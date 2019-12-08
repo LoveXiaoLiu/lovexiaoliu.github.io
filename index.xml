@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gra55&#39;s Blog</title>
+    <link>/</link>
+    <description>Recent content on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fancy App 1</title>
+      <link>/itemized/item1/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/itemized/item1/</guid>
+      <description>App 1 </description>
+    </item>
+    
+    <item>
+      <title>Fancy App 2</title>
+      <link>/itemized/item2/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/itemized/item2/</guid>
+      <description>App 2 </description>
+    </item>
+    
+    <item>
+      <title>Fancy App 3</title>
+      <link>/itemized/item3/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/itemized/item3/</guid>
+      <description>App 3 </description>
+    </item>
+    
+    <item>
+      <title>Fancy App 4</title>
+      <link>/itemized/item4/</link>
+      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/itemized/item4/</guid>
+      <description>App 4 </description>
+    </item>
+    
+    <item>
+      <title>Python：主要模块和常用方法简览</title>
+      <link>/blog/2016-01-18-main-module-api/</link>
+      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2016-01-18-main-module-api/</guid>
+      <description>os、os.path、stat、sys、datetime、date、time&amp;hellip;&amp;hellip;
+   os模块:
+ os.remove() 删除文件 os.unlink() 删除文件 os.rename() 重命名文件 os.listdir() 列出指定目录下所有文件 os.chdir() 改变当前工作目录 os.getcwd() 获取当前文件路径 os.mkdir() 新建目录 os.rmdir() 删除空目录(删除非空目录, 使用shutil.rmtree()) os.makedirs() 创建多级目录 os.removedirs() 删除多级目录 os.stat(file) 获取文件属性 os.chmod(file) 修改文件权限 os.utime(file) 修改文件时间戳 os.name(file) 获取操作系统标识 os.system() 执行操作系统命令 os.execvp() 启动一个新进程 os.fork() 获取父进程ID，在子进程返回中返回0 os.execvp() 执行外部程序脚本（Uinx） os.spawn() 执行外部程序脚本（Windows） os.access(path, mode) 判断文件权限(详细参考cnblogs) os.wait() 暂时未知    os.path模块：
+ os.path.split(filename) 将文件路径和文件名分割(会将最后一个目录作为文件名而分离) os.path.splitext(filename) 将文件路径和文件扩展名分割成一个元组 os.path.dirname(filename) 返回文件路径的目录部分 os.path.basename(filename) 返回文件路径的文件名部分 os.path.join(dirname,basename) 将文件路径和文件名凑成完整文件路径 os.path.abspath(name) 获得绝对路径 os.path.splitunc(path) 把路径分割为挂载点和文件名 os.</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>/blog/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&#39;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&#39;t cover using CSS to style your theme.
+We&#39;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>/blog/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>/blog/hugoisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/hugoisforlovers/</guid>
+      <description>&lt;h2 id=&#34;step-1-install-hugo&#34;&gt;Step 1. Install Hugo&lt;/h2&gt;
+&lt;p&gt;Go to &lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;hugo releases&lt;/a&gt; and download the
+appropriate version for your os and architecture.&lt;/p&gt;
+&lt;p&gt;Save it somewhere specific as we will be using it in the next step.&lt;/p&gt;
+&lt;p&gt;More complete instructions are available at &lt;a href=&#34;/overview/installing/&#34;&gt;installing hugo&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>/blog/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/migrate-from-jekyll/</guid>
+      <description>&lt;h2 id=&#34;move-static-content-to-static&#34;&gt;Move static content to &lt;code&gt;static&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Jekyll has a rule that any directory not starting with &lt;code&gt;_&lt;/code&gt; will be copied as-is to the &lt;code&gt;_site&lt;/code&gt; output. Hugo keeps all static content under &lt;code&gt;static&lt;/code&gt;. You should therefore move it all there.
+With Jekyll, something that looked like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;▾ &amp;lt;root&amp;gt;/
+    ▾ images/
+        logo.png
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
