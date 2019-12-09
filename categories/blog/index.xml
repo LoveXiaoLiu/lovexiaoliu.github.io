@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on Gra55&#39;s Blog</title>
-    <link>/blog/</link>
+    <link>/categories/blog/</link>
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -25,18 +25,6 @@
 于是去 staticman 的 issue 区找找，果然很多人遇到了这个问题。
 出现这个问题的原因是由于使用 staticman 的人太多了，导致部署的公共 staticman app 达到了 Github 的限制（Github 限制每个用户每小时只能调用 API 5K 次）。
  为什么会达到这个限制呢？  staticman 的工作方式是这样的，你将 staticman 添加到你的博客系统以后，需要将 staticmanapp 账户添加到你的 repo Collaborators 中。当有人在你的博客中提交评论，staticman 会将这些评论内容通过公开的 staticman app，以提交代码的方式提交到你的 repo 中。问题就出在这里，提交代码的账户就是 staticmanapp，随着 staticman 的用户越来越多，staticmanapp 肯定会超过这个限制的。 目前这个账户已经被注销。 针对这个问题，维护人员咨询了 GitHub 官方，官方回复让他创建一个 GitHub App 参考 issues 243   0x02 自己动手 </description>
-    </item>
-    
-    <item>
-      <title>Python：主要模块和常用方法简览</title>
-      <link>/blog/2016/python/main-module-api/</link>
-      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2016/python/main-module-api/</guid>
-      <description>os、os.path、stat、sys、datetime、date、time&amp;hellip;&amp;hellip;
-  os模块:
-os.remove() #删除文件 os.unlink() #删除文件 os.rename() #重命名文件 os.listdir() #列出指定目录下所有文件 os.chdir() #改变当前工作目录 os.getcwd() #获取当前文件路径 os.mkdir() #新建目录 os.rmdir() #删除空目录(删除非空目录, 使用shutil.rmtree()) os.makedirs() #创建多级目录 os.removedirs() #删除多级目录 os.stat(file) #获取文件属性 os.chmod(file) #修改文件权限 os.utime(file) #修改文件时间戳 os.name(file) #获取操作系统标识 os.system() #执行操作系统命令 os.execvp() #启动一个新进程 os.fork() #获取父进程ID，在子进程返回中返回0 os.execvp() #执行外部程序脚本（Uinx） os.spawn() #执行外部程序脚本（Windows） os.access(path, mode) #判断文件权限(详细参考cnblogs) os.wait() #暂时未知  os.path模块：
-os.path.split(filename) 将文件路径和文件名分割(会将最后一个目录作为文件名而分离) os.path.splitext(filename) 将文件路径和文件扩展名分割成一个元组 os.path.dirname(filename) 返回文件路径的目录部分 os.path.basename(filename) 返回文件路径的文件名部分 os.path.join(dirname,basename) 将文件路径和文件名凑成完整文件路径 os.path.abspath(name) 获得绝对路径 os.path.splitunc(path) 把路径分割为挂载点和文件名 os.path.normpath(path) 规范path字符串形式 os.path.exists() 判断文件或目录是否存在 os.path.isabs() 如果path是绝对路径，返回True os.</description>
     </item>
     
   </channel>

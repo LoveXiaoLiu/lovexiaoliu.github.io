@@ -4,13 +4,54 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/2019/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/blog/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2019/blog/hugo_plus_staticman/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/blog/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -35,20 +76,8 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/itemized/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/blog/</loc>
-    <lastmod>2016-01-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -61,12 +90,6 @@
   <url>
     <loc>/blog/2016/python/main-module-api/</loc>
     <lastmod>2016-01-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2016-01-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

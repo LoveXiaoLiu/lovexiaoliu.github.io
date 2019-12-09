@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gra55&#39;s Blog</title>
+    <title>Categories on Gra55&#39;s Blog</title>
     <link>/categories/</link>
-    <description>Recent content on Gra55&#39;s Blog</description>
+    <description>Recent content in Categories on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Fancy App 1</title>
-      <link>/itemized/item1/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      <title></title>
+      <link>/categories/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/itemized/item1/</guid>
-      <description> App 1 </description>
+      <guid>/categories/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Fancy App 2</title>
-      <link>/itemized/item2/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Blog</title>
+      <link>/categories/blog/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/itemized/item2/</guid>
-      <description> App 2 </description>
+      <guid>/categories/blog/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Fancy App 3</title>
-      <link>/itemized/item3/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Python</title>
+      <link>/categories/python/</link>
+      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>/itemized/item3/</guid>
-      <description> App 3 </description>
-    </item>
-    
-    <item>
-      <title>Fancy App 4</title>
-      <link>/itemized/item4/</link>
-      <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/itemized/item4/</guid>
-      <description> App 4 </description>
+      <guid>/categories/python/</guid>
+      <description></description>
     </item>
     
   </channel>
