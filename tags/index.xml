@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Gra55&#39;s Blog</title>
-    <link>/tags/</link>
+    <link>www.yangliu.date/tags/</link>
     <description>Recent content in Tags on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="www.yangliu.date/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>2019</title>
-      <link>/tags/2019/</link>
+      <link>www.yangliu.date/tags/2019/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/2019/</guid>
+      <guid>www.yangliu.date/tags/2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>blog</title>
-      <link>/tags/blog/</link>
+      <link>www.yangliu.date/tags/blog/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/blog/</guid>
+      <guid>www.yangliu.date/tags/blog/</guid>
       <description></description>
     </item>
     
