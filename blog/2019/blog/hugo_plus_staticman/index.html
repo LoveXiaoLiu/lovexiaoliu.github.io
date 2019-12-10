@@ -614,9 +614,9 @@
 
 <h2 id="0x01-太年轻">0x01 太年轻</h2>
 
-<p>准备按照 <a href="https://staticman.net/">staticman</a> 的 <code>Getting started</code> 一步一步执行。</p>
+<p>准备按照 <a href="https://staticman.net/">staticman</a> 的 Getting started 一步一步执行。</p>
 
-<p>可谓是出师不利，第一步就过不去：无法把 <code>staticmanapp</code> 账户添加到 <code>Collaborators</code> 中。
+<p>可谓是出师不利，第一步就过不去：无法把 staticmanapp 账户添加到 Collaborators 中。
 
 
 
@@ -657,7 +657,7 @@
 
 </p>
 
-<p>随后访问 <code>https://api.staticman.net/v2/connect/LoveXiaoLiu/blog-comment</code> 也是各种报错。
+<p>随后访问 <a href="https://api.staticman.net/v2/connect/LoveXiaoLiu/blog-comment">https://api.staticman.net/v2/connect/LoveXiaoLiu/blog-comment</a> 也是各种报错。
 
 
 
@@ -698,17 +698,17 @@
 
 </p>
 
-<p>于是去 <a href="https://staticman.net/">staticman</a> 的 <code>issue</code> 区找找，果然很多人遇到了这个问题。</p>
+<p>于是去 <a href="https://staticman.net/">staticman</a> 的 issue 区找找，果然很多人遇到了这个问题。</p>
 
-<p>出现这个问题的原因是由于使用 <a href="https://staticman.net/">staticman</a> 的人太多了，导致部署的公共 <code>staticman app</code> 达到了 <code>Github</code> 的限制（<code>Github</code> 限制每个用户每小时只能调用 <code>API</code> <code>5K</code> 次）。</p>
+<p>出现这个问题的原因是由于使用 <a href="https://staticman.net/">staticman</a> 的人太多了，导致部署的公共 staticman app 达到了 Github 的限制（Github 限制每个用户每小时只能调用 API 5K 次）。</p>
 
 <ul>
 <li>为什么会达到这个限制呢？
 
 <ul>
-<li><a href="https://staticman.net/">staticman</a> 的工作方式是这样的，你将 <a href="https://staticman.net/">staticman</a> 添加到你的博客系统以后，需要将 <code>staticmanapp</code> 账户添加到你的 <code>repo</code> <code>Collaborators</code> 中。当有人在你的博客中提交评论，<a href="https://staticman.net/">staticman</a> 会将这些评论内容通过公开的 <code>staticman app</code>，以提交代码的方式提交到你的 <code>repo</code> 中。问题就出在这里，提交代码的账户就是 <code>staticmanapp</code>，随着 <a href="https://staticman.net/">staticman</a> 的用户越来越多，<code>staticmanapp</code> 肯定会超过这个限制的。</li>
+<li><a href="https://staticman.net/">staticman</a> 的工作方式是这样的，你将 <a href="https://staticman.net/">staticman</a> 添加到你的博客系统以后，需要将 staticmanapp 账户添加到你的 repo Collaborators 中。当有人在你的博客中提交评论，<a href="https://staticman.net/">staticman</a> 会将这些评论内容通过公开的 staticman app，以提交代码的方式提交到你的 repo 中。问题就出在这里，提交代码的账户就是 staticmanapp，随着 <a href="https://staticman.net/">staticman</a> 的用户越来越多，staticmanapp 肯定会超过这个限制的。</li>
 <li>目前这个账户已经被注销。</li>
-<li>针对这个问题，维护人员咨询了 <code>GitHub</code> 官方，官方回复让他创建一个 <a href="https://developer.github.com/apps/">GitHub App</a></li>
+<li>针对这个问题，维护人员咨询了 GitHub 官方，官方回复让他创建一个 <a href="https://developer.github.com/apps/">GitHub App</a></li>
 <li>参考 <a href="https://github.com/eduardoboucas/staticman/issues/243">issues 243</a></li>
 </ul></li>
 </ul>
@@ -761,7 +761,7 @@
 
   <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
 
-    <input type="hidden" name="options[redirect]" value="//blog/2019/blog/hugo_plus_staticman/">
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2019/blog/hugo_plus_staticman/">
     <input type="hidden" name="options[entryId]" value="b986b96fa39df7d0c185e2c6180002ed">
     <input required name="fields[name]" type="text" placeholder="Your name (Required)">
     <input name="fields[website]" type="text" placeholder="Your website">
@@ -969,6 +969,9 @@
 
 
   
+  
+    
+  
 
 
         
@@ -976,7 +979,7 @@
         
 
         <a href="/blog/2019/blog/hugo_plus_staticman/" class="image featured">
-            <img src="/img//pic01.jpg" alt="">
+            <img src="/img/2019/12/pic01.jpg" alt="">
         </a>
     
 
@@ -1007,6 +1010,9 @@
 
 
   
+  
+    
+  
 
 
         
@@ -1014,7 +1020,7 @@
         
 
         <a href="/blog/2016/python/main-module-api/" class="image featured">
-            <img src="/img//pic03.jpg" alt="">
+            <img src="/img/2016/01/pic03.jpg" alt="">
         </a>
     
 
