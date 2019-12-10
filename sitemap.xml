@@ -3,90 +3,90 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>www.yangliu.date/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/tags/2019/</loc>
+    <loc>/tags/2019/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/categories/blog/</loc>
+    <loc>/categories/blog/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/blog/</loc>
+    <loc>/blog/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/</loc>
+    <loc>/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/blog/2019/blog/hugo_plus_staticman/</loc>
+    <loc>/blog/2019/blog/hugo_plus_staticman/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>www.yangliu.date/tags/</loc>
-    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>www.yangliu.date/tags/blog/</loc>
+    <loc>/tags/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/itemized/item1/</loc>
+    <loc>/tags/blog/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/itemized/item1/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>www.yangliu.date/itemized/item2/</loc>
+    <loc>/itemized/item2/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>www.yangliu.date/itemized/item3/</loc>
+    <loc>/itemized/item3/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>www.yangliu.date/itemized/item4/</loc>
+    <loc>/itemized/item4/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>www.yangliu.date/itemized/</loc>
+    <loc>/itemized/</loc>
     <lastmod>2017-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.yangliu.date/about/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>www.yangliu.date/contact/</loc>
+    <loc>/contact/</loc>
   </url>
   
 </urlset>
