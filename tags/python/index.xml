@@ -6,21 +6,22 @@
     <description>Recent content in python on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Python：主要模块和常用方法简览</title>
-      <link>/blog/2016/python/main-module-api/</link>
-      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+      <title>Python 与 Golang 语法特性对比</title>
+      <link>/blog/2019/go/go_compare_python/</link>
+      <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2016/python/main-module-api/</guid>
-      <description>os、os.path、stat、sys、datetime、date、time&amp;hellip;&amp;hellip;
-  os模块:
-os.remove() #删除文件 os.unlink() #删除文件 os.rename() #重命名文件 os.listdir() #列出指定目录下所有文件 os.chdir() #改变当前工作目录 os.getcwd() #获取当前文件路径 os.mkdir() #新建目录 os.rmdir() #删除空目录(删除非空目录, 使用shutil.rmtree()) os.makedirs() #创建多级目录 os.removedirs() #删除多级目录 os.stat(file) #获取文件属性 os.chmod(file) #修改文件权限 os.utime(file) #修改文件时间戳 os.name(file) #获取操作系统标识 os.system() #执行操作系统命令 os.execvp() #启动一个新进程 os.fork() #获取父进程ID，在子进程返回中返回0 os.execvp() #执行外部程序脚本（Uinx） os.spawn() #执行外部程序脚本（Windows） os.access(path, mode) #判断文件权限(详细参考cnblogs) os.wait() #暂时未知  os.path模块：
-os.path.split(filename) 将文件路径和文件名分割(会将最后一个目录作为文件名而分离) os.path.splitext(filename) 将文件路径和文件扩展名分割成一个元组 os.path.dirname(filename) 返回文件路径的目录部分 os.path.basename(filename) 返回文件路径的文件名部分 os.path.join(dirname,basename) 将文件路径和文件名凑成完整文件路径 os.path.abspath(name) 获得绝对路径 os.path.splitunc(path) 把路径分割为挂载点和文件名 os.path.normpath(path) 规范path字符串形式 os.path.exists() 判断文件或目录是否存在 os.path.isabs() 如果path是绝对路径，返回True os.</description>
+      <guid>/blog/2019/go/go_compare_python/</guid>
+      <description>0x00 缘起 之前整体把 golang 的语法过了一遍，花了大概几个小时。
+然鹅，2 天没写 go 代码，语法就忘完了，还得回过头去查一次，真是浪费时间。
+所以，我就想到了这个联想记忆，通过熟悉的东西，来记住陌生的东西。
+0x01 语法特性对比  参考：go 语言之旅
+     Python Go     包声明 文件名 文件内定义：package main   引入包 import json import &amp;quot;math/rand&amp;quot;   模块对象暴露 __all__ 包内对象首字母大写   函数 def 关键字 func 关键字   函数多指返回 return x, y return x, y（特例：func split(sum int) (x, y int) { x = sum * 4 / 9; y = sum - x; return }）   变量 动态类型 关键字 var，在变量名后声明（多个变量类型相同时，前边类型可以忽略）   变量初始化 直接赋值 如果提供初始值，则不需要指明类型   短变量声明 / :=（函数外必须使用 var 关键字）   基本类型 int、string、bool、list、dict、tuple bool、string、int[8, 16, 32, 64]、uint[8, 16, 32, 64]、uintptr、byte（uint8 的别名）、rune（int32 的别名；表示一个 Unicode 码点）、float32、float64、complex64、complex128   零值 / 没有赋初值的变量默认为零值（int 为 0；bool 为 false；字符串为 &#39;&#39;；指针为 nil；切片为 nil，它的长度和容量为 0，且没有底层数组；映射为 nil，nil 映射既没有键，也不能添加键；）   类型转换 同 go 语言 T(v) 将值 v 转换为类型 T（不同类型直接赋值需要显式转换）   常量 与变量相同 关键字 const，不能使用 := 语法（常量不指明类型的话，会根据上下文自动识别其类型）   for for i in [1, 2, 3]: for i:=0; i&amp;lt;10; i++ {xxx}（初始化语句和后置语句是可选的）   while while True: for sum &amp;lt; 1000 {xxx}   死循环 while True: for {xxx}   if if i &amp;lt; 10: xxx else: xxx if v := math.</description>
     </item>
     
   </channel>
