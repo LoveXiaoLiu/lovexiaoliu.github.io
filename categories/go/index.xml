@@ -13,10 +13,10 @@
     
     <item>
       <title>Python 与 Golang 语法特性对比</title>
-      <link>/blog/2019/go/go_compare_python/</link>
+      <link>/blog/2019/go/go-compare-python/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/go/go_compare_python/</guid>
+      <guid>/blog/2019/go/go-compare-python/</guid>
       <description>0x00 缘起 之前整体把 golang 的语法过了一遍，花了大概几个小时。
 然鹅，2 天没写 go 代码，语法就忘完了，还得回过头去查一次，真是浪费时间。
 所以，我就想到了这个联想记忆，通过熟悉的东西，来记住陌生的东西。

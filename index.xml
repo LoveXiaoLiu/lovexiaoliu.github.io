@@ -12,20 +12,35 @@
     
     
     <item>
-      <title>视频：林轩田机器学习基石</title>
-      <link>/awesome/machine_learning_foundation/</link>
+      <title>抛弃 Python2，从此使用 Python3</title>
+      <link>/blog/2019/python/why-upgrade-python3/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/awesome/machine_learning_foundation/</guid>
+      <guid>/blog/2019/python/why-upgrade-python3/</guid>
+      <description>为什么要使用 Python3？我 2 用的好好的。（py 版本演进过程；2018 年开发者问卷调查；）
+Python 2 3 的特性对比
+到底写 2 还是写 3，还是两个都写。（如果是自己的项目，只写 py3，如果是提供的第三方库，需要写 3 代码来兼容 2。为什么不是写 2 的代码兼容 3 呢？2 孔的插座好比 Python2，3 孔的好比 Python3，本来是 2 孔的充电器插 2 孔的电源，3 孔的插 3 孔的。现在假如 2 孔的插座快淘汰了，你是愿意给 3 孔的充电器安装一个 2 孔的转接头，让他可以用使用 2 孔的插座呢，还是另外一种做法）
+如何逐步迁移到 Python 3（不迁移的话，你永远在使用 py2，因为你迈不出第一步）（需要注意很多老库不支持 py3）
+迁移工具有哪些
+如何部署 Python 2 和 Python3 的环境，并且还有虚拟环境
+ 0x00 一直使用 Python2 不行吗？ 0x01 语法特性对比 参考： 📌 Python 2 or 3?</description>
+    </item>
+    
+    <item>
+      <title>视频：林轩田机器学习基石</title>
+      <link>/awesome/machine-learning-foundation/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/machine-learning-foundation/</guid>
       <description> 0x00 《机器学习基石》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
     </item>
     
     <item>
       <title>Python 与 Golang 语法特性对比</title>
-      <link>/blog/2019/go/go_compare_python/</link>
+      <link>/blog/2019/go/go-compare-python/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/go/go_compare_python/</guid>
+      <guid>/blog/2019/go/go-compare-python/</guid>
       <description>0x00 缘起 之前整体把 golang 的语法过了一遍，花了大概几个小时。
 然鹅，2 天没写 go 代码，语法就忘完了，还得回过头去查一次，真是浪费时间。
 所以，我就想到了这个联想记忆，通过熟悉的东西，来记住陌生的东西。
@@ -35,10 +50,10 @@
     
     <item>
       <title>Hugo 配置 staticman 静态评论平台</title>
-      <link>/blog/2019/blog/hugo_plus_staticman/</link>
+      <link>/blog/2019/blog/hugo-plus-staticman/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/blog/hugo_plus_staticman/</guid>
+      <guid>/blog/2019/blog/hugo-plus-staticman/</guid>
       <description>0x00 起因 我使用的 hugo 主题 hugo-future-imperfect，默认支持 disqus 和 staticman 的评论方式。
 奈何有一些不可描述的原因，disqus 无法访问，遂转投 staticman 怀抱，这才开启了踩坑之路。
 0x01 太年轻 准备按照 staticman 的 Getting started 一步一步执行。

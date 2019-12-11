@@ -6,21 +6,24 @@
     <description>Recent content in Python on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Python：主要模块和常用方法简览</title>
-      <link>/blog/2016/python/main-module-api/</link>
-      <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+      <title>抛弃 Python2，从此使用 Python3</title>
+      <link>/blog/2019/python/why-upgrade-python3/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2016/python/main-module-api/</guid>
-      <description>os、os.path、stat、sys、datetime、date、time&amp;hellip;&amp;hellip;
-  os模块:
-os.remove() #删除文件 os.unlink() #删除文件 os.rename() #重命名文件 os.listdir() #列出指定目录下所有文件 os.chdir() #改变当前工作目录 os.getcwd() #获取当前文件路径 os.mkdir() #新建目录 os.rmdir() #删除空目录(删除非空目录, 使用shutil.rmtree()) os.makedirs() #创建多级目录 os.removedirs() #删除多级目录 os.stat(file) #获取文件属性 os.chmod(file) #修改文件权限 os.utime(file) #修改文件时间戳 os.name(file) #获取操作系统标识 os.system() #执行操作系统命令 os.execvp() #启动一个新进程 os.fork() #获取父进程ID，在子进程返回中返回0 os.execvp() #执行外部程序脚本（Uinx） os.spawn() #执行外部程序脚本（Windows） os.access(path, mode) #判断文件权限(详细参考cnblogs) os.wait() #暂时未知  os.path模块：
-os.path.split(filename) 将文件路径和文件名分割(会将最后一个目录作为文件名而分离) os.path.splitext(filename) 将文件路径和文件扩展名分割成一个元组 os.path.dirname(filename) 返回文件路径的目录部分 os.path.basename(filename) 返回文件路径的文件名部分 os.path.join(dirname,basename) 将文件路径和文件名凑成完整文件路径 os.path.abspath(name) 获得绝对路径 os.path.splitunc(path) 把路径分割为挂载点和文件名 os.path.normpath(path) 规范path字符串形式 os.path.exists() 判断文件或目录是否存在 os.path.isabs() 如果path是绝对路径，返回True os.</description>
+      <guid>/blog/2019/python/why-upgrade-python3/</guid>
+      <description>为什么要使用 Python3？我 2 用的好好的。（py 版本演进过程；2018 年开发者问卷调查；）
+Python 2 3 的特性对比
+到底写 2 还是写 3，还是两个都写。（如果是自己的项目，只写 py3，如果是提供的第三方库，需要写 3 代码来兼容 2。为什么不是写 2 的代码兼容 3 呢？2 孔的插座好比 Python2，3 孔的好比 Python3，本来是 2 孔的充电器插 2 孔的电源，3 孔的插 3 孔的。现在假如 2 孔的插座快淘汰了，你是愿意给 3 孔的充电器安装一个 2 孔的转接头，让他可以用使用 2 孔的插座呢，还是另外一种做法）
+如何逐步迁移到 Python 3（不迁移的话，你永远在使用 py2，因为你迈不出第一步）（需要注意很多老库不支持 py3）
+迁移工具有哪些
+如何部署 Python 2 和 Python3 的环境，并且还有虚拟环境
+ 0x00 一直使用 Python2 不行吗？ 0x01 语法特性对比 参考： 📌 Python 2 or 3?</description>
     </item>
     
   </channel>
