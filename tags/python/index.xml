@@ -39,5 +39,18 @@ Python 2 3 的特性对比
      Python Go     包声明 文件名 文件内定义：package main   引入包 import json import &amp;ldquo;math/rand&amp;rdquo;   模块对象暴露 __all__ 包内对象首字母大写   函数 def 关键字 func 关键字   函数多指返回 return x, y return x, y（特例：func split(sum int) (x, y int) { x = sum * 4 / 9; y = sum - x; return }）   变量 动态类型 关键字 var，在变量名后声明（多个变量类型相同时，前边类型可以忽略）   变量初始化 直接赋值 如果提供初始值，则不需要指明类型   短变量声明 / :=（函数外必须使用 var 关键字）   基本类型 int、string、bool、list、dict、tuple bool、string、int[8, 16, 32, 64]、uint[8, 16, 32, 64]、uintptr、byte（uint8 的别名）、rune（int32 的别名；表示一个 Unicode 码点）、float32、float64、complex64、complex128   零值 / 没有赋初值的变量默认为零值（int 为 0；bool 为 false；字符串为 &amp;ldquo;；指针为 nil；切片为 nil，它的长度和容量为 0，且没有底层数组；映射为 nil，nil 映射既没有键，也不能添加键；）   类型转换 同 go 语言 T(v) 将值 v 转换为类型 T（不同类型直接赋值需要显式转换）   常量 与变量相同 关键字 const，不能使用 := 语法（常量不指明类型的话，会根据上下文自动识别其类型）   for for i in [1, 2, 3]: for i:=0; i&amp;lt;10; i++ {xxx}（初始化语句和后置语句是可选的）   while while True: for sum &amp;lt; 1000 {xxx}   死循环 while True: for {xxx}   if if i &amp;lt; 10: xxx else: xxx if v := math.</description>
     </item>
     
+    <item>
+      <title>开发 Python 第三方包，上传到 PyPI</title>
+      <link>/blog/2019/python/python-package-pypi/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/python/python-package-pypi/</guid>
+      <description>0x00 初始化 skeleton 开源一个 Python 第三方包，需要配置很多额外的东西（pip 需要的 setup.cfg，CI/CD 需要的 .travis.yml 等），这些东西完全没必要自己来逐一创建。
+所以我们需要一个脚手架来快速创建项目的 skeleton。这里我推荐使用 cookiecutter-X 系列工具。
+我这里开发 pypi 包，使用 cookiecutter-pypackage 模板。
+cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git  0x01 生态配置 创建完项目 skeleton 以后，需要关联 Travis 账号、ReadTheDocs 账号等。步骤如下：
+ 将 repo 添加到 GitHub 中 将该 repo 添加到 Travis CI 中（需要注册 Travis 账号） 安装 dev requirement.txt 到虚拟开发环境中：pip install -r requirements_dev.txt 注册项目到 PyPI 中（需要注册 PyPI 账号）  生成 tar&amp;amp;wheel 包：python setup.py sdist bdist_wheel 上传包到 PyPI 中：python -m twine upload dist/*  将该 repo 添加到 ReadTheDocs 中  0x02 迭代开发  更新项目代码，开发新 features 使用 bumpversion 升级版本：bumpversion --current-version 0.</description>
+    </item>
+    
   </channel>
 </rss>
