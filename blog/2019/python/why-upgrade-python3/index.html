@@ -32,7 +32,7 @@
         "datePublished": "2019-12-11 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-11 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/python\/why-upgrade-python3\/",
-        "wordCount" : "65",
+        "wordCount" : "294",
         "keywords" : [ "python","2019","Blog" ]
     }
     </script>
@@ -89,7 +89,7 @@
 
 <meta itemprop="datePublished" content="2019-12-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="65">
+<meta itemprop="wordCount" content="294">
 
 
 
@@ -440,14 +440,125 @@
 <p>如何部署 Python 2 和 Python3 的环境，并且还有虚拟环境</p>
 </blockquote>
 
-<h2 id="0x00-一直使用-python2-不行吗">0x00 一直使用 Python2 不行吗？</h2>
+<h2 id="0x00-为什么要升级到-python3">0x00 为什么要升级到 Python3</h2>
 
-<h2 id="0x01-语法特性对比">0x01 语法特性对比</h2>
+<p>Python2
++ Python2 算是一种比较古老的语言
++ 2010 年 7 月，发布 2.7.0 版本的时候，就宣布了以后不会再发布 Python 2.x 大版本。参考 <a href="https://www.python.org/dev/peps/pep-0404/">PEP 404</a>
++ 2020 年 1月 1 日以后，Python 官方不再支持 Python2。最初是打算 2014 年停止支持，发现大多数人还是没有迁移到 Python3，所以推迟到 2020 年。参考 <a href="https://www.python.org/dev/peps/pep-0373/">PEP 373</a></p>
+
+<p>Python3
++ Python3 是一种比较现代化的语言
++ 第一个版本 3.0.0，发布于 2008 年 12 月
++ 初期的 3.x 版本不稳定，直到 3.3 版本（2012 年 9 月发布）以后</p>
+
+<p>Python2 语言在最初设计的时候，就存在很多问题（Unicode、print &amp; exec 都是语句、整数使用了地板除、rang等），在后来版本迭代的时候发现向后兼容的成本大于新写一门语言，所以就果断放弃了 Python2。</p>
+
+<p>为什么要推迟停止支持 Python2 的时间？我个人觉得是 Python3 早期没有太多的库来支持，如果我的项目想迁移到 Python3，但是我依赖的库只支持 Python2，那我肯定是放弃升级 Python3 的。</p>
+
+<p>But now，时代不一样了，95% 的常用库都已经支持 Python3 了，所以，你还在等什么呢？</p>
+
+<p>另外，根据 <a href="https://www.jetbrains.com/research/python-developers-survey-2017/">2017</a> 和 <a href="https://www.jetbrains.com/research/python-developers-survey-2018/">2018</a> 年的 Python 开发者调查报告显示，2018 年使用 Python3 的人数高达 84%，2019 年的报告还没出来，占比肯定 会更高。</p>
+
+<h2 id="0x01-主要差异对比">0x01 主要差异对比</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Python2</th>
+<th>Python3</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>print</td>
+<td>print 是语句</td>
+<td>函数</td>
+</tr>
+
+<tr>
+<td>整数除法</td>
+<td>地板除</td>
+<td>返回浮点型</td>
+</tr>
+
+<tr>
+<td>input</td>
+<td>转换成输入的类型</td>
+<td>传入的值总是文本类型（类似 Python2 中的 raw_input）</td>
+</tr>
+
+<tr>
+<td>Round</td>
+<td>返回浮点型数字</td>
+<td>返回指定的精度</td>
+</tr>
+
+<tr>
+<td>变量泄漏</td>
+<td>存在变量泄漏</td>
+<td>不存在</td>
+</tr>
+
+<tr>
+<td>range</td>
+<td>直接返回列表</td>
+<td>返回生成器（类似 Python2 中的 xrange）</td>
+</tr>
+
+<tr>
+<td>Exception</td>
+<td>as 关键字可有可无</td>
+<td>as 关键字必须存在</td>
+</tr>
+
+<tr>
+<td>生成器的 .next 方法</td>
+<td>可以使用</td>
+<td>不能使用</td>
+</tr>
+
+<tr>
+<td>ASCII &amp; Unicode &amp; Byte</td>
+<td>有 ASCII string 和 Unicode 类型，无 Byte 类型</td>
+<td>有 Unicode 和 Byte 类型</td>
+</tr>
+</tbody>
+</table>
+
+<p>不再返回 list：
++ zip()
++ map()
++ filter()
++ dictionary’s .keys() method
++ dictionary’s .values() method
++ dictionary’s .items() method</p>
+
+<h2 id="0x02-升级工具">0x02 升级工具</h2>
+
+<h2 id="0x03-如何写兼容-python2-3-的代码">0x03 如何写兼容 Python2 &amp; 3 的代码</h2>
+
+<h2 id="0x04-安装-python-2-3-的环境">0x04 安装 Python 2 &amp; 3 的环境</h2>
 
 <hr />
 
-<p>参考：
-📌 <a href="https://www.fullstackpython.com/python-2-or-3.html">Python 2 or 3?</a></p>
+<p>参考：</p>
+
+<p>📌 <a href="https://www.fullstackpython.com/python-2-or-3.html">Python 2 or 3?</a></p>
+
+<p>📌 <a href="https://wiki.python.org/moin/Python2orPython3?action=recall&amp;rev=96">Should I use Python 2 or Python 3 for my development activity?</a></p>
+
+<p>📌 <a href="https://www.python.org/dev/peps/pep-0373/">PEP 373 &ndash; Python 2.7 Release Schedule</a></p>
+
+<p>📌 <a href="http://python-notes.curiousefficiency.org/en/latest/python3/questions_and_answers.html#why-was-python-3-made-incompatible-with-python-2">Why was Python 3 made incompatible with Python 2?</a></p>
+
+<p>📌 <a href="http://python-future.org/compatible_idioms.html">Cheat Sheet: Writing Python 2-3 compatible code</a></p>
+
+<p>📌 <a href="https://www.guru99.com/python-2-vs-python-3.html">Python 2 vs Python 3: Key Differences</a></p>
+
+<p>📌 <a href="https://www.geeksforgeeks.org/python2-vs-python3-syntax-and-performance-comparison/">Python2 vs Python3 | Syntax and performance Comparison</a></p>
 
             </div>
         </article>
