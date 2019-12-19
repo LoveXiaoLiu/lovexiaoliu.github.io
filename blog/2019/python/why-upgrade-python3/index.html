@@ -32,7 +32,7 @@
         "datePublished": "2019-12-11 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-11 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/python\/why-upgrade-python3\/",
-        "wordCount" : "294",
+        "wordCount" : "379",
         "keywords" : [ "python","2019","Blog" ]
     }
     </script>
@@ -89,7 +89,7 @@
 
 <meta itemprop="datePublished" content="2019-12-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="294">
+<meta itemprop="wordCount" content="379">
 
 
 
@@ -308,7 +308,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
         </a>
     
@@ -577,9 +577,19 @@
 + dictionary’s .values() method
 + dictionary’s .items() method</p>
 
-<h2 id="0x02-升级工具">0x02 升级工具</h2>
+<h2 id="0x02-如何写兼容-python2-3-的代码">0x02 如何写兼容 Python2 &amp; 3 的代码</h2>
 
-<h2 id="0x03-如何写兼容-python2-3-的代码">0x03 如何写兼容 Python2 &amp; 3 的代码</h2>
+<blockquote>
+<p>首先需要明确一个问题：写 Python2 代码来兼容 Python3，还是写 Python3 代码来兼容 Python2？
++ 历史经验来看，最佳实践是写<strong>Python3 代码来兼容 Python2</strong>
++ 打一个不太恰当的比方：2 孔的插座好比 Python2 解释器，3 孔的好比 Python3 解释器，本来是 2 孔的充电器（Python2 代码）插 2 孔插座（Python2 解释器），3 孔（Python3 代码）的插 3 孔插座（Python3 解释器）。现在假如 2 孔的插座（Python2 解释器）快被淘汰了，你是愿意给 3 孔的充电器（Python3 代码）安装一个 2 孔的转接头（six library），让他可以同时使用 2 孔（Python2 解释器）和 3 孔插座（Python3 代码）呢？还是给 2 孔充电器（Python2 代码）安装一个 3 孔的转接头（six library）？
++ 当然是给 3 孔的充电器（Python3 代码）安装 2 孔的转接头（six library）。因为 2 孔的插座（Python2 解释器）被淘汰以后，我们完全可以不使用转接头了。否则必须一直依赖转接头（six library）。</p>
+</blockquote>
+
+<p><a href="https://github.com/PythonCharmers/python-future">python-future</a> 库是用来弥补 Python2 和 Python3 兼容性的库，也就是一个转接头。
+<a href="https://github.com/benjaminp/six">six</a> 也是一个解决 Python2 和 Python3 兼容性的库</p>
+
+<h2 id="0x03-升级工具">0x03 升级工具</h2>
 
 <h2 id="0x04-安装-python-2-3-的环境">0x04 安装 Python 2 &amp; 3 的环境</h2>
 
@@ -600,6 +610,8 @@
 <p>📌 <a href="https://www.guru99.com/python-2-vs-python-3.html">Python 2 vs Python 3: Key Differences</a></p>
 
 <p>📌 <a href="https://www.geeksforgeeks.org/python2-vs-python3-syntax-and-performance-comparison/">Python2 vs Python3 | Syntax and performance Comparison</a></p>
+
+<p>📌 <a href="https://pybit.es/python-porting.html">Best Practices for Compatible Python 2 and 3 Code</a></p>
 
             </div>
         </article>
@@ -764,7 +776,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
         </a>
     

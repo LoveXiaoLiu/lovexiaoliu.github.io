@@ -24,7 +24,7 @@
         "datePublished": "2019-12-19 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-19 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/python\/python-queue\/",
-        "wordCount" : "89",
+        "wordCount" : "136",
         "keywords" : [ "python","2019","Blog" ]
     }
     </script>
@@ -83,7 +83,7 @@
 
 <meta itemprop="datePublished" content="2019-12-19T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-19T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="89">
+<meta itemprop="wordCount" content="136">
 
 
 
@@ -307,7 +307,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
         </a>
     
@@ -685,7 +685,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
             <div style="
                     text-align: center; 
@@ -698,7 +698,7 @@
                     max-width: 800px;
                 "
             >
-            张国荣在《霸王别姬》中的幕后照
+            1997年12月19日詹姆斯·卡梅隆指导的《泰坦尼克号》在美国上映 
             </div>
         </a>
     
@@ -708,78 +708,131 @@
     
 
 <blockquote>
-<p>Btw：Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。</p>
+<p>Btw：</p>
+
+<p>Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。</p>
 </blockquote>
 
-<h2 id="0x00-overview">0x00 Overview</h2>
+<h1 id="0x00-overview">0x00 Overview</h1>
 
 <p>Queue 模块实现的是<strong>多生产者</strong>、<strong>多消费者</strong>的队列。因此它是<strong>线程安全</strong>的，可以在多线程下使用。因为 Queue 类内部实现了所有必须的锁。</p>
 
 <p>Queue 模块提供了三种类型的队列，三种类型的主要差异是获取数据的顺序不同。</p>
 
-<h2 id="0x01-队列">0x01 队列</h2>
+<h1 id="0x01-队列">0x01 队列</h1>
 
-<h3 id="class-queue-maxsize-0">class：Queue(maxsize=0)</h3>
+<p><strong>class：Queue(maxsize=0)</strong></p>
 
-<p>FIFO（先进先出）队列。</p>
+<ul>
+<li><p>FIFO（先进先出）队列。</p></li>
 
-<p>maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。</p>
+<li><p>maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。</p></li>
 
-<p>如果 maxsize 小于等于 0，队列的容量是无限大。</p>
+<li><p>如果 maxsize 小于等于 0，队列的容量是无限大。</p></li>
+</ul>
 
-<h3 id="class-lifoqueue-maxsize-0">class：LifoQueue(maxsize=0)</h3>
+<p><strong>class：LifoQueue(maxsize=0)</strong></p>
 
-<p>LIFO（先进后出）队列，类似于栈。</p>
+<ul>
+<li><p>LIFO（先进后出）队列，类似于栈。</p></li>
 
-<p>其他规则同 Queue。</p>
+<li><p>其他规则同 Queue。</p></li>
+</ul>
 
-<h3 id="class-priorityqueue-maxsize-0">class：PriorityQueue(maxsize=0)</h3>
+<p><strong>class：PriorityQueue(maxsize=0)</strong></p>
 
-<p>优先队列，内部使用 <a href="https://docs.python.org/2/library/heapq.html#module-heapq">heapq</a> 实现。</p>
+<ul>
+<li><p>优先队列，内部使用 <a href="https://docs.python.org/2/library/heapq.html#module-heapq">heapq</a> 实现。</p></li>
 
-<p>其他规则同 Queue。</p>
+<li><p>其他规则同 Queue。</p></li>
 
-<p>优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)</p>
+<li><p>优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)</p></li>
+</ul>
 
-<h3 id="exception-empty">exception：Empty</h3>
+<p><strong>exception：Empty</strong></p>
 
-<p>在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。</p>
+<ul>
+<li>在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。</li>
+</ul>
 
-<h3 id="exception-full">exception：Full</h3>
+<p><strong>exception：Full</strong></p>
 
-<p>在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。</p>
+<ul>
+<li>在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。</li>
+</ul>
 
-<h2 id="0x02-queue-对象介绍">0x02 Queue 对象介绍</h2>
+<h1 id="0x02-queue-对象介绍">0x02 Queue 对象介绍</h1>
 
 <blockquote>
 <p>LifoQueue，PriorityQueue 都是继承自 Queue</p>
 </blockquote>
 
-<h3 id="queue-qsize">Queue.qsize()</h3>
+<p><strong>Queue.qsize()</strong></p>
 
-<p>返回队列的近似大小，不能保证读写不会被阻塞。</p>
+<ul>
+<li>返回队列的近似大小，不能保证读写不会被阻塞。</li>
+</ul>
 
-<h3 id="queue-empty">Queue.empty()</h3>
+<p><strong>Queue.empty()</strong></p>
 
-<p>判断队列是不是空，返回 True or False。不能保证读写不会被阻塞。</p>
+<ul>
+<li>判断队列是不是空，返回 True or False。不能保证读写不会被阻塞。</li>
+</ul>
 
-<h3 id="queue-full">Queue.full()</h3>
+<p><strong>Queue.full()</strong></p>
 
-<p>判断队列是不是满的，返回 True or False。不能保证读写不会被阻塞。</p>
+<ul>
+<li>判断队列是不是满的，返回 True or False。不能保证读写不会被阻塞。</li>
+</ul>
 
-<h3 id="queue-put-item-block-timeout">Queue.put(item[, block[, timeout]])</h3>
+<p><strong>Queue.put(item[, block[, timeout]])</strong></p>
 
-<p>将一个元素插入到队列中。如果 block=True 并且 timeout=None，如果队列满的话会阻塞，直到有空位。</p>
+<ul>
+<li><p>将一个元素插入到队列中。如果 block=True 并且 timeout=None，如果队列满的话会阻塞，直到有空位置。</p></li>
 
-<h3 id="queue-put-nowait-item">Queue.put_nowait(item)</h3>
+<li><p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有空位置，则会抛出一个 Full 异常。</p></li>
 
-<h3 id="queue-get-block-timeout">Queue.get([block[, timeout]])</h3>
+<li><p>如果 block=False，如果队列没有空位置，则会立即抛出一个 Full 异常。</p></li>
+</ul>
 
-<h3 id="queue-get-nowait">Queue.get_nowait()</h3>
+<p><strong>Queue.put_nowait(item)</strong></p>
 
-<h3 id="queue-task-done">Queue.task_done()</h3>
+<ul>
+<li>等价于 put(item, False).</li>
+</ul>
 
-<h3 id="queue-join">Queue.join()</h3>
+<p><strong>Queue.get([block[, timeout]])</strong></p>
+
+<ul>
+<li><p>从队列移除并返回数据。如果 block=True 并且 timeout=None，如果队列为空的话会阻塞，直到有数据可用。</p></li>
+
+<li><p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有数据，则会抛出一个 Empty 异常。</p></li>
+
+<li><p>如果 block=False，如果队列没有数据，则会立即抛出一个 Empty 异常。</p></li>
+</ul>
+
+<p><strong>Queue.get_nowait()</strong></p>
+
+<ul>
+<li>等价于 get(False)</li>
+</ul>
+
+<p><strong>Queue.task_done()</strong></p>
+
+<ul>
+<li><p>表示前一个排队的任务已经完成，常用于队列的消费线程。</p></li>
+
+<li><p>调用 get() 获取一个任务以后，紧接着调用 task_done()，就是告诉队列：正在处理的任务已经完成。</p></li>
+
+<li><p>如果阻塞在 join() 处，需要重新调用 task_done() 将所有任务处理完成。</p></li>
+</ul>
+
+<p><strong>Queue.join()</strong></p>
+
+<ul>
+<li>调用以后就进行阻塞，直到所有的任务都被获取并处理完（task_done()）。</li>
+<li>一个消费线程调用 task_done()，未完成任务的数量就会减一。减到零以后就会停止阻塞。</li>
+</ul>
 
 <hr />
 
@@ -1036,7 +1089,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
         </a>
     
