@@ -1,13 +1,3 @@
-
-
-
-    
-        
-    
-
-
-
-
 <!DOCTYPE HTML>
 
 <html>
@@ -20,10 +10,10 @@
              "@type": "WebPage",
              "@id": "\/"
         },
-        "articleSection" : "categories",
-        "name" : "Go",
-        "headline" : "Go",
-        "description" : "",
+        "articleSection" : "blog",
+        "name" : "Python 内置库：Queue",
+        "headline" : "Python 内置库：Queue",
+        "description" : "Python 内置库 Queue 的用法总结",
         "inLanguage" : "en",
         "author" : "",
         "creator" : "",
@@ -31,15 +21,17 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2019",
-        "datePublished": "2019-12-10 00:00:00 \x2b0000 UTC",
-        "dateModified" : "2019-12-10 00:00:00 \x2b0000 UTC",
-        "url" : "\/categories\/go\/",
-        "wordCount" : "0",
-        "keywords" : [ "Blog" ]
+        "datePublished": "2019-12-19 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2019-12-19 00:00:00 \x2b0000 UTC",
+        "url" : "\/blog\/2019\/python\/python-queue\/",
+        "wordCount" : "76",
+        "keywords" : [ "python","2019","Blog" ]
     }
     </script>
         
-            <title>Go Posts - Gra55&#39;s Blog</title>
+            
+                <title>Python 内置库：Queue</title>
+            
         
 
         <meta charset="utf-8" />
@@ -64,30 +56,38 @@
 
 
         
+            <meta name="author" content="gra55">
         
-            
-                <meta name="description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
-            
+        
+            <meta name="description" content="Python 内置库 Queue 的用法总结">
         
 
         <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go"/>
-<meta name="twitter:description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo"/>
+<meta name="twitter:title" content="Python 内置库：Queue"/>
+<meta name="twitter:description" content="Python 内置库 Queue 的用法总结"/>
 
-        <meta property="og:title" content="Go" />
-<meta property="og:description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/categories/go/" />
-
-<meta property="og:updated_time" content="2019-12-10T00:00:00+00:00" />
+        <meta property="og:title" content="Python 内置库：Queue" />
+<meta property="og:description" content="Python 内置库 Queue 的用法总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2019/python/python-queue/" />
+<meta property="article:published_time" content="2019-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-19T00:00:00+00:00" />
 
         <meta property="og:image" content="//images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
-        <meta itemprop="name" content="Go">
-<meta itemprop="description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
+        <meta itemprop="name" content="Python 内置库：Queue">
+<meta itemprop="description" content="Python 内置库 Queue 的用法总结">
 
+
+<meta itemprop="datePublished" content="2019-12-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="76">
+
+
+
+<meta itemprop="keywords" content="python,2019," />
 
         
 
@@ -127,9 +127,10 @@
       <div id="wrapper">
 
     
+    
 <header id="header">
     
-      <h1><a href="/">categories</a></h1>
+      <h1><a href="/">blog</a></h1>
     
 
     <nav class="links">
@@ -175,6 +176,10 @@
     </nav>
     <nav class="main">
         <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
             
             <li class="search">
                 <a class="fa-search" href="#search">Search</a>
@@ -442,35 +447,219 @@
         
 </section>
 
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;text=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;description=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
     
     <div id="main">
-        <h1>Go</h1>
         
         
-            <article class="post">
+        <article class="post">
   <header>
     <div class="title">
         
-            <h2><a href="/blog/2019/go/go-compare-python/">Python 与 Golang 语法特性对比</a></h2>
+            <h1><a href="/blog/2019/python/python-queue/">Python 内置库：Queue</a></h1>
+            
         
         
-            <p>Python 程序员入门 Golang，通过表格对比，加强记忆，也可以作为一个语法速查表</p>
+            <p>Python 内置库 Queue 的用法总结</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2019-12-10'>
-            December 10, 2019</time>
+            datetime='2019-12-19'>
+            December 19, 2019</time>
         <span class="author">gra55</span>
         
-            <p>2 minute read</p>
+            <p>1 minute read</p>
         
         
     </div>
 </header>
 
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;text=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;title=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=%2fblog%2f2019%2fpython%2fpython-queue%2f&amp;description=Python%20%e5%86%85%e7%bd%ae%e5%ba%93%ef%bc%9aQueue" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2fpython%2fpython-queue%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
   
     
 
@@ -494,21 +683,107 @@
         
         
 
-        <a href="/blog/2019/go/go-compare-python/" class="image featured">
+        <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/12/kobe_first_champ.jpg" alt="">
+                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
             
+            <div style="
+                    text-align: center; 
+                    color: #aaaaaa; 
+                    font-family: 'Raleway', Helvetica, sans-serif; 
+                    font-size: 0.5em; 
+                    font-weight: 400; 
+                    letter-spacing: 0.25em; 
+                    text-transform: uppercase;
+                    max-width: 800px;
+                "
+            >
+            张国荣在《霸王别姬》中的幕后照
+            </div>
         </a>
     
 
 
-  
-  <p>之前整体把 golang 的语法过了一遍，花了大概几个小时。</p>
+  <div id="content">
+    
+
+<blockquote>
+<p>Btw：Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。</p>
+</blockquote>
+
+<h2 id="0x00-overview">0x00 Overview</h2>
+
+<p>Queue 模块实现的是<strong>多生产者</strong>、<strong>多消费者</strong>的队列。因此它是<strong>线程安全</strong>的，可以在多线程下使用。因为 Queue 类内部实现了所有必须的锁。</p>
+
+<p>Queue 模块提供了三种类型的队列，三种类型的主要差异是获取数据的顺序不同。</p>
+
+<h2 id="0x01-队列">0x01 队列</h2>
+
+<h4 id="class-queue-maxsize-0">class：Queue(maxsize=0)</h4>
+
+<p>FIFO（先进先出）队列。</p>
+
+<p>maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。</p>
+
+<p>如果 maxsize 小于等于 0，队列的容量是无限大。</p>
+
+<h4 id="class-lifoqueue-maxsize-0">class：LifoQueue(maxsize=0)</h4>
+
+<p>LIFO（先进后出）队列，类似于栈。</p>
+
+<p>其他规则同 Queue。</p>
+
+<h4 id="class-priorityqueue-maxsize-0">class：PriorityQueue(maxsize=0)</h4>
+
+<p>优先队列，内部使用 <a href="https://docs.python.org/2/library/heapq.html#module-heapq">heapq</a> 实现。</p>
+
+<p>其他规则同 Queue。</p>
+
+<p>优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)</p>
+
+<h4 id="exception-empty">exception：Empty</h4>
+
+<p>在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。</p>
+
+<h4 id="exception-full">exception：Full</h4>
+
+<p>在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。</p>
+
+<h2 id="0x02-queue-对象介绍">0x02 Queue 对象介绍</h2>
+
+<blockquote>
+<p>LifoQueue，PriorityQueue 都是继承自 Queue</p>
+</blockquote>
+
+<h4 id="queue-qsize">Queue.qsize()</h4>
+
+<p>返回队列的近似大小，不能保证读写</p>
+
+<h4 id="queue-empty">Queue.empty()</h4>
+
+<h4 id="queue-full">Queue.full()</h4>
+
+<h4 id="queue-put-item-block-timeout">Queue.put(item[, block[, timeout]])</h4>
+
+<h4 id="queue-put-nowait-item">Queue.put_nowait(item)</h4>
+
+<h4 id="queue-get-block-timeout">Queue.get([block[, timeout]])</h4>
+
+<h4 id="queue-get-nowait">Queue.get_nowait()</h4>
+
+<h4 id="queue-task-done">Queue.task_done()</h4>
+
+<h4 id="queue-join">Queue.join()</h4>
+
+<hr />
+
+<p>参考：
+<a href="https://docs.python.org/2/library/queue.html">Queue — A synchronized queue class</a></p>
+
+  </div>
+
   <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/go/go-compare-python/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
+    <ul class="stats">
   <li class="categories">
     <ul>
         
@@ -517,7 +792,7 @@
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="/categories/go">Go</a></li>
+                <li><a class="article-category-link" href="/categories/python">Python</a></li>
                 
             
         
@@ -534,9 +809,6 @@
                 <li><a class="article-category-link" href="/tags/python">python</a></li>
                 
                 
-                <li><a class="article-category-link" href="/tags/go">go</a></li>
-                
-                
                 <li><a class="article-category-link" href="/tags/2019">2019</a></li>
                 
             
@@ -546,20 +818,55 @@
 </ul>
 
   </footer>
+
 </article>
 
-        
+    <article class="post">
+      <h2>Say something</h2>
 
-        
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
+
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2019/python/python-queue/">
+    <input type="hidden" name="options[entryId]" value="def52995265d734ffc62477e1d1706c8">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
+
+
+<h2>Comments</h2>
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
 <ul class="actions pagination">
     
-        <li><a href="#" class="disabled button big previous">Previous Page</a></li>
+        <li><a href="/blog/2019/web/http-overview/"
+                class="button big previous">HTTP 协议透彻解析</a></li>
     
 
     
-        <li><a href="#" class="disabled button big next">Next Page</a></li>
-    
 </ul>
+
 
     </div>
     
@@ -583,7 +890,7 @@
       <ul class="icons">
         
           
-    <li><a href="/categories/go/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         
@@ -722,7 +1029,7 @@
 
         <a href="/blog/2019/python/python-queue/" class="image featured">
             
-                <img src="/img/2019/122019/12/zgr-bwbj.jpeg" alt="">
+                <img src="/img/2019/12/zgr-bwbj.jpeg" alt="">
             
         </a>
     
@@ -765,7 +1072,7 @@
 
         <a href="/blog/2019/go/go-compare-python/" class="image featured">
             
-                <img src="/img/2019/122019/12/kobe_first_champ.jpg" alt="">
+                <img src="/img/2019/12/kobe_first_champ.jpg" alt="">
             
         </a>
     
@@ -808,7 +1115,7 @@
 
         <a href="/blog/2019/blog/hugo-plus-staticman/" class="image featured">
             
-                <img src="/img/2019/122019/12/pic01.jpg" alt="">
+                <img src="/img/2019/12/pic01.jpg" alt="">
             
         </a>
     
@@ -944,7 +1251,7 @@
       <ul class="icons">
         
           
-    <li><a href="/categories/go/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         
