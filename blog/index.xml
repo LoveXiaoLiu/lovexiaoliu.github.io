@@ -6,10 +6,22 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>程序员必须知道的常识</title>
+      <link>/blog/2019/computer-basics/what-programmers-must-know/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/computer-basics/what-programmers-must-know/</guid>
+      <description>写在前面：
+这里总结的很多常识只是根据当时的计算机发展水平来预估的，给大家提供一个大致的参考，存在过时的可能（我会不定时更新）。
+eg：redis 读操作最高能达到 10W QPS，这个只是针对当下的计算机水平和固定的 redis 版本评估出来的，过几年突破 100w 也是有可能的。
+ 0x00 计算机  从内存读取 1M 的数据需要 250 微秒，SSD 需要 4 倍的时间，磁盘需要 80 倍的时间。 从内存顺序读的速度是 4G/s 从 SSD 顺序读的速度是 1G/s，内存的 1&amp;frasl;4 从磁盘顺序读的速度是 30M/s，SSD的 1&amp;frasl;30 一个月有 2.5M（250万）秒 位运算：右移一位相当于除以 2，左移一位相当于乘以 2 有一些十进制数的小数无法转换成二进制数（0.1） 内存和cpu都是集成电路（IC）  0x01 网络  从 1G 的以太网顺序读的速度是 100M/s 同一个数据中心内数据往返 2000次/s  0x02 数据库  Redis 单机一般可以抗住读 100k QPS，写 80k QPS MySQL 单机一般可以抗住 5k 左右 QPS MySQL 单表大于 2000 万行或者大于 50-100G 就有压力  0x03 编程  带 log 的时间复杂度，一般都需要使用二分法或者二叉树等 使用循环可能性能更好，使用递归程序可能更容易理解 递归需要两个条件：基线条件（让递归停止）和递归条件（让递归继续执行） 两个算法的大 O 时间复杂度一样，并不代表这两种算法的效率一样（某个计算步骤可能非常耗时） 最短路径问题可以使用广度优先搜索算法完成 通常我们认为计算机可解决的问题只限于多项式时间内。而O(2ⁿ)、O(N!</description>
+    </item>
     
     <item>
       <title>Python 标准库：Queue</title>
