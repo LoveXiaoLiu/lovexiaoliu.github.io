@@ -6,17 +6,27 @@
     <description>Recent content in python on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Python 标准库：re</title>
+      <link>/blog/2019/python/python-standard-library-re/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/python/python-standard-library-re/</guid>
+      <description>0x00 0x01 0x02 参考：
+📌 Regular expression operations</description>
+    </item>
+    
+    <item>
       <title>Python 标准库：Queue</title>
-      <link>/blog/2019/python/python-queue/</link>
+      <link>/blog/2019/python/python-standard-library-queue/</link>
       <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/python/python-queue/</guid>
+      <guid>/blog/2019/python/python-standard-library-queue/</guid>
       <description>Btw：
 Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。
  0x00 Overview Queue 模块实现的是多生产者、多消费者的队列。因此它是线程安全的，可以在多线程下使用。因为 Queue 类内部实现了所有必须的锁。
