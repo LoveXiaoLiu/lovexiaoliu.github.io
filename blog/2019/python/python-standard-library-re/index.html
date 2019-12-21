@@ -32,7 +32,7 @@
         "datePublished": "2019-12-20 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-20 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/python\/python-standard-library-re\/",
-        "wordCount" : "79",
+        "wordCount" : "203",
         "keywords" : [ "python","2019","Blog" ]
     }
     </script>
@@ -89,7 +89,7 @@
 
 <meta itemprop="datePublished" content="2019-12-20T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-20T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="79">
+<meta itemprop="wordCount" content="203">
 
 
 
@@ -308,7 +308,7 @@
 
         <a href="/blog/2019/computer-basics/what-programmers-must-know/" class="image featured">
             
-                <img src="/img/2019/122019/12/macau_back_china.jpg" alt="">
+                <img src="/img/2019/12/macau_back_china.jpg" alt="">
             
         </a>
     
@@ -349,7 +349,7 @@
 
         <a href="/blog/2019/python/python-standard-library-queue/" class="image featured">
             
-                <img src="/img/2019/122019/12/titanic.png" alt="">
+                <img src="/img/2019/12/titanic.png" alt="">
             
         </a>
     
@@ -390,7 +390,7 @@
 
         <a href="/blog/2019/go/go-compare-python/" class="image featured">
             
-                <img src="/img/2019/122019/12/kobe_first_champ.jpg" alt="">
+                <img src="/img/2019/12/kobe_first_champ.jpg" alt="">
             
         </a>
     
@@ -481,13 +481,63 @@
 
 <p><strong>re.M &amp;&amp; re.MULTILINE</strong></p>
 
-<hr />
+<ul>
+<li>指定正则匹配时进行多行匹配：<code>^</code> 字符匹配字符串和<strong>每一行开始（也就是换行符之后）</strong>的位置（默认情况下，<code>^</code> 只匹配字符串开始的位置），<code>$</code> 字符匹配字符串和<strong>每一行结尾（也就是换行符之前）</strong>的位置（默认情况下，<code>$</code> 只匹配字符串结尾，如果结尾是换行符就匹配到换行符之前的位置）</li>
+</ul>
 
-<hr />
+<p><strong>re.S &amp;&amp; re.DOTALL</strong></p>
 
-<hr />
+<ul>
+<li>这个标识使正则表达式中的 <code>.</code> 字符可以匹配任何字符（包括换行符，默认不匹配换行符）</li>
+</ul>
 
-<hr />
+<p><strong>re.U &amp;&amp; re.UNICODE</strong></p>
+
+<ul>
+<li>使 \w、\W、\b、\B、\d、\D、\s、\S 依赖于 Unicode 字符集，可以为 re.IGNORECASE 开启 non-ASCII 的匹配</li>
+</ul>
+
+<p><strong>re.X &amp;&amp; re.VERBOSE</strong></p>
+
+<ul>
+<li><p>这个标识允许你给正则表达式的 pattern 添加注释，注释使用 <code>#</code> 关键字，从最左边的 <code>#</code> 字符开始到行尾都是注释（前提是 <code>#</code> 不在 character class 中，或者前边没有转义反斜杠）。pattern 中的空白字符是被忽略的，除非在 character class 中，或者前边是一个非转义的反斜杠，或者在 <code>*?</code>、<code>(?:</code>、<code>(?P&lt;...&gt;</code> 中。</p>
+
+<pre><code class="language-python"># 这两个正则表达式等价
+a = re.compile(r&quot;&quot;&quot;\d +  # the integral part
+               \.    # the decimal point
+               \d *  # some fractional digits&quot;&quot;&quot;, re.X)
+b = re.compile(r&quot;\d+\.\d*&quot;)
+</code></pre></li>
+</ul>
+
+<p><strong>re.search(pattern, string, flags=0)</strong></p>
+
+<ul>
+<li><p>扫描字符串（string），寻找第一个正则表达式匹配到的位置，返回一个 MatchObject 对象。如果在字符串中没有位置匹配，就返回 None。注意，this is different from finding a zero-length match at some point in the string（没太明白这句话什么意思）</p>
+
+<pre><code class="language-python">a=re.search(&quot;a?bb&quot;, &quot;bbcc&quot;)
+a.group()
+# 'bb'
+
+a=re.search(&quot;a?bb&quot;, &quot;bccabbcbb&quot;)
+a.group()
+# 'abb'
+</code></pre></li>
+</ul>
+
+<p><strong>re.match(pattern, string, flags=0)</strong></p>
+
+<ul>
+<li>其他的内容与 re.search 相同，不同的是， re.match 必须从字符串的开头开始匹配（re.search 可以从中间才开始匹配正则表达式）。</li>
+<li>还有一点需要注意的是，即使在 re.MULTILINE 模式下，re.match 也只能在字符串的开头匹配（而不是每行的开头）</li>
+</ul>
+
+<p><strong>re.split(pattern, string, maxsplit=0, flags=0)</strong></p>
+
+<ul>
+<li>从 pattern 匹配到的位置来分割字符串。</li>
+<li>如果发现在 pattern 中有圆括号，会同时将所有的 groups 添加到列表中返回。</li>
+</ul>
 
 <hr />
 
@@ -756,7 +806,7 @@
 
         <a href="/blog/2019/go/go-compare-python/" class="image featured">
             
-                <img src="/img//kobe_first_champ.jpg" alt="">
+                <img src="/img/2019/12/kobe_first_champ.jpg" alt="">
             
         </a>
     
