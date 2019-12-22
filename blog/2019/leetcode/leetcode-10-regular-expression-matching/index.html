@@ -32,7 +32,7 @@
         "datePublished": "2019-12-22 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-22 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/leetcode\/leetcode-10-regular-expression-matching\/",
-        "wordCount" : "169",
+        "wordCount" : "107",
         "keywords" : [ "动态规划","2019","Blog" ]
     }
     </script>
@@ -89,7 +89,7 @@
 
 <meta itemprop="datePublished" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="169">
+<meta itemprop="wordCount" content="107">
 
 
 
@@ -425,24 +425,9 @@
 
 <p>那就是对正则表达式问题进行重新定义，找到状态和状态转移方程。
 + 状态：<code>dp[i][j]</code> 表示 p[0:i] 是否能匹配 s[0:j]，状态值是 0 或者 1
-+ 转移方程：<code>dp[i][j]</code></p>
++ 转移方程：</p>
 
-<pre><code class="language-python">def longestPalindrome(s):
-    sLen = len(s)
-    if sLen == 0:
-        return s
-    dp = [[0] * sLen for _ in range(sLen)]
-
-    ret = s[0]
-    for j in range(1, sLen):
-        # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了
-        for i in range(j):
-            if s[i] == s[j] and (j-i &lt;= 2 or dp[i+1][j-1]):
-                dp[i][j] = 1
-
-                if j-i+1 &gt; len(ret):
-                    ret = s[i:j+1]
-    return ret
+<pre><code class="language-python">
 </code></pre>
 
 <p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
@@ -635,6 +620,9 @@
 
 
   
+  
+    
+  
 
 
         
@@ -643,7 +631,7 @@
 
         <a href="/blog/2019/python/python-standard-library-re/" class="image featured">
             
-                <img src="/img//beethoven.jpg" alt="">
+                <img src="/img/2019/12/beethoven.jpg" alt="">
             
         </a>
     
@@ -683,7 +671,7 @@
           <article>
             <header>
               
-                <a href="/categories/python/">python</a>
+                <a href="/categories/leetcode/">leetcode</a>
                 <span style="float:right;">4</span>
               
             </header>
@@ -694,8 +682,8 @@
           <article>
             <header>
               
-                <a href="/categories/leetcode/">leetcode</a>
-                <span style="float:right;">3</span>
+                <a href="/categories/python/">python</a>
+                <span style="float:right;">4</span>
               
             </header>
           </article>

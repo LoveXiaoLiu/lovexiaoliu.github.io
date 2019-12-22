@@ -45,6 +45,22 @@
     </item>
     
     <item>
+      <title>Leetcode：#32 最长有效括号</title>
+      <link>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</guid>
+      <description>0x00 题目描述 #32
+给定一个只包含 ( 和 ) 的字符串，找出最长的包含有效括号的子串的长度。
+输入: &amp;quot;(()&amp;quot; 输出: 2 解释: 最长有效括号子串为 &amp;quot;()&amp;quot; 输入: &amp;quot;)()())&amp;quot; 输出: 4 解释: 最长有效括号子串为 &amp;quot;()()&amp;quot;  0x01 约束  注意字符串为空的情况  0x02 题解   一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。
+ 看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。
+   算法 1：无头绪 之前遇到一个类似的题，没有任何头绪。暴力破解肯定是能想出来的，但是是蠢办法。
+算法 2：动态规划 找状态和状态转移方程（类似于最长回文子串）：
+ 状态：dp[i][j] 表示从 i-j 的子串是不是有效的括号 状态转移方程：
+  PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</description>
+    </item>
+    
+    <item>
       <title>Leetcode：#5 最长回文子串</title>
       <link>/blog/2019/leetcode/leetcode-5-longest-palindromic-substring/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
