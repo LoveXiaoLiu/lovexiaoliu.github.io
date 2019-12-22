@@ -12,6 +12,21 @@
     
     
     <item>
+      <title>Leetcode：#10 正则表达式匹配</title>
+      <link>/blog/2019/leetcode/leetcode-10-regular-expression-matching/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/leetcode/leetcode-10-regular-expression-matching/</guid>
+      <description>0x00 题目描述 #10
+给定一个字符串 s 和一个字符规则 p，实现一个支持 . 和 * 的正则表达式匹配。其中 . 匹配任意单个字符，* 匹配零个或多个前面的那一个元素。
+所谓匹配，是要涵盖整个字符串 s，而不是 s 的子串。类似于 re.match 而不是 re.search。
+输入: s = &amp;quot;aa&amp;quot; p = &amp;quot;a&amp;quot; 输出: false 解释: &amp;quot;a&amp;quot; 无法匹配 &amp;quot;aa&amp;quot; 整个字符串。  0x01 约束  s 可能为空，且只包含 a-z 的小写字母 p 可能为空，且只包含 a-z 的小写字母，以及字符 . 和 *  0x02 题解   一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。
+ 看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。
+   算法 1：无头绪 开始拿到这个题，我感觉无从下手，想不到什么好的办法（没有头绪）。
+只是想到 s 和 p 各拿一个指针，从左到右的扫描。接下来需要进行各种 if else 的判断，而且判断条件很复杂，不一定能做出来。</description>
+    </item>
+    
+    <item>
       <title>Leetcode：#204 计数质数</title>
       <link>/blog/2019/leetcode/leetcode-204-count-primes/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
@@ -41,8 +56,9 @@
  看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。
    算法 1：暴力破解法 这是一个蠢方法，把所有的子串找出来，判断每个子串是不是回文的，然后找出最长的那个子串返回。
 找出所有子串的时间复杂度是 O(n²)。
-算法 2：动态规划 找状态和状态转移方程： + 状态：dp[i][j] 表示从 i-j 的子串是不是回文的 + 状态转移方程：dp[i][j] = s[i] == s[j] and (j-1 &amp;lt;= 2 or dp[i+1][j-1] == True)
-def longestPalindrome(s): sLen = len(s) if sLen == 0: return s dp = [[0] * sLen for _ in range(sLen)] ret = s[0] for j in range(1, sLen): # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了 for i in range(j): if s[i] == s[j] and (j-i &amp;lt;= 2 or dp[i+1][j-1]): dp[i][j] = 1 if j-i+1 &amp;gt; len(ret): ret = s[i:j+1] return ret  PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</description>
+算法 2：动态规划 找状态和状态转移方程：
+ 状态：dp[i][j] 表示从 i-j 的子串是不是回文的 状态转移方程：dp[i][j] = s[i] == s[j] and (j-1 &amp;lt;= 2 or dp[i+1][j-1] == True)
+def longestPalindrome(s): sLen = len(s) if sLen == 0: return s dp = [[0] * sLen for _ in range(sLen)] ret = s[0] for j in range(1, sLen): # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了 for i in range(j): if s[i] == s[j] and (j-i &amp;lt;= 2 or dp[i+1][j-1]): dp[i][j] = 1 if j-i+1 &amp;gt; len(ret): ret = s[i:j+1] return ret   PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</description>
     </item>
     
   </channel>

@@ -24,7 +24,7 @@
         "datePublished": "2019-12-22 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-22 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/leetcode\/leetcode-5-longest-palindromic-substring\/",
-        "wordCount" : "116",
+        "wordCount" : "114",
         "keywords" : [ "动态规划","2019","Blog" ]
     }
     </script>
@@ -83,7 +83,7 @@
 
 <meta itemprop="datePublished" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="116">
+<meta itemprop="wordCount" content="114">
 
 
 
@@ -552,27 +552,31 @@
 
 <h2 id="算法-2-动态规划">算法 2：动态规划</h2>
 
-<p>找状态和状态转移方程：
-+ 状态：<code>dp[i][j]</code> 表示从 <code>i-j</code> 的子串是不是回文的
-+ 状态转移方程：<code>dp[i][j] = s[i] == s[j] and (j-1 &lt;= 2 or dp[i+1][j-1] == True)</code></p>
+<p>找状态和状态转移方程：</p>
+
+<ul>
+<li>状态：<code>dp[i][j]</code> 表示从 <code>i-j</code> 的子串是不是回文的</li>
+
+<li><p>状态转移方程：<code>dp[i][j] = s[i] == s[j] and (j-1 &lt;= 2 or dp[i+1][j-1] == True)</code></p>
 
 <pre><code class="language-python">def longestPalindrome(s):
-    sLen = len(s)
-    if sLen == 0:
-        return s
-    dp = [[0] * sLen for _ in range(sLen)]
+sLen = len(s)
+if sLen == 0:
+    return s
+dp = [[0] * sLen for _ in range(sLen)]
 
-    ret = s[0]
-    for j in range(1, sLen):
-        # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了
-        for i in range(j):
-            if s[i] == s[j] and (j-i &lt;= 2 or dp[i+1][j-1]):
-                dp[i][j] = 1
+ret = s[0]
+for j in range(1, sLen):
+    # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了
+    for i in range(j):
+        if s[i] == s[j] and (j-i &lt;= 2 or dp[i+1][j-1]):
+            dp[i][j] = 1
 
-                if j-i+1 &gt; len(ret):
-                    ret = s[i:j+1]
-    return ret
-</code></pre>
+            if j-i+1 &gt; len(ret):
+                ret = s[i:j+1]
+return ret
+</code></pre></li>
+</ul>
 
 <p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
 
@@ -912,7 +916,7 @@
             <header>
               
                 <a href="/categories/leetcode/">leetcode</a>
-                <span style="float:right;">2</span>
+                <span style="float:right;">3</span>
               
             </header>
           </article>
