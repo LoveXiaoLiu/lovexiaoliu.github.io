@@ -27,6 +27,17 @@
   </url>
   
   <url>
+    <loc>/categories/leetcode/</loc>
+    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2019/leetcode/leetcode-204-count-primes/</loc>
+    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/python/</loc>
     <lastmod>2019-12-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -45,6 +56,12 @@
   
   <url>
     <loc>/tags/python/</loc>
+    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95/</loc>
     <lastmod>2019-12-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
