@@ -6,10 +6,26 @@
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode：#32 最长有效括号</title>
+      <link>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</link>
+      <pubDate>Mon, 23 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</guid>
+      <description>0x00 题目描述 #32
+给定一个只包含 ( 和 ) 的字符串，找出最长的包含有效括号的子串的长度。
+输入: &amp;quot;(()&amp;quot; 输出: 2 解释: 最长有效括号子串为 &amp;quot;()&amp;quot; 输入: &amp;quot;)()())&amp;quot; 输出: 4 解释: 最长有效括号子串为 &amp;quot;()()&amp;quot;  0x01 约束  注意字符串为空的情况  0x02 题解   一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。
+ 看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。
+   算法 1：无头绪 之前遇到一个类似的题，没有任何头绪。暴力破解肯定是能想出来的，但是是蠢办法。
+算法 2：动态规划 找状态和状态转移方程（类似于最长回文子串）：
+ 状态：  dp[i][j] 表示从 i-j 的子串是不是有效的括号 第一次就将状态找错了，DP 也可以是一维的三维的，不要形成思维定式。这里就是一维的状态：dp[i] 中 i 表示在 s 中，下标以 i 结束的子串，有效括号的个数  状态转移方程：
+ DP 最不好找的就是转移方程 这里分 3 种情况： 以 ( 结尾的肯定不是有效括号，直接忽略处理 以 ) 结尾的字符串中，如果 i-1 是 (，那么 dp[i] = dp[i-2] + 2（前两个字符索引处对应的最长括号有效个数 + 新增的 1 个有效括号） 以 ) 结尾的字符串中，如果 i-1 是 )，那么久追溯到 i-1 索引处对应的有效括号的最左端，即 i-dp[i-1]，然后查看 i-dp[i-1]-1是不是 (，如果是的话，dp[i] = dp[i-1]+2+dp[i-dp[i-1]-2]，其中 dp[i-dp[i-1]-2] 是前面的有效括号个数</description>
+    </item>
     
     <item>
       <title>Leetcode：#10 正则表达式匹配</title>
@@ -42,22 +58,6 @@
 这个算法太愚蠢了，时间复杂度也很大 O(n²)。
 算法 2：埃拉托斯特尼筛法 我最初卡在如何判断一个数字是不是质数的问题上。其实判断一个数是不是质数，不需要判断比他小的每一个数字可不可以被整除，只需要判断到 [1-sqrt(n)]。
 比如说 12 = 2 x 6，12 = 3 x 4，12 = sqrt(12) x sqrt(12)，12 = 4 x 3，12 = 6 x 2。从 sqrt(12) 分割，前半部分和后半部分是对称的，所以只需要判断 [1-sqrt(n)] 区间内的数字可不可以被整除就 ok 了。</description>
-    </item>
-    
-    <item>
-      <title>Leetcode：#32 最长有效括号</title>
-      <link>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</link>
-      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</guid>
-      <description>0x00 题目描述 #32
-给定一个只包含 ( 和 ) 的字符串，找出最长的包含有效括号的子串的长度。
-输入: &amp;quot;(()&amp;quot; 输出: 2 解释: 最长有效括号子串为 &amp;quot;()&amp;quot; 输入: &amp;quot;)()())&amp;quot; 输出: 4 解释: 最长有效括号子串为 &amp;quot;()()&amp;quot;  0x01 约束  注意字符串为空的情况  0x02 题解   一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。
- 看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。
-   算法 1：无头绪 之前遇到一个类似的题，没有任何头绪。暴力破解肯定是能想出来的，但是是蠢办法。
-算法 2：动态规划 找状态和状态转移方程（类似于最长回文子串）：
- 状态：dp[i][j] 表示从 i-j 的子串是不是有效的括号 状态转移方程：
-  PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</description>
     </item>
     
     <item>
