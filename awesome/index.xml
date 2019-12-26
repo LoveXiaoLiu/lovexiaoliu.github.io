@@ -6,10 +6,19 @@
     <description>Recent content in Awesome on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/awesome/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>视频：奥斯卡最佳动画短片 - Alike</title>
+      <link>/awesome/academy-award-for-best-animated-short-alike/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/academy-award-for-best-animated-short-alike/</guid>
+      <description> 0x00 《Alike》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
     
     <item>
       <title>音乐：Photograph</title>
