@@ -6,10 +6,55 @@
     <description>Recent content in 2019 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2019/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式事务：2PC &amp; 3PC</title>
+      <link>/blog/2019/architecture/distributed-transaction-2pc-3pc/</link>
+      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/distributed-transaction-2pc-3pc/</guid>
+      <description>什么是分布式？ + 与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。
+分布式事务常见解决方案: + 2PC两段提交协议 + 3PC三段提交协议(弥补两端提交协议缺点) + TCC或者GTS(阿里) + 消息中间件最终一致性 + 使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。
+ 0x00 CAP 定理 所谓定理就是别人发现的规律，并且已经证实该规律是正确的（就像勾股定理，它永远是正确的，你直接用它的结论就行，你也可以自己证实其正确性）。
+CAP 定理定义：在异步网络中（不可靠的网络），不可能同时实现并发读/写状态下的 availability、consistency。即 Consistency、Availability 和 Partition Tolerance 不能同时满足。
+这里证明了 CAP 是成立的
+0x01 2PC Two-Phase Commit Protocol（两阶段提交协议），注意 2PC 是一个协议。
+2PC 是一个强一致、中心化的原子提交协议。这里面包含一个中心化的协调者节点（coordinator）。
+Example：订单服务 A，需要调用支付服务 B 去支付，支付成功则处理购物订单为待发货状态，否则就需要将购物订单处理为失败状态。
+两个阶段： Prepare 阶段
+ 事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应 执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况 返回事务询问响应：参与者根据本地事务的情况返回 Yes or No  Commit 阶段
+ Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No） 执行本地 commit 或者 rollbak</description>
+    </item>
+    
+    <item>
+      <title>Python 标准库：socket</title>
+      <link>/blog/2019/python/python-standard-library-socket/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/python/python-standard-library-socket/</guid>
+      <description>Btw：
+Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。
+ 0x00 Overview Queue 模块实现的是多生产者、多消费者的队列。因此它是线程安全的，可以在多线程下使用。因为 Queue 类内部实现了所有必须的锁。
+Queue 模块提供了三种类型的队列，三种类型的主要差异是获取数据的顺序不同。
+0x01 队列 class：Queue(maxsize=0)
+ FIFO（先进先出）队列。
+ maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。
+ 如果 maxsize 小于等于 0，队列的容量是无限大。
+  class：LifoQueue(maxsize=0)
+ LIFO（先进后出）队列，类似于栈。
+ 其他规则同 Queue。
+  class：PriorityQueue(maxsize=0)
+ 优先队列，内部使用 heapq 实现。
+ 其他规则同 Queue。
+ 优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)
+  exception：Empty
+ 在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。  exception：Full
+ 在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。  0x02 Queue 对象介绍  LifoQueue，PriorityQueue 都是继承自 Queue</description>
+    </item>
     
     <item>
       <title>Leetcode：#32 最长有效括号</title>

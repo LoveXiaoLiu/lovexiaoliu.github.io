@@ -1,0 +1,1296 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "\/"
+        },
+        "articleSection" : "blog",
+        "name" : "分布式事务：2PC \x26 3PC",
+        "headline" : "分布式事务：2PC \x26 3PC",
+        "description" : "单体架构演化到微服务架构，分布式事务是必不可少的问题",
+        "inLanguage" : "en",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-12-27 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2019-12-27 00:00:00 \x2b0000 UTC",
+        "url" : "\/blog\/2019\/architecture\/distributed-transaction-2pc-3pc\/",
+        "wordCount" : "364",
+        "keywords" : [ "分布式事务","2PC","3PC","2019","Blog" ]
+    }
+    </script>
+        
+            
+                <title>分布式事务：2PC &amp; 3PC</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.56.0" />
+        
+  
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='/favicon/apple-touch-icon-precomposed.png'>
+  <link rel="icon" href='/favicon/favicon.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile.png'>
+  <meta name="application-name" content="Gra55&#39;s Blog">
+  <meta name="msapplication-tooltip" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+            <meta name="author" content="gra55">
+        
+        
+            <meta name="description" content="单体架构演化到微服务架构，分布式事务是必不可少的问题">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="分布式事务：2PC &amp; 3PC"/>
+<meta name="twitter:description" content="单体架构演化到微服务架构，分布式事务是必不可少的问题"/>
+
+        <meta property="og:title" content="分布式事务：2PC &amp; 3PC" />
+<meta property="og:description" content="单体架构演化到微服务架构，分布式事务是必不可少的问题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2019/architecture/distributed-transaction-2pc-3pc/" />
+<meta property="article:published_time" content="2019-12-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-27T00:00:00+00:00" />
+
+        <meta property="og:image" content="//images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        <meta itemprop="name" content="分布式事务：2PC &amp; 3PC">
+<meta itemprop="description" content="单体架构演化到微服务架构，分布式事务是必不可少的问题">
+
+
+<meta itemprop="datePublished" content="2019-12-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="364">
+
+
+
+<meta itemprop="keywords" content="分布式事务,2PC,3PC,2019," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      <h1><a href="/">blog</a></h1>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/about/">
+                            <i class="fa fa-heartbeat">&nbsp;</i>About
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-coffee">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/awesome/">
+                            <i class="fa fa-snowflake-o">&nbsp;</i>Awesome
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories/">
+                            <i class="fa fa-free-code-camp">&nbsp;</i>Categories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//bing.com/search">
+                    <input type="text" name="q" placeholder="Search" value="site:yangliu.date "/>
+                    <input type="hidden" name="as_sitesearch" value="yangliu.date/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//bing.com/search">
+                <input type="text" name="q" placeholder="Search" value="site:yangliu.date "/>
+                <input type="hidden" name="as_sitesearch" value="yangliu.date/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Home
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about/">
+                            <h3>
+                                <i class="fa fa-heartbeat">&nbsp;</i>About
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-coffee">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/awesome/">
+                            <h3>
+                                <i class="fa fa-snowflake-o">&nbsp;</i>Awesome
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/">
+                            <h3>
+                                <i class="fa fa-free-code-camp">&nbsp;</i>Categories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section class="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/">分布式事务：2PC &amp; 3PC</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2019-12-27'>
+                                    December 27, 2019</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
+            
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
+            
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/">Leetcode：#32 最长有效括号</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2019-12-23'>
+                                    December 23, 2019</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2019/leetcode/leetcode-204-count-primes/">Leetcode：#204 计数质数</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2019-12-22'>
+                                    December 22, 2019</time>
+                            </header>
+                            
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">View more posts</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f&amp;text=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9a2PC%20%26%203PC&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f&amp;title=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9a2PC%20%26%203PC" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/">分布式事务：2PC &amp; 3PC</a></h1>
+            
+        
+        
+            <p>单体架构演化到微服务架构，分布式事务是必不可少的问题</p>
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2019-12-27'>
+            December 27, 2019</time>
+        <span class="author">gra55</span>
+        
+            <p>2 minute read</p>
+        
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f&amp;text=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9a2PC%20%26%203PC&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f&amp;title=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9a2PC%20%26%203PC" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-2pc-3pc%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
+            
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
+            
+            <div style="
+                    text-align: center; 
+                    color: #aaaaaa; 
+                    font-family: 'Raleway', Helvetica, sans-serif; 
+                    font-size: 0.5em; 
+                    font-weight: 400; 
+                    letter-spacing: 0.25em; 
+                    text-transform: uppercase;
+                    max-width: 800px;
+                "
+            >
+            1984年12月27日，我国首支极地探险队在南极半岛附近的乔治王岛登陆，开始建设长城站
+            </div>
+        </a>
+    
+
+
+  <div id="content">
+    
+
+<blockquote>
+<p>什么是分布式？
++ 与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。</p>
+
+<p>分布式事务常见解决方案:
++ 2PC两段提交协议
++ 3PC三段提交协议(弥补两端提交协议缺点)
++ TCC或者GTS(阿里)
++ 消息中间件最终一致性
++ 使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。</p>
+</blockquote>
+
+<h1 id="0x00-cap-定理">0x00 CAP 定理</h1>
+
+<p>所谓定理就是别人发现的规律，并且已经证实该规律是正确的（就像勾股定理，它永远是正确的，你直接用它的结论就行，你也可以自己证实其正确性）。</p>
+
+<p>CAP 定理定义：在异步网络中（不可靠的网络），不可能同时实现并发读/写状态下的 availability、consistency。即 Consistency、Availability 和 Partition Tolerance 不能同时满足。</p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/33999708">这里证明了 CAP 是成立的</a></p>
+
+<h1 id="0x01-2pc">0x01 2PC</h1>
+
+<p>Two-Phase Commit Protocol（两阶段提交协议），注意 2PC 是一个协议。</p>
+
+<p>2PC 是一个强一致、中心化的原子提交协议。这里面包含一个中心化的协调者节点（coordinator）。</p>
+
+<p>Example：订单服务 A，需要调用支付服务 B 去支付，支付成功则处理购物订单为待发货状态，否则就需要将购物订单处理为失败状态。</p>
+
+<h3 id="两个阶段">两个阶段：</h3>
+
+<p>Prepare 阶段</p>
+
+<ol>
+<li>事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应</li>
+<li>执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况</li>
+<li>返回事务询问响应：参与者根据本地事务的情况返回 Yes or No</li>
+</ol>
+
+<p>Commit 阶段</p>
+
+<ol>
+<li>Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No）</li>
+
+<li><p>执行本地 commit 或者 rollbak</p>
+
+<pre><code class="language-c">                  +
+                  |
+                  |
+                  | request
+                  |
+                  |
++-----------------+-----------------+
+|                                   |
+|            Coordinator            |
+|                                   |
++-+------+----+-------+---+------+--+
+  |      ^    |       |   ^      |
+  |      |    |       |   |      |
+4 |    3 |    | 1   1 |   | 3    | 4
+  |      |    |       |   |      |
+  v      |    v       v   |      v
++-----+------+----+-+    ++---+------+-------+
+|                   |    |                   |
+|                   |    |                   |
+|      Server A     |    |      Server B     |
+|                   |    |                   |
+|                   |    |                   |
++------+-----+------+    +---+-----+---------+
+   |     |               |     |
+ 5 |     | 2           2 |     | 5
+   |     |               |     |
+   v     v               v     v
++--+-----+---+         +-+-----+----+
+|            |         |            |
+|     DB 1   |         |   DB 2     |
+|            |         |            |
++------------+         +------------+
+</code></pre></li>
+</ol>
+
+<h3 id="缺点">缺点：</h3>
+
+<ul>
+<li>性能差：2PC 是一个阻塞协议，即节点在等待休息的时候会阻塞</li>
+<li>单节点故障：Coordinator 作为一个中心化，如果单节点并且故障，整个分布式系统就会崩掉</li>
+</ul>
+
+<h1 id="0x02-3pc">0x02 3PC</h1>
+
+<p>3PC 的诞生主要是为了解决 2PC 出现的阻塞问题。与 2PC 相比提出了两个改动：
++ Coordinator 和参与者都引入超时机制
++ 在 2PC 的 Prepare 和 Commit 之前加入一个 check 阶段，以保证最后 Commit 阶段之前各参与节点状态一致</p>
+
+<h3 id="三个阶段">三个阶段：</h3>
+
+<p>CanCommit 阶段</p>
+
+<ol>
+<li>锁询问：请求到达 Coordinator 后， Coordinator 发起 CanCommit 请求，各参与节点根据情况判断是否可以获取数据库锁</li>
+<li>锁请求：各参与节点尝试获取本地数据库锁</li>
+<li>锁返回：参与节点根据获取锁的情况返回 Yes or No</li>
+</ol>
+
+<p>PreCommit 阶段</p>
+
+<ul>
+<li>如果所有参与节点都返回 Yes，则进入PreCommit 阶段，PreCommit 类似于 2PC 的Prepare 阶段，只是增加了超时机制，这里不再赘述</li>
+</ul>
+
+<p>DoCommit 阶段</p>
+
+<ul>
+<li><p>DoCommit 阶段类似于 2PC 的 Commit 阶段</p>
+
+<pre><code class="language-c">                  +
+                  |
+                  |
+                  | request
+                  |
+                  |
++-----------------+-----------------+
+|                                   |
+|            Coordinator            |
+|                                   |
++--------+----+-------+---+---------+
+         ^    |       |   ^
+         |    |       |   |
+       3 |    | 1   1 |   | 3
+         |    |       |   |
+         |    v       v   |
++------------+----+-+    ++---+--------------+
+|                   |    |                   |
+|                   |    |                   |
+|      Server A     |    |      Server B     |
+|                   |    |                   |
+|                   |    |                   |
++------------+------+    +---+---------------+
+         |               |
+         | 2           2 |
+         |               |
+         v               v
++--------+---+         +-+----------+
+|            |         |            |
+|     DB 1   |         |   DB 2     |
+|            |         |            |
++------------+         +------------+
+</code></pre></li>
+</ul>
+
+<h3 id="缺点-1">缺点：</h3>
+
+<p>2PC 和 3PC 都没有完全解决数据不一致的问题。</p>
+
+<hr />
+
+<p>参考：</p>
+
+<p>📌 <a href="https://www.cnblogs.com/qdhxhz/p/11167025.html">分布式事务(1)&mdash;2PC和3PC原理</a></p>
+
+<p>📌 <a href="https://devopedia.org/cap-theorem">CAP Theorem</a></p>
+
+<p>📌 <a href="https://zhuanlan.zhihu.com/p/33999708">谈谈分布式系统的CAP理论</a></p>
+
+<p>📌 <a href="http://courses.cs.vt.edu/~cs5204/fall00/distributedDBMS/duckett/tpcp.html">The Two-Phase Commit Protocol</a></p>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84">架构</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1">分布式事务</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2pc">2PC</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/3pc">3PC</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+      <h2>Say something</h2>
+
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
+
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2019/architecture/distributed-transaction-2pc-3pc/">
+    <input type="hidden" name="options[entryId]" value="63c4ec0b757dab42f3cc086c9db14228">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
+
+
+<h2>Comments</h2>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2019/python/python-standard-library-socket/"
+                class="button big previous">Python 标准库：socket</a></li>
+    
+
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+      
+        <a href='/' class="logo"><img src="/img/main/logo.jpg" alt="Mamba spirit" /></a>
+      
+    
+    
+      <header>
+        <h2>Gra55</h2>
+        <p>愿背井离乡、追寻梦想的你归来仍是少年 <i class='fa fa-hand-peace-o'></i></p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/LoveXiaoLiu" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="/img/main/wechar-qr.png" target="_blank" title="WeChat: 0x00" class="fa fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:shuai.grass@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section class="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Recent Posts</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/">分布式事务：2PC &amp; 3PC</a>
+              </h3>
+              
+              <time class="published" datetime='2019-12-27'>
+                December 27, 2019
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
+            
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
+            
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/">Leetcode：#32 最长有效括号</a>
+              </h3>
+              
+              <time class="published" datetime='2019-12-23'>
+                December 23, 2019
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2019/leetcode/leetcode-204-count-primes/">Leetcode：#204 计数质数</a>
+              </h3>
+              
+              <time class="published" datetime='2019-12-22'>
+                December 22, 2019
+              </time>
+            </header>
+            
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">View more posts</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/categories/">Categories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/python/">python</a>
+                <span style="float:right;">5</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/leetcode/">leetcode</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/blog/">blog</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/go/">go</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/web/">web</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+  
+  
+    <section id="mini-bio">
+      <h3>About</h3>
+      <p>Ordinary but not mediocre, fighting <i class='fa fa-hand-peace-o'></i></p>
+      <a href="/about/" class="button">Learn More</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/LoveXiaoLiu" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="/img/main/wechar-qr.png" target="_blank" title="WeChat: 0x00" class="fa fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:shuai.grass@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2019
+        
+          Gra55&#39;s Blog
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+      <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </body>
+</html>
+

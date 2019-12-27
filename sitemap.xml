@@ -3,13 +3,68 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/awesome/</loc>
-    <lastmod>2019-12-26T00:00:00+00:00</lastmod>
+    <loc>/tags/2019/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/2pc/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/3pc/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2019/architecture/distributed-transaction-2pc-3pc/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2019-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/awesome/</loc>
     <lastmod>2019-12-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -22,20 +77,27 @@
   </url>
   
   <url>
-    <loc>/tags/2019/</loc>
-    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
+    <loc>/categories/python/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/blog/</loc>
-    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
+    <loc>/blog/2019/python/python-standard-library-socket/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
+    <loc>/tags/socket/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -50,12 +112,6 @@
     <lastmod>2019-12-23T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-12-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -86,22 +142,10 @@
   </url>
   
   <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/blog/2019/python/python-standard-library-re/</loc>
     <lastmod>2019-12-22T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
