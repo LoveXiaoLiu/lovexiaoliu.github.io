@@ -24,7 +24,7 @@
         "datePublished": "2019-12-27 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-27 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/architecture\/distributed-transaction-2pc-3pc\/",
-        "wordCount" : "350",
+        "wordCount" : "342",
         "keywords" : [ "分布式事务","2PC","3PC","2019","Blog" ]
     }
     </script>
@@ -83,7 +83,7 @@
 
 <meta itemprop="datePublished" content="2019-12-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="350">
+<meta itemprop="wordCount" content="342">
 
 
 
@@ -321,7 +321,7 @@
                                 
                                 <time class="published" datetime=
                                     '2019-12-23'>
-                                    December 23, 2019</time>
+                                    December 27, 2019</time>
                             </header>
                             
 
@@ -525,9 +525,6 @@
 
 
   
-  
-    
-  
 
 
         
@@ -536,7 +533,7 @@
 
         <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
             
-                <img src="/img/2019/122019/12/great-wall-station-antarctica.jpg" alt="">
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
             
             <div style="
                     text-align: center; 
@@ -596,49 +593,50 @@
 
 <p>Prepare 阶段</p>
 
-<p>① 事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应</p>
+<p>①、事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应</p>
 
-<p>② 执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况</p>
+<p>②、执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况</p>
 
-<p>③ 返回事务询问响应：参与者根据本地事务的情况返回 Yes or No</p>
+<p>③、返回事务询问响应：参与者根据本地事务的情况返回 Yes or No</p>
 
 <p>Commit 阶段</p>
 
-<p>④ Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No）</p>
+<p>④、Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No）</p>
 
-<p>⑤ 执行本地 commit 或者 rollbak</p>
+<p>⑤、执行本地 commit 或者 rollbak</p>
 
-<pre><code class="language-py">                      +
-                      |
-                      |
-                      | request
-                      |
-                      |
-    +-----------------+-----------------+
-    |                                   |
-    |            Coordinator            |
-    |                                   |
-    +-+------+----+-------+---+------+--+
-      |      ^    |       |   ^      |
-      |      |    |       |   |      |
-    4 |    3 |    | 1   1 |   | 3    | 4
-      |      |    |       |   |      |
-      v      |    v       v   |      v
-+-----+------+----+-+    ++---+------+-------+
+<pre><code>                  +
+                  |
+                  |
+                  | request
+                  |
+                  |
++-----------------+-----------------+
+|                                   |
+|            Coordinator            |
+|                                   |
++-+------+----+-------+---+------+--+
+  |      ^    |       |   ^      |
+  |      |    |       |   |      |
+4 |    3 |    | 1   1 |   | 3    | 4
+  |      |    |       |   |      |
+  v      |    v       v   |      v
+</code></pre>
+
+<p>+&mdash;&ndash;+&mdash;&mdash;+&mdash;-+-+    ++&mdash;+&mdash;&mdash;+&mdash;&mdash;-+
 |                   |    |                   |
 |      Server A     |    |      Server B     |
 |                   |    |                   |
-+------+-----+------+    +---+-----+---------+
++&mdash;&mdash;+&mdash;&ndash;+&mdash;&mdash;+    +&mdash;+&mdash;&ndash;+&mdash;&mdash;&mdash;+
        |     |               |     |
      5 |     | 2           2 |     | 5
        |     |               |     |
        v     v               v     v
-    +--+-----+---+         +-+-----+----+
+    +&ndash;+&mdash;&ndash;+&mdash;+         +-+&mdash;&ndash;+&mdash;-+
     |            |         |            |
     |     DB 1   |         |   DB 2     |
     |            |         |            |
-    +------------+         +------------+
-</code></pre>
+    +&mdash;&mdash;&mdash;&mdash;+         +&mdash;&mdash;&mdash;&mdash;+</p>
 
 <h3 id="缺点">缺点：</h3>
 
@@ -657,11 +655,11 @@
 
 <p>CanCommit 阶段</p>
 
-<p>① 锁询问：请求到达 Coordinator 后， Coordinator 发起 CanCommit 请求，各参与节点根据情况判断是否可以获取数据库锁</p>
+<p>①、锁询问：请求到达 Coordinator 后， Coordinator 发起 CanCommit 请求，各参与节点根据情况判断是否可以获取数据库锁</p>
 
-<p>② 锁请求：各参与节点尝试获取本地数据库锁</p>
+<p>②、锁请求：各参与节点尝试获取本地数据库锁</p>
 
-<p>③ 锁返回：参与节点根据获取锁的情况返回 Yes or No</p>
+<p>③、锁返回：参与节点根据获取锁的情况返回 Yes or No</p>
 
 <p>PreCommit 阶段</p>
 
@@ -982,7 +980,7 @@
 
         <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
             
-                <img src="/img/2019/122019/12/great-wall-station-antarctica.jpg" alt="">
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
             
         </a>
     
