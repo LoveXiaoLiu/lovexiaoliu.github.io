@@ -24,7 +24,7 @@
         "datePublished": "2019-12-27 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-27 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/architecture\/distributed-transaction-2pc-3pc\/",
-        "wordCount" : "293",
+        "wordCount" : "291",
         "keywords" : [ "分布式事务","2PC","3PC","2019","Blog" ]
     }
     </script>
@@ -83,7 +83,7 @@
 
 <meta itemprop="datePublished" content="2019-12-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="293">
+<meta itemprop="wordCount" content="291">
 
 
 
@@ -608,8 +608,7 @@
 
 <p>⑤、执行本地 commit 或者 rollbak</p>
 
-<pre><code class="language-c">                      +
-                      |
+<pre><code class="language-markdown">                      |
                       | request
                       v
     +-----------------+-----------------+
@@ -666,8 +665,7 @@
 <ul>
 <li><p>DoCommit 阶段类似于 2PC 的 Commit 阶段</p>
 
-<pre><code class="language-c">                  +
-                  |
+<pre><code class="language-markdown">                  |
                   | request
                   v
 +-----------------+-----------------+
