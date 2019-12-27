@@ -24,7 +24,7 @@
         "datePublished": "2019-12-27 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-27 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/architecture\/distributed-transaction-2pc-3pc\/",
-        "wordCount" : "298",
+        "wordCount" : "293",
         "keywords" : [ "分布式事务","2PC","3PC","2019","Blog" ]
     }
     </script>
@@ -83,7 +83,7 @@
 
 <meta itemprop="datePublished" content="2019-12-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="298">
+<meta itemprop="wordCount" content="293">
 
 
 
@@ -611,7 +611,7 @@
 <pre><code class="language-c">                      +
                       |
                       | request
-                      |
+                      v
     +-----------------+-----------------+
     |            Coordinator            |
     +-+------+----+-------+---+------+--+
@@ -669,7 +669,7 @@
 <pre><code class="language-c">                  +
                   |
                   | request
-                  |
+                  v
 +-----------------+-----------------+
 |            Coordinator            |
 +--------+----+-------+---+---------+
@@ -690,10 +690,6 @@
 +------------+         +------------+
 </code></pre></li>
 </ul>
-
-<h2 id="缺点-1">缺点：</h2>
-
-<p>2PC 和 3PC 都没有完全解决数据不一致的问题。</p>
 
 <hr />
 
@@ -954,9 +950,6 @@
 
 
 
-  
-  
-    
   
 
 
