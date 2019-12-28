@@ -1,11 +1,3 @@
-
-
-
-    
-
-
-
-
 <!DOCTYPE HTML>
 
 <html>
@@ -32,12 +24,14 @@
         "datePublished": "2019-12-22 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-22 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/leetcode\/leetcode-10-regular-expression-matching\/",
-        "wordCount" : "100",
+        "wordCount" : "283",
         "keywords" : [ "动态规划","2019","Blog" ]
     }
     </script>
         
-            <title>Leetcode：#10 正则表达式匹配 - Gra55&#39;s Blog</title>
+            
+                <title>Leetcode：#10 正则表达式匹配</title>
+            
         
 
         <meta charset="utf-8" />
@@ -87,7 +81,7 @@
 <meta itemprop="description" content="Leetcode：#10 Regular Expression Matching，难度：困难">
 <meta itemprop="datePublished" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="100">
+<meta itemprop="wordCount" content="283">
 
 
 
@@ -129,6 +123,7 @@
       
       <div id="wrapper">
 
+    
     
 <header id="header">
     
@@ -178,6 +173,10 @@
     </nav>
     <nav class="main">
         <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
             
             <li class="search">
                 <a class="fa-search" href="#search">Search</a>
@@ -381,11 +380,77 @@
         
 </section>
 
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f&amp;text=Leetcode%ef%bc%9a%2310%20%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e5%8c%b9%e9%85%8d&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f&amp;title=Leetcode%ef%bc%9a%2310%20%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e5%8c%b9%e9%85%8d" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
     
     <div id="main">
+        
+        
         <article class="post">
-            
-            <header>
+  <header>
     <div class="title">
         
             <h1><a href="/blog/2019/leetcode/leetcode-10-regular-expression-matching/">Leetcode：#10 正则表达式匹配</a></h1>
@@ -395,10 +460,87 @@
             <p>Leetcode：#10 Regular Expression Matching，难度：困难</p>
         
     </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2019-12-22'>
+            December 22, 2019</time>
+        <span class="author">gra55</span>
+        
+            <p>2 minute read</p>
+        
+        
+    </div>
 </header>
 
-            <div id="content">
-                <h1 id="0x00-">0x00 题目描述</h1>
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f&amp;text=Leetcode%ef%bc%9a%2310%20%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e5%8c%b9%e9%85%8d&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f&amp;title=Leetcode%ef%bc%9a%2310%20%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e5%8c%b9%e9%85%8d" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2fleetcode%2fleetcode-10-regular-expression-matching%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+
+  <div id="content">
+    <h1 id="0x00-">0x00 题目描述</h1>
 <p><a href="https://leetcode-cn.com/problems/regular-expression-matching/">#10</a></p>
 <p>给定一个字符串 s 和一个字符规则 p，实现一个支持 <code>.</code> 和 <code>*</code> 的正则表达式匹配。其中 <code>.</code> 匹配任意单个字符，<code>*</code> 匹配零个或多个前面的那一个元素。</p>
 <p>所谓匹配，是要涵盖整个字符串 s，而不是 s 的子串。类似于 re.match 而不是 re.search。</p>
@@ -435,19 +577,154 @@
 <li>动态规划方法要寻找符合“最优子结构“的状态和状态转移方程的定义，在找到之后，这个问题就可以以“记忆化地求解递推式”的方法来解决。而寻找到的定义，才是动态规划的本质。</li>
 </ul>
 <p>再回到这个问题上来。</p>
-<p>那就是对正则表达式问题进行重新定义，找到状态和状态转移方程。</p>
+<p>那就是对正则表达式问题进行重新定义，找到状态和状态转移方程（<em><strong>这个题的状态转移函数特别难找</strong></em>）。</p>
 <ul>
-<li>状态：<code>dp[i][j]</code> 表示 p[0:i] 是否能匹配 s[0:j]，状态值是 0 或者 1</li>
-<li>转移方程：</li>
+<li>状态：<code>dp[i][j]</code> 表示 <code>s[0:i]</code> 是否能匹配 <code>p[0:j]</code>，状态值是 <code>False</code> 或者 <code>True</code></li>
+<li>转移方程：这个状态转移函数真的很难找，分为好几种情况，如下所示：
+<ul>
+<li>最简单的情况就是 <code>s[i] == p[j]</code> 或者 <code>p[j] == '.'</code>，那就表示当前字符是匹配的，那就看 <code>i-1</code> 和 <code>j-1</code> 是否匹配，即 <code>dp[i][j] == dp[i-1][j-1]</code></li>
+<li>复杂的是当 <code>p[j] == '*'</code>，需要分两种情况：
+<ul>
+<li>第一种情况是看 <code>p[j]</code> 的前一个字符（<code>p[j-1]</code>）是否等于 <code>.</code> 或者与 <code>s[j]</code> 相等。此时需要判断三种情况，有一个满足要求即可：
+<ul>
+<li><code>dp[i-1][j]</code>，这个表示 <code>s[:i-1]</code> 可以匹配 <code>p[:j]</code>，说明此时的的 <code>s[i]</code> 是匹配了多个值（即 <code>*</code> 匹配了多个值）</li>
+<li><code>dp[i][j-1]</code>，表示 <code>s[:i]</code> 与 不带星号的 <code>p[:j-1]</code> 匹配上了，说明此时的 <code>*</code> 匹配了一个字母</li>
+<li><code>dp[i][j-2]</code>，表示 <code>s[:i]</code> 与不带星号和星号前面的字符（<code>p[:j-2]</code>）匹配上了，说明此时的 <code>*</code> 匹配了 <code>0</code> 个字母</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</li>
+<li>剩下的就是第二种情况，<code>p[j-1]</code> 不等于 <code>s[j]</code>，即表示此时的 <code>*</code> 表示的是 <code>0</code> 个字符，那么 <code>dp[i][j]</code> 需要参考 <code>dp[i][j-2]</code> 的匹配情况</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isMatch</span>(self, s: str, p: str) <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> bool:
+        sLen <span style="color:#f92672">=</span> len(s)
+        pLen <span style="color:#f92672">=</span> len(p)
+
+        <span style="color:#66d9ef">if</span> sLen <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> pLen <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">return</span> True
+
+        dp <span style="color:#f92672">=</span> [[False] <span style="color:#f92672">*</span> (pLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(sLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+        dp[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> True
+
+        <span style="color:#75715e"># only need to init empty `s` to all `p`, because dp init to False</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, pLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+            <span style="color:#66d9ef">if</span> p[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span>:
+                dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> dp[<span style="color:#ae81ff">0</span>][i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, sLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, pLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+                <span style="color:#66d9ef">if</span> s[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> p[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">or</span> p[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">&#39;</span>:
+                    dp[i][j] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+
+                <span style="color:#66d9ef">if</span> p[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">*</span><span style="color:#e6db74">&#39;</span>:
+                    <span style="color:#66d9ef">if</span> s[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> p[j<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">or</span> p[j<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">.</span><span style="color:#e6db74">&#39;</span>:
+                        dp[i][j] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">or</span> dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">or</span> dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+                    <span style="color:#66d9ef">else</span>:
+                        dp[i][j] <span style="color:#f92672">=</span> dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+
+        <span style="color:#66d9ef">return</span> dp[sLen][pLen]
 </code></pre></div><p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
 <hr>
 <p>参考：</p>
 <p>📌 <a href="https://www.zhihu.com/question/23995189">什么是动态规划（Dynamic Programming）？</a></p>
+<p>📌 <a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/dong-tai-gui-hua-zen-yao-cong-0kai-shi-si-kao-da-b/">状态转移函数参考这里</a></p>
 
-            </div>
-        </article>
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="/categories/leetcode">Leetcode</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+      <h2>Say something</h2>
+
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
+
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2019/leetcode/leetcode-10-regular-expression-matching/">
+    <input type="hidden" name="options[entryId]" value="d4de6beb08ad89a1b67e048ec7ec304f">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
+
+
+<h2>Comments</h2>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2019/leetcode/leetcode-204-count-primes/"
+                class="button big previous">Leetcode：#204 计数质数</a></li>
+    
+
+    
+        <li><a href="/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/"
+                class="button big next">Leetcode：#32 最长有效括号</a></li>
+    
+</ul>
+
+
     </div>
     
 <section id="sidebar">
