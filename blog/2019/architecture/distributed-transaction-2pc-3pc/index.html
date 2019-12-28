@@ -24,7 +24,7 @@
         "datePublished": "2019-12-27 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-27 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/architecture\/distributed-transaction-2pc-3pc\/",
-        "wordCount" : "345",
+        "wordCount" : "363",
         "keywords" : [ "分布式事务","2PC","3PC","2019","Blog" ]
     }
     </script>
@@ -81,7 +81,7 @@
 <meta itemprop="description" content="单体架构演化到微服务架构，分布式事务是必须要解决的问题">
 <meta itemprop="datePublished" content="2019-12-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="345">
+<meta itemprop="wordCount" content="363">
 
 
 
@@ -304,7 +304,7 @@
 
         <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
             
-                <img src="/date2019/12/great-wall-station-antarctica.jpg" alt="">
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
             
         </a>
     
@@ -576,11 +576,11 @@
 <p>2PC 是一个强一致、中心化的原子提交协议。这里面包含一个中心化的协调者节点（coordinator）。</p>
 <p>Example：订单服务 A，需要调用支付服务 B 去支付，支付成功则处理购物订单为待发货状态，否则就需要将购物订单处理为失败状态。</p>
 <h2 id="heading">两个阶段：</h2>
-<h4 id="prepare-">Prepare 阶段</h4>
+<p><strong>Prepare 阶段</strong></p>
 <p>①、事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应</p>
 <p>②、执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况</p>
 <p>③、返回事务询问响应：参与者根据本地事务的情况返回 Yes or No</p>
-<h4 id="commit-">Commit 阶段</h4>
+<p><strong>Commit 阶段</strong></p>
 <p>④、Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No）</p>
 <p>⑤、执行本地 commit 或者 rollbak</p>
 <pre><code class="language-flow" data-lang="flow">                      |
@@ -604,10 +604,16 @@
     +--+-----+---+         +-+-----+----+
     |     DB 1   |         |   DB 2     |
     +------------+         +------------+
-</code></pre><h2 id="heading-1">缺点：</h2>
+</code></pre><h2 id="heading-1">优缺点：</h2>
+<p><strong>优点</strong></p>
+<ul>
+<li>原理简单（大多数关系型数据都是采用 2PC，eg：MySQL）</li>
+</ul>
+<p><strong>缺点</strong></p>
 <ul>
 <li>性能差：2PC 是一个阻塞协议，即节点在等待休息的时候会阻塞</li>
 <li>单节点故障：Coordinator 作为一个中心化，如果单节点并且故障，整个分布式系统就会崩掉</li>
+<li>数据不一致：Commit 阶段，由于网络问题只有部分参与者收到 Commit 命令，会导致数据不一致</li>
 </ul>
 <h1 id="0x02-3pc">0x02 3PC</h1>
 <p>3PC 的诞生主要是为了解决 2PC 出现的阻塞问题。与 2PC 相比提出了两个改动：</p>
@@ -616,15 +622,15 @@
 <li>在 2PC 的 Prepare 和 Commit 之前加入一个 check 阶段，以保证最后 Commit 阶段之前各参与节点状态一致</li>
 </ul>
 <h2 id="heading-2">三个阶段：</h2>
-<h4 id="cancommit-">CanCommit 阶段</h4>
+<p><strong>CanCommit 阶段</strong></p>
 <p>①、锁询问：请求到达 Coordinator 后， Coordinator 发起 CanCommit 请求，各参与节点根据情况判断是否可以获取数据库锁</p>
 <p>②、锁请求：各参与节点尝试获取本地数据库锁</p>
 <p>③、锁返回：参与节点根据获取锁的情况返回 Yes or No</p>
-<h4 id="precommit-">PreCommit 阶段</h4>
+<p><strong>PreCommit 阶段</strong></p>
 <ul>
 <li>如果所有参与节点都返回 Yes，则进入PreCommit 阶段，PreCommit 类似于 2PC 的Prepare 阶段，只是增加了超时机制，这里不再赘述</li>
 </ul>
-<h4 id="docommit-">DoCommit 阶段</h4>
+<p><strong>DoCommit 阶段</strong></p>
 <ul>
 <li>DoCommit 阶段类似于 2PC 的 Commit 阶段</li>
 </ul>
@@ -649,7 +655,17 @@
   +-+---------+--------+-+       +-+---------+-------+-+
   |         DB 1         |       |         DB 2        |
   +----------------------+       +---------------------+
-</code></pre><hr>
+</code></pre><h2 id="heading-3">优缺点：</h2>
+<p><strong>优点</strong></p>
+<ul>
+<li>在 2PC 的基础上，增加超时机制，缓解了阻塞的范围</li>
+<li>能够在出现单点故障后继续达成一致</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>问题也是出现在<strong>优点 2</strong> 中，即使在出现单点故障的时候，参与者仍然会提交本地事务，这必然会出现数据不一致</li>
+</ul>
+<hr>
 <p>参考：</p>
 <p>📌 <a href="https://www.cnblogs.com/qdhxhz/p/11167025.html">分布式事务(1)&mdash;2PC和3PC原理</a></p>
 <p>📌 <a href="https://devopedia.org/cap-theorem">CAP Theorem</a></p>
