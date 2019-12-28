@@ -32,7 +32,7 @@
         "datePublished": "2019-12-22 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-22 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/leetcode\/leetcode-10-regular-expression-matching\/",
-        "wordCount" : "107",
+        "wordCount" : "100",
         "keywords" : [ "动态规划","2019","Blog" ]
     }
     </script>
@@ -42,7 +42,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -85,16 +85,13 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="Leetcode：#10 正则表达式匹配">
 <meta itemprop="description" content="Leetcode：#10 Regular Expression Matching，难度：困难">
-
-
 <meta itemprop="datePublished" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="107">
+<meta itemprop="wordCount" content="100">
 
 
 
 <meta itemprop="keywords" content="动态规划,2019," />
-
         
 
         
@@ -372,70 +369,52 @@
 </header>
 
             <div id="content">
-                
-
-<h1 id="0x00-题目描述">0x00 题目描述</h1>
-
+                <h1 id="0x00-">0x00 题目描述</h1>
 <p><a href="https://leetcode-cn.com/problems/regular-expression-matching/">#10</a></p>
-
 <p>给定一个字符串 s 和一个字符规则 p，实现一个支持 <code>.</code> 和 <code>*</code> 的正则表达式匹配。其中 <code>.</code> 匹配任意单个字符，<code>*</code> 匹配零个或多个前面的那一个元素。</p>
-
 <p>所谓匹配，是要涵盖整个字符串 s，而不是 s 的子串。类似于 re.match 而不是 re.search。</p>
-
-<pre><code class="language-shell">输入: s = &quot;aa&quot; p = &quot;a&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">输入: s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;aa&#34;</span> p <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;a&#34;</span>
 输出: false
-解释: &quot;a&quot; 无法匹配 &quot;aa&quot; 整个字符串。
-</code></pre>
-
-<h1 id="0x01-约束">0x01 约束</h1>
-
+解释: <span style="color:#e6db74">&#34;a&#34;</span> 无法匹配 <span style="color:#e6db74">&#34;aa&#34;</span> 整个字符串。
+</code></pre></div><h1 id="0x01-">0x01 约束</h1>
 <ul>
 <li>s 可能为空，且只包含 a-z 的小写字母</li>
 <li>p 可能为空，且只包含 a-z 的小写字母，以及字符 <code>.</code> 和 <code>*</code></li>
 </ul>
-
-<h1 id="0x02-题解">0x02 题解</h1>
-
+<h1 id="0x02-">0x02 题解</h1>
 <blockquote>
 <ul>
-<li><p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p></li>
-
-<li><p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p></li>
+<li>
+<p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p>
+</li>
+<li>
+<p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p>
+</li>
 </ul>
 </blockquote>
-
-<h2 id="算法-1-无头绪">算法 1：无头绪</h2>
-
+<h2 id="-1">算法 1：无头绪</h2>
 <p>开始拿到这个题，我感觉无从下手，想不到什么好的办法（没有头绪）。</p>
-
 <p>只是想到 s 和 p 各拿一个指针，从左到右的扫描。接下来需要进行各种 if else 的判断，而且判断条件很复杂，不一定能做出来。</p>
-
-<h2 id="算法-2-动态规划">算法 2：动态规划</h2>
-
+<h2 id="-2">算法 2：动态规划</h2>
 <p>开始没有想到这个题还可以使用 DP。</p>
-
-<p>那么什么样的问题可以使用 DP 呢？
-+ 关键点是：问题可以被拆分成子问题（要不然要状态干嘛！），子问题无后效性（也就是说子问题求解出来以后，后面的计算就不用关心前面的子问题了），
-+ <strong>不要以为看到最优子结构这类问题才能用 DP。</strong>
-+ DP 的核心是缩小解的空间，暴力破解是全局解，DP 排除了不可能成为最优解的项
-+ <a href="https://www.zhihu.com/question/23995189/answer/35324479">什么是动态规划？- 徐凯强 Andy的回答 - 知乎</a>
-+ 动态规划方法要寻找符合“最优子结构“的状态和状态转移方程的定义，在找到之后，这个问题就可以以“记忆化地求解递推式”的方法来解决。而寻找到的定义，才是动态规划的本质。</p>
-
+<p>那么什么样的问题可以使用 DP 呢？</p>
+<ul>
+<li>关键点是：问题可以被拆分成子问题（要不然要状态干嘛！），子问题无后效性（也就是说子问题求解出来以后，后面的计算就不用关心前面的子问题了），</li>
+<li><strong>不要以为看到最优子结构这类问题才能用 DP。</strong></li>
+<li>DP 的核心是缩小解的空间，暴力破解是全局解，DP 排除了不可能成为最优解的项</li>
+<li><a href="https://www.zhihu.com/question/23995189/answer/35324479">什么是动态规划？- 徐凯强 Andy的回答 - 知乎</a></li>
+<li>动态规划方法要寻找符合“最优子结构“的状态和状态转移方程的定义，在找到之后，这个问题就可以以“记忆化地求解递推式”的方法来解决。而寻找到的定义，才是动态规划的本质。</li>
+</ul>
 <p>再回到这个问题上来。</p>
-
-<p>那就是对正则表达式问题进行重新定义，找到状态和状态转移方程。
-+ 状态：<code>dp[i][j]</code> 表示 p[0:i] 是否能匹配 s[0:j]，状态值是 0 或者 1
-+ 转移方程：</p>
-
-<pre><code class="language-python">
-</code></pre>
-
-<p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
-
-<hr />
-
+<p>那就是对正则表达式问题进行重新定义，找到状态和状态转移方程。</p>
+<ul>
+<li>状态：<code>dp[i][j]</code> 表示 p[0:i] 是否能匹配 s[0:j]，状态值是 0 或者 1</li>
+<li>转移方程：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
+<hr>
 <p>参考：</p>
-
 <p>📌 <a href="https://www.zhihu.com/question/23995189">什么是动态规划（Dynamic Programming）？</a></p>
 
             </div>

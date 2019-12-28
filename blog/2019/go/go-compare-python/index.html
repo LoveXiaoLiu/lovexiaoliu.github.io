@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -79,8 +79,6 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="Python 与 Golang 语法特性对比">
 <meta itemprop="description" content="Python 程序员入门 Golang，通过表格对比，加强记忆，也可以作为一个语法速查表">
-
-
 <meta itemprop="datePublished" content="2019-12-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-10T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="422">
@@ -88,7 +86,6 @@
 
 
 <meta itemprop="keywords" content="python,go,2019," />
-
         
 
         
@@ -556,22 +553,14 @@
 
 
   <div id="content">
-    
-
-<h2 id="0x00-缘起">0x00 缘起</h2>
-
+    <h2 id="0x00-">0x00 缘起</h2>
 <p>之前整体把 golang 的语法过了一遍，花了大概几个小时。</p>
-
 <p>然鹅，2 天没写 go 代码，语法就忘完了，还得回过头去查一次，真是浪费时间。</p>
-
 <p>所以，我就想到了这个联想记忆，通过熟悉的东西，来记住陌生的东西。</p>
-
-<h2 id="0x01-语法特性对比">0x01 语法特性对比</h2>
-
+<h2 id="0x01-">0x01 语法特性对比</h2>
 <blockquote>
 <p>参考：<a href="https://tour.go-zh.org/welcome/1">go 语言之旅</a></p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -580,206 +569,172 @@
 <th align="left">Go</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">包声明</td>
 <td align="left">文件名</td>
 <td align="left">文件内定义：package main</td>
 </tr>
-
 <tr>
 <td align="center">引入包</td>
 <td align="left">import json</td>
 <td align="left">import &ldquo;math/rand&rdquo;</td>
 </tr>
-
 <tr>
 <td align="center">模块对象暴露</td>
 <td align="left">__all__</td>
 <td align="left">包内对象首字母大写</td>
 </tr>
-
 <tr>
 <td align="center">函数</td>
 <td align="left">def 关键字</td>
 <td align="left">func 关键字</td>
 </tr>
-
 <tr>
 <td align="center">函数多指返回</td>
 <td align="left">return x, y</td>
 <td align="left">return x, y（特例：func split(sum int) (x, y int) { x = sum * 4 / 9; y = sum - x; return }）</td>
 </tr>
-
 <tr>
 <td align="center">变量</td>
 <td align="left">动态类型</td>
 <td align="left">关键字 var，在变量名后声明（多个变量类型相同时，前边类型可以忽略）</td>
 </tr>
-
 <tr>
 <td align="center">变量初始化</td>
 <td align="left">直接赋值</td>
 <td align="left">如果提供初始值，则不需要指明类型</td>
 </tr>
-
 <tr>
 <td align="center">短变量声明</td>
 <td align="left">/</td>
 <td align="left">:=（函数外必须使用 var 关键字）</td>
 </tr>
-
 <tr>
 <td align="center">基本类型</td>
 <td align="left">int、string、bool、list、dict、tuple</td>
 <td align="left">bool、string、int[8, 16, 32, 64]、uint[8, 16, 32, 64]、uintptr、byte（uint8 的别名）、rune（int32 的别名；表示一个 Unicode 码点）、float32、float64、complex64、complex128</td>
 </tr>
-
 <tr>
 <td align="center">零值</td>
 <td align="left">/</td>
-<td align="left">没有赋初值的变量默认为零值（int 为 0；bool 为 false；字符串为 &ldquo;；指针为 nil；切片为 nil，它的长度和容量为 0，且没有底层数组；映射为 nil，nil 映射既没有键，也不能添加键；）</td>
+<td align="left">没有赋初值的变量默认为零值（int 为 0；bool 为 false；字符串为 &lsquo;'；指针为 nil；切片为 nil，它的长度和容量为 0，且没有底层数组；映射为 nil，nil 映射既没有键，也不能添加键；）</td>
 </tr>
-
 <tr>
 <td align="center">类型转换</td>
 <td align="left">同 go 语言</td>
 <td align="left">T(v) 将值 v 转换为类型 T（不同类型直接赋值需要显式转换）</td>
 </tr>
-
 <tr>
 <td align="center">常量</td>
 <td align="left">与变量相同</td>
 <td align="left">关键字 const，不能使用 := 语法（常量不指明类型的话，会根据上下文自动识别其类型）</td>
 </tr>
-
 <tr>
 <td align="center">for</td>
 <td align="left">for i in [1, 2, 3]:</td>
 <td align="left">for i:=0; i&lt;10; i++ {xxx}（初始化语句和后置语句是可选的）</td>
 </tr>
-
 <tr>
 <td align="center">while</td>
 <td align="left">while True:</td>
 <td align="left">for sum &lt; 1000 {xxx}</td>
 </tr>
-
 <tr>
 <td align="center">死循环</td>
 <td align="left">while True:</td>
 <td align="left">for {xxx}</td>
 </tr>
-
 <tr>
 <td align="center">if</td>
 <td align="left">if i &lt; 10: xxx else: xxx</td>
 <td align="left">if v := math.Pow(x, n); v &lt; lim {xxx} else {xxx}（if 和 for 语句类似，可以再 if 关键字后加一个初始化语句，这个变量的作用域是 if 和 else 作用域内）</td>
 </tr>
-
 <tr>
 <td align="center">switch</td>
 <td align="left">无，使用字典代替</td>
 <td align="left">switch os := runtime.GOOS; os {case &ldquo;abc&rdquo;: xxx} （运行 switch 关键字后的赋值语句，然后运行匹配成功的那个 case，case 关键字后的值，无需为常量，也可以是函数等）（switch {} 等于 switch true {}）</td>
 </tr>
-
 <tr>
 <td align="center">推迟调用</td>
 <td align="left">无</td>
 <td align="left">关键字 defer，作用是将指定的调用推迟到外层函数返回以后执行（defer 的调用会被压入栈中，所以先声明的后调用）</td>
 </tr>
-
 <tr>
 <td align="center">指针</td>
 <td align="left">无，变量名都是引用</td>
 <td align="left">声明指针变量时，给类型前加 *；&amp; 可以获取变量的地址；*p 可以通过指针设置或读取值 （var p *int，p = &amp;i）</td>
 </tr>
-
 <tr>
 <td align="center">结构体</td>
 <td align="left">类</td>
 <td align="left">type Vertex struct {X int; Y int} v2 = Vertex{X: 1}（一组字段的集合，字段通过点号来访问，也可以通过指针来访问，指针前不需要加 *，编译器自己会处理优化）</td>
 </tr>
-
 <tr>
 <td align="center">数组</td>
 <td align="left">list</td>
 <td align="left">[n]T 表示拥有 n 个 T 类型的值的数组</td>
 </tr>
-
 <tr>
 <td align="center">切片</td>
 <td align="left">[x:y]（生成一个新的数组）</td>
 <td align="left">与 Python 类似的语法，可以忽略 x 和 y 的值，同样也是左闭右开的取值范围（切片生成的变量只是之前数组的引用）（切片有长度和容量：长度是包含的元素个数，容量是从第一个元素到底层数组的最后一个元素的个数。切片时左范围会改变数组容量）（可以使用 make 函数动态创建一个数组的切片：b := make([]int, len, cap)）</td>
 </tr>
-
 <tr>
 <td align="center">数组添加元素</td>
 <td align="left">append 方法</td>
 <td align="left">append 函数：func append(s []T, vs &hellip;T) []T。s 为切片，将新的值添加到切片最后，如果 s 的底层数组太小，会新分配一个更大的数组，然后返回的切片指向这个新数组</td>
 </tr>
-
 <tr>
 <td align="center">range</td>
 <td align="left">返回一个数组</td>
 <td align="left">for i, v := range pow {xxx}，使用在 for 循环中，i 是当前元素在数组中的下标，v 是该下标对应的元素副本（这里副本是指针还是什么，有待查询？&ndash;副本指的是另外一个值一样，但是内存地址不一样的变量）（可以使用 _ 来忽略某一个变量，也可以手动忽略最后有一个变量。感觉有点像 js-es6 的语法）</td>
 </tr>
-
 <tr>
 <td align="center">映射</td>
 <td align="left">dict</td>
 <td align="left">关键字 map，make 函数用来创建给定类型的映射并初始化：m = make(map[string]int)。（修改和获取键对应的值得方式和 Python 一样，删除使用 delete(m, key)，检测某个键是否存在 elem, ok = m[key]，ok 标识是否存在，若不存在 elem 是该映射元素类型的零值）</td>
 </tr>
-
 <tr>
 <td align="center">函数也是值</td>
 <td align="left">是</td>
 <td align="left">是的，和 Python 一样，可以作为函数参数进行传递或者作为返回值</td>
 </tr>
-
 <tr>
 <td align="center">闭包</td>
 <td align="left">内嵌函数引用外部函数的变量，并且外部函数返回该内部函数</td>
 <td align="left">和 Python 闭包概念一样</td>
 </tr>
-
 <tr>
 <td align="center">方法</td>
 <td align="left">类中的方法</td>
 <td align="left">为结构体定义的函数叫做方法。方法是一类带有特殊<strong>接受者</strong>（就像 Python 中的 self）参数的函数：func (v Vertex) Abs() float64 {xxx}。当使用 Vertex 结构体的实例变量调用 Abs 方法（a := Vertex{3, 4}; a.Abs()）的时候，Abs 方法中的 v 就等于这里的 a 变量。（结构体的类型定义和方法声明必须在同一包内；不能为内建类型声明方法）（方法的接受者也可以是该类型的指针，这种更常用，因为指针可以修改结构体的值）（函数与方法的小区别：函数的参数如果是指针类型，那么调用的时候必须传一个指针类型；但是方法不一样，即使方法需要一个指针接受者，但是 a.Abs() 这样调用也是可以的，其中 a 不是指针类型，这是因为 go 内部将其隐士修改为 (&amp;a).Abs()，同样的接受者为值类型的话，使用值和指针调用都可以。总结一下：不管方法的接受者是指针还是值类型，它的调用者可以是指针和值中的任意一个，通常选择使用指针作为接受者，因为指针接受者可以改变结构体内部的值，另外在每次调用的时候不需要复制该值）</td>
 </tr>
-
 <tr>
 <td align="center">接口</td>
 <td align="left">继承</td>
 <td align="left">接口是一种类型，一组方法<strong>签名</strong>的集合（可以理解为父类，父类定义了很多接口，子类（这里相当于结构体）必须实现所有接口，才能满足 is-a 的关系）。type Abser interface {Abs() float64}。接口也是值，也可以当做参数或者返回值，它的值是一个元组 (value:值, type:类型)。nil 值仍然可以调用接口方法。为初始化的 nil 接口值，调用方法会报运行时错误，因为不知道需要执行哪个方法。</td>
 </tr>
-
 <tr>
 <td align="center">类型判断</td>
 <td align="left">type 函数</td>
 <td align="left">s, ok := i.(string)，s 是底层值，ok 表示是否是 string 类型</td>
 </tr>
-
 <tr>
 <td align="center">协程</td>
 <td align="left">yield、gevent</td>
 <td align="left">goroutine 是由 go 运行时管理的轻量级线程。语法：go f(x, y, z)。f、x、y、z 的求值发生在当前的 goroutine 中，f 的执行发生在新的 goroutine 中。（goroutine 在相同的地址空间运行，因此访问共享的内存时必须进行同步，可以使用 sync 包。）</td>
 </tr>
-
 <tr>
 <td align="center">信道</td>
 <td align="left">/</td>
 <td align="left">带有类型的管道，使用 make 函数创建：ch := make(chan int, 100)，第二个参数是可选的，表示信道的缓冲区大小，缓冲区满了发送数据会阻塞，缓冲区为空接收数据会阻塞；从信道发送接收内容：ch &lt;- v; v := &lt;-ch。默认情况下，在另一端未准备好的情况下，另一端是阻塞的状态（隐式同步）。（发送者可以通过 close 函数来关闭一个信道，表示没有任何内容需要发送了，注意，只有发送者才能关闭信道，接受者不可以关闭。接收时 v, ok := &lt;-ch，信道关闭后，ok 会被置为 false。）（for i := range c 可以不断从信道读取数据，直到信道关闭。信道和文件不同，通常情况下不用主动关闭它们，除非需要告诉接受者不会再给信道发送数据了，比如这里需要通过 rang 来终止循环。）</td>
 </tr>
-
 <tr>
 <td align="center">select</td>
 <td align="left">select：io 多路复用的 Windows 第三方库</td>
 <td align="left">select 语句可以通过一个 goroutine 来等待多个信道通信操作，语法：select {case c &lt;- a:xxx;  case &lt;-quit:xxx; default:xxx}。（select 会一直阻塞，直到有分支可以继续执行，如果不想阻塞的话，可以定义 default 分支；如果多个分支都可以执行，会随机选择一个分支执行。）</td>
 </tr>
-
 <tr>
 <td align="center">锁</td>
 <td align="left">threading.Lock</td>

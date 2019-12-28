@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>计算机基础 on Gra55&#39;s Blog</title>
@@ -20,7 +20,7 @@
       <description>写在前面：
 这里总结的很多常识只是根据当时的计算机发展水平来预估的，给大家提供一个大致的参考，存在过时的可能（我会不定时更新）。
 eg：redis 读操作最高能达到 10W QPS，这个只是针对当下的计算机水平和固定的 redis 版本评估出来的，过几年突破 100w 也是有可能的。
- 0x00 计算机  从内存读取 1M 的数据需要 250 微秒，SSD 需要 4 倍的时间，磁盘需要 80 倍的时间。 从内存顺序读的速度是 4G/s 从 SSD 顺序读的速度是 1G/s，内存的 1&amp;frasl;4 从磁盘顺序读的速度是 30M/s，SSD的 1&amp;frasl;30 一个月有 2.5M（250万）秒 位运算：右移一位相当于除以 2，左移一位相当于乘以 2 有一些十进制数的小数无法转换成二进制数（0.1） 内存和 CPU 都是集成电路（IC） 8-bit string 就是 ASCII 编码的字符串  0x01 网络  从 1G 的以太网顺序读的速度是 100M/s 同一个数据中心内数据往返 2000次/s  0x02 数据库  Redis 单机一般可以抗住读 100k QPS，写 80k QPS MySQL 单机一般可以抗住 5k 左右 QPS MySQL 单表大于 2000 万行或者大于 50-100G 就有压力 MySQL 单实例存储到达 3-3.</description>
+ 0x00 计算机  从内存读取 1M 的数据需要 250 微秒，SSD 需要 4 倍的时间，磁盘需要 80 倍的时间。 从内存顺序读的速度是 4G/s 从 SSD 顺序读的速度是 1G/s，内存的 1/4 从磁盘顺序读的速度是 30M/s，SSD的 1/30 一个月有 2.5M（250万）秒 位运算：右移一位相当于除以 2，左移一位相当于乘以 2 有一些十进制数的小数无法转换成二进制数（0.1） 内存和 CPU 都是集成电路（IC） 8-bit string 就是 ASCII 编码的字符串  0x01 网络  从 1G 的以太网顺序读的速度是 100M/s 同一个数据中心内数据往返 2000次/s  0x02 数据库  Redis 单机一般可以抗住读 100k QPS，写 80k QPS MySQL 单机一般可以抗住 5k 左右 QPS MySQL 单表大于 2000 万行或者大于 50-100G 就有压力 MySQL 单实例存储到达 3-3.</description>
     </item>
     
   </channel>

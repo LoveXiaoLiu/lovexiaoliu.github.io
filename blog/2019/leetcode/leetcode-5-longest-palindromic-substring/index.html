@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -79,8 +79,6 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="Leetcode：#5 最长回文子串">
 <meta itemprop="description" content="Leetcode：#5 Longest Palindromic Substring，难度：中等">
-
-
 <meta itemprop="datePublished" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-22T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="114">
@@ -88,7 +86,6 @@
 
 
 <meta itemprop="keywords" content="动态规划,2019," />
-
         
 
         
@@ -514,71 +511,54 @@
   
 
   <div id="content">
-    
-
-<h1 id="0x00-题目描述">0x00 题目描述</h1>
-
+    <h1 id="0x00-">0x00 题目描述</h1>
 <p><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">#5</a></p>
-
 <p>给定一个字符串 s，找到 s 中最长的回文子串。</p>
-
-<pre><code class="language-shell">输入: &quot;babad&quot;
-输出: &quot;bab&quot;
-注意: &quot;aba&quot; 也是一个有效答案。
-</code></pre>
-
-<h1 id="0x01-约束">0x01 约束</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">输入: <span style="color:#e6db74">&#34;babad&#34;</span>
+输出: <span style="color:#e6db74">&#34;bab&#34;</span>
+注意: <span style="color:#e6db74">&#34;aba&#34;</span> 也是一个有效答案。
+</code></pre></div><h1 id="0x01-">0x01 约束</h1>
 <ul>
 <li>s 最大长度为 1000</li>
 <li>注意字符串为空的情况</li>
 </ul>
-
-<h1 id="0x02-题解">0x02 题解</h1>
-
+<h1 id="0x02-">0x02 题解</h1>
 <blockquote>
 <ul>
-<li><p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p></li>
-
-<li><p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p></li>
+<li>
+<p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p>
+</li>
+<li>
+<p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p>
+</li>
 </ul>
 </blockquote>
-
-<h2 id="算法-1-暴力破解法">算法 1：暴力破解法</h2>
-
+<h2 id="-1">算法 1：暴力破解法</h2>
 <p>这是一个蠢方法，把所有的子串找出来，判断每个子串是不是回文的，然后找出最长的那个子串返回。</p>
-
 <p>找出所有子串的时间复杂度是 O(n²)。</p>
-
-<h2 id="算法-2-动态规划">算法 2：动态规划</h2>
-
+<h2 id="-2">算法 2：动态规划</h2>
 <p>找状态和状态转移方程：</p>
-
 <ul>
 <li>状态：<code>dp[i][j]</code> 表示从 <code>i-j</code> 的子串是不是回文的</li>
-
-<li><p>状态转移方程：<code>dp[i][j] = s[i] == s[j] and (j-1 &lt;= 2 or dp[i+1][j-1] == True)</code></p>
-
-<pre><code class="language-python">def longestPalindrome(s):
-sLen = len(s)
-if sLen == 0:
-    return s
-dp = [[0] * sLen for _ in range(sLen)]
-
-ret = s[0]
-for j in range(1, sLen):
-    # 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了
-    for i in range(j):
-        if s[i] == s[j] and (j-i &lt;= 2 or dp[i+1][j-1]):
-            dp[i][j] = 1
-
-            if j-i+1 &gt; len(ret):
-                ret = s[i:j+1]
-return ret
-</code></pre></li>
+<li>状态转移方程：<code>dp[i][j] = s[i] == s[j] and (j-1 &lt;= 2 or dp[i+1][j-1] == True)</code></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">longestPalindrome</span>(s):
+    sLen <span style="color:#f92672">=</span> len(s)
+    <span style="color:#66d9ef">if</span> sLen <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">return</span> s
+    dp <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> sLen <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(sLen)]
 
-<p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
+    ret <span style="color:#f92672">=</span> s[<span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, sLen):
+        <span style="color:#75715e"># 如果使用 range(sLen) 来循环，提交会超时，可能与题目限制 s 最大为 1000 有关，多一次循环就给超时了</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(j):
+            <span style="color:#66d9ef">if</span> s[i] <span style="color:#f92672">==</span> s[j] <span style="color:#f92672">and</span> (j<span style="color:#f92672">-</span>i <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">or</span> dp[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]):
+                dp[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+                <span style="color:#66d9ef">if</span> j<span style="color:#f92672">-</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> len(ret):
+                    ret <span style="color:#f92672">=</span> s[i:j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+    <span style="color:#66d9ef">return</span> ret
+</code></pre></div><p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
 
   </div>
 
@@ -836,7 +816,7 @@ return ret
 
         <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
             
-                <img src="/date/great-wall-station-antarctica.jpg" alt="">
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
             
         </a>
     

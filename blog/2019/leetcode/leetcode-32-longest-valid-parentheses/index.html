@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -79,8 +79,6 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="Leetcode：#32 最长有效括号">
 <meta itemprop="description" content="Leetcode：#32 Longest Valid Parentheses，难度：困难">
-
-
 <meta itemprop="datePublished" content="2019-12-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-23T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="151">
@@ -88,7 +86,6 @@
 
 
 <meta itemprop="keywords" content="动态规划,2019," />
-
         
 
         
@@ -514,85 +511,71 @@
   
 
   <div id="content">
-    
-
-<h1 id="0x00-题目描述">0x00 题目描述</h1>
-
+    <h1 id="0x00-">0x00 题目描述</h1>
 <p><a href="https://leetcode-cn.com/problems/longest-valid-parentheses/">#32</a></p>
-
 <p>给定一个只包含 <code>(</code> 和 <code>)</code> 的字符串，找出最长的包含有效括号的子串的长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">输入: <span style="color:#e6db74">&#34;(()&#34;</span>
+输出: <span style="color:#ae81ff">2</span>
+解释: 最长有效括号子串为 <span style="color:#e6db74">&#34;()&#34;</span>
 
-<pre><code class="language-shell">输入: &quot;(()&quot;
-输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;
-
-输入: &quot;)()())&quot;
-输出: 4
-解释: 最长有效括号子串为 &quot;()()&quot;
-</code></pre>
-
-<h1 id="0x01-约束">0x01 约束</h1>
-
+输入: <span style="color:#e6db74">&#34;)()())&#34;</span>
+输出: <span style="color:#ae81ff">4</span>
+解释: 最长有效括号子串为 <span style="color:#e6db74">&#34;()()&#34;</span>
+</code></pre></div><h1 id="0x01-">0x01 约束</h1>
 <ul>
 <li>注意字符串为空的情况</li>
 </ul>
-
-<h1 id="0x02-题解">0x02 题解</h1>
-
+<h1 id="0x02-">0x02 题解</h1>
 <blockquote>
 <ul>
-<li><p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p></li>
-
-<li><p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p></li>
+<li>
+<p>一般看到 <code>最长</code>、<code>最优</code> 等<strong>求最优解</strong>的题目，首先应该想到动态规划。</p>
+</li>
+<li>
+<p><strong>看到一个题，你首先应该能想到用什么现有的算法来解决，如果第一眼匹配不到现有的算法，那基本这个题你是解不出来的。因为不是专门研究算法的同学，能想到新的优秀的算法是很难的。</strong></p>
+</li>
 </ul>
 </blockquote>
-
-<h2 id="算法-1-无头绪">算法 1：无头绪</h2>
-
+<h2 id="-1">算法 1：无头绪</h2>
 <p>之前遇到一个类似的题，没有任何头绪。暴力破解肯定是能想出来的，但是是蠢办法。</p>
-
-<h2 id="算法-2-动态规划">算法 2：动态规划</h2>
-
+<h2 id="-2">算法 2：动态规划</h2>
 <p>找状态和状态转移方程（类似于<a href="https://www.yangliu.date/blog/2019/leetcode/leetcode-5-longest-palindromic-substring/">最长回文子串</a>）：</p>
-
 <ul>
 <li>状态：
-
 <ul>
 <li><del><code>dp[i][j]</code> 表示从 <code>i-j</code> 的子串是不是有效的括号</del></li>
 <li>第一次就将状态找错了，DP 也可以是一维的三维的，不要形成思维定式。这里就是一维的状态：dp[i] 中 i 表示在 s 中，下标以 i 结束的子串，有效括号的个数</li>
-</ul></li>
-
-<li><p>状态转移方程：</p>
-
+</ul>
+</li>
+<li>状态转移方程：
 <ul>
 <li>DP 最不好找的就是转移方程</li>
-<li>这里分 3 种情况：</li>
+<li>这里分 3 种情况：
+<ul>
 <li>以 <code>(</code> 结尾的肯定不是有效括号，直接忽略处理</li>
 <li>以 <code>)</code> 结尾的字符串中，如果 i-1 是 <code>(</code>，那么 dp[i] = dp[i-2] + 2（前两个字符索引处对应的最长括号有效个数 + 新增的 1 个有效括号）</li>
-
-<li><p>以 <code>)</code> 结尾的字符串中，如果 i-1 是 <code>)</code>，那么久追溯到 i-1 索引处对应的有效括号的最左端，即 i-dp[i-1]，然后查看 i-dp[i-1]-1是不是 <code>(</code>，如果是的话，dp[i] = dp[i-1]+2+dp[i-dp[i-1]-2]，其中 dp[i-dp[i-1]-2] 是前面的有效括号个数</p>
-
-<pre><code class="language-python">def longestValidParentheses(s):
-sLen = len(s)
-if sLen &lt; 2: return 0
-dp = [0] * sLen
-
-for i in range(1, sLen):
-if s[i] == ')':
-    if s[i-1] == '(':
-        tmp = 0 if i-2 &lt; 0 else dp[i-2]
-        dp[i] = tmp + 2
-    else:
-        if i-dp[i-1]-1 &gt;=0 and s[i-dp[i-1]-1] == '(':
-            dp[i] = dp[i-1] + 2 + dp[i-dp[i-1]-2]
-
-return max(dp)
-</code></pre></li>
-</ul></li>
+<li>以 <code>)</code> 结尾的字符串中，如果 i-1 是 <code>)</code>，那么久追溯到 i-1 索引处对应的有效括号的最左端，即 i-dp[i-1]，然后查看 i-dp[i-1]-1是不是 <code>(</code>，如果是的话，dp[i] = dp[i-1]+2+dp[i-dp[i-1]-2]，其中 dp[i-dp[i-1]-2] 是前面的有效括号个数</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">longestValidParentheses</span>(s):
+    sLen <span style="color:#f92672">=</span> len(s)
+    <span style="color:#66d9ef">if</span> sLen <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>: <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    dp <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> sLen
 
-<p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, sLen):
+        <span style="color:#66d9ef">if</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>:
+            <span style="color:#66d9ef">if</span> s[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#39;</span>:
+                tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+                dp[i] <span style="color:#f92672">=</span> tmp <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">if</span> i<span style="color:#f92672">-</span>dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> s[i<span style="color:#f92672">-</span>dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#39;</span>:
+                    dp[i] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> dp[i<span style="color:#f92672">-</span>dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+
+    <span style="color:#66d9ef">return</span> max(dp)
+</code></pre></div><p>PS：动态规划的时间复杂度其实也不小（O(n²)），只是避免了很多重复的计算。</p>
 
   </div>
 
@@ -850,7 +833,7 @@ return max(dp)
 
         <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image featured">
             
-                <img src="/date2019/12/great-wall-station-antarctica.jpg" alt="">
+                <img src="/img/2019/12/great-wall-station-antarctica.jpg" alt="">
             
         </a>
     

@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -79,8 +79,6 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="开发 Python 第三方包，上传到 PyPI">
 <meta itemprop="description" content="如何开源一个 Python 第三方包">
-
-
 <meta itemprop="datePublished" content="2019-07-09T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-07-09T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="87">
@@ -88,7 +86,6 @@
 
 
 <meta itemprop="keywords" content="python,2019," />
-
         
 
         
@@ -556,38 +553,26 @@
 
 
   <div id="content">
-    
-
-<h2 id="0x00-初始化-skeleton">0x00 初始化 skeleton</h2>
-
+    <h2 id="0x00--skeleton">0x00 初始化 skeleton</h2>
 <p>开源一个 Python 第三方包，需要配置很多额外的东西（pip 需要的 setup.cfg，CI/CD 需要的 .travis.yml 等），这些东西完全没必要自己来逐一创建。</p>
-
 <p>所以我们需要一个脚手架来快速创建项目的 skeleton。这里我推荐使用 <a href="https://github.com/cookiecutter/cookiecutter">cookiecutter-X 系列工具</a>。</p>
-
 <p>我这里开发 pypi 包，使用 <a href="https://github.com/audreyr/cookiecutter-pypackage">cookiecutter-pypackage</a> 模板。</p>
-
-<pre><code class="language-shell">cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
-</code></pre>
-
-<h2 id="0x01-生态配置">0x01 生态配置</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
+</code></pre></div><h2 id="0x01-">0x01 生态配置</h2>
 <p>创建完项目 skeleton 以后，需要关联 Travis 账号、ReadTheDocs 账号等。步骤如下：</p>
-
 <ul>
 <li>将 repo 添加到 <a href="https://github.com">GitHub</a> 中</li>
 <li>将该 repo 添加到 <a href="https://travis-ci.org/">Travis CI</a> 中（需要注册 <a href="https://travis-ci.org/">Travis</a> 账号）</li>
 <li>安装 dev requirement.txt 到虚拟开发环境中：<code>pip install -r requirements_dev.txt</code></li>
 <li>注册项目到 <a href="https://pypi.org/">PyPI</a> 中（需要注册 <a href="https://pypi.org/">PyPI</a> 账号）
-
 <ul>
 <li>生成 tar&amp;wheel 包：<code>python setup.py sdist bdist_wheel</code></li>
 <li>上传包到 <a href="https://pypi.org/">PyPI</a> 中：<code>python -m twine upload dist/*</code></li>
-</ul></li>
+</ul>
+</li>
 <li>将该 repo 添加到 <a href="https://readthedocs.org/">ReadTheDocs</a> 中</li>
 </ul>
-
-<h2 id="0x02-迭代开发">0x02 迭代开发</h2>
-
+<h2 id="0x02-">0x02 迭代开发</h2>
 <ul>
 <li>更新项目代码，开发新 features</li>
 <li>使用 <a href="https://github.com/peritus/bumpversion">bumpversion</a> 升级版本：<code>bumpversion --current-version 0.1.0 minor setup.py</code></li>

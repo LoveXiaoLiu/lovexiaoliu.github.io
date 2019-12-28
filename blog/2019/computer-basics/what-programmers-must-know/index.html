@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.56.0" />
+        <meta name="generator" content="Hugo 0.62.0" />
         
   
     
@@ -79,8 +79,6 @@
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="程序员必须知道的常识">
 <meta itemprop="description" content="程序员生涯中会遇到很多东西，而某些东西只需要记住就好了，不需要理解，常识就是这样">
-
-
 <meta itemprop="datePublished" content="2019-12-20T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-20T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="91">
@@ -88,7 +86,6 @@
 
 
 <meta itemprop="keywords" content="基础,2019," />
-
         
 
         
@@ -556,48 +553,36 @@
 
 
   <div id="content">
-    
-
-<blockquote>
+    <blockquote>
 <p>写在前面：</p>
-
 <p>这里总结的很多常识只是根据当时的计算机发展水平来预估的，给大家提供一个大致的参考，存在过时的可能（<strong>我会不定时更新</strong>）。</p>
-
 <p>eg：redis 读操作最高能达到 10W QPS，这个只是针对当下的计算机水平和固定的 redis 版本评估出来的，过几年突破 100w 也是有可能的。</p>
 </blockquote>
-
-<h1 id="0x00-计算机">0x00 计算机</h1>
-
+<h1 id="0x00-">0x00 计算机</h1>
 <ul>
 <li>从内存读取 1M 的数据需要 250 微秒，SSD 需要 4 倍的时间，磁盘需要 80 倍的时间。</li>
 <li>从内存顺序读的速度是 4G/s</li>
-<li>从 SSD 顺序读的速度是 1G/s，内存的 <sup>1</sup>&frasl;<sub>4</sub></li>
-<li>从磁盘顺序读的速度是 30M/s，SSD的 <sup>1</sup>&frasl;<sub>30</sub></li>
+<li>从 SSD 顺序读的速度是 1G/s，内存的 1/4</li>
+<li>从磁盘顺序读的速度是 30M/s，SSD的 1/30</li>
 <li>一个月有 2.5M（250万）秒</li>
 <li>位运算：右移一位相当于除以 2，左移一位相当于乘以 2</li>
 <li>有一些十进制数的小数无法转换成二进制数（0.1）</li>
 <li>内存和 CPU 都是集成电路（IC）</li>
 <li><a href="http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Bits.html">8-bit string 就是 ASCII 编码的字符串</a></li>
 </ul>
-
-<h1 id="0x01-网络">0x01 网络</h1>
-
+<h1 id="0x01-">0x01 网络</h1>
 <ul>
 <li>从 1G 的以太网顺序读的速度是 100M/s</li>
 <li>同一个数据中心内数据往返 2000次/s</li>
 </ul>
-
-<h1 id="0x02-数据库">0x02 数据库</h1>
-
+<h1 id="0x02-">0x02 数据库</h1>
 <ul>
 <li>Redis 单机一般可以抗住读 100k QPS，写 80k QPS</li>
 <li>MySQL 单机一般可以抗住 5k 左右 QPS</li>
 <li>MySQL 单表大于 2000 万行或者大于 50-100G 就有压力</li>
 <li>MySQL 单实例存储到达 3-3.8T 时， 一般情况下就已经到达极限了</li>
 </ul>
-
-<h1 id="0x03-编程">0x03 编程</h1>
-
+<h1 id="0x03-">0x03 编程</h1>
 <ul>
 <li>带 log 的时间复杂度，一般都需要使用二分法或者二叉树等</li>
 <li>使用循环可能性能更好，使用递归程序可能更容易理解</li>
@@ -895,7 +880,7 @@
               </h3>
               
               <time class="published" datetime='2019-12-23'>
-                December 23, 2019
+                December 20, 2019
               </time>
             </header>
             

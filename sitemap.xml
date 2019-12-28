@@ -1,53 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>/tags/2019/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/2pc/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/3pc/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/blog/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -60,13 +68,15 @@
   <url>
     <loc>/categories/%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/awesome/</loc>
     <lastmod>2019-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -79,7 +89,15 @@
   <url>
     <loc>/categories/python/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -90,21 +108,17 @@
   </url>
   
   <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/socket/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/categories/leetcode/</loc>
     <lastmod>2019-12-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -117,7 +131,8 @@
   <url>
     <loc>/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
     <lastmod>2019-12-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -151,13 +166,15 @@
   <url>
     <loc>/tags/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95/</loc>
     <lastmod>2019-12-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2019-12-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -170,7 +187,8 @@
   <url>
     <loc>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2019-12-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -188,6 +206,13 @@
   </url>
   
   <url>
+    <loc>/tags/http/</loc>
+    <lastmod>2019-12-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/blog/2019/web/http-overview/</loc>
     <lastmod>2019-12-18T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -197,19 +222,15 @@
   <url>
     <loc>/categories/web/</loc>
     <lastmod>2019-12-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/http/</loc>
-    <lastmod>2019-12-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/web/</loc>
     <lastmod>2019-12-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -236,7 +257,15 @@
   <url>
     <loc>/categories/go/</loc>
     <lastmod>2019-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/go/</loc>
+    <lastmod>2019-12-10T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -247,19 +276,7 @@
   </url>
   
   <url>
-    <loc>/tags/go/</loc>
-    <lastmod>2019-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/blog/</loc>
-    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/blog/2019/blog/hugo-plus-staticman/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -268,7 +285,15 @@
   <url>
     <loc>/tags/blog/</loc>
     <lastmod>2019-12-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2019/blog/hugo-plus-staticman/</loc>
+    <lastmod>2019-12-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
