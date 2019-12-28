@@ -1,11 +1,3 @@
-
-
-
-    
-
-
-
-
 <!DOCTYPE HTML>
 
 <html>
@@ -19,9 +11,9 @@
              "@id": "\/"
         },
         "articleSection" : "blog",
-        "name" : "Python 标准库：socket",
-        "headline" : "Python 标准库：socket",
-        "description" : "socket 是比较底层的网络接口，所以必须掌握它的用法",
+        "name" : "分布式事务：TCC",
+        "headline" : "分布式事务：TCC",
+        "description" : "2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务",
         "inLanguage" : "en",
         "author" : "",
         "creator" : "",
@@ -29,15 +21,17 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2019",
-        "datePublished": "2019-12-24 00:00:00 \x2b0000 UTC",
-        "dateModified" : "2019-12-24 00:00:00 \x2b0000 UTC",
-        "url" : "\/blog\/2019\/python\/python-standard-library-socket\/",
-        "wordCount" : "136",
-        "keywords" : [ "python","2019","socket","Blog" ]
+        "datePublished": "2019-12-28 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2019-12-28 00:00:00 \x2b0000 UTC",
+        "url" : "\/blog\/2019\/architecture\/distributed-transaction-tcc\/",
+        "wordCount" : "174",
+        "keywords" : [ "分布式事务","2PC","TCC","2019","Blog" ]
     }
     </script>
         
-            <title>Python 标准库：socket - Gra55&#39;s Blog</title>
+            
+                <title>分布式事务：TCC</title>
+            
         
 
         <meta charset="utf-8" />
@@ -65,33 +59,33 @@
             <meta name="author" content="gra55">
         
         
-            <meta name="description" content="socket 是比较底层的网络接口，所以必须掌握它的用法">
+            <meta name="description" content="2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务">
         
 
         <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python 标准库：socket"/>
-<meta name="twitter:description" content="socket 是比较底层的网络接口，所以必须掌握它的用法"/>
+<meta name="twitter:title" content="分布式事务：TCC"/>
+<meta name="twitter:description" content="2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务"/>
 
-        <meta property="og:title" content="Python 标准库：socket" />
-<meta property="og:description" content="socket 是比较底层的网络接口，所以必须掌握它的用法" />
+        <meta property="og:title" content="分布式事务：TCC" />
+<meta property="og:description" content="2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/2019/python/python-standard-library-socket/" />
-<meta property="article:published_time" content="2019-12-24T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-24T00:00:00+00:00" />
+<meta property="og:url" content="/blog/2019/architecture/distributed-transaction-tcc/" />
+<meta property="article:published_time" content="2019-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-28T00:00:00+00:00" />
 
         <meta property="og:image" content="//images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
-        <meta itemprop="name" content="Python 标准库：socket">
-<meta itemprop="description" content="socket 是比较底层的网络接口，所以必须掌握它的用法">
-<meta itemprop="datePublished" content="2019-12-24T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="136">
+        <meta itemprop="name" content="分布式事务：TCC">
+<meta itemprop="description" content="2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务">
+<meta itemprop="datePublished" content="2019-12-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="174">
 
 
 
-<meta itemprop="keywords" content="python,2019,socket," />
+<meta itemprop="keywords" content="分布式事务,2PC,TCC,2019," />
         
 
         
@@ -129,6 +123,7 @@
       
       <div id="wrapper">
 
+    
     
 <header id="header">
     
@@ -178,6 +173,10 @@
     </nav>
     <nav class="main">
         <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
             
             <li class="search">
                 <a class="fa-search" href="#search">Search</a>
@@ -381,143 +380,362 @@
         
 </section>
 
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f&amp;text=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9aTCC&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f&amp;title=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9aTCC" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
     
     <div id="main">
+        
+        
         <article class="post">
-            
-            <header>
+  <header>
     <div class="title">
         
-            <h1><a href="/blog/2019/python/python-standard-library-socket/">Python 标准库：socket</a></h1>
+            <h1><a href="/blog/2019/architecture/distributed-transaction-tcc/">分布式事务：TCC</a></h1>
             
         
         
-            <p>socket 是比较底层的网络接口，所以必须掌握它的用法</p>
+            <p>2PC 是资源层面的分布式事务，TCC 是业务层面的分布式事务</p>
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2019-12-28'>
+            December 28, 2019</time>
+        <span class="author">gra55</span>
+        
+            <p>1 minute read</p>
+        
         
     </div>
 </header>
 
-            <div id="content">
-                <blockquote>
-<p>Btw：</p>
-<p>Python3 中，Queue 模块已经重命名为 queue。Python3.7 中增加了一个 SimpleQueue 类，其他内容同 Python2。</p>
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f&amp;text=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9aTCC&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f&amp;title=%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%ef%bc%9aTCC" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2019%2farchitecture%2fdistributed-transaction-tcc%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+        
+        
+        
+
+        <a href="/blog/2019/architecture/distributed-transaction-tcc/" class="image featured">
+            
+                <img src="/img/2019/12/basketball.jpg" alt="">
+            
+            <div style="
+                    text-align: center; 
+                    color: #aaaaaa; 
+                    font-family: 'Raleway', Helvetica, sans-serif; 
+                    font-size: 0.5em; 
+                    font-weight: 400; 
+                    letter-spacing: 0.25em; 
+                    text-transform: uppercase;
+                    max-width: 800px;
+                "
+            >
+            公司篮球比赛，作为内线大闸，谁也别想在我面前上篮
+            </div>
+        </a>
+    
+
+
+  <div id="content">
+    <blockquote>
+<p>什么是分布式？</p>
+<ul>
+<li>与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。</li>
+</ul>
+<p>分布式事务常见解决方案:</p>
+<ul>
+<li>2PC两段提交协议</li>
+<li>3PC三段提交协议(弥补两端提交协议缺点)</li>
+<li>TCC或者GTS(阿里)</li>
+<li>消息中间件最终一致性</li>
+<li>使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。</li>
+</ul>
 </blockquote>
-<h1 id="0x00-overview">0x00 Overview</h1>
-<p>Queue 模块实现的是<strong>多生产者</strong>、<strong>多消费者</strong>的队列。因此它是<strong>线程安全</strong>的，可以在多线程下使用。因为 Queue 类内部实现了所有必须的锁。</p>
-<p>Queue 模块提供了三种类型的队列，三种类型的主要差异是获取数据的顺序不同。</p>
-<h1 id="0x01-">0x01 队列</h1>
-<p><strong>class：Queue(maxsize=0)</strong></p>
+<h1 id="0x00-tcc">0x00 TCC</h1>
+<p>TCC 是 Try、Confire、Cancel 的缩写。</p>
+<p>又称补偿机制，核心思想是：针对每个操作（Try）都要注册一个与其对应的确认（Confirm）和补偿（Cancel）操作。</p>
+<h1 id="0x01-5-">0x01 5 个步骤</h1>
+<p>①、向协调者发起开启事务请求</p>
+<p>②、Try 阶段：Try 阶段负责把所有服务的业务资源预留和锁住。类似于 MySQL DML 操作，会加行锁</p>
+<p>③、Confirm or Cancel 阶段：如果 Try 阶段涉及的所有服务都确认执行成功，则向协调者发送 Confirm（commit），否则发送 Cancel（rollback）</p>
+<p>④、协调者根据业务发送的 Confirm or Cancel，向所有服务发送相应的 Confirm or Cancel 请求</p>
+<p>⑤、各服务提交本地事务</p>
+<pre><code class="language-flow" data-lang="flow">                         +----------------------+       1        +------------------------+
+                         |                      +---------------&gt;+                        |
+                         |         APP          |                |  Coordination service  |
+                         |                      +---------------&gt;+                        |
+                         +-+--+--+------+--+--+-+       3        +------------------------+
+                           |  |  |      |  |  |
+               2           |  |  |      |  |  |              2
+  +------------------------+  |  |      |  |  +--------------------------+
+  |             4             |  |      |  |              4              |
+  |  +------------------------+  |      |  +--------------------------+  |
+  |  |           4'              |      |                4'           |  |
+  |  |    +----------------------+      +-------------------------+   |  |
+  |  |    |                                                       |   |  |
+  v  v    v                                                       v   v  v
++-+--+----+-------------------------+       +---------------------+---+--+-+
+|            service A              |       |           service B          |
++----------------------+------------+       +-------+----------------------+
+                       |                            |
+                     5 |                            | 5
+                       v                            v
+                 +-----+-------+                +---+---------+
+                 |    DB 1     |                |    DB 2     |
+                 +-------------+                +-------------+
+</code></pre><h2 id="-2pc-">与 2PC 比较：</h2>
+<p>2PC 是资源层面的分布式事务，强一致，整个操作中资源一直被加锁，不需要开发者参与。</p>
+<p>TCC 是业务层面的分布式事务，需要开发人员自己来实现，最终一致性，不需要一直给资源加锁。补偿性事务。</p>
+<p>Note：</p>
 <ul>
-<li>
-<p>FIFO（先进先出）队列。</p>
-</li>
-<li>
-<p>maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。</p>
-</li>
-<li>
-<p>如果 maxsize 小于等于 0，队列的容量是无限大。</p>
-</li>
-</ul>
-<p><strong>class：LifoQueue(maxsize=0)</strong></p>
-<ul>
-<li>
-<p>LIFO（先进后出）队列，类似于栈。</p>
-</li>
-<li>
-<p>其他规则同 Queue。</p>
-</li>
-</ul>
-<p><strong>class：PriorityQueue(maxsize=0)</strong></p>
-<ul>
-<li>
-<p>优先队列，内部使用 <a href="https://docs.python.org/2/library/heapq.html#module-heapq">heapq</a> 实现。</p>
-</li>
-<li>
-<p>其他规则同 Queue。</p>
-</li>
-<li>
-<p>优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)</p>
-</li>
-</ul>
-<p><strong>exception：Empty</strong></p>
-<ul>
-<li>在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。</li>
-</ul>
-<p><strong>exception：Full</strong></p>
-<ul>
-<li>在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。</li>
-</ul>
-<h1 id="0x02-queue-">0x02 Queue 对象介绍</h1>
-<blockquote>
-<p>LifoQueue，PriorityQueue 都是继承自 Queue</p>
-</blockquote>
-<p><strong>Queue.qsize()</strong></p>
-<ul>
-<li>返回队列的近似大小，不能保证读写不会被阻塞。</li>
-</ul>
-<p><strong>Queue.empty()</strong></p>
-<ul>
-<li>判断队列是不是空，返回 True or False。不能保证读写不会被阻塞。</li>
-</ul>
-<p><strong>Queue.full()</strong></p>
-<ul>
-<li>判断队列是不是满的，返回 True or False。不能保证读写不会被阻塞。</li>
-</ul>
-<p><strong>Queue.put(item[, block[, timeout]])</strong></p>
-<ul>
-<li>
-<p>将一个元素插入到队列中。如果 block=True 并且 timeout=None，如果队列满的话会阻塞，直到有空位置。</p>
-</li>
-<li>
-<p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有空位置，则会抛出一个 Full 异常。</p>
-</li>
-<li>
-<p>如果 block=False，如果队列没有空位置，则会立即抛出一个 Full 异常。</p>
-</li>
-</ul>
-<p><strong>Queue.put_nowait(item)</strong></p>
-<ul>
-<li>等价于 put(item, False).</li>
-</ul>
-<p><strong>Queue.get([block[, timeout]])</strong></p>
-<ul>
-<li>
-<p>从队列移除并返回数据。如果 block=True 并且 timeout=None，如果队列为空的话会阻塞，直到有数据可用。</p>
-</li>
-<li>
-<p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有数据，则会抛出一个 Empty 异常。</p>
-</li>
-<li>
-<p>如果 block=False，如果队列没有数据，则会立即抛出一个 Empty 异常。</p>
-</li>
-</ul>
-<p><strong>Queue.get_nowait()</strong></p>
-<ul>
-<li>等价于 get(False)</li>
-</ul>
-<p><strong>Queue.task_done()</strong></p>
-<ul>
-<li>
-<p>表示前一个排队的任务已经完成，常用于队列的消费线程。</p>
-</li>
-<li>
-<p>调用 get() 获取一个任务以后，紧接着调用 task_done()，就是告诉队列：正在处理的任务已经完成。</p>
-</li>
-<li>
-<p>如果阻塞在 join() 处，需要重新调用 task_done() 将所有任务处理完成。</p>
-</li>
-</ul>
-<p><strong>Queue.join()</strong></p>
-<ul>
-<li>调用以后就进行阻塞，直到所有的任务都被获取并处理完（task_done()）。</li>
-<li>一个消费线程调用 task_done()，未完成任务的数量就会减一。减到零以后就会停止阻塞。</li>
+<li>TCC 不需要对资源加锁，所以性能比 2PC 好，但是需要额外开发 3 个接口（Try、Confirm、Cancel）。</li>
+<li>Confirm 和 Cancel 可能会被多次调用，所以必须是幂等的。</li>
 </ul>
 <hr>
 <p>参考：</p>
-<p>📌 <a href="https://docs.python.org/2/library/queue.html">Queue — A synchronized queue class</a></p>
+<p>📌 <a href="https://www.cnblogs.com/qdhxhz/p/11172585.html">分布式事务(2）&mdash;TCC原理</a></p>
 
-            </div>
-        </article>
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84">架构</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1">分布式事务</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2pc">2PC</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/tcc">TCC</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+      <h2>Say something</h2>
+
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
+
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2019/architecture/distributed-transaction-tcc/">
+    <input type="hidden" name="options[entryId]" value="2e41ea425cf8488622c6e52a9f8267cc">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
+
+
+<h2>Comments</h2>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/"
+                class="button big previous">分布式事务：2PC &amp; 3PC</a></li>
+    
+
+    
+</ul>
+
+
     </div>
     
 <section id="sidebar">

@@ -6,10 +6,28 @@
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式事务：TCC</title>
+      <link>/blog/2019/architecture/distributed-transaction-tcc/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/distributed-transaction-tcc/</guid>
+      <description>什么是分布式？
+ 与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。  分布式事务常见解决方案:
+ 2PC两段提交协议 3PC三段提交协议(弥补两端提交协议缺点) TCC或者GTS(阿里) 消息中间件最终一致性 使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。   0x00 TCC TCC 是 Try、Confire、Cancel 的缩写。
+又称补偿机制，核心思想是：针对每个操作（Try）都要注册一个与其对应的确认（Confirm）和补偿（Cancel）操作。
+0x01 5 个步骤 ①、向协调者发起开启事务请求
+②、Try 阶段：Try 阶段负责把所有服务的业务资源预留和锁住。类似于 MySQL DML 操作，会加行锁
+③、Confirm or Cancel 阶段：如果 Try 阶段涉及的所有服务都确认执行成功，则向协调者发送 Confirm（commit），否则发送 Cancel（rollback）
+④、协调者根据业务发送的 Confirm or Cancel，向所有服务发送相应的 Confirm or Cancel 请求
+⑤、各服务提交本地事务
++----------------------+ 1 +------------------------+ | +---------------&amp;gt;+ | | APP | | Coordination service | | +---------------&amp;gt;+ | +-+--+--+------+--+--+-+ 3 +------------------------+ | | | | | | 2 | | | | | | 2 +------------------------+ | | | | +--------------------------+ | 4 | | | | 4 | | +------------------------+ | | +--------------------------+ | | | 4&#39; | | 4&#39; | | | | +----------------------+ +-------------------------+ | | | | | | | | v v v v v v +-+--+----+-------------------------+ +---------------------+---+--+-+ | service A | | service B | +----------------------+------------+ +-------+----------------------+ | | 5 | | 5 v v +-----+-------+ +---+---------+ | DB 1 | | DB 2 | +-------------+ +-------------+ 与 2PC 比较： 2PC 是资源层面的分布式事务，强一致，整个操作中资源一直被加锁，不需要开发者参与。</description>
+    </item>
     
     <item>
       <title>分布式事务：2PC &amp; 3PC</title>
