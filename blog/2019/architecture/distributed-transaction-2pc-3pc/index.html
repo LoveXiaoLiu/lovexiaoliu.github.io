@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.62.0" />
+        <meta name="generator" content="Hugo 0.60.0" />
         
   
     
@@ -662,7 +662,7 @@
     +--+-----+---+         +-+-----+----+
     |     DB 1   |         |   DB 2     |
     +------------+         +------------+
-</code></pre><h2 id="heading-1">优缺点：</h2>
+</code></pre><h2 id="heading1">优缺点：</h2>
 <p><strong>优点</strong></p>
 <ul>
 <li>原理简单（大多数关系型数据都是采用 2PC，eg：MySQL）</li>
@@ -679,7 +679,7 @@
 <li>Coordinator 和参与者都引入超时机制</li>
 <li>在 2PC 的 Prepare 和 Commit 之前加入一个 check 阶段，以保证最后 Commit 阶段之前各参与节点状态一致</li>
 </ul>
-<h2 id="heading-2">三个阶段：</h2>
+<h2 id="heading2">三个阶段：</h2>
 <p><strong>CanCommit 阶段</strong></p>
 <p>①、锁询问：请求到达 Coordinator 后， Coordinator 发起 CanCommit 请求，各参与节点根据情况判断是否可以获取数据库锁</p>
 <p>②、锁请求：各参与节点尝试获取本地数据库锁</p>
@@ -713,7 +713,7 @@
   +-+---------+--------+-+       +-+---------+-------+-+
   |         DB 1         |       |         DB 2        |
   +----------------------+       +---------------------+
-</code></pre><h2 id="heading-3">优缺点：</h2>
+</code></pre><h2 id="heading3">优缺点：</h2>
 <p><strong>优点</strong></p>
 <ul>
 <li>在 2PC 的基础上，增加超时机制，缓解了阻塞的范围</li>
@@ -1342,7 +1342,6 @@
         <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/python.min.js"></script>
         <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/sql.min.js"></script>
         <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/shell.min.js"></script>
-        <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/c.min.js"></script>
         <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
       
     
