@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Python</title>
+      <link>/categories/python/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>架构</title>
       <link>/categories/%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
@@ -26,15 +35,6 @@
       <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/categories/python/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/python/</guid>
       <description></description>
     </item>
     

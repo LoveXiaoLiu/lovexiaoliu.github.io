@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>abc on Gra55&#39;s Blog</title>
+    <link>/tags/abc/</link>
+    <description>Recent content in abc on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/abc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python 标准库：abc</title>
+      <link>/blog/2019/python/python-standard-library-abc/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/python/python-standard-library-abc/</guid>
+      <description>0x00 为什么需要 abc 模块 abc 模块为调用者和具体实现类之间提供更高级别的语义化约定。
+类似于静态语言中的接口，子类必须实现抽象基类中的所有抽象方法和属性。
+详情请查看 PEP 3119
+0x01 class：Queue(maxsize=0)
+  FIFO（先进先出）队列。
+  maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。
+  如果 maxsize 小于等于 0，队列的容量是无限大。
+  class：LifoQueue(maxsize=0)
+  LIFO（先进后出）队列，类似于栈。
+  其他规则同 Queue。
+  class：PriorityQueue(maxsize=0)
+  优先队列，内部使用 heapq 实现。
+  其他规则同 Queue。
+  优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)
+  exception：Empty
+ 在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。  exception：Full
+ 在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。  0x02 Queue 对象介绍  LifoQueue，PriorityQueue 都是继承自 Queue</description>
+    </item>
+    
+  </channel>
+</rss>
