@@ -6,10 +6,26 @@
     <description>Recent content in 2019 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2019/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>设计模式：简单工厂、工厂方法、抽象工厂</title>
+      <link>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</guid>
+      <description>0x00 模式概述 这种三种设计模式都是属于创建型，都是为了将类的创建和使用隔离。GoF 23 种设计模式不包含简单工厂模式，因为简单工厂在扩展的时候需要修改源码，违反了开闭原则
+工厂方法模式是简单工厂的升级版，解决了扩展需要修改源码的问题，满足了开闭原则。
+抽象工厂模式是工厂方法的升级版，解决了工厂方法只能生产一类产品的问题，但是抽象工厂在增加新类型产品的时候会违反开闭原则，这里需要特别注意。
+0x01 场景 简单工厂  只有一个工厂生产产品，后期也不会扩展  工厂方法  多个工厂生产同一类产品，后期会扩展更多的工厂  抽象工厂  多个工厂生产多种类型的产品  0x02 解决方案 简单工厂 简单工厂的类图（不是标准的类图，只是凸显一下依赖关系）如下所示，client 需要使用产品类 A 时不直接实例化产品类 A，而是通过 SimpleFactory 工厂类的 createProd() 方法来创建产品类 A 实例。
+如果现在需要新增产品类 B，则需要修改 createProd() 方法的源码，这明显违反了开闭原则。
++--------------------+ +---------------------------+ | | | SimpleFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd(prodType) | +--------------------+ +---------------------------+ 工厂方法 所以出现了工厂方法，工厂方法其实是依赖倒置原则（面向接口编程，不要面向实现编程）的体现，client 不依赖具体的 SimpleFactory，而是依赖一个抽象的工厂 AbstractFactory，具体的工厂继承自 AbstractFactory，实现 createProd() 方法即可。
+增加新产品 C 时，只需要新增加 ConcreteFactoryC 类即可，满足开闭原则。
++--------------------+ +---------------------------+ | | | AbstractFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd() | +--------------------+ +----+----------------+-----+ ^ ^ | | | | +--------------+-----+ +----+---------------+ | ConcreteFactoryA | | ConcreteFactoryB | +--------------------+ +--------------------+ | +createProd() | | +createProd() | +--------------------+ +--------------------+ 抽象工厂 抽象工厂在工厂方法的基础上增加了新的产品类型（2 号产品），其他没有太大的区别。但是在扩展新产品类型（3号产品）的时候需要修改已有的代码（AbstractFactory、ConcreteFactoryA、ConcreteFactoryB 都需要增加 createProd3() 方法），破坏了开闭原则。</description>
+    </item>
     
     <item>
       <title>设计模式概述</title>
@@ -24,21 +40,6 @@
 设计模式的本质是面向对象设计原则的实际应用。
  0x00 设计模式分类 按目的来分  创建型：用于描述如何创建对象，将对象的创建与使用分离开 结构型：用于描述如何将类或对象按照某种布局组成更大的结构（类似于聚合） 行为型：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务（类似于组合）  按作用范围来分  类模式：用于描述类与子类的关系，是静态的，在编译时就能确定下来（通过继承实现） 对象模式：用于描述对象之间的关系，在运行时刻是变化的（通过聚合/组合实现）     范围\目的 创建型 结构型 行为型     类模式 工厂方法 适配器（类） 模板方法、解释器   对象模式 单例、原型、抽象工厂、建造者 代理、适配器（对象）、桥接、装饰、外观、享元、组合 策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录    0x01 Prin 1：开闭原则 Software entities should be open for extension, but closed for modification.
  需求变更的时候，尽量通过扩展来实现需求，而不是通过修改源码来实现。 开闭原则是面向对象程序设计的终极目标 实现方法：通过抽象约束、封装变化来实现开闭原则，即通过接口或者抽象类为软件实体定义一个相对稳定的抽象层，而将相同的可变因素封装在具体实现类中。  0x02 Prin 2：里氏替换原则 Inheritance should ensure that any property proved about supertype objects also holds for subtype objects.</description>
-    </item>
-    
-    <item>
-      <title>设计模式：工厂方法</title>
-      <link>/blog/2019/architecture/design-patterns-factory-method/</link>
-      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/architecture/design-patterns-factory-method/</guid>
-      <description>0x00 模式概述 工厂方法模式定义：定义一个创建产品对象的工厂接口，将产品对象的创建工作推迟到具体子工厂类中。
-如果创建的产品对象不多，那么只需要一个工厂类就可以完成。这个叫做简单工厂。简单工厂不属于 GoF 23 种设计模式，因为在增加新产品时会违反开闭原则。
-工厂方法是简单工厂的的进一步抽象，使增加新产品时不需要修改原来的代码，满足开闭原则。
-0x01 场景  客户只知道创建产品的工厂名，不知道具体的产品名 创建对象的任务由多个具体子工厂中的某一个完成，而抽象工厂只提供创建产品的接口  0x02 解决方案 工厂方法其实是依赖倒置原则的体现，在简单工厂中，Client 创建类 A 的实例，也就是依赖于 A，这样的耦合性很高，增加一个产品 B，在 Client 中就需要进行条件判断才知道需要创建哪个类的实例。
-所以使用依赖倒置
-0x03 优缺点 优点：  用户只需要知道具体工厂的名字，就可以得到想要的产品对象，不需要知道产品的具体创建过程。 在系统增加新的产品时，只需要添加一个具体产品类和对应的具体工厂类，不需要修改原工厂代码，满足开闭原则。  缺点：  每增加一个产品就需要增加一个具体的产品类和具体工厂类，增加系统复杂性。   参考：
-📌 软件设计模式概述</description>
     </item>
     
     <item>
