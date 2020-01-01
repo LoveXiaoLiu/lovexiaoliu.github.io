@@ -12,23 +12,6 @@
     
     
     <item>
-      <title>Python 标准库：abc</title>
-      <link>/blog/2019/python/python-standard-library-abc/</link>
-      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/python/python-standard-library-abc/</guid>
-      <description>0x00 为什么需要 abc 模块 abc 模块为调用者和具体实现类（而不是抽象类）之间提供更高级别的语义化约定。你使用类 A 之前，类 A 就给你保证它有 b 方法和 c 属性，不需要你在使用的时候通过 getattr 来判断，这个就是约定（contract）。
-上面说的那句话是什么意思其实我也不是很懂，我理解它其实就类似于静态语言中的接口，子类必须实现抽象基类中的所有抽象方法和属性。而 abc 模块就帮你完成了这些事情。
-详情请查看 PEP 3119
-0x01 abc.ABCMeta 对象介绍  ABCMeta 是一个元类（metaclass），用来定义 Abstract Base Classes (ABCs)
-ABCMeta 可以被继承，可以作为一个 Mixin Class。
-可以注册不相关的具体类和 ABCs，作为虚拟类，他和他的子类会被认为是注册的 ABC 的子类（使用内置的 issubclass 函数来判断），但是注册的 ABC 不会出现在他们的 MRO（Method Resolution Order）中，注册 ABC 的方法也不能被调用。
-通过 ABCMeta 元类创建的类具有以下方法：
- register(subclass)
- 注册一个子类，作为这个 ABC 的虚拟子类  from abc import ABCMeta class MyABC: __metaclass__ = ABCMeta MyABC.register(tuple) assert issubclass(tuple, MyABC) assert isinstance((), MyABC) __subclasshook__(subclass)</description>
-    </item>
-    
-    <item>
       <title>设计模式：简单工厂、工厂方法、抽象工厂</title>
       <link>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
