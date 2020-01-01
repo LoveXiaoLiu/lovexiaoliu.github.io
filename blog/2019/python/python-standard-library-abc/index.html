@@ -32,7 +32,7 @@
         "datePublished": "2019-12-31 00:00:00 \x2b0000 UTC",
         "dateModified" : "2019-12-31 00:00:00 \x2b0000 UTC",
         "url" : "\/blog\/2019\/python\/python-standard-library-abc\/",
-        "wordCount" : "138",
+        "wordCount" : "182",
         "keywords" : [ "python","2019","abc","Blog" ]
     }
     </script>
@@ -87,7 +87,7 @@
 <meta itemprop="description" content="在 Python 中 abc 模块用来创建抽象基类">
 <meta itemprop="datePublished" content="2019-12-31T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-31T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="138">
+<meta itemprop="wordCount" content="182">
 
 
 
@@ -428,116 +428,74 @@
 
             <div id="content">
                 <h1 id="0x00--abc-">0x00 为什么需要 abc 模块</h1>
-<p>abc 模块为调用者和具体实现类之间提供更高级别的语义化约定。</p>
-<p>类似于静态语言中的<strong>接口</strong>，子类必须实现抽象基类中的所有抽象方法和属性。</p>
+<p>abc 模块为调用者和具体实现类（而不是抽象类）之间提供更高级别的语义化约定。你使用类 A 之前，类 A 就给你保证它有 b 方法和 c 属性，不需要你在使用的时候通过 getattr 来判断，这个就是约定（contract）。</p>
+<p>上面说的那句话是什么意思其实我也不是很懂，我理解它其实就类似于静态语言中的<strong>接口</strong>，子类必须实现抽象基类中的所有抽象方法和属性。而 abc 模块就帮你完成了这些事情。</p>
 <p>详情请查看 <a href="https://www.python.org/dev/peps/pep-3119/#abcs-vs-alternatives">PEP 3119</a></p>
-<h1 id="0x01">0x01</h1>
-<p><strong>class：Queue(maxsize=0)</strong></p>
-<ul>
-<li>
-<p>FIFO（先进先出）队列。</p>
-</li>
-<li>
-<p>maxsize 用来设置队列的最大容量，一旦到达最大值，插入操作就会被阻塞住，直到队列内的内容被消费。</p>
-</li>
-<li>
-<p>如果 maxsize 小于等于 0，队列的容量是无限大。</p>
-</li>
-</ul>
-<p><strong>class：LifoQueue(maxsize=0)</strong></p>
-<ul>
-<li>
-<p>LIFO（先进后出）队列，类似于栈。</p>
-</li>
-<li>
-<p>其他规则同 Queue。</p>
-</li>
-</ul>
-<p><strong>class：PriorityQueue(maxsize=0)</strong></p>
-<ul>
-<li>
-<p>优先队列，内部使用 <a href="https://docs.python.org/2/library/heapq.html#module-heapq">heapq</a> 实现。</p>
-</li>
-<li>
-<p>其他规则同 Queue。</p>
-</li>
-<li>
-<p>优先返回优先级低的数据，典型的数据模式是一个元组：(priority_number, data)</p>
-</li>
-</ul>
-<p><strong>exception：Empty</strong></p>
-<ul>
-<li>在一个空队列调用非阻塞 get() 或者 get_nowait() 时会抛出此异常。</li>
-</ul>
-<p><strong>exception：Full</strong></p>
-<ul>
-<li>在一个容量达到最大值的队列调用非阻塞 put() 或者 put_nowait() 时会抛出此异常。</li>
-</ul>
-<h1 id="0x02-queue-">0x02 Queue 对象介绍</h1>
+<h1 id="0x01-abcabcmeta-">0x01 abc.ABCMeta 对象介绍</h1>
 <blockquote>
-<p>LifoQueue，PriorityQueue 都是继承自 Queue</p>
+<p>ABCMeta 是一个元类（metaclass），用来定义 Abstract Base Classes (ABCs)</p>
+<p>ABCMeta 可以被继承，可以作为一个 Mixin Class。</p>
+<p>可以注册不相关的具体类和 ABCs，作为<strong>虚拟类</strong>，他和他的子类会被认为是注册的 ABC 的子类（使用内置的 issubclass 函数来判断），但是注册的 ABC 不会出现在他们的 MRO（Method Resolution Order）中，注册 ABC 的方法也不能被调用。</p>
+<p>通过 ABCMeta 元类创建的类具有以下方法：</p>
 </blockquote>
-<p><strong>Queue.qsize()</strong></p>
+<p><strong>register(subclass)</strong></p>
 <ul>
-<li>返回队列的近似大小，不能保证读写不会被阻塞。</li>
+<li>注册一个子类，作为这个 ABC 的虚拟子类</li>
 </ul>
-<p><strong>Queue.empty()</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> ABCMeta
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyABC</span>:
+    __metaclass__ <span style="color:#f92672">=</span> ABCMeta
+
+MyABC<span style="color:#f92672">.</span>register(tuple)
+
+<span style="color:#66d9ef">assert</span> issubclass(tuple, MyABC)
+<span style="color:#66d9ef">assert</span> isinstance((), MyABC)
+</code></pre></div><p><strong>__subclasshook__(subclass)</strong></p>
 <ul>
-<li>判断队列是不是空，返回 True or False。不能保证读写不会被阻塞。</li>
+<li>必须是一个类方法。</li>
+<li>检测 <em>subclass</em> 是不是这个 ABC 的子类。</li>
+<li>这个方法被 __subclasscheck__ 调用，意思就是说可以通过这个类自定义 issubclass 的行为，不需要给每个需要注册虚拟子类的类调用 register() 方法（类似于 MyABC.register(tuple)）。</li>
+<li>这个方法必须返回 True，False 或者 NotImplemented。True 表示 <em>subclass</em> 是 ABC 的子类，False 反之，如果是 NotImplemented，那就继续执行接下来的常规流程。</li>
 </ul>
-<p><strong>Queue.full()</strong></p>
+<p><strong>给个例子解释下功能用法：</strong></p>
 <ul>
-<li>判断队列是不是满的，返回 True or False。不能保证读写不会被阻塞。</li>
+<li>ABC 类 MyIterable 定义了标准的可迭代对象方法（__iter__()）作为抽象方法。这里给出的实现仍然可以在子类调用。get_iterator() 方法也是 MyIterable 的一部分，但是它不是抽象方法，所以它没有强制要求被非抽象子类重写（overridden）。</li>
+<li></li>
 </ul>
-<p><strong>Queue.put(item[, block[, timeout]])</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span>(object):
+    <span style="color:#66d9ef">def</span> __getitem__(self, index):
+        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+    <span style="color:#66d9ef">def</span> __len__(self):
+        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_iterator</span>(self):
+        <span style="color:#66d9ef">return</span> iter(self)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyIterable</span>:
+    __metaclass__ <span style="color:#f92672">=</span> ABCMeta
+
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#66d9ef">while</span> False:
+            <span style="color:#66d9ef">yield</span> None
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_iterator</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>__iter__()
+
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__subclasshook__</span>(cls, C):
+        <span style="color:#66d9ef">if</span> cls <span style="color:#f92672">is</span> MyIterable:
+            <span style="color:#66d9ef">if</span> any(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__iter__</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">in</span> B<span style="color:#f92672">.</span>__dict__ <span style="color:#66d9ef">for</span> B <span style="color:#f92672">in</span> C<span style="color:#f92672">.</span>__mro__):
+                <span style="color:#66d9ef">return</span> True
+        <span style="color:#66d9ef">return</span> NotImplemented
+
+MyIterable<span style="color:#f92672">.</span>register(Foo)
+</code></pre></div><h1 id="0x01-abc-">0x01 abc 模块装饰器介绍</h1>
+<p><strong>abc.abstractmethod(function)</strong></p>
 <ul>
-<li>
-<p>将一个元素插入到队列中。如果 block=True 并且 timeout=None，如果队列满的话会阻塞，直到有空位置。</p>
-</li>
-<li>
-<p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有空位置，则会抛出一个 Full 异常。</p>
-</li>
-<li>
-<p>如果 block=False，如果队列没有空位置，则会立即抛出一个 Full 异常。</p>
-</li>
+<li>ss</li>
 </ul>
-<p><strong>Queue.put_nowait(item)</strong></p>
-<ul>
-<li>等价于 put(item, False).</li>
-</ul>
-<p><strong>Queue.get([block[, timeout]])</strong></p>
-<ul>
-<li>
-<p>从队列移除并返回数据。如果 block=True 并且 timeout=None，如果队列为空的话会阻塞，直到有数据可用。</p>
-</li>
-<li>
-<p>如果 timeout 是正数 x，它会阻塞 x 秒，这段时间内如果没有数据，则会抛出一个 Empty 异常。</p>
-</li>
-<li>
-<p>如果 block=False，如果队列没有数据，则会立即抛出一个 Empty 异常。</p>
-</li>
-</ul>
-<p><strong>Queue.get_nowait()</strong></p>
-<ul>
-<li>等价于 get(False)</li>
-</ul>
-<p><strong>Queue.task_done()</strong></p>
-<ul>
-<li>
-<p>表示前一个排队的任务已经完成，常用于队列的消费线程。</p>
-</li>
-<li>
-<p>调用 get() 获取一个任务以后，紧接着调用 task_done()，就是告诉队列：正在处理的任务已经完成。</p>
-</li>
-<li>
-<p>如果阻塞在 join() 处，需要重新调用 task_done() 将所有任务处理完成。</p>
-</li>
-</ul>
-<p><strong>Queue.join()</strong></p>
-<ul>
-<li>调用以后就进行阻塞，直到所有的任务都被获取并处理完（task_done()）。</li>
-<li>一个消费线程调用 task_done()，未完成任务的数量就会减一。减到零以后就会停止阻塞。</li>
-</ul>
+<p><strong>abc.abstractproperty([fget[, fset[, fdel[, doc]]]])</strong></p>
 <hr>
 <p>参考：</p>
 <p>📌 <a href="https://docs.python.org/2/library/abc.html">abc — Abstract Base Classes</a></p>
@@ -741,9 +699,6 @@
 
 
   
-  
-    
-  
 
 
         
@@ -752,7 +707,7 @@
 
         <a href="/blog/2019/architecture/design-patterns-overview/" class="image featured">
             
-                <img src="/img/2019/12/strawberry.jpg" alt="">
+                <img src="/img//strawberry.jpg" alt="">
             
         </a>
     
