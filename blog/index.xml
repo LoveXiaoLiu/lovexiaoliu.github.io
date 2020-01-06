@@ -6,10 +6,22 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LRU 算法概述</title>
+      <link>/blog/2020/algorithm/lru-cache/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/algorithm/lru-cache/</guid>
+      <description>0x00 算法概述 LRU（Least-recently-used）：最近最少被使用的某个东西。最早使用在内存中，表示最近最少被使用的内存将会被释放。
+0x01 算法实现 如果想要这个算法的 get 和 set 时间复杂度都为 O(1)，我们这里需要使用两种数据结构 dict 和双向链表。
+dict 获取元素的时间复杂度是 O(1)，set 元素时通过字典先找到已存在的元素，然后将这个元素挪到链表的尾部，时间复杂度也是 O(1)。结构如下所示：
++----------+ +----------+ +----------+ +----------+ | key-root | | key-A | | key-B | | key-C | +----------+ +----+-----+ +----+-----+ +----+-----+ | | | | | | | | v v v v +----+-----------------+----------------+------------------+----------+ | hash function | +----+-----------------+----------------+------------------+----------+ | | | | v v v v +----+-----+ +----+-----+ +---+------+ +----+-----+ +------&amp;gt;+ +-----&amp;gt;+ +------+ +-----&amp;gt;+ +--------+ | | root | | A | | B | | C | | | +----+ +&amp;lt;-----+ +------+ +&amp;lt;-----+ +&amp;lt;---+ | | | +----------+ +----------+ +----------+ +----------+ | | | | | | | +--------------------------------------------------------------------------+ | +---------------------------------------------------------------------------------+ 0x02 代码实现 在 Python 3 的内置模块 functools 中（Python 2 中没有），给出了 lru_cache 的实现，这应该就是用 Python 来实现 lru cache 的最佳实践了。</description>
+    </item>
     
     <item>
       <title>Python 基础知识点</title>
@@ -18,8 +30,10 @@
       
       <guid>/blog/2020/python/python-basic-knowledge/</guid>
       <description>以下知识点只给出结论，不给予论证，请自行测试。
- 0x00 实例属性的访问顺序  __getattribute__ 类的数据描述符属性 实例的属性 类的非数据描述符属性 类的普通属性 __getattr__  0x01 实例属性的赋值顺序  类的数据描述符属性 实例属性  0x02  参考：
-📌</description>
+ 0x00 实例属性的访问顺序  __getattribute__ 类的数据描述符属性 实例的属性 类的非数据描述符属性 类的普通属性 __getattr__  0x01 实例属性的赋值顺序  类的数据描述符属性 实例属性  0x02 内存管理  引用计数 内存池 垃圾回收  0x03 垃圾回收  引用计数 标记清除 分代回收  0x04 作用域  global 关键字用来访问全局作用域的变量值。
+nonlocal 关键字（只有 Python 3 支持）用来访问 Enclosing locals（闭包）作用域的变量值。
+Python 没有块作用域，for 语句范围不是单独的作用域。
+  Local Enclosing locals Global Built-in  0x05 is 关键字  is 用来比较变量的地址 == 用来比较变量的值  0x06 单引号/双引号/三引号  单引号和双引号等效，换行需要使用反斜杠（\） 三引号可以直接换行，可以包含任何形式的字符串  0x07 自省  运行时能够查看对象内部的属性或状态 自省函数：type()、isinstance()、dir()、hasattr()、getattr()  0x08 staticmethod &amp;amp; classmethod  staticmethod &amp;amp; classmethod 都是内置类型，属于非数据描述符 可以将类内的方法转变成静态方法和类方法（从 Python 2.</description>
     </item>
     
     <item>
