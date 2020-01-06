@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Python</title>
       <link>/categories/python/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/python/</guid>
       <description></description>
@@ -39,11 +39,11 @@
     </item>
     
     <item>
-      <title>Leetcode</title>
-      <link>/categories/leetcode/</link>
+      <title>algorithm</title>
+      <link>/categories/algorithm/</link>
       <pubDate>Mon, 23 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/leetcode/</guid>
+      <guid>/categories/algorithm/</guid>
       <description></description>
     </item>
     

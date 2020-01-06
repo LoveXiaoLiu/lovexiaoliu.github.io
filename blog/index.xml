@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python 基础知识点</title>
+      <link>/blog/2020/python/python-basic-knowledge/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/python/python-basic-knowledge/</guid>
+      <description>以下知识点只给出结论，不给予论证，请自行测试。
+ 0x00 实例属性的访问顺序  __getattribute__ 类的数据描述符属性 实例的属性 类的非数据描述符属性 类的普通属性 __getattr__  0x01 实例属性的赋值顺序  类的数据描述符属性 实例属性  0x02  参考：
+📌</description>
+    </item>
     
     <item>
       <title>Python 标准库：abc</title>
@@ -142,10 +153,10 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     
     <item>
       <title>Leetcode：#32 最长有效括号</title>
-      <link>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</link>
+      <link>/blog/2019/algorithm/leetcode-32-longest-valid-parentheses/</link>
       <pubDate>Mon, 23 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/leetcode/leetcode-32-longest-valid-parentheses/</guid>
+      <guid>/blog/2019/algorithm/leetcode-32-longest-valid-parentheses/</guid>
       <description>0x00 题目描述 #32
 给定一个只包含 ( 和 ) 的字符串，找出最长的包含有效括号的子串的长度。
 输入: &amp;#34;(()&amp;#34; 输出: 2 解释: 最长有效括号子串为 &amp;#34;()&amp;#34; 输入: &amp;#34;)()())&amp;#34; 输出: 4 解释: 最长有效括号子串为 &amp;#34;()()&amp;#34; 0x01 约束  注意字符串为空的情况  0x02 题解    一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。
@@ -157,10 +168,10 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     
     <item>
       <title>Leetcode：#10 正则表达式匹配</title>
-      <link>/blog/2019/leetcode/leetcode-10-regular-expression-matching/</link>
+      <link>/blog/2019/algorithm/leetcode-10-regular-expression-matching/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/leetcode/leetcode-10-regular-expression-matching/</guid>
+      <guid>/blog/2019/algorithm/leetcode-10-regular-expression-matching/</guid>
       <description>0x00 题目描述 #10
 给定一个字符串 s 和一个字符规则 p，实现一个支持 . 和 * 的正则表达式匹配。其中 . 匹配任意单个字符，* 匹配零个或多个前面的那一个元素。
 所谓匹配，是要涵盖整个字符串 s，而不是 s 的子串。类似于 re.match 而不是 re.search。
@@ -172,10 +183,10 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     
     <item>
       <title>Leetcode：#204 计数质数</title>
-      <link>/blog/2019/leetcode/leetcode-204-count-primes/</link>
+      <link>/blog/2019/algorithm/leetcode-204-count-primes/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/leetcode/leetcode-204-count-primes/</guid>
+      <guid>/blog/2019/algorithm/leetcode-204-count-primes/</guid>
       <description>0x00 题目描述 #204
 统计所有小于非负整数 n 的质数的数量。
 0x01 约束   n 为非负整数
@@ -190,10 +201,10 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     
     <item>
       <title>Leetcode：#5 最长回文子串</title>
-      <link>/blog/2019/leetcode/leetcode-5-longest-palindromic-substring/</link>
+      <link>/blog/2019/algorithm/leetcode-5-longest-palindromic-substring/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/leetcode/leetcode-5-longest-palindromic-substring/</guid>
+      <guid>/blog/2019/algorithm/leetcode-5-longest-palindromic-substring/</guid>
       <description>0x00 题目描述 #5
 给定一个字符串 s，找到 s 中最长的回文子串。
 输入: &amp;#34;babad&amp;#34; 输出: &amp;#34;bab&amp;#34; 注意: &amp;#34;aba&amp;#34; 也是一个有效答案。 0x01 约束  s 最大长度为 1000 注意字符串为空的情况  0x02 题解    一般看到 最长、最优 等求最优解的题目，首先应该想到动态规划。

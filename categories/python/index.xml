@@ -6,10 +6,21 @@
     <description>Recent content in Python on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python 基础知识点</title>
+      <link>/blog/2020/python/python-basic-knowledge/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/python/python-basic-knowledge/</guid>
+      <description>以下知识点只给出结论，不给予论证，请自行测试。
+ 0x00 实例属性的访问顺序  __getattribute__ 类的数据描述符属性 实例的属性 类的非数据描述符属性 类的普通属性 __getattr__  0x01 实例属性的赋值顺序  类的数据描述符属性 实例属性  0x02  参考：
+📌</description>
+    </item>
     
     <item>
       <title>Python 标准库：abc</title>
