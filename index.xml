@@ -6,10 +6,27 @@
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AVL Tree 概述</title>
+      <link>/blog/2020/algorithm/avl-tree/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/algorithm/avl-tree/</guid>
+      <description>0x00 前言 最早出现的是二叉树，随后人们发现二叉树可以用来二分查找，所以出现了二叉搜索树。
+但是二叉搜索树在极端情况会退化成单链表的形式，所以出现了平衡二叉搜索树，即AVL 树（AVL 取自发明它的两个人的名字首字母，话说老外都爱这个干，以自己名字命名各种算法）
+但是AVL 树也是有缺陷的，删除和插入效率很低（因为需要旋转多次），所以出现了红黑树，红黑树不是严格的平衡树，所以查找效率可能会低一点。
+本文主要介绍AVL 树，后续出单独的文章介绍红黑树。
+0x01 特性  必须是一颗二叉搜索树 每个节点的左子树和右子树的高度差的绝对值不能大于 1 查找、插入、删除的平均和最坏时间复杂度都是 O(logn)  0x02 术语 平衡因子（Balance Factor）
+ 二叉树节点的左子树高度减去右子树高度的值，称为该节点的平衡因子  最小不平衡子树
+ 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的树，就是最小不平衡子树  0x03 实现 节点结构 下面的节点结构包含了节点的高度，也可以存储平衡因子和父节点。
+class TreeNode(object): def __init__(self, value): self.value = value self.left = None self.right = None self.height = 0 AVL 类提供的函数 失衡调整 - 左单旋（在最小不平衡子树的右子树中插入右孩子时）
++---+ +---+ +---+ | 4 | | 4 | | 5 | +---+ +---+ +---+ | | | | +---+ +---+ +---+ +---+ | 5 | | 5 | | 4 | | 6 | +---+ +---+ +---+ +---+ | +---+ | 6 | +---+ def leftRotation(proot): &amp;#34;&amp;#34;&amp;#34;单左旋转操作:param proot: 最小失衡子树的根节点:rtype: TreeNode&amp;#34;&amp;#34;&amp;#34; # 左旋 tmpNode = proot.</description>
+    </item>
     
     <item>
       <title>LRU 算法概述</title>
