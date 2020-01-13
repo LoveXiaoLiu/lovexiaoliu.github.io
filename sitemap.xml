@@ -4,14 +4,63 @@
   
   <url>
     <loc>/tags/2020/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/categories/algorithm/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2020/algorithm/back-tracking/</loc>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -32,34 +81,6 @@
   
   <url>
     <loc>/tags/binary-tree/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/blog/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-01-10T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

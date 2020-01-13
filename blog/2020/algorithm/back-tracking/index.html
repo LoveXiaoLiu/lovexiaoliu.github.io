@@ -1,0 +1,1063 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "\/"
+        },
+        "articleSection" : "blog",
+        "name" : "基础算法：回溯法",
+        "headline" : "基础算法：回溯法",
+        "description" : "常用的基础算法之一，被称为通用解题方法",
+        "inLanguage" : "en",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-01-13 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2020-01-13 00:00:00 \x2b0000 UTC",
+        "url" : "\/blog\/2020\/algorithm\/back-tracking\/",
+        "wordCount" : "23",
+        "keywords" : [ "基础算法","回溯法","2020","Blog" ]
+    }
+    </script>
+        
+            
+                <title>基础算法：回溯法</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.60.0" />
+        
+  
+    
+  
+
+  
+
+  <link rel="apple-touch-icon-precomposed" href='/favicon/apple-touch-icon-precomposed.png'>
+  <link rel="icon" href='/favicon/favicon.png'>
+  
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content='/favicon/mstile.png'>
+  <meta name="application-name" content="Gra55&#39;s Blog">
+  <meta name="msapplication-tooltip" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
+  <meta name="msapplication-config" content='/favicon/ieconfig.xml'>
+
+
+
+        
+            <meta name="author" content="gra55">
+        
+        
+            <meta name="description" content="常用的基础算法之一，被称为通用解题方法">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基础算法：回溯法"/>
+<meta name="twitter:description" content="常用的基础算法之一，被称为通用解题方法"/>
+
+        <meta property="og:title" content="基础算法：回溯法" />
+<meta property="og:description" content="常用的基础算法之一，被称为通用解题方法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2020/algorithm/back-tracking/" />
+<meta property="article:published_time" content="2020-01-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-13T00:00:00+00:00" />
+
+        <meta property="og:image" content="//images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        <meta itemprop="name" content="基础算法：回溯法">
+<meta itemprop="description" content="常用的基础算法之一，被称为通用解题方法">
+<meta itemprop="datePublished" content="2020-01-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-13T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="23">
+
+
+
+<meta itemprop="keywords" content="基础算法,回溯法,2020," />
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.15.10/styles/monokai-sublime.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      <h1><a href="/">blog</a></h1>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/about/">
+                            <i class="fa fa-heartbeat">&nbsp;</i>About
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-coffee">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/awesome/">
+                            <i class="fa fa-snowflake-o">&nbsp;</i>Awesome
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories/">
+                            <i class="fa fa-free-code-camp">&nbsp;</i>Categories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//bing.com/search">
+                    <input type="text" name="q" placeholder="Search" value="site:yangliu.date "/>
+                    <input type="hidden" name="as_sitesearch" value="yangliu.date/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//bing.com/search">
+                <input type="text" name="q" placeholder="Search" value="site:yangliu.date "/>
+                <input type="hidden" name="as_sitesearch" value="yangliu.date/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Home
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about/">
+                            <h3>
+                                <i class="fa fa-heartbeat">&nbsp;</i>About
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-coffee">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/awesome/">
+                            <h3>
+                                <i class="fa fa-snowflake-o">&nbsp;</i>Awesome
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/">
+                            <h3>
+                                <i class="fa fa-free-code-camp">&nbsp;</i>Categories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section class="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2020/algorithm/back-tracking/">基础算法：回溯法</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-01-13'>
+                                    January 13, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2020/algorithm/avl-tree/">AVL Tree 概述</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-01-10'>
+                                    January 10, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/2020/algorithm/lru-cache/">LRU 算法概述</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-01-06'>
+                                    January 6, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">View more posts</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2020%2falgorithm%2fback-tracking%2f&amp;text=%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95%ef%bc%9a%e5%9b%9e%e6%ba%af%e6%b3%95&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2020%2falgorithm%2fback-tracking%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2020%2falgorithm%2fback-tracking%2f&amp;title=%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95%ef%bc%9a%e5%9b%9e%e6%ba%af%e6%b3%95" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2020%2falgorithm%2fback-tracking%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/2020/algorithm/back-tracking/">基础算法：回溯法</a></h1>
+            
+        
+        
+            <p>常用的基础算法之一，被称为通用解题方法</p>
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2020-01-13'>
+            January 13, 2020</time>
+        <span class="author">gra55</span>
+        
+            <p>1 minute read</p>
+        
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2020%2falgorithm%2fback-tracking%2f&amp;text=%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95%ef%bc%9a%e5%9b%9e%e6%ba%af%e6%b3%95&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2020%2falgorithm%2fback-tracking%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2020%2falgorithm%2fback-tracking%2f&amp;title=%e5%9f%ba%e7%a1%80%e7%ae%97%e6%b3%95%ef%bc%9a%e5%9b%9e%e6%ba%af%e6%b3%95" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2020%2falgorithm%2fback-tracking%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+
+  <div id="content">
+    <h1 id="0x00-">0x00 算法概述</h1>
+<p>回溯算法其实是一种枚举算法（穷举法），是一种暴力解法，时间复杂度比较高。</p>
+<p>回溯法通过<strong>深度优先遍历</strong>的方法来尝试所有可能的解，当发现某一个分支无法满足求解条件，立马退回一步重新选择（回溯），尝试其他路径。如果只求一个解时，搜索到可用解后就停止搜索；如果求问题的所有解，就必须遍历所有解空间。</p>
+<h1 id="0x01-">0x01 解题步骤</h1>
+<ol>
+<li>针对所给问题，确定解空间：需要确定问题的解空间是否存在一个（最优）解</li>
+<li>确定搜索规则</li>
+<li>以深度优先策略开始搜索解空间，搜索过程中通过<strong>剪枝函数</strong>避免无效搜索</li>
+</ol>
+<p>什么是剪枝函数？</p>
+<ul>
+<li>剪枝函数是对无效解的过滤策略（明知道这条路径走下去不会得到解或最优解，所以就提前回溯，提高效率）</li>
+<li>可行性剪枝：提前判断当前路径无法求出解，就可以提前回溯</li>
+<li>最优化剪枝：声明一个变量存储当前最优解，如果可以提前判断当前路径无法满足最优解的条件，就提前回溯</li>
+<li>剪枝函数特别难找，好的剪枝函数可以极大的降低算法的时间复杂度</li>
+</ul>
+<h1 id="0x02-">0x02 实现方式</h1>
+<ul>
+<li>非递归</li>
+<li>递归</li>
+</ul>
+<hr>
+<p>参考：</p>
+<p>📌  <a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741376.html">五大常用算法之四：回溯法</a></p>
+<p>📌  <a href="https://blog.csdn.net/Arabic1666/article/details/80147606">“通用解题法”之回溯中的“剪枝”</a></p>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="/categories/algorithm">algorithm</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95">回溯法</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/2020">2020</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+      <h2>Say something</h2>
+
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
+
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2020/algorithm/back-tracking/">
+    <input type="hidden" name="options[entryId]" value="73961e74717d40cf76f67d26b688dbf3">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
+
+
+<h2>Comments</h2>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/2020/algorithm/avl-tree/"
+                class="button big previous">AVL Tree 概述</a></li>
+    
+
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+      
+        <a href='/' class="logo"><img src="/img/main/logo.jpg" alt="Mamba spirit" /></a>
+      
+    
+    
+      <header>
+        <h2>Gra55</h2>
+        <p>愿背井离乡、追寻梦想的你归来仍是少年 <i class='fa fa-hand-peace-o'></i></p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/LoveXiaoLiu" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="/img/main/wechar-qr.png" target="_blank" title="WeChat: 0x00" class="fa fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:shuai.grass@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section class="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Recent Posts</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2020/algorithm/back-tracking/">基础算法：回溯法</a>
+              </h3>
+              
+              <time class="published" datetime='2020-01-13'>
+                January 13, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2020/algorithm/avl-tree/">AVL Tree 概述</a>
+              </h3>
+              
+              <time class="published" datetime='2020-01-10'>
+                January 10, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/2020/algorithm/lru-cache/">LRU 算法概述</a>
+              </h3>
+              
+              <time class="published" datetime='2020-01-06'>
+                January 6, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">View more posts</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/categories/">Categories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/algorithm/">algorithm</a>
+                <span style="float:right;">7</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/python/">python</a>
+                <span style="float:right;">7</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/blog/">blog</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/go/">go</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/web/">web</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+  
+  
+    <section id="mini-bio">
+      <h3>About</h3>
+      <p>Ordinary but not mediocre, fighting <i class='fa fa-hand-peace-o'></i></p>
+      <a href="/about/" class="button">Learn More</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/LoveXiaoLiu" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="/img/main/wechar-qr.png" target="_blank" title="WeChat: 0x00" class="fa fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:shuai.grass@gmail.com" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2020
+        
+          Gra55&#39;s Blog
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/python.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/sql.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.15.10/languages/shell.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+      <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </body>
+</html>
+
