@@ -6,10 +6,26 @@
     <description>Recent content in 基础算法 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>基础算法：贪心算法</title>
+      <link>/blog/2020/algorithm/greedy-algorithm/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/algorithm/greedy-algorithm/</guid>
+      <description>0x00 算法概述 贪心算法是在求解问题的时候，总是选择当前最优的解，不考虑全局最优解。
+选择当前最优的解的方法称为贪心策略，贪心策略必须保证拆分的子问题必须是无后效性的（当前状态不会影响之前的状态）。
+0x01 解题步骤  分析问题，抽象成数学模型 将问题拆分成多个子问题（子问题必须是无后效性的） 求解每一个子问题，得到子问题的局部最优解 合并子问题的最优解，得出全局解  贪心算法的核心就是找贪心策略，然后证明贪心策略中子问题的最优解一定会得到全局最优解。
+0x02 实现方式 适用场景：
+ 单源最短路经问题 最小生成树问题 可任意分割的背包问题。如果不可以任意分割，就需要用动态规划求解。 某些情况下，即使贪心算法不能得到整体最优解，但其最终结果近似于最优解。  贪心算法的实现很简单，只要能找到贪心策略，代码很容易写出来。
+ 参考：
+📌 五大常用算法之三：贪心算法
+📌 常见算法及问题场景——贪心算法</description>
+    </item>
     
     <item>
       <title>基础算法：回溯法</title>
