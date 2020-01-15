@@ -1,11 +1,3 @@
-
-
-
-    
-
-
-
-
 <!DOCTYPE HTML>
 
 <html>
@@ -19,9 +11,9 @@
              "@id": "\/"
         },
         "articleSection" : "blog",
-        "name" : "Blog",
-        "headline" : "Blog",
-        "description" : "",
+        "name" : "设计模式 # 创建型 # 单例模式",
+        "headline" : "设计模式 # 创建型 # 单例模式",
+        "description" : "最简单的创建型设计模式之一，对外提供全局唯一的对象",
         "inLanguage" : "en",
         "author" : "",
         "creator" : "",
@@ -31,13 +23,15 @@
         "copyrightYear" : "2020",
         "datePublished": "2020-01-15 00:00:00 \x2b0000 UTC",
         "dateModified" : "2020-01-15 00:00:00 \x2b0000 UTC",
-        "url" : "\/blog\/",
-        "wordCount" : "0",
-        "keywords" : [ "Blog" ]
+        "url" : "\/blog\/2020\/architecture\/singleton-pattern\/",
+        "wordCount" : "19",
+        "keywords" : [ "设计模式","单例模式","2020","Blog" ]
     }
     </script>
         
-            <title>Blog - Gra55&#39;s Blog</title>
+            
+                <title>设计模式 # 创建型 # 单例模式</title>
+            
         
 
         <meta charset="utf-8" />
@@ -62,28 +56,36 @@
 
 
         
+            <meta name="author" content="gra55">
         
-            
-                <meta name="description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
-            
+        
+            <meta name="description" content="最简单的创建型设计模式之一，对外提供全局唯一的对象">
         
 
         <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Blog"/>
-<meta name="twitter:description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo"/>
+<meta name="twitter:title" content="设计模式 # 创建型 # 单例模式"/>
+<meta name="twitter:description" content="最简单的创建型设计模式之一，对外提供全局唯一的对象"/>
 
-        <meta property="og:title" content="Blog" />
-<meta property="og:description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/blog/" />
-<meta property="og:updated_time" content="2020-01-15T00:00:00+00:00" />
+        <meta property="og:title" content="设计模式 # 创建型 # 单例模式" />
+<meta property="og:description" content="最简单的创建型设计模式之一，对外提供全局唯一的对象" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2020/architecture/singleton-pattern/" />
+<meta property="article:published_time" content="2020-01-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-15T00:00:00+00:00" />
 
         <meta property="og:image" content="//images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
-        <meta itemprop="name" content="Blog">
-<meta itemprop="description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
+        <meta itemprop="name" content="设计模式 # 创建型 # 单例模式">
+<meta itemprop="description" content="最简单的创建型设计模式之一，对外提供全局唯一的对象">
+<meta itemprop="datePublished" content="2020-01-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="19">
+
+
+
+<meta itemprop="keywords" content="设计模式,单例模式,2020," />
         
 
         
@@ -121,6 +123,7 @@
       
       <div id="wrapper">
 
+    
     
 <header id="header">
     
@@ -170,6 +173,10 @@
     </nav>
     <nav class="main">
         <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
             
             <li class="search">
                 <a class="fa-search" href="#search">Search</a>
@@ -315,26 +322,92 @@
         
 </section>
 
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f&amp;text=%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%20%23%20%e5%88%9b%e5%bb%ba%e5%9e%8b%20%23%20%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f&amp;title=%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%20%23%20%e5%88%9b%e5%bb%ba%e5%9e%8b%20%23%20%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
     
     <div id="main">
         
         
-            <article class="post">
+        <article class="post">
   <header>
     <div class="title">
         
-            <h2><a href="/blog/2019/computer-basics/what-programmers-must-know/">程序员必须知道的常识</a></h2>
+            <h1><a href="/blog/2020/architecture/singleton-pattern/">设计模式 # 创建型 # 单例模式</a></h1>
+            
         
         
-            <p>程序员生涯中会遇到很多东西，而某些东西只需要记住就好了，不需要理解，常识就是这样</p>
+            <p>最简单的创建型设计模式之一，对外提供全局唯一的对象</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2019-12-20'>
-            December 20, 2019</time>
+            datetime='2020-01-15'>
+            January 15, 2020</time>
         <span class="author">gra55</span>
         
             <p>1 minute read</p>
@@ -343,11 +416,31 @@
     </div>
 </header>
 
+
+  
+
+  <div id="content">
+    <h1 id="0x00-">0x00 模式概述</h1>
+<p>单例模式是最简单的设计模式之一，属于创建型，提供了一种创建全局唯一对象的方法。</p>
+<h1 id="0x01-">0x01 场景</h1>
+<p>在业务代码中，如果需要全局唯一的对象，可以使用单例模式来创建对象。</p>
+<h1 id="0x02-">0x02 解决方案</h1>
+<p>单例模式根据对象实例化的时机，划分为懒汉式和饿汉式，顾名思义：</p>
+<ul>
+<li><strong>饿汉式</strong>：在类初始化的时候，就提前实例化一个对象，等到使用的时候直接返回</li>
+<li><strong>懒汉式</strong>：在第一次准备实例化对象的时候才真正创建一个对象，再此之后的实例化都是直接返回第一次创建的对象</li>
+</ul>
+<p>饿汉式的优势是因为它是线程安全的，因为对象在使用之前已经创建了。而懒汉式就存在多线程并发情况下会创建出多个实例对象的问题，所以就需要加锁，加锁会影响性能。</p>
+<h1 id="0x03-">0x03 总结</h1>
+<p>一般情况下使用饿汉式就可以了，除非明确要求延迟初始化（lazy initialization）。</p>
+<hr>
+<p>参考：</p>
+<p>📌 <a href="https://github.com/guanguans/notes/blob/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%8845%E7%A7%8D%EF%BC%89.md">设计模式（45种）</a></p>
+
+  </div>
+
   <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/computer-basics/what-programmers-must-know/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
+    <ul class="stats">
   <li class="categories">
     <ul>
         
@@ -356,7 +449,7 @@
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80">计算机基础</a></li>
+                <li><a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84">架构</a></li>
                 
             
         
@@ -370,76 +463,13 @@
                 <i class="fa fa-tags"></i>
                 
                 
-                <li><a class="article-category-link" href="/tags/%E5%9F%BA%E7%A1%80">基础</a></li>
+                <li><a class="article-category-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></li>
                 
                 
-                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
-                
-            
-        
-    </ul>
-  </li>
-</ul>
-
-  </footer>
-</article>
-
-        
-            <article class="post">
-  <header>
-    <div class="title">
-        
-            <h2><a href="/blog/2019/python/python-standard-library-queue/">Python 标准库：Queue</a></h2>
-        
-        
-            <p>Python 标准库 Queue 的用法总结</p>
-        
-    </div>
-    <div class="meta">
-        
-
-        <time class="published"
-            datetime='2019-12-19'>
-            December 19, 2019</time>
-        <span class="author">gra55</span>
-        
-            <p>1 minute read</p>
-        
-        
-    </div>
-</header>
-
-  <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/python/python-standard-library-queue/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
-  <li class="categories">
-    <ul>
-        
-            
-            
-                <i class="fa fa-folder"></i>
+                <li><a class="article-category-link" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">单例模式</a></li>
                 
                 
-                <li><a class="article-category-link" href="/categories/python">Python</a></li>
-                
-            
-        
-    </ul>
-  </li>
-  <li class="tags">
-    <ul>
-        
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                
-                <li><a class="article-category-link" href="/tags/python">python</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
+                <li><a class="article-category-link" href="/tags/2020">2020</a></li>
                 
             
         
@@ -448,226 +478,123 @@
 </ul>
 
   </footer>
+
+  
+    <section id="social-share" style="text-align: right;">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f&amp;text=%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%20%23%20%e5%88%9b%e5%bb%ba%e5%9e%8b%20%23%20%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f&amp;title=%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%20%23%20%e5%88%9b%e5%bb%ba%e5%9e%8b%20%23%20%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by gra55&amp;body=%2fblog%2f2020%2farchitecture%2fsingleton-pattern%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
 </article>
 
-        
-            
-        
-            
-        
-            <article class="post">
-  <header>
-    <div class="title">
-        
-            <h2><a href="/blog/2019/go/go-compare-python/">Python 与 Golang 语法特性对比</a></h2>
-        
-        
-            <p>Python 程序员入门 Golang，通过表格对比，加强记忆，也可以作为一个语法速查表</p>
-        
-    </div>
-    <div class="meta">
-        
+    <article class="post">
+      <h2>Say something</h2>
 
-        <time class="published"
-            datetime='2019-12-10'>
-            December 10, 2019</time>
-        <span class="author">gra55</span>
-        
-            <p>2 minute read</p>
-        
-        
-    </div>
-</header>
+  <form class="post-new-comment" method="POST" action="https://dev.staticman.net/v3/entry/github/LoveXiaoLiu/gra55_blog/master/comments">
 
-  <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/go/go-compare-python/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
-  <li class="categories">
-    <ul>
-        
-            
-            
-                <i class="fa fa-folder"></i>
-                
-                
-                <li><a class="article-category-link" href="/categories/go">Go</a></li>
-                
-            
-        
-    </ul>
-  </li>
-  <li class="tags">
-    <ul>
-        
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                
-                <li><a class="article-category-link" href="/tags/python">python</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/go">go</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
-                
-            
-        
-    </ul>
-  </li>
-</ul>
+    <input type="hidden" name="options[redirect]" value="https://www.yangliu.date//blog/2020/architecture/singleton-pattern/">
+    <input type="hidden" name="options[entryId]" value="3079f2e1fa3d09072965cb6edee27e79">
+    <input required name="fields[name]" type="text" placeholder="Your name (Required)">
+    <input name="fields[website]" type="text" placeholder="Your website">
+    <input required name="fields[email]" type="email" placeholder="Your email address (Required for Gravatar)">
+    <textarea required name="fields[body]" placeholder='Your message. Feel free to use Markdown (Google "Markdown Cheat Sheet").' rows="10"></textarea>
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="">
+    <input type="hidden" name="options[reCaptcha][secret]" value="">
+    <div class="g-recaptcha" data-sitekey=""></div>
+    <input type="submit" value="Submit">
+  </form>
 
-  </footer>
-</article>
 
-        
-            <article class="post">
-  <header>
-    <div class="title">
-        
-            <h2><a href="/blog/2019/blog/hugo-plus-staticman/">Hugo 配置 staticman 静态评论平台</a></h2>
-        
-        
-            <p>staticman 使用的坎坷之路</p>
-        
-    </div>
-    <div class="meta">
-        
+<h2>Comments</h2>
 
-        <time class="published"
-            datetime='2019-12-09'>
-            December 9, 2019</time>
-        <span class="author">gra55</span>
-        
-            <p>1 minute read</p>
-        
-        
-    </div>
-</header>
 
-  <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/blog/hugo-plus-staticman/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
-  <li class="categories">
-    <ul>
-        
-            
-            
-                <i class="fa fa-folder"></i>
-                
-                
-                <li><a class="article-category-link" href="/categories/blog">Blog</a></li>
-                
-            
-        
-    </ul>
-  </li>
-  <li class="tags">
-    <ul>
-        
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                
-                <li><a class="article-category-link" href="/tags/blog">blog</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
-                
-            
-        
-    </ul>
-  </li>
-</ul>
 
-  </footer>
-</article>
 
-        
-            <article class="post">
-  <header>
-    <div class="title">
-        
-            <h2><a href="/blog/2019/python/python-package-pypi/">开发 Python 第三方包，上传到 PyPI</a></h2>
-        
-        
-            <p>如何开源一个 Python 第三方包</p>
-        
-    </div>
-    <div class="meta">
-        
 
-        <time class="published"
-            datetime='2019-07-09'>
-            July 9, 2019</time>
-        <span class="author">gra55</span>
-        
-            <p>1 minute read</p>
-        
-        
-    </div>
-</header>
 
-  <footer>
-    <ul class="actions">
-      <li><a href="/blog/2019/python/python-package-pypi/" class="button big">Continue Reading</a></li>
-    </ul>
-  <ul class="stats">
-  <li class="categories">
-    <ul>
-        
-            
-            
-                <i class="fa fa-folder"></i>
-                
-                
-                <li><a class="article-category-link" href="/categories/python">Python</a></li>
-                
-            
-        
-    </ul>
-  </li>
-  <li class="tags">
-    <ul>
-        
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                
-                <li><a class="article-category-link" href="/tags/python">python</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/2019">2019</a></li>
-                
-            
-        
-    </ul>
-  </li>
-</ul>
+  
 
-  </footer>
-</article>
+  
 
-        
+  
 
-        
+  
+
+  
+
+
+
+  <p>Nothing yet.</p>
+
+
+    </article>
+
+
 <ul class="actions pagination">
     
-        <li><a href="/blog/page/2/"
-                class="button big previous">Previous Page</a></li>
+        <li><a href="/blog/2020/algorithm/divide-and-conquer-algorithm/"
+                class="button big previous">基础算法：分治法</a></li>
     
 
     
-        <li><a href="#" class="disabled button big next">Next Page</a></li>
-    
 </ul>
+
 
     </div>
     
@@ -691,7 +618,7 @@
       <ul class="icons">
         
           
-    <li><a href="/blog/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         
@@ -974,7 +901,7 @@
       <ul class="icons">
         
           
-    <li><a href="/blog/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         

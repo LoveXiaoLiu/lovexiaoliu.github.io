@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>2020</title>
       <link>/tags/2020/</link>
-      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>单例模式</title>
+      <link>/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>设计模式</title>
+      <link>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
       <description></description>
     </item>
     
@@ -143,15 +161,6 @@
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>设计模式</title>
-      <link>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
       <description></description>
     </item>
     
