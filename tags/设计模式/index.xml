@@ -28,6 +28,17 @@
     </item>
     
     <item>
+      <title>设计模式 # 创建型 # 原型模式</title>
+      <link>/blog/2020/architecture/prototype-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/prototype-pattern/</guid>
+      <description>0x00 模式概述 原型模式用于创建重复的对象，该重复对象的创建成本比较高，所以原型模式通过 clone 现有对象来完成。
+0x01 场景 适用于创建实例成本比较高的场景，eg：创建对象时需要先连接数据库，这个成本就很高，原型模式很适合。
+0x02 解决方案 // 克隆羊多利 class Sheep { protected $name; protected $category; public function __construct(string $name, string $category = &amp;#39;Mountain Sheep&amp;#39;) { $this-&amp;gt;name = $name; $this-&amp;gt;category = $category; } public function setName(string $name) { $this-&amp;gt;name = $name; } public function getName() { return $this-&amp;gt;name; } public function setCategory(string $category) { $this-&amp;gt;category = $category; } public function getCategory() { return $this-&amp;gt;category; } } // client $original = new Sheep(&amp;#39;Jolly&amp;#39;); echo $original-&amp;gt;getName(); // Jolly echo $original-&amp;gt;getCategory(); // Mountain Sheep // Clone and modify what is required $cloned = clone $original; $cloned-&amp;gt;setName(&amp;#39;Dolly&amp;#39;); echo $cloned-&amp;gt;getName(); // Dolly echo $cloned-&amp;gt;getCategory(); // Mountain sheep 0x03 总结 这个模式很简单，当创建的成本比较高时，就可以考虑使用 clone 的方式（原型模式）。</description>
+    </item>
+    
+    <item>
       <title>设计模式 # 创建型 # 构建器模式</title>
       <link>/blog/2020/architecture/builder-pattern/</link>
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
