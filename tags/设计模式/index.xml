@@ -23,7 +23,20 @@
  饿汉式：在类初始化的时候，就提前实例化一个对象，等到使用的时候直接返回 懒汉式：在第一次准备实例化对象的时候才真正创建一个对象，再此之后的实例化都是直接返回第一次创建的对象  饿汉式的优势是因为它是线程安全的，因为对象在使用之前已经创建了。而懒汉式就存在多线程并发情况下会创建出多个实例对象的问题，所以就需要加锁，加锁会影响性能。
 0x03 总结 一般情况下使用饿汉式就可以了，除非明确要求延迟初始化（lazy initialization）。
  参考：
-📌 设计模式（45种）</description>
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 构建器模式</title>
+      <link>/blog/2020/architecture/builder-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/builder-pattern/</guid>
+      <description>0x00 模式概述 构建器模式用来创建复杂的对象，该复杂对象由多个步骤构建而来。
+为了分离这种复杂性，新增一个对象 Builder 来一步一步创建最终的对象，这种创建实例的方式真的是非常优雅，后续如果进行需求变更，需要修改的内容就很少。
+0x01 场景 创建一个复杂的对象时，基础的对象不会变化，但是其组合会经常变化，此时使用构建器模式就非常有用。
+0x02 解决方案 // 复杂对象 class Burger { protected $size; protected $pepperoni = false; protected $lettuce = false; protected $tomato = false; public function __construct(BurgerBuilder $builder) { $this-&amp;gt;size = $builder-&amp;gt;size; $this-&amp;gt;pepperoni = $builder-&amp;gt;pepperoni; $this-&amp;gt;lettuce = $builder-&amp;gt;lettuce; $this-&amp;gt;tomato = $builder-&amp;gt;tomato; } } // 构造器类 class BurgerBuilder { public $size; public $pepperoni = false; public $lettuce = false; public $tomato = false; public function __construct(int $size) { $this-&amp;gt;size = $size; } public function addPepperoni() { $this-&amp;gt;pepperoni = true; return $this; } public function addLettuce() { $this-&amp;gt;lettuce = true; return $this; } public function addTomato() { $this-&amp;gt;tomato = true; return $this; } public function build(): Burger { return new Burger($this); } } // client $burger = (new BurgerBuilder(14)) -&amp;gt;addLettuce() -&amp;gt;addTomato() -&amp;gt;build(); 0x03 总结 这个模式很简单，简单理解就是适用于复杂对象的构造函数会经常变更的场景。</description>
     </item>
     
     <item>

@@ -45,6 +45,13 @@
   </url>
   
   <url>
+    <loc>/tags/%E6%9E%84%E5%BB%BA%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/categories/%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -60,6 +67,13 @@
   
   <url>
     <loc>/blog/2020/architecture/singleton-pattern/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/2020/architecture/builder-pattern/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
