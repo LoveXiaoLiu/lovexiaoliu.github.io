@@ -51,6 +51,22 @@
     </item>
     
     <item>
+      <title>设计模式 # 结构型 # 装饰器模式</title>
+      <link>/blog/2020/architecture/decorator-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/decorator-pattern/</guid>
+      <description>结构型设计模式主要用于描述对象之间的组合，通过对象间的组合来完成特定功能。
+ 0x00 模式概述 装饰器模式会动态的给一个对象添加新功能，就增加功能来说，装饰器模式比子类化更灵活（合成复用原则）。
+0x01 场景 当需要给一个对象增加新功能时，又不想使用继承，可以考虑使用装饰器模式实现。
+0x02 解决方案 装饰器模式通过将对象包装在装饰器类内部来动态更改对象的行为。
+0x03 总结 装饰器模式很简单，大多数脚本语言已经在语言层面实现了该模式。
+ 参考：
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
+    
+    <item>
       <title>基础算法：分治法</title>
       <link>/blog/2020/algorithm/divide-and-conquer-algorithm/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
