@@ -6,10 +6,26 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>设计模式 # 结构型 # 装饰器模式</title>
+      <link>/blog/2020/architecture/decorator-pattern/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/decorator-pattern/</guid>
+      <description>结构型设计模式主要用于描述对象之间的组合，通过对象间的组合来完成特定功能。
+ 0x00 模式概述 装饰器模式会动态的给一个对象添加新功能，就增加功能来说，装饰器模式比子类化更灵活（合成复用原则）。
+0x01 场景 当需要给一个对象增加新功能时，又不想使用继承，可以考虑使用装饰器模式实现。
+0x02 解决方案 装饰器模式通过将对象包装在装饰器类内部来动态更改对象的行为。
+0x03 总结 装饰器模式很简单，大多数脚本语言已经在语言层面实现了该模式。
+ 参考：
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
     
     <item>
       <title>设计模式 # 创建型 # 单例模式</title>
@@ -48,22 +64,6 @@
 为了分离这种复杂性，新增一个对象 Builder 来一步一步创建最终的对象，这种创建实例的方式真的是非常优雅，后续如果进行需求变更，需要修改的内容就很少。
 0x01 场景 创建一个复杂的对象时，基础的对象不会变化，但是其组合会经常变化，此时使用构建器模式就非常有用。
 0x02 解决方案 // 复杂对象 class Burger { protected $size; protected $pepperoni = false; protected $lettuce = false; protected $tomato = false; public function __construct(BurgerBuilder $builder) { $this-&amp;gt;size = $builder-&amp;gt;size; $this-&amp;gt;pepperoni = $builder-&amp;gt;pepperoni; $this-&amp;gt;lettuce = $builder-&amp;gt;lettuce; $this-&amp;gt;tomato = $builder-&amp;gt;tomato; } } // 构造器类 class BurgerBuilder { public $size; public $pepperoni = false; public $lettuce = false; public $tomato = false; public function __construct(int $size) { $this-&amp;gt;size = $size; } public function addPepperoni() { $this-&amp;gt;pepperoni = true; return $this; } public function addLettuce() { $this-&amp;gt;lettuce = true; return $this; } public function addTomato() { $this-&amp;gt;tomato = true; return $this; } public function build(): Burger { return new Burger($this); } } // client $burger = (new BurgerBuilder(14)) -&amp;gt;addLettuce() -&amp;gt;addTomato() -&amp;gt;build(); 0x03 总结 这个模式很简单，简单理解就是适用于复杂对象的构造函数会经常变更的场景。</description>
-    </item>
-    
-    <item>
-      <title>设计模式 # 结构型 # 装饰器模式</title>
-      <link>/blog/2020/architecture/decorator-pattern/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2020/architecture/decorator-pattern/</guid>
-      <description>结构型设计模式主要用于描述对象之间的组合，通过对象间的组合来完成特定功能。
- 0x00 模式概述 装饰器模式会动态的给一个对象添加新功能，就增加功能来说，装饰器模式比子类化更灵活（合成复用原则）。
-0x01 场景 当需要给一个对象增加新功能时，又不想使用继承，可以考虑使用装饰器模式实现。
-0x02 解决方案 装饰器模式通过将对象包装在装饰器类内部来动态更改对象的行为。
-0x03 总结 装饰器模式很简单，大多数脚本语言已经在语言层面实现了该模式。
- 参考：
-📌 设计模式（45种）
-📌 Design patterns for humans 中文版</description>
     </item>
     
     <item>

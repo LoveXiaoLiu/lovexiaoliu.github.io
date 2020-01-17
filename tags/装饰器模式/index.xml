@@ -6,7 +6,7 @@
     <description>Recent content in 装饰器模式 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>设计模式 # 结构型 # 装饰器模式</title>
       <link>/blog/2020/architecture/decorator-pattern/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/2020/architecture/decorator-pattern/</guid>
       <description>结构型设计模式主要用于描述对象之间的组合，通过对象间的组合来完成特定功能。
