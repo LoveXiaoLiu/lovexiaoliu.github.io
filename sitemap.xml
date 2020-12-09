@@ -3,6 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/awesome/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/awesome/mit-distributed-system/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/tags/2020/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -39,13 +60,6 @@
   
   <url>
     <loc>/blog/2020/go/go-standard-library-context/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -390,13 +404,6 @@
   <url>
     <loc>/blog/2019/architecture/distributed-transaction-2pc-3pc/</loc>
     <lastmod>2019-12-27T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/awesome/</loc>
-    <lastmod>2019-12-26T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
