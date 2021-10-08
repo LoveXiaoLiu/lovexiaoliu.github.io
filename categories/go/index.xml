@@ -17,7 +17,7 @@
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/2020/go/go-standard-library-context/</guid>
-      <description>0x00 简介 context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &amp;hellip;&amp;hellip;
+      <description>0x00 简介 Context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &amp;hellip;&amp;hellip;
 当一个 context 被 canceled，所有从它派生的 context 都会被取消：B 被取消，C 同样也会被废弃
 调用 WithCancel、WithDeadline、WithTimeout 这三个函数，入参是 parent context，出参是包含了 parent context 的 child context 和 CancelFunc函数。
  调用 CancelFunc 函数会废弃 child context，并且会废弃 child context 的 context，同样会切断与 parent context 的关联，也会暂停所有相关的定时器。 如果没有调用 CancelFunc 函数，只能等到 parent context 被废弃或者定时器被触发。 go 的 vet 工具会检查所有的 context 链中 CancelFuncs 函数是否被调用。  0x01 最佳实践  不要将 context 对象保存在结构体类型中。我们应该显式的传递 context 给需要的函数，而且 context 必须是第一个参数，通常命名为 ctx 不要传递一个 nil 的 context，即使你不需要他。此时可以使用 context.</description>

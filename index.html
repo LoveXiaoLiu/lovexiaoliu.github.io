@@ -417,7 +417,7 @@
 
   <div id="content">
     <h2 id="0x00-">0x00 简介</h2>
-<p>context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &hellip;&hellip;</p>
+<p>Context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &hellip;&hellip;</p>
 <p>当一个 context 被 canceled，所有从它派生的 context 都会被取消：B 被取消，C 同样也会被废弃</p>
 <p>调用 <code>WithCancel</code>、<code>WithDeadline</code>、<code>WithTimeout</code> 这三个函数，入参是 <code>parent context</code>，出参是包含了 <code>parent context</code> 的 <code>child context</code> 和 CancelFunc函数。</p>
 <ul>
