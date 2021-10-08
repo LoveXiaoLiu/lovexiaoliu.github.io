@@ -5,8 +5,8 @@
     <link>/tags/http/</link>
     <description>Recent content in http on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Thu, 18 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>HTTP 协议透彻解析</title>
       <link>/blog/2019/web/http-overview/</link>
-      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/web/http-overview/</guid>
       <description>keywords:

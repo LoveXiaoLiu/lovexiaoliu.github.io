@@ -5,7 +5,7 @@
     <link>/tags/</link>
     <description>Recent content in Tags on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -300,9 +300,18 @@
     </item>
     
     <item>
+      <title>blog</title>
+      <link>/tags/blog/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>http</title>
       <link>/tags/http/</link>
-      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/http/</guid>
       <description></description>
@@ -311,18 +320,9 @@
     <item>
       <title>web</title>
       <link>/tags/web/</link>
-      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>blog</title>
-      <link>/tags/blog/</link>
-      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/blog/</guid>
       <description></description>
     </item>
     

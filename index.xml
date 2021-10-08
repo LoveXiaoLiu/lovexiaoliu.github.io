@@ -5,7 +5,7 @@
     <link>/</link>
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
@@ -453,21 +453,6 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     </item>
     
     <item>
-      <title>HTTP 协议透彻解析</title>
-      <link>/blog/2019/web/http-overview/</link>
-      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2019/web/http-overview/</guid>
-      <description>keywords:
- http 协议是什么（历史、未来发展） http 协议的传输过程 http 协议包内容 http 协议的问题   0x00 HTTP 协议是什么  btw：什么是协议？ 协议不光在计算机中使用，我们平时生活中经常会用到协议。比如说两个网友奔现，双方都不认识，那就必须定义一个约定或者协议：男方来了必须穿黑色牛仔裤，手里拿一束花，女方必须穿白色上衣，背红色包包。这样，才能互相认识，否则就无法完成奔现。
- 先参照上面的例子简单说下 HTTP 协议：女方就好比是 Client 端，男方就好比是 Server 端。Client 和 Server 进行通信的时候双方不认识，那就必须遵守某种协议才能进行交互。这个协议就是 HTTP 协议。
-接下来用正式的、官方的解释说下 HTTP 协议：HTTP 协议是一种通过 Web 获取资源（HTML、CSS、文本等）的协议。它是数据交互的基础，是一种 C-S 结构的协议。
-官方的解释很清楚，HTTP 协议的作用就是在网络上获取资源。
-Key point：
- HTTP 交互的是单独的 message，而不是数据流（stream of data） HTTP 是应用层协议，通过 TCP 或者 TLS 加密的 TCP 连接发送数据 HTTP 协议的高度可扩展性，使它能传输任何类型的文件（video、imag 等） Client 与 Server 中间可以有多层代理 HTTP 协议依靠 HTTP headers 可以自由的扩展功能 HTTP 协议是无状态的（stateless，同一个连接先后发送的两个请求是没有联系的），但是是有会话状态的（not sessionless，通过 HTTP header 的可扩展性，HTTP cookie 支持有状态的会话）  历史 早在 1990 年，HTTP 协议就被设计出来了，它是一个高度可扩展的协议，灵活性高，所以发展的很迅速。</description>
-    </item>
-    
-    <item>
       <title>TED演讲：什么是区块链？</title>
       <link>/awesome/what-is-block-chain/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
@@ -533,6 +518,21 @@ Python 2 3 的特性对比
     </item>
     
     <item>
+      <title>HTTP 协议透彻解析</title>
+      <link>/blog/2019/web/http-overview/</link>
+      <pubDate>Thu, 18 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/web/http-overview/</guid>
+      <description>keywords:
+ http 协议是什么（历史、未来发展） http 协议的传输过程 http 协议包内容 http 协议的问题   0x00 HTTP 协议是什么  btw：什么是协议？ 协议不光在计算机中使用，我们平时生活中经常会用到协议。比如说两个网友奔现，双方都不认识，那就必须定义一个约定或者协议：男方来了必须穿黑色牛仔裤，手里拿一束花，女方必须穿白色上衣，背红色包包。这样，才能互相认识，否则就无法完成奔现。
+ 先参照上面的例子简单说下 HTTP 协议：女方就好比是 Client 端，男方就好比是 Server 端。Client 和 Server 进行通信的时候双方不认识，那就必须遵守某种协议才能进行交互。这个协议就是 HTTP 协议。
+接下来用正式的、官方的解释说下 HTTP 协议：HTTP 协议是一种通过 Web 获取资源（HTML、CSS、文本等）的协议。它是数据交互的基础，是一种 C-S 结构的协议。
+官方的解释很清楚，HTTP 协议的作用就是在网络上获取资源。
+Key point：
+ HTTP 交互的是单独的 message，而不是数据流（stream of data） HTTP 是应用层协议，通过 TCP 或者 TLS 加密的 TCP 连接发送数据 HTTP 协议的高度可扩展性，使它能传输任何类型的文件（video、imag 等） Client 与 Server 中间可以有多层代理 HTTP 协议依靠 HTTP headers 可以自由的扩展功能 HTTP 协议是无状态的（stateless，同一个连接先后发送的两个请求是没有联系的），但是是有会话状态的（not sessionless，通过 HTTP header 的可扩展性，HTTP cookie 支持有状态的会话）  历史 早在 1990 年，HTTP 协议就被设计出来了，它是一个高度可扩展的协议，灵活性高，所以发展的很迅速。</description>
+    </item>
+    
+    <item>
       <title>开发 Python 第三方包，上传到 PyPI</title>
       <link>/blog/2019/python/python-package-pypi/</link>
       <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
@@ -543,6 +543,25 @@ Python 2 3 的特性对比
 我这里开发 pypi 包，使用 cookiecutter-pypackage 模板。
 cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git 0x01 生态配置 创建完项目 skeleton 以后，需要关联 Travis 账号、ReadTheDocs 账号等。步骤如下：
  将 repo 添加到 GitHub 中 将该 repo 添加到 Travis CI 中（需要注册 Travis 账号） 安装 dev requirement.txt 到虚拟开发环境中：pip install -r requirements_dev.txt 注册项目到 PyPI 中（需要注册 PyPI 账号）  生成 tar&amp;amp;wheel 包：python setup.py sdist bdist_wheel 上传包到 PyPI 中：python -m twine upload dist/*   将该 repo 添加到 ReadTheDocs 中  0x02 迭代开发  更新项目代码，开发新 features 使用 bumpversion 升级版本：bumpversion --current-version 0.</description>
+    </item>
+    
+    <item>
+      <title>About Gra55</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I&#39;m a full stack engineer, working for 6 years.
+I like playing basketball 🏀, and I like Kobe too, because he is a man with strong will, we call it MAMBA spirit.</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/contact/</guid>
+      <description></description>
     </item>
     
   </channel>
