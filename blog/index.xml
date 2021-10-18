@@ -6,10 +6,19 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title> 操作系统基础知识概览</title>
+      <link>/blog/2021/computer-basics/os-basic/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/computer-basics/os-basic/</guid>
+      <description>0x00 计算机硬件结构 +------------------+ | ======CPU======= | +--------+---------+ | +------------+--------------+ +-----+ | | +------+ | AGP +--------+ MCH(Memory Controller Hub)+----+Memory| +--+--+ | | +------+ | +------------+--------------+ +------+-------+ | | | +------------+--------------+ +-----+ | Display | | | | | | | | ICH(I/O Controller Hub) +-----+ --&amp;gt; +--------------+ | | | PCI | +---+--------+-------+----+-+ | --&amp;gt; | | | | | | +----------+ | +----+---+ | +-+-----+ | --&amp;gt; +---+ USB +-+ | ATA | | |Network| | | | +-------+--+ +----+---+ | +-------+ | --&amp;gt; | | | | | | +---+---+ +----+---+ +------+--+ +--+--------+ | --&amp;gt; | Mouse | |Keyboard| |Hard Disk| | Flash BIOS| | | +-------+ +--------+ +---------+ +-----------+ +-----+ 计算机体系架构需要知道以下内容：</description>
+    </item>
     
     <item>
       <title>Golang 标准库：context</title>
@@ -386,6 +395,16 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
  将正则表达式的 pattern 编译成 _sre.SRE_Pattern 对象。 通过指定 flag 的值可以改变正则表达式匹配的行为，flag 的值可以通过 | 操作符组合多个值。 re.compile() 返回的对象可以多次使用，不需要使用时再次编译，提高效率。但是，如何一个程序中只使用很少的几个正则表达式，那就不需要担心编译的问题了，因为 re.match()、re.search()、re.compile() 等都会将编译后的对象进行缓存（使用的正则表达式多了就不行了，因为毕竟缓存是有限的）。  re.DEBUG
  显示被编译的表达式的 debug 信息  re.I &amp;amp;&amp;amp; re.IGNORECASE
  re.I 是 re.IGNORECASE 的缩写。 进行匹配的时候忽略大小写，如果需要对 Unicode 类型的字符使用这个效果，可以添加 re.</description>
+    </item>
+    
+    <item>
+      <title>标题</title>
+      <link>/blog/_template/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/_template/</guid>
+      <description> 引用：
+ 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考      </description>
     </item>
     
     <item>

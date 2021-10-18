@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2021 on Gra55&#39;s Blog</title>
+    <link>/tags/2021/</link>
+    <description>Recent content in 2021 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/2021/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title> 操作系统基础知识概览</title>
+      <link>/blog/2021/computer-basics/os-basic/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/computer-basics/os-basic/</guid>
+      <description>0x00 计算机硬件结构 +------------------+ | ======CPU======= | +--------+---------+ | +------------+--------------+ +-----+ | | +------+ | AGP +--------+ MCH(Memory Controller Hub)+----+Memory| +--+--+ | | +------+ | +------------+--------------+ +------+-------+ | | | +------------+--------------+ +-----+ | Display | | | | | | | | ICH(I/O Controller Hub) +-----+ --&amp;gt; +--------------+ | | | PCI | +---+--------+-------+----+-+ | --&amp;gt; | | | | | | +----------+ | +----+---+ | +-+-----+ | --&amp;gt; +---+ USB +-+ | ATA | | |Network| | | | +-------+--+ +----+---+ | +-------+ | --&amp;gt; | | | | | | +---+---+ +----+---+ +------+--+ +--+--------+ | --&amp;gt; | Mouse | |Keyboard| |Hard Disk| | Flash BIOS| | | +-------+ +--------+ +---------+ +-----------+ +-----+ 计算机体系架构需要知道以下内容：</description>
+    </item>
+    
+  </channel>
+</rss>

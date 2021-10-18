@@ -3,13 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/awesome/</loc>
-    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+    <loc>/blog/2021/computer-basics/os-basic/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/2021/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="/zh-cn/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -23,6 +48,36 @@
   </url>
   
   <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/awesome/</loc>
+    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/awesome/mit-distributed-system/</loc>
     <lastmod>2020-12-09T00:00:00+00:00</lastmod>
   </url>
@@ -30,26 +85,6 @@
   <url>
     <loc>/tags/2020/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/blog/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="/zh-cn/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
-                />
   </url>
   
   <url>
@@ -65,21 +100,6 @@
   <url>
     <loc>/blog/2020/go/go-standard-library-context/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
   </url>
   
   <url>
@@ -238,11 +258,6 @@
   </url>
   
   <url>
-    <loc>/tags/%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-01-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/abc/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
@@ -373,12 +388,12 @@
   </url>
   
   <url>
-    <loc>/blog/2019/computer-basics/what-programmers-must-know/</loc>
+    <loc>/blog/_template/</loc>
     <lastmod>2019-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <loc>/blog/2019/computer-basics/what-programmers-must-know/</loc>
     <lastmod>2019-12-20T00:00:00+00:00</lastmod>
   </url>
   

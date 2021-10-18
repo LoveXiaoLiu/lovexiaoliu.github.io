@@ -203,6 +203,16 @@ Queue 模块提供了三种类型的队列，三种类型的主要差异是获�
     </item>
     
     <item>
+      <title>标题</title>
+      <link>/blog/_template/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/_template/</guid>
+      <description> 引用：
+ 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考      </description>
+    </item>
+    
+    <item>
       <title>程序员必须知道的常识</title>
       <link>/blog/2019/computer-basics/what-programmers-must-know/</link>
       <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>

@@ -6,10 +6,19 @@
     <description>Recent content in 基础 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title> 操作系统基础知识概览</title>
+      <link>/blog/2021/computer-basics/os-basic/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/computer-basics/os-basic/</guid>
+      <description>0x00 计算机硬件结构 +------------------+ | ======CPU======= | +--------+---------+ | +------------+--------------+ +-----+ | | +------+ | AGP +--------+ MCH(Memory Controller Hub)+----+Memory| +--+--+ | | +------+ | +------------+--------------+ +------+-------+ | | | +------------+--------------+ +-----+ | Display | | | | | | | | ICH(I/O Controller Hub) +-----+ --&amp;gt; +--------------+ | | | PCI | +---+--------+-------+----+-+ | --&amp;gt; | | | | | | +----------+ | +----+---+ | +-+-----+ | --&amp;gt; +---+ USB +-+ | ATA | | |Network| | | | +-------+--+ +----+---+ | +-------+ | --&amp;gt; | | | | | | +---+---+ +----+---+ +------+--+ +--+--------+ | --&amp;gt; | Mouse | |Keyboard| |Hard Disk| | Flash BIOS| | | +-------+ +--------+ +---------+ +-----------+ +-----+ 计算机体系架构需要知道以下内容：</description>
+    </item>
     
     <item>
       <title>Python 基础知识点</title>
@@ -22,6 +31,16 @@
 nonlocal 关键字（只有 Python 3 支持）用来访问 Enclosing locals（闭包）作用域的变量值。
 Python 没有块作用域，for 语句范围不是单独的作用域。
   Local Enclosing locals Global Built-in  0x05 is 关键字  is 用来比较变量的地址 == 用来比较变量的值  0x06 单引号/双引号/三引号  单引号和双引号等效，换行需要使用反斜杠（\） 三引号可以直接换行，可以包含任何形式的字符串  0x07 自省  运行时能够查看对象内部的属性或状态 自省函数：type()、isinstance()、dir()、hasattr()、getattr()  0x08 staticmethod &amp;amp; classmethod  staticmethod &amp;amp; classmethod 都是内置类型，属于非数据描述符 可以将类内的方法转变成静态方法和类方法（从 Python 2.</description>
+    </item>
+    
+    <item>
+      <title>标题</title>
+      <link>/blog/_template/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/_template/</guid>
+      <description> 引用：
+ 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考      </description>
     </item>
     
     <item>
