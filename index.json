@@ -5,11 +5,17 @@
     "body": "0x00 计算机硬件结构 +------------------+ | ======CPU======= | +--------+---------+ | +------------+--------------+ +-----+ | | +------+ | AGP +--------+ MCH(Memory Controller Hub)+----+Memory| +--+--+ | | +------+ | +------------+--------------+ +------+-------+ | | | +------------+--------------+ +-----+ | Display | | | | | | | | ICH(I/O Controller Hub) +-----+ --\u0026gt; +--------------+ | | | PCI | +---+--------+-------+----+-+ | --\u0026gt; | | | | | | +----------+ | +----+---+ | +-+-----+ | --\u0026gt; +---+ USB +-+ | ATA | | |Network| | | | +-------+--+ +----+---+ | +-------+ | --\u0026gt; | | | | | | +---+---+ +----+---+ +------+--+ +--+--------+ | --\u0026gt; | Mouse | |Keyboard| |Hard Disk| | Flash BIOS| | | +-------+ +--------+ +---------+ +-----------+ +-----+ 计算机体系架构需要知道以下内容：\n CPU 负责指令执行与控制； MCH - Memory Controller Hub 芯片连接高速部件，如内存、显卡； Memory 内存通过地址总线直接与 CPU 相连，并受控于它，通过数据总线与其传输数据； ICH - I/O Controller Hub 芯片连接各种外部低速输入输出设备，如鼠标、键盘、硬盘、 PCI 外部互连总线扩展设备。  整个体系架构中，CPU 在最上面，也是速度最快的（主频基本都是 GHz 级别），其次是通过 MCH（内存控制芯片）连接的内存和显卡，MCH 又被称为北桥芯片（上北下南），再下面连接的是南桥芯片 ICH（IO 控制芯片），ICH 芯片与各种低速设备连接。\n对于 CPU 来说，所有连接的设备都属于 IO 设备，指令需要从内存中输入，处理得到的数据可以写入内存、硬盘，或者输出到显卡，以此来输出到显示器上。\n0x01 指令集 CPU 的指令集也很多，但是基本可以分为两类，它们差别主要体现在指令与数据处理上：\n CISC - Complex Instruction Set Computer 复杂指令集，具有大量的指令和数据寻址方式； RISC - Reduced Instruction Set Computer 精简指令集，仅处理寄存器中的数据；  PC 结构与 CPU 架构对比，分为以下两种情况，基本属于一一对应关系：\n  冯·诺依曼体系结构，对应 CISC 指令系统，如 x86、x86-64、Atom，常用于台式机或服务器：\n 数据与指令都存储在同一存储区中，取指令与取数据利用同一数据总线。 被早期大多数计算机所采用。 ARM7 是冯诺依曼体系结构简单，但速度较慢，取指不能同时取数据。    哈佛体系结构，对应 RISC 指令系统，如嵌入式中流行的 ARM、PowerPC、MIPS、Sparc、Alpha，常用于工控、移动设备：\n 程序存储器与数据存储器分开。 提供了较大的存储器带宽，各自有自己的总线。 适合于数字信号处理。 大多数 DSP 都是哈佛结构。 ARM9 是哈佛结构，取指和取数在同一周期进行，提高速度，改进哈佛体系结构分成三个存储区：指令区、数据区、共用区。    0xff 参考 文档  [MIT] 6.828 操作系统工程导读  工具  QEMU Emulator：模拟器，可真实模拟出你的硬件环境，用于调试操作系统等底层系统 GDB：GNU 项目的调试工具，用于查看一个程序内部活动 GCC：编译器工具集，用于将高级语言编译成二进制可执行程序 SPIM 模拟器：一个指令集的模拟器，可以模拟简单指令集，如 MIPS 指令集。QtSpim 是带有图形界面的版本。软件可以直接打开汇编代码。  ",
     "ref": "/blog/2021/computer-basics/os-basic/"
   },{
+    "title": "MIT：6.828-操作系统引擎",
+    "date": "",
+    "description": "MIT Operating System Engineering 课程",
+    "body": "0x00 原版视频  document.getElementById(\"video-bilibili\").style.height=document.getElementById(\"video-bilibili\").scrollWidth*0.5+\"px\";  0x01 UP 主实操视频【推荐】  document.getElementById(\"video-bilibili\").style.height=document.getElementById(\"video-bilibili\").scrollWidth*0.5+\"px\";  0xff 题外话 MIT 6.828 是由 PDOS 发布的操作系统相关的公开课程。\nPDOS 是什么呢？PDOS 全称是 MIT Parallel \u0026amp; Distributed Operating Systems Group，即麻省理工学院平行与分布式操作系统研究组，这个小组致力于研究操作系统相关的内容。PDOS 隶属于 MIT CSAIL。\nMIT CSAIL 又是什么呢？CSAIL 全称是 MIT Computer Science \u0026amp; Artificial Intelligence Lab，即麻省理工学院计算机科学与人工智能实验室，是计算机领域的先驱，创造了很多有价值的东西。下设很多小组，分别研究不同的方向。\n",
+    "ref": "/awesome/mit-6.828/"
+  },{
     "title": "MIT：6.824-分布式系统",
     "date": "",
     "description": "MIT 分布式系统课程",
     "body": "0x00 《Distributed Systems》  document.getElementById(\"video-bilibili\").style.height=document.getElementById(\"video-bilibili\").scrollWidth*0.5+\"px\";  ",
-    "ref": "/awesome/mit-distributed-system/"
+    "ref": "/awesome/mit-6.824/"
   },{
     "title": "Golang 标准库：context",
     "date": "",

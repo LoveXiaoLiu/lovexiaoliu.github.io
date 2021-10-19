@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/awesome/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/</loc>
     <lastmod>2021-10-18T00:00:00+00:00</lastmod>
   </url>
@@ -48,6 +53,11 @@
   </url>
   
   <url>
+    <loc>/awesome/mit-6.828/</loc>
+    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2021-10-18T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -73,12 +83,7 @@
   </url>
   
   <url>
-    <loc>/awesome/</loc>
-    <lastmod>2020-12-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/awesome/mit-distributed-system/</loc>
+    <loc>/awesome/mit-6.824/</loc>
     <lastmod>2020-12-09T00:00:00+00:00</lastmod>
   </url>
   
