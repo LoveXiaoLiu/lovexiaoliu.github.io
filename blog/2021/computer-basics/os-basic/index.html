@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-18 00:00:00 &#43;0000 UTC">October 18, 2021</time>
     <p>gra55</p>
-    <p>1-Minute Read</p>
+    <p>2-Minute Read</p>
   </div>
 </header>
 
@@ -228,6 +228,10 @@
 <p>整个体系架构中，CPU 在最上面，也是速度最快的（主频基本都是 GHz 级别），其次是通过 MCH（内存控制芯片）连接的内存和显卡，MCH 又被称为北桥芯片（上北下南），再下面连接的是南桥芯片 ICH（IO 控制芯片），ICH 芯片与各种低速设备连接。</p>
 <p>对于 CPU 来说，所有连接的设备都属于 IO 设备，指令需要从内存中输入，处理得到的数据可以写入内存、硬盘，或者输出到显卡，以此来输出到显示器上。</p>
 <h1 id="0x01-">0x01 指令集</h1>
+<blockquote>
+<p>3086 是 16 位的
+30386 是 32 位的</p>
+</blockquote>
 <p>CPU 的指令集也很多，但是基本可以分为两类，它们差别主要体现在指令与数据处理上：</p>
 <ul>
 <li>CISC - Complex Instruction Set Computer 复杂指令集，具有大量的指令和数据寻址方式；</li>
@@ -254,6 +258,13 @@
 </ul>
 </li>
 </ol>
+<h1 id="0x02-">0x02 汇编语言</h1>
+<p>CPU 只能执行二进制指令，早期人们编程就是手写二进制指令，二进制指令不方便人类记忆和使用，所以就诞生了汇编语言，使用英文字符表示二进制指令，英文字符和二进制指令是一一对应的。</p>
+<p>所以针对不同的 CPU，有不同的指令集，那么相对应的汇编语言指令名称也就不尽相同。</p>
+<h1 id="0x03-">0x03 寄存器</h1>
+<p>CPU 只负责运算，不存储数据，那么从哪里获取数据，答案就是寄存器（而不是内存，内存相对 CPU 来说太慢了）。寄存器不需要<code>寻址</code>步骤，按名称来区分，比如 x86 的 ESP 寄存器用来存储栈的地址，CPU 直接取 ESP 的值就能拿到数据，不需要寻址。</p>
+<p>我们平时说的 16 位、32 位、64 位 CPU，指的就是寄存器的大小。</p>
+<h1 id="0x04-">0x04 内存模型</h1>
 <h1 id="0xff-">0xff 参考</h1>
 <h2 id="heading">文档</h2>
 <ul>
@@ -347,6 +358,8 @@
   </article>
   <div class="pagination">
     
+      <a href="/blog/2021/mit/6.828-1/" class="button left"><span>【MIT 6.828】1. 课程介绍</span></a>
+    
     
       <a href="/blog/2020/go/go-standard-library-context/" class="button right"><span>Golang 标准库：context</span></a>
     
@@ -363,26 +376,24 @@
       <article class="mini-post">
           
         <header>
-          <h2><a href="/blog/2021/computer-basics/os-basic/"> 操作系统基础知识概览</a></h2>
-          <time class="published" datetime="2021-10-18 00:00:00 &#43;0000 UTC">October 18, 2021</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-          <a href="/blog/2020/go/go-standard-library-context/" class="image" style="--bg-image: url('/img/2020/11/kobe-04-as-gty.jpg');">
-    <img class="stretchH" src="/img/2020/11/kobe-04-as-gty.jpg" alt="Fog may have disoriented pilot in helicopter crash that killed Kobe Bryant, 8 others: NTSB">
-  </a>
-        <header>
-          <h2><a href="/blog/2020/go/go-standard-library-context/">Golang 标准库：context</a></h2>
-          <time class="published" datetime="2020-11-27 00:00:00 &#43;0000 UTC">November 27, 2020</time>
+          <h2><a href="/blog/2021/mit/6.828-2/">【MIT 6.828】2. 实验环境准备</a></h2>
+          <time class="published" datetime="2021-10-21 00:00:00 &#43;0000 UTC">October 21, 2021</time>
         </header>
       </article>
       
       <article class="mini-post">
           
         <header>
-          <h2><a href="/blog/2020/architecture/decorator-pattern/">设计模式 # 结构型 # 装饰器模式</a></h2>
-          <time class="published" datetime="2020-01-16 00:00:00 &#43;0000 UTC">January 16, 2020</time>
+          <h2><a href="/blog/2021/mit/6.828-1/">【MIT 6.828】1. 课程介绍</a></h2>
+          <time class="published" datetime="2021-10-20 00:00:00 &#43;0000 UTC">October 20, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/computer-basics/os-basic/"> 操作系统基础知识概览</a></h2>
+          <time class="published" datetime="2021-10-18 00:00:00 &#43;0000 UTC">October 18, 2021</time>
         </header>
       </article>
       
@@ -414,7 +425,7 @@
               <a href="/categories/python/">python<span class="count">7</span></a>
           
           <li>
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础<span class="count">3</span></a>
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础<span class="count">5</span></a>
           
           <li>
               <a href="/categories/go/">go<span class="count">2</span></a>

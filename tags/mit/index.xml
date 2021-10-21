@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MIT on Gra55&#39;s Blog</title>
+    <link>/tags/mit/</link>
+    <description>Recent content in MIT on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【MIT 6.828】2. 实验环境准备</title>
+      <link>/blog/2021/mit/6.828-2/</link>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-2/</guid>
+      <description>0x00 简述 我的实验环境：
+ CentOS 7  0x01 工具安装  整个实验环境需要两类工具：ToolChain、QEMU 模拟器
+ ToolChain 工具链 ToolChain 包含汇编器、连接器、C 编译器和 debug 工具。
+一般的现代 Linux 系统都自带了 6.828 需要的 ToolChain，命令 objdump -i 和 gcc -m32 -print-libgcc-file-name 如果都能执行成功，说明 ToolChain 工具链已经就绪。
+我的 CentOS 自带了 ToolChain 工具链，所以没有安装，如果有问题或者需要自己安装 ToolChain 工具链，可以参考官方文档和B 站 UP 主的视频指导，推荐B 站 UP 主的视频指导，该视频讲解的很详细。
+QEMU 模拟器 QEMU 建议安装 6.828 专用的 path 版本，仓库为 https://github.com/mit-pdos/6.828-qemu.git，可参考官方文档安装，安装时的简单报错可以根据提示很容易修复。
+0x02 Troubleshooting   安装 QEMU 时 pixman 报错
+ git submodule update --init pixman 把 pixman 代码下载下来即可    编译 QEMU 时出现 glib-2.</description>
+    </item>
+    
+    <item>
+      <title>【MIT 6.828】1. 课程介绍</title>
+      <link>/blog/2021/mit/6.828-1/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-1/</guid>
+      <description>0x00 简述 6.828 主要讲操作系统基本原理，包括虚拟内存、内核、用户模式等。
+课程组成形式，如下所示：
+├── 讲座 │ ├── 讲解 xv6 操作系统 │ └── 讲解操作系统新兴的概念，这部分会学习很多研究论文 ├── 实验 │ ├── Lab 1：Booting │ ├── Lab 2：Memory management │ ├── Lab 3：User environments │ ├── Lab 4：Preemptive multitasking │ ├── Lab 5：File system, spawn, and shell │ └── Lab 6：Network driver └── 文档读物 0x01 术语  xv6：xv6 是一个类 Unix 的教学使用的操作系统，MIT 基于 Sixth Edition Unix (aka V6) 版本的重新实现，也是基于 x86 的，但是比 x86 更贴近于教学学习。 JOS：JOS 比 xv6 更早期一些，只支持单核，比 xv6 更适合学生来学习，6.</description>
+    </item>
+    
+  </channel>
+</rss>
