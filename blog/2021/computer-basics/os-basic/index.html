@@ -229,8 +229,8 @@
 <p>对于 CPU 来说，所有连接的设备都属于 IO 设备，指令需要从内存中输入，处理得到的数据可以写入内存、硬盘，或者输出到显卡，以此来输出到显示器上。</p>
 <h1 id="0x01-">0x01 指令集</h1>
 <blockquote>
-<p>3086 是 16 位的
-30386 是 32 位的</p>
+<p>3086 是 16 位的 CPU，一共可以寻址 65536 字节（64k），但是其实当时设计的是寻址 1M，所以需要 20 位寻址空间，一个 16 位的寄存器不够，那就用两个，采用分段寻址方式实现 20 位寻址空间。段寄存器 CS（代码段）、DS（数据段）、ES（扩展段）、SS（栈段），通用寄存器 AX、BX、CX、DX，其他控制寄存器 IP（指令指针寄存器）、SP（栈顶指针寄存器）、BP（栈基址寄存器）、SI、DI、FLAG
+30386 是 32 位的 CPU</p>
 </blockquote>
 <p>CPU 的指令集也很多，但是基本可以分为两类，它们差别主要体现在指令与数据处理上：</p>
 <ul>
@@ -264,7 +264,32 @@
 <h1 id="0x03-">0x03 寄存器</h1>
 <p>CPU 只负责运算，不存储数据，那么从哪里获取数据，答案就是寄存器（而不是内存，内存相对 CPU 来说太慢了）。寄存器不需要<code>寻址</code>步骤，按名称来区分，比如 x86 的 ESP 寄存器用来存储栈的地址，CPU 直接取 ESP 的值就能拿到数据，不需要寻址。</p>
 <p>我们平时说的 16 位、32 位、64 位 CPU，指的就是寄存器的大小。</p>
+<h3 id="8086-">8086 如何确定下一条指令的地址？</h3>
+<p>使用代码段寄存器和指令指针寄存器：CS+IP</p>
+<p>例如：CS=0xF000，IP=0x390A</p>
+<p>那么下一条指令的执行地址就是：(CS&laquo;4) + IP = 0xF390A</p>
 <h1 id="0x04-">0x04 内存模型</h1>
+<p>内存与 CPU 使用地址总线、数据总线、控制总线相连。</p>
+<p>8086 的 1M 内存空间如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  ┌─────────────────┐   ◄── 0xFFFFF<span style="color:#f92672">(</span>1MB<span style="color:#f92672">)</span>
+  │    BIOS ROM     │
+  │                 │
+  ├─────────────────┤   ◄── 0xF0000<span style="color:#f92672">(</span>960KB<span style="color:#f92672">)</span>
+  │                 │
+  │ 16-bit devices, │
+  │ expansion ROMs  │
+  │                 │
+  ├─────────────────┤   ◄── 0xC0000<span style="color:#f92672">(</span>768KB<span style="color:#f92672">)</span>
+  │                 │
+  │   VGA Display   │
+  │                 │
+  ├─────────────────┤   ◄── 0xA0000<span style="color:#f92672">(</span>640KB<span style="color:#f92672">)</span>
+  │                 │
+  │   Low Memory    │
+  │                 │
+  └─────────────────┘   ◄── 0x00000
+</code></pre></div><p>如果想在屏幕上显示字符串，直接在 VGA 的内存（0xA0000-0xC0000）内写入数据即可。</p>
+<p>BIOS 则是机器上电以后最先执行的代码，固定的内存地址为 0xF0000-0xFFFFF。为什么要固定，因为不固定，BIOS 系统找不到该执行哪块代码。BIOS 代码一般是机器厂商出厂时固化写死的。</p>
 <h1 id="0xff-">0xff 参考</h1>
 <h2 id="heading">文档</h2>
 <ul>
