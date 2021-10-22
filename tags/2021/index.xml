@@ -6,10 +6,22 @@
     <description>Recent content in 2021 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 21 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2021/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【MIT 6.828】3. PC 启动流程</title>
+      <link>/blog/2021/mit/6.828-3/</link>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-3/</guid>
+      <description>0x00 简述 6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章操作系统基础知识概览
+CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好在 BIOS ROM 中，所以先执行 BIOS 中的代码。
+0x01 BIOS BIOS 执行流程：
+ 上电自检（Power On Self Test） 加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该删除时可引导的？判断最后两个字节为 0xAA55 则表示该扇区可引导 BIOS 会把该扇区加载到段地址为 0x0000，偏移地址为 0x7c00 内存处 然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行 至此，BIOS 完成了自己的使命，把执行流交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。  0xff 参考  MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列 [MIT] 6.828 操作系统工程导读  </description>
+    </item>
     
     <item>
       <title>【MIT 6.828】2. 实验环境准备</title>
