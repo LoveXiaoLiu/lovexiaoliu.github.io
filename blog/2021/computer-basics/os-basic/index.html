@@ -25,7 +25,7 @@
   <meta property="og:url" content="/blog/2021/computer-basics/os-basic/">
   <meta property="og:type" content="article">
   
-    <meta property="og:image" content="/img/main/logo.jpg">
+    <meta property="og:image" content="/img/main/mamba.png">
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
@@ -105,7 +105,7 @@
 
     <div id="wrapper">
       <section id="site-intro" >
-  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="100" alt="Mamba spirit" /></a>
+  <a href="/"><img src="/img/main/mamba.png" class="circle" width="100" alt="Mamba spirit" /></a>
   <header>
     <h1>Gra55</h1>
   </header>
@@ -271,23 +271,18 @@
 <h1 id="0x04-">0x04 内存模型</h1>
 <p>内存与 CPU 使用地址总线、数据总线、控制总线相连。</p>
 <p>8086 的 1M 内存空间如下所示：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  ┌─────────────────┐   ◄── 0xFFFFF<span style="color:#f92672">(</span>1MB<span style="color:#f92672">)</span>
-  │    BIOS ROM     │
-  │                 │
-  ├─────────────────┤   ◄── 0xF0000<span style="color:#f92672">(</span>960KB<span style="color:#f92672">)</span>
-  │                 │
-  │ 16-bit devices, │
-  │ expansion ROMs  │
-  │                 │
-  ├─────────────────┤   ◄── 0xC0000<span style="color:#f92672">(</span>768KB<span style="color:#f92672">)</span>
-  │                 │
-  │   VGA Display   │
-  │                 │
-  ├─────────────────┤   ◄── 0xA0000<span style="color:#f92672">(</span>640KB<span style="color:#f92672">)</span>
-  │                 │
-  │   Low Memory    │
-  │                 │
-  └─────────────────┘   ◄── 0x00000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  +------------------+  &lt;- 0x00100000 <span style="color:#f92672">(</span>1MB<span style="color:#f92672">)</span>
+  |     BIOS ROM     |
+  +------------------+  &lt;- 0x000F0000 <span style="color:#f92672">(</span>960KB<span style="color:#f92672">)</span>
+  |  16-bit devices, |
+  |  expansion ROMs  |
+  +------------------+  &lt;- 0x000C0000 <span style="color:#f92672">(</span>768KB<span style="color:#f92672">)</span>
+  |   VGA Display    |
+  +------------------+  &lt;- 0x000A0000 <span style="color:#f92672">(</span>640KB<span style="color:#f92672">)</span>
+  |                  |
+  |    Low Memory    |
+  |                  |
+  +------------------+  &lt;- 0x00000000
 </code></pre></div><p>如果想在屏幕上显示字符串，直接在 VGA 的内存（0xA0000-0xC0000）内写入数据即可。</p>
 <p>BIOS 则是机器上电以后最先执行的代码，固定的内存地址为 0xF0000-0xFFFFF。为什么要固定，因为不固定，BIOS 系统找不到该执行哪块代码。BIOS 代码一般是机器厂商出厂时固化写死的。</p>
 <h1 id="0xff-">0xff 参考</h1>
@@ -332,52 +327,6 @@
     </div>
     
       
-  <div class='post'>
-    
-    <div>
-      <h2 id='say-something'>Say Something</h2>
-        <form id='comment-form' class='new-comment' method='POST'>
-          
-          <h3 class='reply-notice hidden'>
-            <span class='reply-name'></span>
-            <a class='reply-close-btn button'><i class='fas fa-times'></i></a>
-          </h3>
-
-          
-          <input type='hidden' name='options[entryId]' value='8cf2cd52d71b6d510ccb1a3b3ad968cf'>
-          <input type='hidden' name='fields[replyThread]' value=''>
-          <input type='hidden' name='fields[replyID]' value=''>
-          <input type='hidden' name='fields[replyName]' value=''>
-
-          
-          <input required name='fields[name]' type='text' placeholder='Your Name'>
-          <input name='fields[website]' type='text' placeholder='Your Website'>
-          <input required name='fields[email]' type='email' placeholder='Your Email'>
-          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
-
-          
-          
-
-          
-          <div class='submit-notice'>
-            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
-            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
-          </div>
-
-          
-          <button type='button' id="comment-form-submit" class='button'>Submit</button>
-          <button type='button' id="comment-form-submitted" class='hidden button' disabled>Submitted</button>
-          <button type='reset' id="comment-form-reset" class='button'>Reset</button>
-        </form>
-    </div>
-
-    
-    <div class='comments-container'>
-      <h2>Comments</h2><p>Nothing yet.</p>
-      
-    </div>
-  </div>
-
 
     
   </article>
@@ -544,7 +493,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/python.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/sql.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/shell.min.js"></script>
     <script>hljs.highlightAll();</script><script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
-    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.63eeea18b460f9529d61570a4ae3e8b3b535eaff5e24b05b90bfcc1f9dd873ce.js" integrity="sha256-Y&#43;7qGLRg&#43;VKdYVcKSuPos7U16v9eJLBbkL/MH53Yc84="></script>
+    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.e63fe476a466e8f6d101ddb4dd3f27ec124c3bece64f2f5e317a05eb20e7048d.js" integrity="sha256-5j/kdqRm6PbRAd203T8n7BJMO&#43;zmTy9eMXoF6yDnBI0="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

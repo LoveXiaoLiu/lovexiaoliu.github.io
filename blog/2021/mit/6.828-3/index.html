@@ -25,7 +25,7 @@
   <meta property="og:url" content="/blog/2021/mit/6.828-3/">
   <meta property="og:type" content="article">
   
-    <meta property="og:image" content="/img/main/logo.jpg">
+    <meta property="og:image" content="/img/main/mamba.png">
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
@@ -105,7 +105,7 @@
 
     <div id="wrapper">
       <section id="site-intro" >
-  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="100" alt="Mamba spirit" /></a>
+  <a href="/"><img src="/img/main/mamba.png" class="circle" width="100" alt="Mamba spirit" /></a>
   <header>
     <h1>Gra55</h1>
   </header>
@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-22 00:00:00 &#43;0000 UTC">October 22, 2021</time>
     <p>gra55</p>
-    <p>2-Minute Read</p>
+    <p>3-Minute Read</p>
   </div>
 </header>
 
@@ -298,6 +298,12 @@ K&gt;
 +------------------+  &lt;- 0x00000000
 </code></pre></div><p>早期，基于 16 位 Intel 8088 处理器的电脑，最大只能寻址 1M 的物理内存。所以地址空间是从 <code>0x00000000</code> 到 <code>0x000FFFFF</code>（20-bit，2^20=1M），而不是 <code>0xFFFFFFFF</code>。</p>
 <p>标记为 <code>Low Memory</code> 的 640K 内存区域，是早期 PC 可以使用的 RAM；实际上，跟早期的 PC，只能配置 16KB、32KB、64KB 的 RAM。</p>
+<p><code>0x000A0000</code> 到 <code>0x000FFFFF</code> 的 384K 内存区域是有硬件为视频显示和外部设备固件保留的。</p>
+<p><code>0x000F0000</code> 到 <code>0x000FFFFF</code> 的 64K 内存是为 BIOS（Basic Input/Output System，基本输入输出系统）保留的，这个是非常重要的一部分内存区域。早期的 PC 中，BIOS 保存在 ROM（read-only memory）中，但是现在保存在闪存（译者注：其实也就是内存）中。BIOS 的任务是执行基础的系统初始化工作，例如：激活 video card、检查内存等。初始化检查完成以后，BIOS 会从磁盘、CD-ROM 等位置加载操作系统，然后将机器的控制权交给操作系统。</p>
+<p>Intel 最后使用 80286（支持 16M）和 80386（支持 4G）处理器突破了 1M 的内存限制，<strong>但是整体 PC 的架构还是保留了低 1M 物理地址空间的原始布局</strong>，以确保与现有软件的兼容。所以现代的 PC 中存在一个从 0x000A0000 到 0x00100000 的<strong>特殊内存区域</strong>，所以 RAM 也被区分为 low memory 和 extended memory，low memory 指的就是“<strong>特殊区域</strong>”的前 640K 内存，extended memory 指的就是其他内存 RAM 内存区域。此外，32-bit 物理内存空间的最顶部，首先就是物理 RAM，他由 BIOS 保留，专为 32-bit PCI 设备使用。</p>
+<p>最新的 x86 处理器已经突破了 4G RAM 内存，因此地址空间可以进一步扩展到 <code>0xFFFFFFFF</code> 以上，因此，和 16-bit 一样，64-bit 处理器也需要为 32-bit 处理器留出一部分“<strong>特殊区域</strong>”的 RAM，以此来兼容 32-bit 程序。</p>
+<p>在本课程中，为了简单，其实也是 JOS 本身的设计局限性，JOS 只使用 PC 物理内存的前 256M，所以我们假设所有的 PC 都只有 32 位物理地址空间。</p>
+<h3 id="rom-bios">ROM BIOS</h3>
 <h1 id="0xff-">0xff 参考</h1>
 <ul>
 <li><a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>
@@ -336,52 +342,6 @@ K&gt;
     </div>
     
       
-  <div class='post'>
-    
-    <div>
-      <h2 id='say-something'>Say Something</h2>
-        <form id='comment-form' class='new-comment' method='POST'>
-          
-          <h3 class='reply-notice hidden'>
-            <span class='reply-name'></span>
-            <a class='reply-close-btn button'><i class='fas fa-times'></i></a>
-          </h3>
-
-          
-          <input type='hidden' name='options[entryId]' value='9368adcfc1be714fd113175102a3ab01'>
-          <input type='hidden' name='fields[replyThread]' value=''>
-          <input type='hidden' name='fields[replyID]' value=''>
-          <input type='hidden' name='fields[replyName]' value=''>
-
-          
-          <input required name='fields[name]' type='text' placeholder='Your Name'>
-          <input name='fields[website]' type='text' placeholder='Your Website'>
-          <input required name='fields[email]' type='email' placeholder='Your Email'>
-          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
-
-          
-          
-
-          
-          <div class='submit-notice'>
-            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
-            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
-          </div>
-
-          
-          <button type='button' id="comment-form-submit" class='button'>Submit</button>
-          <button type='button' id="comment-form-submitted" class='hidden button' disabled>Submitted</button>
-          <button type='reset' id="comment-form-reset" class='button'>Reset</button>
-        </form>
-    </div>
-
-    
-    <div class='comments-container'>
-      <h2>Comments</h2><p>Nothing yet.</p>
-      
-    </div>
-  </div>
-
 
     
   </article>
@@ -548,7 +508,7 @@ K&gt;
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/python.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/sql.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/shell.min.js"></script>
     <script>hljs.highlightAll();</script><script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
-    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.63eeea18b460f9529d61570a4ae3e8b3b535eaff5e24b05b90bfcc1f9dd873ce.js" integrity="sha256-Y&#43;7qGLRg&#43;VKdYVcKSuPos7U16v9eJLBbkL/MH53Yc84="></script>
+    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.e63fe476a466e8f6d101ddb4dd3f27ec124c3bece64f2f5e317a05eb20e7048d.js" integrity="sha256-5j/kdqRm6PbRAd203T8n7BJMO&#43;zmTy9eMXoF6yDnBI0="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>
