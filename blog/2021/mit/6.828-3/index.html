@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-22 00:00:00 &#43;0000 UTC">October 22, 2021</time>
     <p>gra55</p>
-    <p>3-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -302,8 +302,42 @@ K&gt;
 <p><code>0x000F0000</code> 到 <code>0x000FFFFF</code> 的 64K 内存是为 BIOS（Basic Input/Output System，基本输入输出系统）保留的，这个是非常重要的一部分内存区域。早期的 PC 中，BIOS 保存在 ROM（read-only memory）中，但是现在保存在闪存（译者注：其实也就是内存）中。BIOS 的任务是执行基础的系统初始化工作，例如：激活 video card、检查内存等。初始化检查完成以后，BIOS 会从磁盘、CD-ROM 等位置加载操作系统，然后将机器的控制权交给操作系统。</p>
 <p>Intel 最后使用 80286（支持 16M）和 80386（支持 4G）处理器突破了 1M 的内存限制，<strong>但是整体 PC 的架构还是保留了低 1M 物理地址空间的原始布局</strong>，以确保与现有软件的兼容。所以现代的 PC 中存在一个从 0x000A0000 到 0x00100000 的<strong>特殊内存区域</strong>，所以 RAM 也被区分为 low memory 和 extended memory，low memory 指的就是“<strong>特殊区域</strong>”的前 640K 内存，extended memory 指的就是其他内存 RAM 内存区域。此外，32-bit 物理内存空间的最顶部，首先就是物理 RAM，他由 BIOS 保留，专为 32-bit PCI 设备使用。</p>
 <p>最新的 x86 处理器已经突破了 4G RAM 内存，因此地址空间可以进一步扩展到 <code>0xFFFFFFFF</code> 以上，因此，和 16-bit 一样，64-bit 处理器也需要为 32-bit 处理器留出一部分“<strong>特殊区域</strong>”的 RAM，以此来兼容 32-bit 程序。</p>
+<blockquote>
+<p>这里就解答了：为什么很多程序都需要编译成 32 位版本和 64 位版本？</p>
+<p>就是因为 32-bit 处理器和 64-bit 处理器的物理内存空间不一样。</p>
+</blockquote>
 <p>在本课程中，为了简单，其实也是 JOS 本身的设计局限性，JOS 只使用 PC 物理内存的前 256M，所以我们假设所有的 PC 都只有 32 位物理地址空间。</p>
 <h3 id="rom-bios">ROM BIOS</h3>
+<blockquote>
+<p>本节将学习使用 QEMU 的调试工具来研究 IA-32 计算机如何启动</p>
+</blockquote>
+<p>首先，打开两个终端，切换到 lab 目录下，终端 A 输入 <code>make qemu-gdb</code> (或者 <code>make qemu-nox-gdb</code>)，此时启动了 QEMU，但是在处理器执行第一条指令之前停止了，此时在等待 GDB 的连接。在终端 B 中，执行 <code>make gdb</code>，将看到下面的输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">athena% make gdb
+GNU gdb <span style="color:#f92672">(</span>GDB<span style="color:#f92672">)</span> 6.8-debian
+Copyright <span style="color:#f92672">(</span>C<span style="color:#f92672">)</span> <span style="color:#ae81ff">2008</span> Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version <span style="color:#ae81ff">3</span> or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type <span style="color:#e6db74">&#34;show copying&#34;</span>
+and <span style="color:#e6db74">&#34;show warranty&#34;</span> <span style="color:#66d9ef">for</span> details.
+This GDB was configured as <span style="color:#e6db74">&#34;i486-linux-gnu&#34;</span>.
++ target remote localhost:26000
+The target architecture is assumed to be i8086
+<span style="color:#f92672">[</span>f000:fff0<span style="color:#f92672">]</span> 0xffff0:	ljmp   $0xf000,$0xe05b
+0x0000fff0 in ?? <span style="color:#f92672">(</span><span style="color:#f92672">)</span>
++ symbol-file obj/kern/kernel
+<span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> 
+</code></pre></div><p>lab 提供了一个 <code>.gdbinit</code> 文件，该文件设置 GDB 来调试早期的 16-bit 引导程序，并连接侦听 QEMU。（如果不起作用，则需要手动添加 <code>add-auto-load-safe-path</code> 到 <code>.gdbinit</code> 文件中）</p>
+<p><code>[f000:fff0] 0xffff0:	ljmp   $0xf000,$0xe05b</code> 这行是 GDB 对将被执行的指令的反汇编，从这行我们可以得到如下信息：</p>
+<ul>
+<li>PC 从 0x000ffff0 物理地址开始执行，该地址位于为 BIOS ROM 保留的 64K 地址的最顶端。</li>
+<li>PC 开始执行 <code>CS=0xf000:IP=0xfff0</code> 位置的代码（不清楚寄存器的可以学习下这篇文章：<a href="/blog/2021/computer-basics/os-basic/" target="_blank">操作系统基础知识概览</a>）</li>
+<li>要执行的第一条指令是 jmp 指令，它跳转到段地址为 <code>CS=0xf000:IP=0xe05b</code> 处</li>
+</ul>
+<blockquote>
+<p>为什么 QEMU 是这样开始的？</p>
+<p>因为 8088 处理器就是这样设计的。为什么要这样设计？因为不这样设计的话，机器通电以后，CPU 不知道该执行哪块的指令。所以 PC 中的 BIOS 是 <code>hard-wired（硬连线）</code> 到地址 <code>0x000f0000-0x000fffff</code> 的，所以机器在上电以后，BIOS 会先拿到机器的控制权（因为此时 RAM 中没有处理器可以执行的程序），执行初始化检查，检查完以后，将控制权再交给操作系统。</p>
+<p>QEMU 模拟器自带了 BIOS，该 BIOS 被放置在处理器模拟物理地址空间的位置上，当处理器被 reset，模拟的处理器则会进入 <code>real mode（实模式）</code>，并且设置 CS=0xf000、IP=0xfff0，所以将从 <code>CS:IP</code> 代码段开始执行。</p>
+</blockquote>
 <h1 id="0xff-">0xff 参考</h1>
 <ul>
 <li><a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>

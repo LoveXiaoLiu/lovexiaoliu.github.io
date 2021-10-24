@@ -227,7 +227,7 @@ tar xjf gcc-core-4.6.4.tar.bz2;cd gcc-4.6.4;mkdir build;cd build
 ../configure --prefix<span style="color:#f92672">=</span>/usr/local --target<span style="color:#f92672">=</span>i386-jos-elf --disable-werror --disable-libssp --disable-libmudflap --with-newlib --without-headers --enable-languages<span style="color:#f92672">=</span>c MAKEINFO<span style="color:#f92672">=</span>missing
 make all-gcc
 make install-gcc
-export LD_LIBRARY_PATH<span style="color:#f92672">=</span>$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH<span style="color:#f92672">=</span>$LD_LIBRARY_PATH:/usr/local/lib <span style="color:#75715e"># 可以加到 ~/.bashrc 文件中，避免每次手动导入</span>
 make all-target-libgcc
 make install-target-libgcc
 cd ../..
