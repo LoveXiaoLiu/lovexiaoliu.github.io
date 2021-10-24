@@ -6,10 +6,19 @@
     <description>Recent content in 2021 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/2021/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>计算机术语【持续更新】</title>
+      <link>/blog/2021/computer-basics/computer-terms/</link>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/computer-basics/computer-terms/</guid>
+      <description>   原文 翻译 解释     endpoint uri Web服务中   stub  rpc中使用，是一段代码，用来转换客户端与服务器之间传递的参数   prefork  多进程模式，pre 表示在请求来之前子进程已经创建好了（进程池？），一般用在非线程安全的情况下   用户认证  判断是否是合法用户   用户权限  查看合法用户有没有权限   ELF 可执行连接格式（Executable and Linkable Format） 是UNIX系统实验室（USL）作为应用程序二进制接口（Application Binary Interface，ABI）而开发和发布的。扩展名为elf。   GNU  GNU 是追求开源一项运动。Unix 系统被发明以后，大家用的很爽，但是后来闭源开始收费了。一个叫 RMS 的大叔觉得很不爽，于是发起 GNU 计划，模仿 Unix 的界面和使用方式，从头做一个开源的版本。然后他自己做了编辑器 Emacs 和编译器 GCC。做了很多可以运行在 Unix 上的开源软件，但是一直没做出操作系统，于是一个叫 Linus 的博士，写出来 Linux 操作系统，完美符合 GNU 的目的，所以最后 Linux 也纳入了 GNU 中。   AT&amp;amp;T syntax  AT&amp;amp;T 是 GNU 汇编语言使用的语法格式，与之相关的是 NASM 汇编语言使用的 Intel 风格的语法   RAM 随机储存器（Random-Access Memory） 断电后数据丢失，也就是电脑上的内存条，程序时放在 RAM 中运行的   ROM 只读储存器（Read-Only Memory） 断电数据不丢失，通俗来讲就是电脑上的硬盘    </description>
+    </item>
     
     <item>
       <title>【MIT 6.828】3. PC 启动流程</title>
@@ -17,10 +26,11 @@
       <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>/blog/2021/mit/6.828-3/</guid>
-      <description>0x00 简述 6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章操作系统基础知识概览
+      <description>0x00 非官方解读 6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章操作系统基础知识概览
 CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好在 BIOS ROM 中，所以先执行 BIOS 中的代码。
-0x01 BIOS BIOS 执行流程：
- 上电自检（Power On Self Test） 加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该删除时可引导的？判断最后两个字节为 0xAA55 则表示该扇区可引导 BIOS 会把该扇区加载到段地址为 0x0000，偏移地址为 0x7c00 内存处 然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行 至此，BIOS 完成了自己的使命，把执行流交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。  0xff 参考  MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列 [MIT] 6.828 操作系统工程导读  </description>
+BIOS 执行流程：
+ 上电自检（Power On Self Test） 加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该删除时可引导的？判断最后两个字节为 0xAA55 则表示该扇区可引导 BIOS 会把该扇区加载到段地址为 0x0000，偏移地址为 0x7c00 内存处 然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行 至此，BIOS 完成了自己的使命，把执行流交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。  0x01 官方解读（Lab 1: Booting a PC）  实验分为三部分：
+ Part 1：主要是熟悉 x86 汇编语言、QEMU x86 仿真器和 PC 的开机引导过程 Part 2：主要是学习 6.828 内核的 boot 引导过程，代码的 boot 目录下 Part 3：主要学习 6.</description>
     </item>
     
     <item>
@@ -34,9 +44,10 @@ CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好�
  ToolChain 工具链 ToolChain 包含汇编器、连接器、C 编译器和 debug 工具。
 一般的现代 Linux 系统都自带了 6.828 需要的 ToolChain，命令 objdump -i 和 gcc -m32 -print-libgcc-file-name 如果都能执行成功，说明 ToolChain 工具链已经就绪。
 我的 CentOS 自带了 ToolChain 工具链，所以没有安装，如果有问题或者需要自己安装 ToolChain 工具链，可以参考官方文档和B 站 UP 主的视频指导，推荐B 站 UP 主的视频指导，该视频讲解的很详细。
-QEMU 模拟器 QEMU 建议安装 6.828 专用的 path 版本，仓库为 https://github.com/mit-pdos/6.828-qemu.git，可参考官方文档安装，安装时的简单报错可以根据提示很容易修复。
-0x02 Troubleshooting   安装 QEMU 时 pixman 报错
- git submodule update --init pixman 把 pixman 代码下载下来即可    编译 QEMU 时出现 glib-2.</description>
+ 更新补充： 使用 linux 自带的工具链还是有些问题，需要到 JOS 中将 conf/env.mk 中的 GCCPREFIX= 注释掉，比较麻烦，估计坑也不少，建议按照官方文档安装。
+ 本人打包好的工具链安装包：点击下载
+安装命令如下：
+tar xjf gmp-5.0.2.tar.bz2;cd gmp-5.0.2;./configure --prefix=/usr/local;make;make install;cd .. tar xjf mpfr-3.</description>
     </item>
     
     <item>
@@ -51,7 +62,7 @@ QEMU 模拟器 QEMU 建议安装 6.828 专用的 path 版本，仓库为 https:/
     </item>
     
     <item>
-      <title> 操作系统基础知识概览</title>
+      <title>操作系统基础知识概览</title>
       <link>/blog/2021/computer-basics/os-basic/</link>
       <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
       

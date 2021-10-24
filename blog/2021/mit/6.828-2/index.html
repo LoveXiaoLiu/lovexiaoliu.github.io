@@ -206,14 +206,50 @@
 <h2 id="toolchain-">ToolChain 工具链</h2>
 <p>ToolChain 包含汇编器、连接器、C 编译器和 debug 工具。</p>
 <p>一般的现代 Linux 系统都自带了 6.828 需要的 ToolChain，命令 <code>objdump -i</code> 和 <code>gcc -m32 -print-libgcc-file-name</code> 如果都能执行成功，说明 ToolChain 工具链已经就绪。</p>
-<p><strong>我的 CentOS 自带了 ToolChain 工具链，所以没有安装</strong>，如果有问题或者需要自己安装 ToolChain 工具链，可以参考<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>和<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，推荐<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，该视频讲解的很详细。</p>
-<h2 id="qemu-httpswwwqemuorg"><a href="https://www.qemu.org/">QEMU 模拟器</a></h2>
+<p><strong><del>我的 CentOS 自带了 ToolChain 工具链，所以没有安装</del></strong>，如果有问题或者需要自己安装 ToolChain 工具链，可以参考<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>和<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，推荐<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，该视频讲解的很详细。</p>
+<blockquote>
+<p>更新补充：
+<strong>使用 linux 自带的工具链还是有些问题，需要到 <code>JOS</code> 中将 <code>conf/env.mk</code> 中的 <code>GCCPREFIX=</code> 注释掉，比较麻烦，估计坑也不少，建议按照<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>安装。</strong></p>
+</blockquote>
+<p>本人打包好的工具链安装包：<a href="../../../../file/toolchain.tar.gz" target="_blank">点击下载</a></p>
+<p>安装命令如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tar xjf gmp-5.0.2.tar.bz2;cd gmp-5.0.2;./configure --prefix<span style="color:#f92672">=</span>/usr/local;make;make install;cd ..
+
+tar xjf mpfr-3.1.2.tar.bz2;cd mpfr-3.1.2;./configure --prefix<span style="color:#f92672">=</span>/usr/local;make;make install;cd ..
+
+tar xzf mpc-0.9.tar.gz;cd mpc-0.9;./configure --prefix<span style="color:#f92672">=</span>/usr/local;make;make install;cd ..
+
+tar xjf binutils-2.21.1.tar.bz2;cd binutils-2.21.1;./configure --prefix<span style="color:#f92672">=</span>/usr/local --target<span style="color:#f92672">=</span>i386-jos-elf --disable-werror;make;make install;cd ..
+
+i386-jos-elf-objdump -i
+
+tar xjf gcc-core-4.6.4.tar.bz2;cd gcc-4.6.4;mkdir build;cd build
+../configure --prefix<span style="color:#f92672">=</span>/usr/local --target<span style="color:#f92672">=</span>i386-jos-elf --disable-werror --disable-libssp --disable-libmudflap --with-newlib --without-headers --enable-languages<span style="color:#f92672">=</span>c MAKEINFO<span style="color:#f92672">=</span>missing
+make all-gcc
+make install-gcc
+export LD_LIBRARY_PATH<span style="color:#f92672">=</span>$LD_LIBRARY_PATH:/usr/local/lib
+make all-target-libgcc
+make install-target-libgcc
+cd ../..
+
+i386-jos-elf-gcc -v
+
+tar xjf gdb-7.3.1.tar.bz2;cd gdb-7.3.1;./configure --prefix<span style="color:#f92672">=</span>/usr/local --target<span style="color:#f92672">=</span>i386-jos-elf --program-prefix<span style="color:#f92672">=</span>i386-jos-elf- --disable-werror;make all;make install;cd ..
+
+git clone https://github.com/mit-pdos/6.828-qemu.git qemu
+./configure --disable-kvm --disable-werror --prefix<span style="color:#f92672">=</span>/usr/local --target-list<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;i386-softmmu x86_64-softmmu&#34;</span>
+make <span style="color:#f92672">&amp;&amp;</span> make install
+
+<span style="color:#75715e"># 下载课程 jos 代码：</span>
+git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab
+</code></pre></div><h2 id="qemu-httpswwwqemuorg"><a href="https://www.qemu.org/">QEMU 模拟器</a></h2>
 <p>QEMU 建议安装 6.828 专用的 path 版本，仓库为 <a href="https://github.com/mit-pdos/6.828-qemu.git">https://github.com/mit-pdos/6.828-qemu.git</a>，可参考<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>安装，安装时的简单报错可以根据提示很容易修复。</p>
 <h1 id="0x02-troubleshooting">0x02 Troubleshooting</h1>
 <ol>
 <li>
 <p>安装 QEMU 时 pixman 报错</p>
 <ul>
+<li>首选：<code>yum install pixman-devel</code></li>
 <li><code>git submodule update --init pixman</code> 把 pixman 代码下载下来即可</li>
 </ul>
 </li>
@@ -330,6 +366,14 @@
       <article class="mini-post">
           
         <header>
+          <h2><a href="/blog/2021/computer-basics/computer-terms/">计算机术语【持续更新】</a></h2>
+          <time class="published" datetime="2021-10-24 00:00:00 &#43;0000 UTC">October 24, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
           <h2><a href="/blog/2021/mit/6.828-3/">【MIT 6.828】3. PC 启动流程</a></h2>
           <time class="published" datetime="2021-10-22 00:00:00 &#43;0000 UTC">October 22, 2021</time>
         </header>
@@ -340,14 +384,6 @@
         <header>
           <h2><a href="/blog/2021/mit/6.828-2/">【MIT 6.828】2. 实验环境准备</a></h2>
           <time class="published" datetime="2021-10-21 00:00:00 &#43;0000 UTC">October 21, 2021</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/2021/mit/6.828-1/">【MIT 6.828】1. 课程介绍</a></h2>
-          <time class="published" datetime="2021-10-20 00:00:00 &#43;0000 UTC">October 20, 2021</time>
         </header>
       </article>
       

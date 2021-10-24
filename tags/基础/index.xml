@@ -6,13 +6,22 @@
     <description>Recent content in 基础 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title> 操作系统基础知识概览</title>
+      <title>计算机术语【持续更新】</title>
+      <link>/blog/2021/computer-basics/computer-terms/</link>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/computer-basics/computer-terms/</guid>
+      <description>   原文 翻译 解释     endpoint uri Web服务中   stub  rpc中使用，是一段代码，用来转换客户端与服务器之间传递的参数   prefork  多进程模式，pre 表示在请求来之前子进程已经创建好了（进程池？），一般用在非线程安全的情况下   用户认证  判断是否是合法用户   用户权限  查看合法用户有没有权限   ELF 可执行连接格式（Executable and Linkable Format） 是UNIX系统实验室（USL）作为应用程序二进制接口（Application Binary Interface，ABI）而开发和发布的。扩展名为elf。   GNU  GNU 是追求开源一项运动。Unix 系统被发明以后，大家用的很爽，但是后来闭源开始收费了。一个叫 RMS 的大叔觉得很不爽，于是发起 GNU 计划，模仿 Unix 的界面和使用方式，从头做一个开源的版本。然后他自己做了编辑器 Emacs 和编译器 GCC。做了很多可以运行在 Unix 上的开源软件，但是一直没做出操作系统，于是一个叫 Linus 的博士，写出来 Linux 操作系统，完美符合 GNU 的目的，所以最后 Linux 也纳入了 GNU 中。   AT&amp;amp;T syntax  AT&amp;amp;T 是 GNU 汇编语言使用的语法格式，与之相关的是 NASM 汇编语言使用的 Intel 风格的语法   RAM 随机储存器（Random-Access Memory） 断电后数据丢失，也就是电脑上的内存条，程序时放在 RAM 中运行的   ROM 只读储存器（Read-Only Memory） 断电数据不丢失，通俗来讲就是电脑上的硬盘    </description>
+    </item>
+    
+    <item>
+      <title>操作系统基础知识概览</title>
       <link>/blog/2021/computer-basics/os-basic/</link>
       <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
       
@@ -31,16 +40,6 @@
 nonlocal 关键字（只有 Python 3 支持）用来访问 Enclosing locals（闭包）作用域的变量值。
 Python 没有块作用域，for 语句范围不是单独的作用域。
   Local Enclosing locals Global Built-in  0x05 is 关键字  is 用来比较变量的地址 == 用来比较变量的值  0x06 单引号/双引号/三引号  单引号和双引号等效，换行需要使用反斜杠（\） 三引号可以直接换行，可以包含任何形式的字符串  0x07 自省  运行时能够查看对象内部的属性或状态 自省函数：type()、isinstance()、dir()、hasattr()、getattr()  0x08 staticmethod &amp;amp; classmethod  staticmethod &amp;amp; classmethod 都是内置类型，属于非数据描述符 可以将类内的方法转变成静态方法和类方法（从 Python 2.</description>
-    </item>
-    
-    <item>
-      <title>标题</title>
-      <link>/blog/_template/</link>
-      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/_template/</guid>
-      <description> 引用：
- 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考      </description>
     </item>
     
     <item>
