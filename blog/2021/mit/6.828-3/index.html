@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-22 00:00:00 &#43;0000 UTC">October 22, 2021</time>
     <p>gra55</p>
-    <p>5-Minute Read</p>
+    <p>7-Minute Read</p>
   </div>
 </header>
 
@@ -200,7 +200,7 @@
 <p>BIOS 执行流程：</p>
 <ol>
 <li>上电自检（Power On Self Test）</li>
-<li>加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该删除时可引导的？判断最后两个字节为 <code>0xAA55</code> 则表示该扇区可引导</li>
+<li>加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该扇区时可引导的？判断最后两个字节为 <code>0xAA55</code> 则表示该扇区可引导</li>
 <li>BIOS 会把该扇区加载到段地址为 0x0000，偏移地址为 0x7c00 内存处</li>
 <li>然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行</li>
 <li>至此，BIOS 完成了自己的使命，把<strong>执行流</strong>交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。</li>
@@ -350,14 +350,14 @@ The target architecture is assumed to be i8086
 <p>在 PC 的发展过程中，从 CD-ROM 引导的能力出现得晚得多，因此 PC 架构师借此机会稍微重新思考了引导过程。因此，现代的 BIOS 从 CD-ROM 引导的方式更复杂（也更强大）。CD-ROMs 使用 2048 字节的扇区代替 512 字节，这样 BIOS 就可以在控制权移交之前，从磁盘加载更大的引导镜像到内存中。</p>
 <p>对于 6.828 实验来说，我们使用传统的硬盘引导机制，这意味着引导加载程序必须容纳在 512 字节以内。引导加载程序（boot loader）包含一个汇编源文件（boot/boot.S）和一个 C 源文件（boot/main.c）,可以详细看下这两个文件。引导加载程序（boot loader）必须执行两个 main functions：</p>
 <ul>
-<li>首先引导加载程序（boot loader）将处理器从实模式（real mode）切换到 32 位保护模式（32-bit protected mode），因为只有在 32 位保护模式（32-bit protected mode）下，软件才能访问处理器物理地址空间中 1M 以上的所有内存。保护模式（protected mode）在<a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本的 1.2.7 和 1.2.8 节</a>有详细的介绍。这个阶段，你只需要了解段地址到物理地址的转换在在保护模式（protected mode）下是不同的，转换偏移量（offset）是 32 位，而不是 16 位的。</li>
+<li>首先引导加载程序（boot loader）将处理器从实模式（real mode）切换到 32 位保护模式（32-bit protected mode），因为只有在 32 位保护模式（32-bit protected mode）下，软件才能访问处理器物理地址空间中 1M 以上的所有内存。保护模式（protected mode）在<a href="/file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本的 1.2.7 和 1.2.8 节</a>有详细的介绍。这个阶段，你只需要了解段地址到物理地址的转换在在保护模式（protected mode）下是不同的，转换偏移量（offset）是 32 位，而不是 16 位的。</li>
 <li>其次，引导加载程序（boot loader）通过 x86 <code>特殊的 I/O 指令</code>直接访问 IDE 磁盘设备寄存器，来从磁盘读取内核（kernel）。如果想更好地理解此处的<code>特定的 I/O 指令</code>的含义，请参考<a href="https://pdos.csail.mit.edu/6.828/2018/reference.html">“IDE硬盘驱动器控制器”部分</a>。本课程中，不需要深入了解特殊设备编程的知识：编写设备驱动程序其实是操作系统开发的一个非常重要的部分，也是最无趣的部分之一。</li>
 </ul>
 <p>理解完引导加载程序（boot loader）源码后，接下来看下 <code>obj/boot/boot.asm</code> 文件，这个文件是使用 GNU Makefile 编译引导加载程序（boot loader）生成的引导加载程序（boot loader）的反汇编。这个反汇编文件可以很容易的看到所有引导加载程序（boot loader）的代码在物理内存中的确切位置，并且在 GDB 调试时跟容易的跟踪发生的事情。</p>
 <p>可以使用 <code>b</code> 命令在 GDB 中设置地址断点，例如：命令 <code>b *0x7c00</code> 会在地址 0x7c00 处设置一个断点。到达断点后，你可以使用 <code>c</code> 和 <code>si</code> 命令继续执行（<code>c</code> 使 QEMU 继续执行，直到遇到下一个断点或者在 QEMU 终端中按下 Ctrl-c；<code>si N</code> 可以一次执行 N 个指令）。</p>
 <p>如果要检查内存中要执行的指令（除了 GDB 自动打印的下一个要执行的指令之外），可以使用 <code>x/i</code> 命令。此命令的语法为 <code>x/Ni ADDR</code>，其中 N 是要反汇编的连续指令数，ADDR 是要开始反汇编的内存地址。</p>
 <p>简单画了个图，如下所示：</p>
-<p><img src="../../../../img/2021/10/boot-loader.png" alt="cpu 上电流程"></p>
+<p><img src="/img/2021/10/boot-loader.png" alt="cpu 上电流程"></p>
 <h3 id="heading">加载内核</h3>
 <p>接下来，将根据 <code>boot/main.c</code> 文件来详细学习引导加载程序（boot loader）的 C 语言部分。（需要温习下 C 语言编程指针部分内容）</p>
 <p>什么是 ELF 二进制文件？</p>
@@ -372,10 +372,112 @@ The target architecture is assumed to be i8086
 <li><code>.rodata</code>：只读数据。比如编译器生成的 ASCII 字符串<strong>常量</strong>。（不会限制硬件写入）</li>
 <li><code>.data</code>：数据部分保存程序的<strong>初始化数据</strong>，例如使用初始化器声明的全局变量（<code>int x = 5</code>）</li>
 </ul>
-<p>当链接器开始计算程序的内存分布时，它会为未初始化的全局变量（例如：<code>int x</code>）保留空间，该空间位于名叫 <code>.bss</code> 的段（section）中，它紧跟在 <code>.data</code> 段（section）之后。</p>
+<p>当链接器开始计算程序的内存分布时，它会为未初始化的全局变量（例如：<code>int x</code>）保留空间，该空间位于名叫 <code>.bss</code> 的段（section）中，它紧跟在 <code>.data</code> 段（section）之后。在 C 语言中，“未初始化”的全局变量默认为 0。因此，不需要将 <code>.bss</code> 的内容存储在 ELF 二进制文件中，只需要链接器记录<code>.bss</code> 段（section）的地址和大小即可。加载程序或者程序自身必须将 <code>.bss</code> 段（section）内容设置为 0。</p>
+<p>输入命令 <code>objdump -h obj/boot/boot.out</code> 来查看 ELF 二进制文件内部的结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@centos ~/6.828/lab<span style="color:#f92672">]</span><span style="color:#75715e"># objdump -h obj/boot/boot.out</span>
+
+obj/boot/boot.out:     file format elf32-i386
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  <span style="color:#ae81ff">0</span> .text         0000017e  00007c00  00007c00  <span style="color:#ae81ff">00000054</span>  2**2
+                  CONTENTS, ALLOC, LOAD, CODE
+  <span style="color:#ae81ff">1</span> .eh_frame     000000cc  00007d80  00007d80  000001d4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  <span style="color:#ae81ff">2</span> .stab         000006d8  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00000000</span>  000002a0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  <span style="color:#ae81ff">3</span> .stabstr      000007df  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00000978</span>  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  <span style="color:#ae81ff">4</span> .comment      <span style="color:#ae81ff">00000011</span>  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00001157</span>  2**0
+                  CONTENTS, READONLY
+</code></pre></div><p>可以看到，这里 dump 出来的内容比我们上面提到的要多，但是其他的段（section）在本课程中不需要过多关注，它们大多数是保存着调试信息，这些信息通常包含在程序的可执行文件中，但是不会由程序加载器加载到内存中。</p>
+<p>需要特别关注一下 <code>.text</code> 部分的 “VMA”（链接地址）和 “LMA”（加载地址）：</p>
+<ul>
+<li>加载地址（LMA）表示 section 内容应该加载到的内存地址</li>
+<li>链接地址（VMA）表示 section 希望执行代码的内存地址</li>
+</ul>
+<p>链接器（linker）以各种方式在二进制文件中编码链接地址，例如当代码需要一个全局变量的地址，如果一个二进制文件从一个没有被链接的地址开始执行，那么这个二进制文件通常是无法正常工作的。（其实，也可以生成一个位置独立（position-independent）的代码，这类代码不包含绝对地址（absolute addresses）。这种方式在现代的共享库（shared libraries）中广泛使用，但他有性能和复杂性成本，在 6.828 中不使用。）</p>
+<p>如上面 terminal 输出所示，一般情况下，链接地址和加载地址相同。</p>
+<p>引导加载程序（boot loader）根据 ELF 程序头（program headers）决定如何去加载 sections。程序头（program headers）标记了 ELF 对象的每个部分应该加载到内存中的哪个目标地址。输入命令 <code>objdump -x obj/kern/kernel</code> 可以查看程序头（program headers）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@centos ~/6.828/lab<span style="color:#f92672">]</span><span style="color:#75715e"># objdump -x obj/kern/kernel</span>
+
+obj/kern/kernel:     file format elf32-i386
+obj/kern/kernel
+architecture: i386, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x0010000c
+
+Program Header:
+    LOAD off    0x00001000 vaddr 0xf0100000 paddr 0x00100000 align 2**12
+         filesz 0x0000ee71 memsz 0x0000ee71 flags r-x
+    LOAD off    0x00010000 vaddr 0xf010f000 paddr 0x0010f000 align 2**12
+         filesz 0x0000a948 memsz 0x0000a948 flags rw-
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  <span style="color:#ae81ff">0</span> .text         0000178e  f0100000  <span style="color:#ae81ff">00100000</span>  <span style="color:#ae81ff">00001000</span>  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  <span style="color:#ae81ff">1</span> .rodata       <span style="color:#ae81ff">00000704</span>  f01017a0  001017a0  000027a0  2**5
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  <span style="color:#ae81ff">2</span> .stab         000044d1  f0101ea4  00101ea4  00002ea4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  <span style="color:#ae81ff">3</span> .stabstr      00008afc  f0106375  <span style="color:#ae81ff">00106375</span>  <span style="color:#ae81ff">00007375</span>  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  <span style="color:#ae81ff">4</span> .data         0000a300  f010f000  0010f000  <span style="color:#ae81ff">00010000</span>  2**12
+                  CONTENTS, ALLOC, LOAD, DATA
+  <span style="color:#ae81ff">5</span> .bss          <span style="color:#ae81ff">00000648</span>  f0119300  <span style="color:#ae81ff">00119300</span>  0001a300  2**5
+                  CONTENTS, ALLOC, LOAD, DATA
+  <span style="color:#ae81ff">6</span> .comment      <span style="color:#ae81ff">00000011</span>  <span style="color:#ae81ff">00000000</span>  <span style="color:#ae81ff">00000000</span>  0001a948  2**0
+                  CONTENTS, READONLY
+SYMBOL TABLE:
+f0100000 l    d  .text  <span style="color:#ae81ff">00000000</span> .text
+f01017a0 l    d  .rodata        <span style="color:#ae81ff">00000000</span> .rodata
+f0101ea4 l    d  .stab  <span style="color:#ae81ff">00000000</span> .stab
+<span style="color:#75715e"># 省略......</span>
+f0101ea4 g       .stab  <span style="color:#ae81ff">00000000</span> __STAB_BEGIN__
+f01011e8 g     F .text  <span style="color:#ae81ff">00000016</span> strlen
+f0101315 g     F .text  0000001d strchr
+f0100648 g     F .text  000000cb mon_kerninfo
+f0100762 g     F .text  <span style="color:#ae81ff">00000136</span> monitor
+f0101459 g     F .text  0000001b memfind
+f0100713 g     F .text  <span style="color:#ae81ff">00000045</span> mon_help
+</code></pre></div><p>如上所示，可以在 “Program Header” 关键字下看到程序头（program headers）。需要被加载到内存中的 ELF 对象区域被 “LOAD” 关键字标记。程序头（program headers）中还可以看到其他信息，比如：虚拟地址 vaddr、物理地址 paddr、加载区域的大小 memsz &amp; filesz。</p>
+<p>回看 <code>boot/main.c</code> 文件，每个程序头（program headers）的 <code>ph-&gt;p_pa</code> 字段包含了段的目标物理地址。（注意：在本例中，它真的是一个物理地址，尽管 ELF 规范中对该字段没有明确说明。）</p>
+<p>BIOS 加载 boot sector 到内存中的起始地址为 <code>0x7c00</code>，因此该地址也是 boot sector 的加载地址。这个地址也是 boot sector 开始执行的位置，所以它也是一个链接地址。我们通过在 <code>boot/Makefrag</code> 文件中将 <code>-Ttext 0x7c00</code> 传递给链接器来设置链接地址。这样的话，链接器将在生成的代码中生成正确的内存地址。</p>
+<p>回顾下 kernel 的加载地址和链接地址，它们是不一样的，引导加载程序（boot loader）是一样的（00007c00）。kernel 告诉引导加载程序（boot loader）以较低的地址（1M 字节）将其加载到内存中，但是 kernel 想以更高的地址来执行代码。下一节中重点讨论这部分的实现。</p>
+<p>除了 section 信息之外，ELF 头中还有一个对我们很重要的字段，名为e_entry。该字段保存程序入口点（entry point）的链接地址：程序的 text 段（section）的内存地址，就是程序开始执行的位置。命令 <code>objdump -f obj/kern/kernel</code> 可以看到程序入口：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@centos ~/6.828/lab<span style="color:#f92672">]</span><span style="color:#75715e"># objdump -f obj/kern/kernel</span>
+obj/kern/kernel:     file format elf32-i386
+architecture: i386, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x0010000c
+</code></pre></div><p>至此，我们应该了解了 <code>boot/main.c</code> 中的小型 ELF 加载器的大致功能：它会从磁盘读取 kernel 中的每个 section，然后加载到对应 section 加载地址所在的内存区域中，然后跳转到 kernel 程序入口（entry point）处开始执行。</p>
+<h2 id="part-3-the-kernel">Part 3: The Kernel</h2>
+<blockquote>
+<p>本节详细学习 JOS 的内核。</p>
+</blockquote>
+<h3 id="heading1">虚拟内存</h3>
+<blockquote>
+<p>使用虚拟内存解决位置依赖问题</p>
+</blockquote>
+<p>如上文所说，引导加载程序（boot loader）的链接地址和加载地址是一样的，但是 kernel 的两个地址相差很大（加载地址是低地址内存区域，链接地址是高地址内存区域）。链接 kernel 比引导加载程序（boot loader）更复杂，因此加载地址和链接地址位于 <code>kern/kernel.ld</code> 的最顶部。</p>
+<p>操作系统内核通常被链接和运行在一个非常高的虚拟地址（virtual address），比如 0xf0100000，以便把处理器的虚拟地址空间较低一部分区域留给用户进程使用。这么做的原因会在下一个 lab 中详细讨论。</p>
+<p>很多机器在地址 <code>0xf0100000</code> 处已经没有物理内存，因此我们不能指望在那个地址存储内核。所以，我们会使用处理器的内存管理硬件（processor's memory management hardware）将虚拟地址 0xf0100000（内核代码预期运行的链接地址）映射到物理地址 0x00100000（引导加载程序（boot loader）将内核加载到的物理内存地址）。尽管内核的虚拟地址足够高，可以为用户进程留下大量地址空间，但是它还是会被加载到 0x00100000 这个物理内存上（译者注：32 位预留的 RAM，最底下 640K 是 16 位预留的 RAM），这个位置刚好位于 BIOS ROM 的上面。这种方法要求 PC 至少有几兆的物理内存（大于 1M 内存，0x100000 内核代码才能正常运行）， 1990 年以前的 PC 估计不行。</p>
+<p>下一个实验，我们会映射 PC 物理地址空间底部的 256M 空间，从物理地址 <code>0x00000000-0x0fffffff</code>（256M）到虚拟地址 <code>0xf0000000-0xffffffff</code>。现在我们就明白了，<strong>为什么 JOS 只能使用前 256M 的物理内存！</strong></p>
+<p>现在我们只映射前 4M 物理内存，这些内存足够我们启动和运行。我们在 <code>kern/entrypgdir.c</code> 文件中手动修改代码，来静态初始化页目录（page directory）和页表（page table）。现在不用了解它的工作机制，只需要了解它的效果就行。在 <code>kern/entry.S</code> 文件设置 <code>CR0_PG</code> 标志之前，内存引用被视为物理地址（严格来说，是线性地址（linear addresses），但是 <code>boot/boot.S</code> 设置了一个线性地址到物理地址的映射）。一旦 <code>CR0_PG</code> 标志被设置，内存引用就是虚拟地址了，该虚拟地址是由虚拟内存硬件（virtual memory hardware）从物理地址转换而来。<code>entry_pgdir</code> 将虚拟地址（0xf0000000-0xf0400000）转换到物理地址（0x00000000-0x00400000），并将虚拟地址（0x00000000-0x00400000）转换为物理地址（0x00000000-0x00400000）。任何不在这两个范围内的虚拟地址都将导致硬件异常，因为我们还没有设置中断处理，这会导致 QEMU 退出并 dumo 机器状态信息。（如果没有使用 6.828 补丁版本的 QEMU，则将无休止地重启）</p>
+<h3 id="heading2">格式化控制台输出</h3>
+<p>大多数人认为直接使用 <code>printf()</code> 函数就行了，可能还认为它是 C 语言的 “primitives”（原语），但是在操作系统内核中，我们必须自己实现所有 I/O。</p>
+<p>大家需要学习一下 <code>kern/printf.c</code>、<code>lib/printfmt.c</code>、<code>kern/console.c</code> 这三个文件，搞清楚他们之间的关联。后面自然就知道为什么 <code>printfmt.c</code> 文件要单独放在 <code>lib</code> 目录下？</p>
+<h3 id="stack">栈（Stack）</h3>
+<blockquote>
+<p>栈是先进后出的数据结构，内存中栈顶在低地址、栈底在高地址。可以想象成一个帽子🎩</p>
+</blockquote>
+<p>本实验的最后，我们学习 C 语言在 x86 上使用栈的方式，并在此过程中，编写一个新的内核监控函数，用于打印栈的 backtrace：也就是从嵌套的 call 指令所保存的指令指针到当前执行指针的列表信息。</p>
+<p>x86 栈指针（<code>esp</code> 寄存器，extended stack pointer）指向栈上当前正在使用的最低位置（栈顶位置指针）。在为栈保留的区域中，该位置下方的所有内容都是空的（free）。push 一个值入栈时，栈指针（<code>esp</code>）需要减小（也就是向下移动），然后将值写入到栈指针（<code>esp</code>）指向的内存区域。相反的，pop 一个值出栈时，会先读取栈指针（<code>esp</code>）指向的内存值，然后栈指针（<code>esp</code>）增加（向上移动）。在 32-bit 模式下，栈只能保存 32 位的值，<code>esp</code> 寄存器事中可以被 4 整除。各种 x86 指令都是“硬连线”（hard-wired）来使用栈指针寄存器（<code>esp</code>）的。</p>
+<p><code>ebp</code> 寄存器（栈基址寄存器，extended base pointer，指向系统栈最上面一个栈帧「最新执行的一个函数」的底部）主要通过软件约定来与栈关联在一起的。进入一个 C 函数时，函数的底层代码通常会将上一个函数的基指针 push 到栈中，然后在函数操作期间将当前 <code>esp</code> 值复制给 <code>ebp</code>（<code>ebp</code> 不是必须的，主要是为了方便操作局部变量）。如果程序中的所有函数都遵守此约定，那么在程序执行中的任何 point，都可以通过栈去追溯：通过保存的 ebp 指针的链路，确定函数通过怎样的调用嵌套顺序来到达这个 point。这个功能还是特别有用的，例如：当某个特定函数由于传递了错误参数导致 assert 失败或 panic，但是不确定是谁传递了错误参数时，栈的 backtrace 可以轻松找到有问题的函数。</p>
 <h1 id="0xff-">0xff 参考</h1>
 <ul>
-<li><a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>
+<li><a href="/file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/368954250">[MIT] 6.828 操作系统工程导读</a></li>
 <li><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1">6.828 Lab 1</a></li>
 </ul>
