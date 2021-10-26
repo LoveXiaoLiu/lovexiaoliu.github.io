@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-22 00:00:00 &#43;0000 UTC">October 22, 2021</time>
     <p>gra55</p>
-    <p>4-Minute Read</p>
+    <p>5-Minute Read</p>
   </div>
 </header>
 
@@ -333,11 +333,46 @@ The target architecture is assumed to be i8086
 <li>PC 开始执行 <code>CS=0xf000:IP=0xfff0</code> 位置的代码（不清楚寄存器的可以学习下这篇文章：<a href="/blog/2021/computer-basics/os-basic/" target="_blank">操作系统基础知识概览</a>）</li>
 <li>要执行的第一条指令是 jmp 指令，它跳转到段地址为 <code>CS=0xf000:IP=0xe05b</code> 处</li>
 </ul>
-<blockquote>
 <p>为什么 QEMU 是这样开始的？</p>
+<blockquote>
 <p>因为 8088 处理器就是这样设计的。为什么要这样设计？因为不这样设计的话，机器通电以后，CPU 不知道该执行哪块的指令。所以 PC 中的 BIOS 是 <code>hard-wired（硬连线）</code> 到地址 <code>0x000f0000-0x000fffff</code> 的，所以机器在上电以后，BIOS 会先拿到机器的控制权（因为此时 RAM 中没有处理器可以执行的程序），执行初始化检查，检查完以后，将控制权再交给操作系统。</p>
-<p>QEMU 模拟器自带了 BIOS，该 BIOS 被放置在处理器模拟物理地址空间的位置上，当处理器被 reset，模拟的处理器则会进入 <code>real mode（实模式）</code>，并且设置 CS=0xf000、IP=0xfff0，所以将从 <code>CS:IP</code> 代码段开始执行。</p>
+<p>QEMU 模拟器自带了 BIOS，该 BIOS 被放置在处理器模拟物理地址空间的位置上，当处理器被 reset，模拟的处理器则会进入 <code>real mode（实模式）</code>，并且设置 <code>CS=0xf000:IP=0xfff0</code>，所以将从 <code>CS:IP</code> 代码段开始执行。</p>
 </blockquote>
+<p>段地址 <code>CS=0xf000:IP=0xfff0</code> 如何转变为物理地址？</p>
+<blockquote>
+<p>电脑刚通电启动，会进入 <code>real mode</code>，该模式下地址转换通过公式（physical address = 16 * segment + offset）进行。当 <code>CS=0xf000:IP=0xfff0</code> 时，物理地址为：<code>16 * 0xf000 + 0xfff0 = 0xf0000 + 0xfff0 = 0xffff0</code>（2 进制乘以 16 相当于左移四位，16 进制下相当于左移一位）。</p>
+<p>0xffff0 是 BIOS（0x100000）内存区域最顶部的 16 个字节。BIOS 做的第一件事就是将 jmp 跳转到 BIOS 中最顶部的位置开始执行指令。</p>
+</blockquote>
+<p>当 BIOS 开始运行时，它会设置一个中断描述符表（interrupt descriptor table），并且初始化各种设备，例如 VGA 等，这时 QEMU 终端会打出 &ldquo;Starting SeaBIOS&rdquo; 信息。</p>
+<p>初始化 PCI 总线和 BIOS 必须的设备后，将会查找可引导设备，例如软盘、硬盘、CD_ROM 等。最后，BIOS 会引导加载程序（boot loader），并将控制权移交给它。</p>
+<h2 id="part-2-the-boot-loader">Part 2: The Boot Loader</h2>
+<p>PC 的软盘和硬盘被划分为多个 512 字节的区域，该 512 字节区域被称为扇区（sectors）。扇区是磁盘的最小传输单位：<strong>每一次读写必须是一个或多个扇区，并且在扇区边界对齐</strong>。如果一个磁盘是可引导的，那么它的<strong>第一个扇区必须是引导扇区（boot sector）</strong>，因为这是引导程序代码所在的位置。当 BIOS 找到可引导的软盘或者硬盘时，他将位于第一个扇区的 512-byte 的引导扇区加载到物理地址为 0x7c00-0x7dff 的内存中，然后使用 jmp 指令将 CS:IP 设置为 0000:7c00，将控制权传递给引导加载程序。就像 加载 BIOS 的地址一样，这些地址看起来是任意地址，但是它们对于 PC 而言，是标准化的，也是固定的。</p>
+<p>在 PC 的发展过程中，从 CD-ROM 引导的能力出现得晚得多，因此 PC 架构师借此机会稍微重新思考了引导过程。因此，现代的 BIOS 从 CD-ROM 引导的方式更复杂（也更强大）。CD-ROMs 使用 2048 字节的扇区代替 512 字节，这样 BIOS 就可以在控制权移交之前，从磁盘加载更大的引导镜像到内存中。</p>
+<p>对于 6.828 实验来说，我们使用传统的硬盘引导机制，这意味着引导加载程序必须容纳在 512 字节以内。引导加载程序（boot loader）包含一个汇编源文件（boot/boot.S）和一个 C 源文件（boot/main.c）,可以详细看下这两个文件。引导加载程序（boot loader）必须执行两个 main functions：</p>
+<ul>
+<li>首先引导加载程序（boot loader）将处理器从实模式（real mode）切换到 32 位保护模式（32-bit protected mode），因为只有在 32 位保护模式（32-bit protected mode）下，软件才能访问处理器物理地址空间中 1M 以上的所有内存。保护模式（protected mode）在<a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本的 1.2.7 和 1.2.8 节</a>有详细的介绍。这个阶段，你只需要了解段地址到物理地址的转换在在保护模式（protected mode）下是不同的，转换偏移量（offset）是 32 位，而不是 16 位的。</li>
+<li>其次，引导加载程序（boot loader）通过 x86 <code>特殊的 I/O 指令</code>直接访问 IDE 磁盘设备寄存器，来从磁盘读取内核（kernel）。如果想更好地理解此处的<code>特定的 I/O 指令</code>的含义，请参考<a href="https://pdos.csail.mit.edu/6.828/2018/reference.html">“IDE硬盘驱动器控制器”部分</a>。本课程中，不需要深入了解特殊设备编程的知识：编写设备驱动程序其实是操作系统开发的一个非常重要的部分，也是最无趣的部分之一。</li>
+</ul>
+<p>理解完引导加载程序（boot loader）源码后，接下来看下 <code>obj/boot/boot.asm</code> 文件，这个文件是使用 GNU Makefile 编译引导加载程序（boot loader）生成的引导加载程序（boot loader）的反汇编。这个反汇编文件可以很容易的看到所有引导加载程序（boot loader）的代码在物理内存中的确切位置，并且在 GDB 调试时跟容易的跟踪发生的事情。</p>
+<p>可以使用 <code>b</code> 命令在 GDB 中设置地址断点，例如：命令 <code>b *0x7c00</code> 会在地址 0x7c00 处设置一个断点。到达断点后，你可以使用 <code>c</code> 和 <code>si</code> 命令继续执行（<code>c</code> 使 QEMU 继续执行，直到遇到下一个断点或者在 QEMU 终端中按下 Ctrl-c；<code>si N</code> 可以一次执行 N 个指令）。</p>
+<p>如果要检查内存中要执行的指令（除了 GDB 自动打印的下一个要执行的指令之外），可以使用 <code>x/i</code> 命令。此命令的语法为 <code>x/Ni ADDR</code>，其中 N 是要反汇编的连续指令数，ADDR 是要开始反汇编的内存地址。</p>
+<p>简单画了个图，如下所示：</p>
+<p><img src="../../../../img/2021/10/boot-loader.png" alt="cpu 上电流程"></p>
+<h3 id="heading">加载内核</h3>
+<p>接下来，将根据 <code>boot/main.c</code> 文件来详细学习引导加载程序（boot loader）的 C 语言部分。（需要温习下 C 语言编程指针部分内容）</p>
+<p>什么是 ELF 二进制文件？</p>
+<blockquote>
+<p>当编译并链接一个 C 程序（比如 JOS 内核程序）时，编译器会将每个 C 源文件（<code>.c</code>）转换成一个 object 文件（<code>.o</code>），object 文件包含汇编语言指令，这些指令以硬件所期望的二进制格式编码。</p>
+<p>然后，链接器将所有编译的 object 文件组合成一个二进制镜像（binary image），例如：<code>obj/kern/kernel</code>，在这里他就是一个 ELF 格式的二进制文件，表示“<strong>可执行和可链接格式</strong>”</p>
+</blockquote>
+<p>我们可以简单的认为，ELF 可执行文件带有<strong>加载信息的头</strong>，信息头后面紧跟的是多个程序段，每个程序段都是连续的一组代码或者数据，会在指定的地址加载到内存中。引导加载程序（boot loader）不会修改代码或数据，他将其加载到内存中并开始执行。</p>
+<p>一个 ELF 二进制文件以一个<strong>固定长度的 ELF 头</strong>（fixed-length ELF header）开始，然后是一个<strong>可变长度的程序头</strong>（variable-length program header），程序头列出了要加载的每个程序段。<code>inc/elf.h</code> 文件中定义了这些 ELF 头，我们需要关注的程序段如下所示：</p>
+<ul>
+<li><code>.text</code>：程序的可执行指令</li>
+<li><code>.rodata</code>：只读数据。比如编译器生成的 ASCII 字符串<strong>常量</strong>。（不会限制硬件写入）</li>
+<li><code>.data</code>：数据部分保存程序的<strong>初始化数据</strong>，例如使用初始化器声明的全局变量（<code>int x = 5</code>）</li>
+</ul>
+<p>当链接器开始计算程序的内存分布时，它会为未初始化的全局变量（例如：<code>int x</code>）保留空间，该空间位于名叫 <code>.bss</code> 的段（section）中，它紧跟在 <code>.data</code> 段（section）之后。</p>
 <h1 id="0xff-">0xff 参考</h1>
 <ul>
 <li><a href="../../../../file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>
