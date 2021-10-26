@@ -194,21 +194,6 @@
       </div>
       <div class="content">
         
-        
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#0x00-">0x00 非官方解读</a></li>
-    <li><a href="#0x01-lab-1-booting-a-pchttpspdoscsailmitedu68282018labslab1introduction">0x01 官方解读（Lab 1: Booting a PC）</a>
-      <ul>
-        <li><a href="#part-1-pc-bootstrap">Part 1: PC Bootstrap</a></li>
-        <li><a href="#part-2-the-boot-loader">Part 2: The Boot Loader</a></li>
-        <li><a href="#part-3-the-kernel">Part 3: The Kernel</a></li>
-      </ul>
-    </li>
-    <li><a href="#0xff-">0xff 参考</a></li>
-  </ul>
-</nav>
-        
         <h2 id="0x00-">0x00 非官方解读</h2>
 <p>6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章<a href="/blog/2021/computer-basics/os-basic/" target="_blank">操作系统基础知识概览</a></p>
 <p>CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好在 BIOS ROM 中，所以先执行 BIOS 中的代码。</p>
