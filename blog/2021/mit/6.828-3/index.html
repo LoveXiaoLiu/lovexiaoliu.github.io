@@ -194,7 +194,22 @@
       </div>
       <div class="content">
         
-        <h1 id="0x00-">0x00 非官方解读</h1>
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-">0x00 非官方解读</a></li>
+    <li><a href="#0x01-lab-1-booting-a-pchttpspdoscsailmitedu68282018labslab1introduction">0x01 官方解读（Lab 1: Booting a PC）</a>
+      <ul>
+        <li><a href="#part-1-pc-bootstrap">Part 1: PC Bootstrap</a></li>
+        <li><a href="#part-2-the-boot-loader">Part 2: The Boot Loader</a></li>
+        <li><a href="#part-3-the-kernel">Part 3: The Kernel</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xff-">0xff 参考</a></li>
+  </ul>
+</nav>
+        
+        <h2 id="0x00-">0x00 非官方解读</h2>
 <p>6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章<a href="/blog/2021/computer-basics/os-basic/" target="_blank">操作系统基础知识概览</a></p>
 <p>CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好在 BIOS ROM 中，所以先执行 BIOS 中的代码。</p>
 <p>BIOS 执行流程：</p>
@@ -205,7 +220,7 @@
 <li>然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行</li>
 <li>至此，BIOS 完成了自己的使命，把<strong>执行流</strong>交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。</li>
 </ol>
-<h1 id="0x01-lab-1-booting-a-pchttpspdoscsailmitedu68282018labslab1introduction">0x01 官方解读（<a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/#Introduction">Lab 1: Booting a PC</a>）</h1>
+<h2 id="0x01-lab-1-booting-a-pchttpspdoscsailmitedu68282018labslab1introduction">0x01 官方解读（<a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/#Introduction">Lab 1: Booting a PC</a>）</h2>
 <blockquote>
 <p>实验分为三部分：</p>
 <ul>
@@ -222,11 +237,11 @@ athena% git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab
 Cloning into lab...
 athena% cd lab
 athena% 
-</code></pre></div><h2 id="part-1-pc-bootstrap">Part 1: PC Bootstrap</h2>
-<h3 id="x86-">x86 汇编</h3>
+</code></pre></div><h3 id="part-1-pc-bootstrap">Part 1: PC Bootstrap</h3>
+<h4 id="x86-">x86 汇编</h4>
 <p>本实验使用的是 GNU 使用的 AT&amp;T 语法的汇编语言，但是你如果实习 Intel语法的汇编语言，那更利于你学习本课程。</p>
 <p>推荐学习书籍《<a href="https://pdos.csail.mit.edu/6.828/2018/readings/pcasm-book.pdf">PC 汇编语言</a>》</p>
-<h3 id="-x86-">模拟 x86 运行</h3>
+<h4 id="-x86-">模拟 x86 运行</h4>
 <p>我们不需要在真实的机器上运行&amp;调试我们的程序，那样是在太麻烦了。在 6.828 课程中，我们使用 <a href="http://www.qemu.org/">QEMU</a> 模拟器来模拟 x86 操作系统的运行，另外还可以使用 GDB 来调试。</p>
 <p>执行一下命令，可以模拟 JOS 系统的启动：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">athena% cd lab
@@ -265,7 +280,7 @@ leaving test_backtrace <span style="color:#ae81ff">5</span>
 Welcome to the JOS kernel monitor!
 Type <span style="color:#e6db74">&#39;help&#39;</span> <span style="color:#66d9ef">for</span> a list of commands.
 K&gt;
-</code></pre></div><h3 id="pc-">PC 的物理地址空间</h3>
+</code></pre></div><h4 id="pc-">PC 的物理地址空间</h4>
 <p>PC 的物理地址空间是 hard-wired 的，如下所示：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">+------------------+  &lt;- 0xFFFFFFFF <span style="color:#f92672">(</span>4GB<span style="color:#f92672">)</span>
 |      32-bit      |
@@ -307,7 +322,7 @@ K&gt;
 <p>就是因为 32-bit 处理器和 64-bit 处理器的物理内存空间不一样。</p>
 </blockquote>
 <p>在本课程中，为了简单，其实也是 JOS 本身的设计局限性，JOS 只使用 PC 物理内存的前 256M，所以我们假设所有的 PC 都只有 32 位物理地址空间。</p>
-<h3 id="rom-bios">ROM BIOS</h3>
+<h4 id="rom-bios">ROM BIOS</h4>
 <blockquote>
 <p>本节将学习使用 QEMU 的调试工具来研究 IA-32 计算机如何启动</p>
 </blockquote>
@@ -345,7 +360,7 @@ The target architecture is assumed to be i8086
 </blockquote>
 <p>当 BIOS 开始运行时，它会设置一个中断描述符表（interrupt descriptor table），并且初始化各种设备，例如 VGA 等，这时 QEMU 终端会打出 &ldquo;Starting SeaBIOS&rdquo; 信息。</p>
 <p>初始化 PCI 总线和 BIOS 必须的设备后，将会查找可引导设备，例如软盘、硬盘、CD_ROM 等。最后，BIOS 会引导加载程序（boot loader），并将控制权移交给它。</p>
-<h2 id="part-2-the-boot-loader">Part 2: The Boot Loader</h2>
+<h3 id="part-2-the-boot-loader">Part 2: The Boot Loader</h3>
 <p>PC 的软盘和硬盘被划分为多个 512 字节的区域，该 512 字节区域被称为扇区（sectors）。扇区是磁盘的最小传输单位：<strong>每一次读写必须是一个或多个扇区，并且在扇区边界对齐</strong>。如果一个磁盘是可引导的，那么它的<strong>第一个扇区必须是引导扇区（boot sector）</strong>，因为这是引导程序代码所在的位置。当 BIOS 找到可引导的软盘或者硬盘时，他将位于第一个扇区的 512-byte 的引导扇区加载到物理地址为 0x7c00-0x7dff 的内存中，然后使用 jmp 指令将 CS:IP 设置为 0000:7c00，将控制权传递给引导加载程序。就像 加载 BIOS 的地址一样，这些地址看起来是任意地址，但是它们对于 PC 而言，是标准化的，也是固定的。</p>
 <p>在 PC 的发展过程中，从 CD-ROM 引导的能力出现得晚得多，因此 PC 架构师借此机会稍微重新思考了引导过程。因此，现代的 BIOS 从 CD-ROM 引导的方式更复杂（也更强大）。CD-ROMs 使用 2048 字节的扇区代替 512 字节，这样 BIOS 就可以在控制权移交之前，从磁盘加载更大的引导镜像到内存中。</p>
 <p>对于 6.828 实验来说，我们使用传统的硬盘引导机制，这意味着引导加载程序必须容纳在 512 字节以内。引导加载程序（boot loader）包含一个汇编源文件（boot/boot.S）和一个 C 源文件（boot/main.c）,可以详细看下这两个文件。引导加载程序（boot loader）必须执行两个 main functions：</p>
@@ -358,7 +373,7 @@ The target architecture is assumed to be i8086
 <p>如果要检查内存中要执行的指令（除了 GDB 自动打印的下一个要执行的指令之外），可以使用 <code>x/i</code> 命令。此命令的语法为 <code>x/Ni ADDR</code>，其中 N 是要反汇编的连续指令数，ADDR 是要开始反汇编的内存地址。</p>
 <p>简单画了个图，如下所示：</p>
 <p><img src="/img/2021/10/boot-loader.png" alt="cpu 上电流程"></p>
-<h3 id="heading">加载内核</h3>
+<h4 id="heading">加载内核</h4>
 <p>接下来，将根据 <code>boot/main.c</code> 文件来详细学习引导加载程序（boot loader）的 C 语言部分。（需要温习下 C 语言编程指针部分内容）</p>
 <p>什么是 ELF 二进制文件？</p>
 <blockquote>
@@ -452,11 +467,11 @@ architecture: i386, flags 0x00000112:
 EXEC_P, HAS_SYMS, D_PAGED
 start address 0x0010000c
 </code></pre></div><p>至此，我们应该了解了 <code>boot/main.c</code> 中的小型 ELF 加载器的大致功能：它会从磁盘读取 kernel 中的每个 section，然后加载到对应 section 加载地址所在的内存区域中，然后跳转到 kernel 程序入口（entry point）处开始执行。</p>
-<h2 id="part-3-the-kernel">Part 3: The Kernel</h2>
+<h3 id="part-3-the-kernel">Part 3: The Kernel</h3>
 <blockquote>
 <p>本节详细学习 JOS 的内核。</p>
 </blockquote>
-<h3 id="heading1">虚拟内存</h3>
+<h4 id="heading1">虚拟内存</h4>
 <blockquote>
 <p>使用虚拟内存解决位置依赖问题</p>
 </blockquote>
@@ -465,17 +480,17 @@ start address 0x0010000c
 <p>很多机器在地址 <code>0xf0100000</code> 处已经没有物理内存，因此我们不能指望在那个地址存储内核。所以，我们会使用处理器的内存管理硬件（processor's memory management hardware）将虚拟地址 0xf0100000（内核代码预期运行的链接地址）映射到物理地址 0x00100000（引导加载程序（boot loader）将内核加载到的物理内存地址）。尽管内核的虚拟地址足够高，可以为用户进程留下大量地址空间，但是它还是会被加载到 0x00100000 这个物理内存上（译者注：32 位预留的 RAM，最底下 640K 是 16 位预留的 RAM），这个位置刚好位于 BIOS ROM 的上面。这种方法要求 PC 至少有几兆的物理内存（大于 1M 内存，0x100000 内核代码才能正常运行）， 1990 年以前的 PC 估计不行。</p>
 <p>下一个实验，我们会映射 PC 物理地址空间底部的 256M 空间，从物理地址 <code>0x00000000-0x0fffffff</code>（256M）到虚拟地址 <code>0xf0000000-0xffffffff</code>。现在我们就明白了，<strong>为什么 JOS 只能使用前 256M 的物理内存！</strong></p>
 <p>现在我们只映射前 4M 物理内存，这些内存足够我们启动和运行。我们在 <code>kern/entrypgdir.c</code> 文件中手动修改代码，来静态初始化页目录（page directory）和页表（page table）。现在不用了解它的工作机制，只需要了解它的效果就行。在 <code>kern/entry.S</code> 文件设置 <code>CR0_PG</code> 标志之前，内存引用被视为物理地址（严格来说，是线性地址（linear addresses），但是 <code>boot/boot.S</code> 设置了一个线性地址到物理地址的映射）。一旦 <code>CR0_PG</code> 标志被设置，内存引用就是虚拟地址了，该虚拟地址是由虚拟内存硬件（virtual memory hardware）从物理地址转换而来。<code>entry_pgdir</code> 将虚拟地址（0xf0000000-0xf0400000）转换到物理地址（0x00000000-0x00400000），并将虚拟地址（0x00000000-0x00400000）转换为物理地址（0x00000000-0x00400000）。任何不在这两个范围内的虚拟地址都将导致硬件异常，因为我们还没有设置中断处理，这会导致 QEMU 退出并 dumo 机器状态信息。（如果没有使用 6.828 补丁版本的 QEMU，则将无休止地重启）</p>
-<h3 id="heading2">格式化控制台输出</h3>
+<h4 id="heading2">格式化控制台输出</h4>
 <p>大多数人认为直接使用 <code>printf()</code> 函数就行了，可能还认为它是 C 语言的 “primitives”（原语），但是在操作系统内核中，我们必须自己实现所有 I/O。</p>
 <p>大家需要学习一下 <code>kern/printf.c</code>、<code>lib/printfmt.c</code>、<code>kern/console.c</code> 这三个文件，搞清楚他们之间的关联。后面自然就知道为什么 <code>printfmt.c</code> 文件要单独放在 <code>lib</code> 目录下？</p>
-<h3 id="stack">栈（Stack）</h3>
+<h4 id="stack">栈（Stack）</h4>
 <blockquote>
 <p>栈是先进后出的数据结构，内存中栈顶在低地址、栈底在高地址。可以想象成一个帽子🎩</p>
 </blockquote>
 <p>本实验的最后，我们学习 C 语言在 x86 上使用栈的方式，并在此过程中，编写一个新的内核监控函数，用于打印栈的 backtrace：也就是从嵌套的 call 指令所保存的指令指针到当前执行指针的列表信息。</p>
 <p>x86 栈指针（<code>esp</code> 寄存器，extended stack pointer）指向栈上当前正在使用的最低位置（栈顶位置指针）。在为栈保留的区域中，该位置下方的所有内容都是空的（free）。push 一个值入栈时，栈指针（<code>esp</code>）需要减小（也就是向下移动），然后将值写入到栈指针（<code>esp</code>）指向的内存区域。相反的，pop 一个值出栈时，会先读取栈指针（<code>esp</code>）指向的内存值，然后栈指针（<code>esp</code>）增加（向上移动）。在 32-bit 模式下，栈只能保存 32 位的值，<code>esp</code> 寄存器事中可以被 4 整除。各种 x86 指令都是“硬连线”（hard-wired）来使用栈指针寄存器（<code>esp</code>）的。</p>
 <p><code>ebp</code> 寄存器（栈基址寄存器，extended base pointer，指向系统栈最上面一个栈帧「最新执行的一个函数」的底部）主要通过软件约定来与栈关联在一起的。进入一个 C 函数时，函数的底层代码通常会将上一个函数的基指针 push 到栈中，然后在函数操作期间将当前 <code>esp</code> 值复制给 <code>ebp</code>（<code>ebp</code> 不是必须的，主要是为了方便操作局部变量）。如果程序中的所有函数都遵守此约定，那么在程序执行中的任何 point，都可以通过栈去追溯：通过保存的 ebp 指针的链路，确定函数通过怎样的调用嵌套顺序来到达这个 point。这个功能还是特别有用的，例如：当某个特定函数由于传递了错误参数导致 assert 失败或 panic，但是不确定是谁传递了错误参数时，栈的 backtrace 可以轻松找到有问题的函数。</p>
-<h1 id="0xff-">0xff 参考</h1>
+<h2 id="0xff-">0xff 参考</h2>
 <ul>
 <li><a href="/file/pcasm-book.pdf" target="_blank">《PC 汇编语言》 PDF 版本</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/368954250">[MIT] 6.828 操作系统工程导读</a></li>

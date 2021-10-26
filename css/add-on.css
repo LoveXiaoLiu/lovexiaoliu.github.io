@@ -4,3 +4,12 @@
   is an official part of the theme (ex. Pull Requests) should be included in main.css
   and follow the formatting and style given.
 */
+
+#TableOfContents {
+  border: 1px dotted rgba(161, 161, 161, 0.7);
+}
+
+#TableOfContents ul {
+  list-style-type: none;
+  padding-inline-start: 1.5em;
+}

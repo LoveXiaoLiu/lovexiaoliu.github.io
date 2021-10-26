@@ -194,16 +194,17 @@
       </div>
       <div class="content">
         
-        <h1 id="0x00-">0x00 简述</h1>
+        
+        <h2 id="0x00-">0x00 简述</h2>
 <p>我的实验环境：</p>
 <ul>
 <li>CentOS 7</li>
 </ul>
-<h1 id="0x01-">0x01 工具安装</h1>
+<h2 id="0x01-">0x01 工具安装</h2>
 <blockquote>
 <p>整个实验环境需要两类工具：ToolChain、<a href="https://www.qemu.org/">QEMU 模拟器</a></p>
 </blockquote>
-<h2 id="toolchain-">ToolChain 工具链</h2>
+<h3 id="toolchain-">ToolChain 工具链</h3>
 <p>ToolChain 包含汇编器、连接器、C 编译器和 debug 工具。</p>
 <p>一般的现代 Linux 系统都自带了 6.828 需要的 ToolChain，命令 <code>objdump -i</code> 和 <code>gcc -m32 -print-libgcc-file-name</code> 如果都能执行成功，说明 ToolChain 工具链已经就绪。</p>
 <p><strong><del>我的 CentOS 自带了 ToolChain 工具链，所以没有安装</del></strong>，如果有问题或者需要自己安装 ToolChain 工具链，可以参考<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>和<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，推荐<a href="https://www.bilibili.com/video/BV1NA411j7rX?spm_id_from=333.999.0.0">B 站 UP 主的视频指导</a>，该视频讲解的很详细。</p>
@@ -242,9 +243,9 @@ make <span style="color:#f92672">&amp;&amp;</span> make install
 
 <span style="color:#75715e"># 下载课程 jos 代码：</span>
 git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab
-</code></pre></div><h2 id="qemu-httpswwwqemuorg"><a href="https://www.qemu.org/">QEMU 模拟器</a></h2>
+</code></pre></div><h3 id="qemu-httpswwwqemuorg"><a href="https://www.qemu.org/">QEMU 模拟器</a></h3>
 <p>QEMU 建议安装 6.828 专用的 path 版本，仓库为 <a href="https://github.com/mit-pdos/6.828-qemu.git">https://github.com/mit-pdos/6.828-qemu.git</a>，可参考<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html">官方文档</a>安装，安装时的简单报错可以根据提示很容易修复。</p>
-<h1 id="0x02-troubleshooting">0x02 Troubleshooting</h1>
+<h2 id="0x02-troubleshooting">0x02 Troubleshooting</h2>
 <ol>
 <li>
 <p>安装 QEMU 时 pixman 报错</p>
@@ -260,7 +261,7 @@ git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab
 </ul>
 </li>
 </ol>
-<h1 id="0xff-">0xff 参考</h1>
+<h2 id="0xff-">0xff 参考</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/74028717">MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/368954250">[MIT] 6.828 操作系统工程导读</a></li>

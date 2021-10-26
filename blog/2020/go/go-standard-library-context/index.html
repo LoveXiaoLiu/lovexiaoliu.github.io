@@ -199,6 +199,26 @@
         <a href="/blog/2020/go/go-standard-library-context/" class="image" style="--bg-image: url('/img/2020/11/kobe-04-as-gty.jpg');">
     <img class="stretchH" src="/img/2020/11/kobe-04-as-gty.jpg" alt="Fog may have disoriented pilot in helicopter crash that killed Kobe Bryant, 8 others: NTSB">
   </a>
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-">0x00 简介</a></li>
+    <li><a href="#0x01-">0x01 最佳实践</a></li>
+    <li><a href="#0x02-">0x02 常用函数</a>
+      <ul>
+        <li><a href="#withcancel">WithCancel</a></li>
+        <li><a href="#withdeadline">WithDeadline</a></li>
+        <li><a href="#withtimeout">WithTimeout</a></li>
+        <li><a href="#cancelfunc">CancelFunc</a></li>
+        <li><a href="#context-">Context 接口</a></li>
+        <li><a href="#background-">Background 方法</a></li>
+        <li><a href="#todo-">TODO 方法</a></li>
+        <li><a href="#withvalue-">WithValue 方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
         <h2 id="0x00-">0x00 简介</h2>
 <p>Context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &hellip;&hellip;</p>
 <p>当一个 context 被 canceled，所有从它派生的 context 都会被取消：B 被取消，C 同样也会被废弃</p>
