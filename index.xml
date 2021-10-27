@@ -6,10 +6,32 @@
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【MIT 6.828】0. 参考资料</title>
+      <link>/blog/2021/mit/6.828-0/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-0/</guid>
+      <description>非官方  MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列 [MIT] 6.828 操作系统工程导读  官方  《PC 汇编语言》 PDF 版本 《6.828: PC hardware and x86》PPT 课件 xv6 操作系统介绍  </description>
+    </item>
+    
+    <item>
+      <title>【MIT 6.828】4. 内存管理</title>
+      <link>/blog/2021/mit/6.828-4/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-4/</guid>
+      <description>lab 2 实验地址：https://pdos.csail.mit.edu/6.828/2018/labs/lab2/
+ 0x00 课程介绍 本次实验中，需要写操作系统内存管理的代码（译者注：我就不写了，学习 6.828 的目的是快速了解操作系统，初步学习且时间有限，能看懂就行了）。内存管理包含两大组件：
+ 内核的物理内存分配器（physical memory allocator）：有了物理内存分配器，内核就可以分配和释放内存空间了。该分配器需要以 4096 字节（称为页，page）为单位来运行。需要做的就是维护一个数据结构，该数据结构记录着哪些物理内存页是空闲的、哪些物理内存页是已分配的、多少进程共享了已分配的内存页。还需要编写申请和释放内存页的代码。 虚拟内存（Virtual Memory）：将内核和用户程序使用的虚拟地址映射到物理内存中的地址。x86 硬件的 MMU（内存管理单元，memory management unit）在指令将要使用内存的时候，通过查询页表（page table），进行映射操作，实验中会要求根据给定规范，修改 JOS 中 MMU 的页表（page table）。  接下来的所有实验，将会逐步构建出自己的内核代码。使用命令 git checkout -b lab2 origin/lab2 可以切换到 lab2 的代码分支，lab2 中已经加入了一些相关的源代码。
+lab2 新增了如下文件：
+ inc/memlayout.h kern/pmap.c kern/pmap.h kern/kclock.h kern/kclock.c  inc/memlayout.h 描述了虚拟地址空间的布局，你需要在 kern/pmap.c 中实现它。inc/memlayout.h 和 kern/pmap.h 定义了 PageInfo 结构体，你需要使用 PageInfo 结构体去跟踪物理内存的那个页（page）是空闲的。kern/kclock.c 和 kern/kclock.h 控制 PC 的时钟和 CMOS RAM 硬件，在这两个文件里面 BIOS 记录着物理内存的总数和其他内容。kern/pmap.c 代码需要去读取设备硬件来得知它有多少物理内存，但是这部分代码已经写完了，我们暂时不需要关注 CMOS 硬件是如何工作的。</description>
+    </item>
     
     <item>
       <title>计算机术语【持续更新】</title>

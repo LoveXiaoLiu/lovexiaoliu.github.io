@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>Web - Gra55&#39;s Blog</title>
+<title>【MIT 6.828】4. 内存管理 - Gra55&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -19,10 +19,10 @@
   <meta name="theme-color" content="#ffffff">
 
 <meta name="generator" content="Hugo 0.60.0" /><meta property="og:site_name" content="Gra55&#39;s Blog">
-  <meta property="og:title" content="Web">
-  <meta property="og:description" content="A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo.">
-  <meta property="description" content="A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo.">
-  <meta property="og:url" content="/categories/web/">
+  <meta property="og:title" content="【MIT 6.828】4. 内存管理">
+  <meta property="og:description" content="本节详细学习 6.828 lab 2，操作系统的内存管理">
+  <meta property="description" content="本节详细学习 6.828 lab 2，操作系统的内存管理">
+  <meta property="og:url" content="/blog/2021/mit/6.828-4/">
   <meta property="og:type" content="article">
   
     <meta property="og:image" content="/img/main/mamba.png">
@@ -42,7 +42,7 @@
     <h1 class="nav-title">
       <a href="/" class="nav">
         
-          categories
+          Blog
         
       </a>
     </h1>
@@ -116,8 +116,6 @@
     <footer>
       <ul class="socnet-icons">
         
-    <li><a href="/categories/web/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
@@ -168,40 +166,68 @@
 
       <main id="site-main">
         
-  
-  
-    <article class="post">
-  <header>
+  <article>
+    <div class="post">
+      <header>
   <div class="title">
     
-      <h2><a href="/blog/2019/web/http-overview/">HTTP 协议透彻解析</a></h2>
+      <h2><a href="/blog/2021/mit/6.828-4/">【MIT 6.828】4. 内存管理</a></h2>
     
     
-      <p>从入门到放弃的讲解 HTTP 协议</p>
+      <p>本节详细学习 6.828 lab 2，操作系统的内存管理</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-07-18 00:00:00 &#43;0000 UTC">July 18, 2019</time>
+    <time datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
     <p>gra55</p>
     <p>1-Minute Read</p>
   </div>
 </header>
 
-  <div class="content">
-    <a href="/blog/2019/web/http-overview/" class="image" style="--bg-image: url('/img/2019/07/zgr-bwbj.jpeg');">
-    <img class="stretchH" src="/img/2019/07/zgr-bwbj.jpeg" alt="张国荣在《霸王别姬》中的幕后照">
-  </a>
-    
-    <p>keywords:</p>
-  </div>
-  <footer>
-    <a href="/blog/2019/web/http-overview/" class="button big">Read More</a>
-    <div class="stats">
+      <div id="socnet-share">
+        
+
+
+
+
+
+      </div>
+      <div class="content">
+        
+        <blockquote>
+<p>lab 2 实验地址：https://pdos.csail.mit.edu/6.828/2018/labs/lab2/</p>
+</blockquote>
+<h2 id="0x00-">0x00 课程介绍</h2>
+<p>本次实验中，需要写操作系统内存管理的代码（译者注：我就不写了，学习 6.828 的目的是快速了解操作系统，初步学习且时间有限，能看懂就行了）。内存管理包含两大组件：</p>
+<ul>
+<li><strong>内核的物理内存分配器</strong>（physical memory allocator）：有了物理内存分配器，内核就可以分配和释放内存空间了。该分配器需要以 4096 字节（称为页，page）为单位来运行。需要做的就是维护一个数据结构，该数据结构记录着哪些物理内存页是空闲的、哪些物理内存页是已分配的、多少进程共享了已分配的内存页。还需要编写申请和释放内存页的代码。</li>
+<li><strong>虚拟内存</strong>（Virtual Memory）：将内核和用户程序使用的虚拟地址映射到物理内存中的地址。x86 硬件的 MMU（内存管理单元，memory management unit）在指令将要使用内存的时候，通过查询页表（page table），<strong>进行映射操作</strong>，实验中会要求根据给定规范，修改 JOS 中 MMU 的页表（page table）。</li>
+</ul>
+<p>接下来的所有实验，将会逐步构建出自己的内核代码。使用命令 <code>git checkout -b lab2 origin/lab2</code> 可以切换到 lab2 的代码分支，lab2 中已经加入了一些相关的源代码。</p>
+<p>lab2 新增了如下文件：</p>
+<ul>
+<li>inc/memlayout.h</li>
+<li>kern/pmap.c</li>
+<li>kern/pmap.h</li>
+<li>kern/kclock.h</li>
+<li>kern/kclock.c</li>
+</ul>
+<p><code>inc/memlayout.h</code> 描述了虚拟地址空间的布局，你需要在 <code>kern/pmap.c</code> 中实现它。<code>inc/memlayout.h</code> 和 <code>kern/pmap.h</code> 定义了 <code>PageInfo</code> 结构体，你需要使用 <code>PageInfo</code> 结构体去跟踪物理内存的那个页（page）是空闲的。<code>kern/kclock.c</code> 和 <code>kern/kclock.h</code> 控制 PC 的时钟和 CMOS RAM 硬件，在这两个文件里面 BIOS 记录着物理内存的总数和其他内容。<code>kern/pmap.c</code> 代码需要去读取设备硬件来得知它有多少物理内存，但是这部分代码已经写完了，我们暂时不需要关注 CMOS 硬件是如何工作的。</p>
+<p>lab2 需要特别关注 <code>inc/memlayout.h</code>、<code>kern/pmap.h</code>、<code>inc/mmu.h</code> 文件，因为会用到这三个文件中定义的很多结构体。</p>
+<h2 id="0x01-part-1-physical-page-management">0x01 Part 1: Physical Page Management</h2>
+<h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
+<h2 id="0x03-part-3-kernel-address-space">0x03 Part 3: Kernel Address Space</h2>
+<h2 id="0xff-">0xff 参考</h2>
+<p><a href="/blog/2021/mit/6.828-0">MIT 6.828 参考资料</a></p>
+
+      </div>
+      <footer>
+        <div class="stats">
   
     <ul class="categories">
       
         
-          <li><a class="article-terms-link" href="/categories/web/">Web</a></li>
+          <li><a class="article-terms-link" href="/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%9f%ba%e7%a1%80/">计算机基础</a></li>
         
       
     </ul>
@@ -210,23 +236,30 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/web/">web</a></li>
+          <li><a class="article-terms-link" href="/tags/mit/">MIT</a></li>
         
-          <li><a class="article-terms-link" href="/tags/http/">http</a></li>
+          <li><a class="article-terms-link" href="/tags/2021/">2021</a></li>
         
-          <li><a class="article-terms-link" href="/tags/2019/">2019</a></li>
+          <li><a class="article-terms-link" href="/tags/6.828/">6.828</a></li>
         
       
     </ul>
   
 </div>
 
-  </footer>
-</article>
+      </footer>
+    </div>
+    
+      
 
-  
+    
+  </article>
   <div class="pagination">
     
+      <a href="/blog/2021/mit/6.828-0/" class="button left"><span>【MIT 6.828】0. 参考资料</span></a>
+    
+    
+      <a href="/blog/2021/computer-basics/computer-terms/" class="button right"><span>计算机术语【持续更新】</span></a>
     
   </div>
 
@@ -327,8 +360,6 @@
   
       <ul class="socnet-icons">
         
-    <li><a href="/categories/web/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 

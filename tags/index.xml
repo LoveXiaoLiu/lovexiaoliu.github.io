@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>2021</title>
       <link>/tags/2021/</link>
-      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>/tags/2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>6.828</title>
+      <link>/tags/6.828/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/6.828/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MIT</title>
+      <link>/tags/mit/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mit/</guid>
       <description></description>
     </item>
     
@@ -35,24 +53,6 @@
       <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E6%9C%AF%E8%AF%AD/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>6.828</title>
-      <link>/tags/6.828/</link>
-      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/6.828/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MIT</title>
-      <link>/tags/mit/</link>
-      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mit/</guid>
       <description></description>
     </item>
     
