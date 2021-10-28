@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
     <p>gra55</p>
-    <p>1-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -215,8 +215,139 @@
 <p><code>inc/memlayout.h</code> 描述了虚拟地址空间的布局，你需要在 <code>kern/pmap.c</code> 中实现它。<code>inc/memlayout.h</code> 和 <code>kern/pmap.h</code> 定义了 <code>PageInfo</code> 结构体，你需要使用 <code>PageInfo</code> 结构体去跟踪物理内存的那个页（page）是空闲的。<code>kern/kclock.c</code> 和 <code>kern/kclock.h</code> 控制 PC 的时钟和 CMOS RAM 硬件，在这两个文件里面 BIOS 记录着物理内存的总数和其他内容。<code>kern/pmap.c</code> 代码需要去读取设备硬件来得知它有多少物理内存，但是这部分代码已经写完了，我们暂时不需要关注 CMOS 硬件是如何工作的。</p>
 <p>lab2 需要特别关注 <code>inc/memlayout.h</code>、<code>kern/pmap.h</code>、<code>inc/mmu.h</code> 文件，因为会用到这三个文件中定义的很多结构体。</p>
 <h2 id="0x01-part-1-physical-page-management">0x01 Part 1: Physical Page Management</h2>
+<p>操作系统必须要跟踪物理 RAM 中哪些是空闲的、哪些是当前正在使用的。JOS 以页面（page）粒度来管理 PC 的物理内存，所以它可以使用 MMU 映射和保护分配的每一块内存。</p>
+<p>现在需要编写物理页分配器（physical page allocator）代码。通过 PageInfo 结构体列表来跟踪哪些页面（page）是空闲的，每个 PageInfo 结构体对应一个物理页面（physical page）。在编写虚拟内存实现之前，需要先编写物理页分配器（physical page allocator）的实现，因为页表（page table）管理代码需要分配物理内存来存储页表（page table）。</p>
+<p><code>kern/pmap.c</code> 中，必须实现一下函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">boot_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+mem_init<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">(</span>only up to the call to check_page_free_list<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+page_init<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+page_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+page_free<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+
+check_page_free_list<span style="color:#f92672">(</span><span style="color:#f92672">)</span> and check_page_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span> test your physical page allocator. You should boot JOS and see whether check_page_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span> reports success. Fix your code so that it passes. You may find it helpful to add your own assert<span style="color:#f92672">(</span><span style="color:#f92672">)</span>s to verify that your assumptions are correct.
+</code></pre></div><p>要实现上面的函数，可以根据函数的注释和 Intel 手册等资料，还是比较麻烦的。</p>
 <h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
-<h2 id="0x03-part-3-kernel-address-space">0x03 Part 3: Kernel Address Space</h2>
+<p>x86 保护模式（protected-mode）下的内存管理架构：段转换（segment translation）和页面转换（page translation）。</p>
+<h3 id="heading">虚拟地址、线性地址和物理地址</h3>
+<p>在 x86 的术语中：</p>
+<ul>
+<li>虚拟地址（virtual address）由段选择器（segment selector）和段内偏移（offset）组成</li>
+<li>线性地址（linear address）是在段转换（segment translation）之后，页面转换（page translation）之前得到的地址</li>
+<li>物理地址（physical address）是在段转换（segment translation）和页面转换（page translation）之后最终得到的地址，该地址最终会通过硬件总线（hardware bus）来访问 RAM</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">           Selector  +--------------+         +-----------+
+          ----------&gt;|              |         |           |
+                     | Segmentation |         |  Paging   |
+Software             |              |--------&gt;|           |----------&gt;  RAM
+            Offset   |  Mechanism   |         | Mechanism |
+          ----------&gt;|              |         |           |
+                     +--------------+         +-----------+
+            Virtual                   Linear                Physical
+</code></pre></div><p>C 语言中的指针（pointer）其实是虚拟地址中的 “offset”。在 <code>boot/boot.S</code> 文件中，我们安装了一个全局描述符表（GDT，Global Descriptor Table），通过设置所有段基地址（segment base address）为 <code>0</code>，并限制最高到 <code>0xffffffff</code>，有效的禁用了段转换（segment translation）。因此 “selector”（段选择器）无效，线性地址（linear address）始终等于虚拟地址（virtual address）的偏移量（offset）。</p>
+<p>在 lab3 中，我们为了设置权限级别（privilege levels），必须与分段（segmentation）进行更多的交互，但是对于内存转换，我们可以忽略 JOS labs 中的分段（segmentation），只需要关注页面转换（page translation）。</p>
+<p>回想一下 <a href="/blog/2021/mit/6.828-3/#part-3-the-kernel">lab1 的 part3</a>，我们使用了一个简单的页表（page table），这样内核就可以在其链接地址（0xf0100000）处运行，尽管它实际加载在 BIOS ROM 上面的物理地址（0x00100000），其中的原因就是由于通过页表（page table）做了一个地址映射，该页表（page table）只能映射 4M 内存。</p>
+<p>本实验中，需要为 JOS 设置虚拟地址空间布局，我们对此进行扩展，映射物理内存的前 256M 内存，虚拟地址从 <code>0xf0000000</code> 开始，并映射虚拟地址空间的其他区域。</p>
+<p>从 CPU 上的执行代码来看，一旦进入保护模式（<code>boot/boot.S</code> 中首先会进入保护模式），<strong>就无法直接使用线性地址和物理地址了</strong>。所有的内存引用都会被解释为虚拟地址，并由 MMU 进行转换，这意味着 C 语言中的所有指针都是虚拟地址。</p>
+<p>JOS 内核通常将地址作为不透明的值（opaque values）或整数（integers）进行操作，而不去引用他们（例如在物理内存分配器中就是这样使用的）。有时是虚拟地址，有时是物理地址，为了方便区分，JOS 源码分成了两种类型（这两种类型实际上都是 32 位整数类型（<code>uint32_t</code>），因此编译器不会阻止它们相互赋值，由于它们是整数类型而不是指针，如果取消引用它们，编译器会报错）：</p>
+<ul>
+<li><code>physaddr_t</code> 类型表示物理地址</li>
+<li><code>uintptr_t</code> 类型表示虚拟地址</li>
+</ul>
+<p>JOS 内核需要先将 <code>uintptr_t</code> 强制转换（cast）成指针类型，才能对 <code>uintptr_t</code> 进行解引用（dereference）操作。相反的，内核不能正确的解引用（dereference）一个物理地址，因为 MMU 转换了所有内存引用。如果将 <code>physaddr_t</code> 强制转换（cast）为指针类型并取消引用，你虽然可以加载和存储得到的地址，但是可能无法获得到预期的内存位置，因为它被视为虚拟地址来被处理的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">      C type  Address type
+          T*  Virtual
+   uintptr_t  Virtual
+  physaddr_t  Physical
+</code></pre></div><p>JOS 内核有时候需要直接读取和修改物理地址对应的内存（非虚拟地址对应的内存），例如：向页表（page table）添加映射关系时可能需要申请物理内存来存储页目录（page directory），然后初始化这块内存。但是，内核不能绕过虚拟地址转换这步操作，因此不能直接加载和存储数据到物理地址。原因之一是：JOS 从物理地址 0 的位置重新映射了所有的物理内存到虚拟内存的 <code>0xf0000000</code> 位置，当内核只知道物理地址时，这种方式（物理地址加上 <code>0xf0000000</code> 就是虚拟地址）会帮助内核来读取和写入数据。为了将物理地址转换成内核可以实际读写的虚拟地址，内核必须将 <code>0xf0000000</code> 和物理地址相加，以在重新映射的区域中找到其相应的虚拟地址，可以使用 <code>KADDR(pa)</code> 函数来做加法操作。</p>
+<p>JOS 内核有时还需要找到一个虚拟地址内存对应的物理地址（该地址存储内核的数据结构）。内核的全局变量和被 <code>boot_alloc()</code> 分配的内存处在内核被加载的区域（从 <code>0xf0000000</code> 开始的位置），这块区域包含在映射范围内。因此，要将该区域的虚拟地址转换为物理地址，内核只需要减去 <code>0xf0000000</code> 即可，可以使用 <code>PADDR(va)</code> 函数来做减法操作。</p>
+<h3 id="reference-counting">引用计数（Reference counting）</h3>
+<p>在后边的 lab 中，会经常看到多个虚拟地址映射到了相同的物理地址，我们需要在 <code>PageInfo</code> 结构体的 <code>pp_ref</code> 字段维护每个物理页面（physical page）被引用的次数。当物理页面（physical page）的引用计数为 0 时，该页就可以被释放了，因为它不再被使用。通常，物理页面（physical page）的引用计数应该等于在所有的页表（page table）范围内 <code>UTOP</code> 以下的区域，该物理页面（physical page）出现的次数。（<code>UTOP</code> 以上的区域大部分是在引导时（boot time）由内核设置的，不应该被释放掉，因此不需要对它们进行引用计数）。我们还将使用引用计数来跟踪指向 <code>page directory</code> 页的指针数量，还有，<code>page directory</code> 对 <code>page table</code> 页的引用数量。</p>
+<p>使用 <code>page_alloc</code> 函数时一定要小心，它返回的页面（page）的引用计数始终为 0，因此当你对返回的页面（page）执行操作（比如将该 page 插入到 page table 中）以后，<code>pp_ref</code> 字段应该立即加 1，有时这个操作是由其他函数（例如，<code>page_insert</code>）处理的，有时调用 <code>page_alloc</code> 的函数必须直接处理。</p>
+<h3 id="page-table-management">页表管理（Page Table Management）</h3>
+<p>这里需要编写管理页表（page table）的代码：插入和删除线性地址到物理地址的映射、在需要的地方创建 <code>page table</code> 页。</p>
+<p>在 <code>kern/pmap.c</code> 文件中，实现如下函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">        pgdir_walk()
+        boot_map_region()
+        page_lookup()
+        page_remove()
+        page_insert()
+
+check_page(), called from mem_init(), tests your page table management routines. You should make sure it reports success before proceeding.
+</code></pre></div><h2 id="0x03-part-3-kernel-address-space">0x03 Part 3: Kernel Address Space</h2>
+<p>JOS 将处理器的 32 位线性地址空间（linear address space）分为两部分，<strong>分界线</strong>是由 <code>inc/memlayout.h</code> 中 <code>ULIM</code> 符号定义的，会为内核保留大约 256M 的虚拟地址空间：</p>
+<ul>
+<li>内核会控制上面一部分的（upper part）的布局（layout）和内容</li>
+<li>用户环境（user environments）会控制下面一部分（lower part）的布局（layout）和内容</li>
+</ul>
+<p>这解释了为什么我们需要在 lab1 中为内核设置如此高的链接地址，如果不设置如此高的链接地址，内核的虚拟地址空间下面就没有足够的空间预留给用户环境。</p>
+<pre><code>Virtual memory map:                                Permissions
+                                                   kernel/user
+   4 Gig --------&gt;  +------------------------------+
+                    |                              | RW/--
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    :              .               :
+                    :              .               :
+                    :              .               :
+                    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| RW/--
+                    |                              | RW/--
+                    |   Remapped Physical Memory   | RW/--
+                    |                              | RW/--
+   KERNBASE, ----&gt;  +------------------------------+ 0xf0000000      --+
+   KSTACKTOP        |     CPU0's Kernel Stack      | RW/--  KSTKSIZE   |
+                    | - - - - - - - - - - - - - - -|                   |
+                    |      Invalid Memory (*)      | --/--  KSTKGAP    |
+                    +------------------------------+                   |
+                    |     CPU1's Kernel Stack      | RW/--  KSTKSIZE   |
+                    | - - - - - - - - - - - - - - -|                 PTSIZE
+                    |      Invalid Memory (*)      | --/--  KSTKGAP    |
+                    +------------------------------+                   |
+                    :              .               :                   |
+                    :              .               :                   |
+   MMIOLIM ------&gt;  +------------------------------+ 0xefc00000      --+
+                    |       Memory-mapped I/O      | RW/--  PTSIZE
+ULIM, MMIOBASE --&gt;  +------------------------------+ 0xef800000         ======&gt; 分界线，上面全部是内核空间
+                    |  Cur. Page Table (User R-)   | R-/R-  PTSIZE               |
+   UVPT      ----&gt;  +------------------------------+ 0xef400000                  |
+                    |          RO PAGES            | R-/R-  PTSIZE               |===&gt; 中间区域内核和用户权限一致
+   UPAGES    ----&gt;  +------------------------------+ 0xef000000                  |
+                    |           RO ENVS            | R-/R-  PTSIZE               |
+UTOP,UENVS ------&gt;  +------------------------------+ 0xeec00000         ======&gt; 分界线，下面全部是用户空间
+UXSTACKTOP -/       |     User Exception Stack     | RW/RW  PGSIZE
+                    +------------------------------+ 0xeebff000
+                    |       Empty Memory (*)       | --/--  PGSIZE
+   USTACKTOP  ---&gt;  +------------------------------+ 0xeebfe000
+                    |      Normal User Stack       | RW/RW  PGSIZE
+                    +------------------------------+ 0xeebfd000
+                    |                              |
+                    |                              |
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    .                              .
+                    .                              .
+                    .                              .
+                    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+                    |     Program Data &amp; Heap      |
+   UTEXT --------&gt;  +------------------------------+ 0x00800000(8M)
+   PFTEMP -------&gt;  |       Empty Memory (*)       |        PTSIZE
+                    |                              |
+   UTEMP --------&gt;  +------------------------------+ 0x00400000      --+
+                    |       Empty Memory (*)       |                   |
+                    | - - - - - - - - - - - - - - -|                   |
+                    |  User STAB Data (optional)   |                 PTSIZE
+   USTABDATA ----&gt;  +------------------------------+ 0x00200000        |
+                    |       Empty Memory (*)       |                   |
+   0 ------------&gt;  +------------------------------+                 --+
+
+Note: The kernel ensures that &quot;Invalid Memory&quot; is *never* mapped.
+    &quot;Empty Memory&quot; is normally unmapped, but user programs may map pages
+    there if desired.  JOS user programs map pages temporarily at UTEMP.
+</code></pre><h3 id="permissions-and-fault-isolation">权限和故障隔离（Permissions and Fault Isolation）</h3>
+<p>由于内核和用户内存都存在于每个环境的地址空间中，因此我们必须在 x86 页表（page table）中使用权限位（permission bits），以限制用户代码仅能访问地址空间中的用户部分。否则，用户代码中的错误可能会覆盖内核数据，导致系统崩溃等问题；用户代码还可能窃取其他环境的私有数据。注意：可写权限位 <code>PTE_W</code> 同时影响用户代码和内核代码。</p>
+<p>内核可以读写 <code>ULIM</code> 符号之上的任何内存，用户环境则没有权限访问。<code>[UTOP，ULIM]</code> 地址范围，内核和用户环境具有相同的权限：他们可以读取但是不能写入该地址范围。<strong>此地址范围用于以只读方式向用户环境公开某些内核数据结构</strong>。最后，<code>UTOP</code> 下面的地址空间供用户环境使用；用户环境将设置访问此内存的权限。</p>
+<h3 id="initializing-the-kernel-address-space">初始化内核地址空间（Initializing the Kernel Address Space）</h3>
+<p>现在，我们需要设置 <code>UTOP</code> 上面的地址空间（地址空间中的内核部分）。我们需要使用上面实现的一些函数来设置适当的线性地址到物理地址的映射。</p>
+<h3 id="address-space-layout">地址空间布局（Address Space Layout）备选方案</h3>
+<p>我们在 JOS 中使用的地址空间布局不是唯一的方案。操作系统也可以将内核映射到较低的线性地址，而将上部地址空间留给用户进程。但是，x86 内核通常不采用这种方法，因为 x86 的虚拟 8086 模式（一种向后兼容的模式）在处理器中是“硬连线”的，就是为了使用线性地址空间的底部区域，因此如果内核映射在那里的话，将无法使用。</p>
+<p>甚至可以设计内核，使其不必为自己保留处理器线性或虚拟地址空间的任何固定部分，而是有效地允许用户级进程不受限制地使用整个 4GB 的虚拟地址空间，同时仍然充分保护内核不受这些进程的影响，并保护不同进程彼此不受影响，显而易见，这是非常困难的。</p>
 <h2 id="0xff-">0xff 参考</h2>
 <p><a href="/blog/2021/mit/6.828-0">MIT 6.828 参考资料</a></p>
 
