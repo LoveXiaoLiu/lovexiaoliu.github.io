@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
     <p>gra55</p>
-    <p>4-Minute Read</p>
+    <p>5-Minute Read</p>
   </div>
 </header>
 
@@ -200,7 +200,7 @@
 <h2 id="0x00-">0x00 课程介绍</h2>
 <p>本次实验中，需要写操作系统内存管理的代码（译者注：我就不写了，学习 6.828 的目的是快速了解操作系统，初步学习且时间有限，能看懂就行了）。内存管理包含两大组件：</p>
 <ul>
-<li><strong>内核的物理内存分配器</strong>（physical memory allocator）：有了物理内存分配器，内核就可以分配和释放内存空间了。该分配器需要以 4096 字节（称为页，page）为单位来运行。需要做的就是维护一个数据结构，该数据结构记录着哪些物理内存页是空闲的、哪些物理内存页是已分配的、多少进程共享了已分配的内存页。还需要编写申请和释放内存页的代码。</li>
+<li><strong>内核的物理内存分配器</strong>（physical memory allocator）：有了物理内存分配器，内核就可以分配和释放内存空间了。该分配器需要以 4096 字节（称为页，page，<code>#define PGSIZE 4096</code>）为单位来运行。需要做的就是维护一个数据结构，该数据结构记录着哪些物理内存页是空闲的、哪些物理内存页是已分配的、多少进程共享了已分配的内存页。还需要编写申请和释放内存页的代码。</li>
 <li><strong>虚拟内存</strong>（Virtual Memory）：将内核和用户程序使用的虚拟地址映射到物理内存中的地址。x86 硬件的 MMU（内存管理单元，memory management unit）在指令将要使用内存的时候，通过查询页表（page table），<strong>进行映射操作</strong>，实验中会要求根据给定规范，修改 JOS 中 MMU 的页表（page table）。</li>
 </ul>
 <p>接下来的所有实验，将会逐步构建出自己的内核代码。使用命令 <code>git checkout -b lab2 origin/lab2</code> 可以切换到 lab2 的代码分支，lab2 中已经加入了一些相关的源代码。</p>
@@ -212,7 +212,7 @@
 <li>kern/kclock.h</li>
 <li>kern/kclock.c</li>
 </ul>
-<p><code>inc/memlayout.h</code> 描述了虚拟地址空间的布局，你需要在 <code>kern/pmap.c</code> 中实现它。<code>inc/memlayout.h</code> 和 <code>kern/pmap.h</code> 定义了 <code>PageInfo</code> 结构体，你需要使用 <code>PageInfo</code> 结构体去跟踪物理内存的那个页（page）是空闲的。<code>kern/kclock.c</code> 和 <code>kern/kclock.h</code> 控制 PC 的时钟和 CMOS RAM 硬件，在这两个文件里面 BIOS 记录着物理内存的总数和其他内容。<code>kern/pmap.c</code> 代码需要去读取设备硬件来得知它有多少物理内存，但是这部分代码已经写完了，我们暂时不需要关注 CMOS 硬件是如何工作的。</p>
+<p><code>inc/memlayout.h</code> 描述了虚拟地址空间的布局，你需要在 <code>kern/pmap.c</code> 中实现它。<code>inc/memlayout.h</code> 和 <code>kern/pmap.h</code> 定义了 <code>PageInfo</code> 结构体，你需要使用 <code>PageInfo</code> 结构体去跟踪物理内存的哪个页（page）是空闲的。<code>kern/kclock.c</code> 和 <code>kern/kclock.h</code> 控制 PC 的时钟和 CMOS RAM 硬件，在这两个文件里面 BIOS 记录着物理内存的总数和其他内容。<code>kern/pmap.c</code> 代码需要去读取设备硬件来得知它有多少物理内存，但是这部分代码已经写完了，我们暂时不需要关注 CMOS 硬件是如何工作的。</p>
 <p>lab2 需要特别关注 <code>inc/memlayout.h</code>、<code>kern/pmap.h</code>、<code>inc/mmu.h</code> 文件，因为会用到这三个文件中定义的很多结构体。</p>
 <h2 id="0x01-part-1-physical-page-management">0x01 Part 1: Physical Page Management</h2>
 <p>操作系统必须要跟踪物理 RAM 中哪些是空闲的、哪些是当前正在使用的。JOS 以页面（page）粒度来管理 PC 的物理内存，所以它可以使用 MMU 映射和保护分配的每一块内存。</p>
@@ -226,7 +226,27 @@ page_free<span style="color:#f92672">(</span><span style="color:#f92672">)</span
 
 check_page_free_list<span style="color:#f92672">(</span><span style="color:#f92672">)</span> and check_page_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span> test your physical page allocator. You should boot JOS and see whether check_page_alloc<span style="color:#f92672">(</span><span style="color:#f92672">)</span> reports success. Fix your code so that it passes. You may find it helpful to add your own assert<span style="color:#f92672">(</span><span style="color:#f92672">)</span>s to verify that your assumptions are correct.
 </code></pre></div><p>要实现上面的函数，可以根据函数的注释和 Intel 手册等资料，还是比较麻烦的。</p>
-<h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
+<p>页（page）的结构体如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">PageInfo</span> {
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">PageInfo</span> <span style="color:#f92672">*</span>pp_link;  <span style="color:#75715e">// 空闲列表中的下一个 page
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint16_t</span> pp_ref;           <span style="color:#75715e">// 记录指向该页的指针数量（引用计数）
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>每个 PageInfo 结构体存储着一个物理页的元数据。但是他不是物理页本身，但是物理页和 PageInfo 结构体有一对一的关系，可以使用 <code>kern/pmap.h</code> 中的 <code>page2pa()</code> 函数将结构体 PageInfo 映射到对应的物理地址上。</p>
+<p>page table 其实就是一个列表，存储着所有页（page）。GDB 查看 entry_pgtable（页表的变量）的值如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> p entry_pgtable
+$14 <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>3, 4099, 8195, 12291, 16387, 20483, 24579, 28675, 32771, 36867, 40963, 45059, 49155, 53251, 57347, 61443, 65539, 69635, 73731, 77827, 
+  81923, 86019, 90115, 94211, 98307, 102403, 106499, 110595, 114691, 118787, 122883, 126979, 131075, 135171, 139267, 143363, 147459, 151555, 
+  155651, 159747, 163843, 167939, 172035, 176131, 180227, 184323, 188419, 192515, 196611, 200707, 204803, 208899, 212995, 217091, 221187, 
+  225283, 229379, 233475, 237571, 241667, 245763, 249859, 253955, 258051, 262147, 266243, 270339, 274435, 278531, 282627, 286723, 290819, 
+  294915, 299011, 303107, 307203, 311299, 315395, 319491, 323587, 327683, 331779, 335875, 339971, 344067, 348163, 352259, 356355, 360451, 
+  364547, 368643, 372739, 376835, 380931, 385027, 389123, 393219, 397315, 401411, 405507, 409603, 413699, 417795, 421891, 425987, 430083, 
+  434179, 438275, 442371, 446467, 450563, 454659, 458755, 462851, 466947, 471043, 475139, 479235, 483331, 487427, 491523, 495619, 499715, 
+  503811, 507907, 512003, 516099, 520195, 524291, 528387, 532483, 536579, 540675, 544771, 548867, 552963, 557059, 561155, 565251, 569347, 
+  573443, 577539, 581635, 585731, 589827, 593923, 598019, 602115, 606211, 610307, 614403, 618499, 622595, 626691, 630787, 634883, 638979, 
+  643075, 647171, 651267, 655363, 659459, 663555, 667651, 671747, 675843, 679939, 684035, 688131, 692227, 696323, 700419, 704515, 708611, 
+  712707, 716803, 720899, 724995, 729091, 733187, 737283, 741379, 745475, 749571, 753763, 757763, 761859, 765955, 770051, 774147, 778243, 
+  782339, 786435, 790531, 794627, 798723, 802819, 806915, 811011, 815107...<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
 <p>x86 保护模式（protected-mode）下的内存管理架构：段转换（segment translation）和页面转换（page translation）。</p>
 <h3 id="heading">虚拟地址、线性地址和物理地址</h3>
 <p>在 x86 的术语中：</p>
