@@ -180,7 +180,7 @@
   <div class="meta">
     <time datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
     <p>gra55</p>
-    <p>5-Minute Read</p>
+    <p>3-Minute Read</p>
   </div>
 </header>
 
@@ -232,21 +232,9 @@ check_page_free_list<span style="color:#f92672">(</span><span style="color:#f926
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint16_t</span> pp_ref;           <span style="color:#75715e">// 记录指向该页的指针数量（引用计数）
 </span><span style="color:#75715e"></span>};
 </code></pre></div><p>每个 PageInfo 结构体存储着一个物理页的元数据。但是他不是物理页本身，但是物理页和 PageInfo 结构体有一对一的关系，可以使用 <code>kern/pmap.h</code> 中的 <code>page2pa()</code> 函数将结构体 PageInfo 映射到对应的物理地址上。</p>
-<p>page table 其实就是一个列表，存储着所有页（page）。GDB 查看 entry_pgtable（页表的变量）的值如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> p entry_pgtable
-$14 <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>3, 4099, 8195, 12291, 16387, 20483, 24579, 28675, 32771, 36867, 40963, 45059, 49155, 53251, 57347, 61443, 65539, 69635, 73731, 77827, 
-  81923, 86019, 90115, 94211, 98307, 102403, 106499, 110595, 114691, 118787, 122883, 126979, 131075, 135171, 139267, 143363, 147459, 151555, 
-  155651, 159747, 163843, 167939, 172035, 176131, 180227, 184323, 188419, 192515, 196611, 200707, 204803, 208899, 212995, 217091, 221187, 
-  225283, 229379, 233475, 237571, 241667, 245763, 249859, 253955, 258051, 262147, 266243, 270339, 274435, 278531, 282627, 286723, 290819, 
-  294915, 299011, 303107, 307203, 311299, 315395, 319491, 323587, 327683, 331779, 335875, 339971, 344067, 348163, 352259, 356355, 360451, 
-  364547, 368643, 372739, 376835, 380931, 385027, 389123, 393219, 397315, 401411, 405507, 409603, 413699, 417795, 421891, 425987, 430083, 
-  434179, 438275, 442371, 446467, 450563, 454659, 458755, 462851, 466947, 471043, 475139, 479235, 483331, 487427, 491523, 495619, 499715, 
-  503811, 507907, 512003, 516099, 520195, 524291, 528387, 532483, 536579, 540675, 544771, 548867, 552963, 557059, 561155, 565251, 569347, 
-  573443, 577539, 581635, 585731, 589827, 593923, 598019, 602115, 606211, 610307, 614403, 618499, 622595, 626691, 630787, 634883, 638979, 
-  643075, 647171, 651267, 655363, 659459, 663555, 667651, 671747, 675843, 679939, 684035, 688131, 692227, 696323, 700419, 704515, 708611, 
-  712707, 716803, 720899, 724995, 729091, 733187, 737283, 741379, 745475, 749571, 753763, 757763, 761859, 765955, 770051, 774147, 778243, 
-  782339, 786435, 790531, 794627, 798723, 802819, 806915, 811011, 815107...<span style="color:#f92672">}</span>
-</code></pre></div><h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
+<p>Page Directory 和 Page Table 其实就是一个列表，列表中每一项存储着具体的地址信息，目前这种方式相当于二级页表查找。线性地址（32-bit）分为三部分：页目录（10-bit）+ 页表（10-bit）+ 偏移（12-bit）。页目录可以存放 1024（2^10）个页表，每个页表可以存放 1024（2^10）个内存页，每个物理内存页是 4096 字节（4K），所以，整个线性地址可以表示 4G（4K * 1024 * 1024）的内存。如下图所示：</p>
+<p><img src="/img/2021/10/address-map.png" alt="内存映射"></p>
+<h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
 <p>x86 保护模式（protected-mode）下的内存管理架构：段转换（segment translation）和页面转换（page translation）。</p>
 <h3 id="heading">虚拟地址、线性地址和物理地址</h3>
 <p>在 x86 的术语中：</p>
@@ -300,67 +288,8 @@ check_page(), called from mem_init(), tests your page table management routines.
 <li>用户环境（user environments）会控制下面一部分（lower part）的布局（layout）和内容</li>
 </ul>
 <p>这解释了为什么我们需要在 lab1 中为内核设置如此高的链接地址，如果不设置如此高的链接地址，内核的虚拟地址空间下面就没有足够的空间预留给用户环境。</p>
-<pre><code>Virtual memory map:                                Permissions
-                                                   kernel/user
-   4 Gig --------&gt;  +------------------------------+
-                    |                              | RW/--
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    :              .               :
-                    :              .               :
-                    :              .               :
-                    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| RW/--
-                    |                              | RW/--
-                    |   Remapped Physical Memory   | RW/--
-                    |                              | RW/--
-   KERNBASE, ----&gt;  +------------------------------+ 0xf0000000      --+
-   KSTACKTOP        |     CPU0's Kernel Stack      | RW/--  KSTKSIZE   |
-                    | - - - - - - - - - - - - - - -|                   |
-                    |      Invalid Memory (*)      | --/--  KSTKGAP    |
-                    +------------------------------+                   |
-                    |     CPU1's Kernel Stack      | RW/--  KSTKSIZE   |
-                    | - - - - - - - - - - - - - - -|                 PTSIZE
-                    |      Invalid Memory (*)      | --/--  KSTKGAP    |
-                    +------------------------------+                   |
-                    :              .               :                   |
-                    :              .               :                   |
-   MMIOLIM ------&gt;  +------------------------------+ 0xefc00000      --+
-                    |       Memory-mapped I/O      | RW/--  PTSIZE
-ULIM, MMIOBASE --&gt;  +------------------------------+ 0xef800000         ======&gt; 分界线，上面全部是内核空间
-                    |  Cur. Page Table (User R-)   | R-/R-  PTSIZE               |
-   UVPT      ----&gt;  +------------------------------+ 0xef400000                  |
-                    |          RO PAGES            | R-/R-  PTSIZE               |===&gt; 中间区域内核和用户权限一致
-   UPAGES    ----&gt;  +------------------------------+ 0xef000000                  |
-                    |           RO ENVS            | R-/R-  PTSIZE               |
-UTOP,UENVS ------&gt;  +------------------------------+ 0xeec00000         ======&gt; 分界线，下面全部是用户空间
-UXSTACKTOP -/       |     User Exception Stack     | RW/RW  PGSIZE
-                    +------------------------------+ 0xeebff000
-                    |       Empty Memory (*)       | --/--  PGSIZE
-   USTACKTOP  ---&gt;  +------------------------------+ 0xeebfe000
-                    |      Normal User Stack       | RW/RW  PGSIZE
-                    +------------------------------+ 0xeebfd000
-                    |                              |
-                    |                              |
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    .                              .
-                    .                              .
-                    .                              .
-                    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-                    |     Program Data &amp; Heap      |
-   UTEXT --------&gt;  +------------------------------+ 0x00800000(8M)
-   PFTEMP -------&gt;  |       Empty Memory (*)       |        PTSIZE
-                    |                              |
-   UTEMP --------&gt;  +------------------------------+ 0x00400000      --+
-                    |       Empty Memory (*)       |                   |
-                    | - - - - - - - - - - - - - - -|                   |
-                    |  User STAB Data (optional)   |                 PTSIZE
-   USTABDATA ----&gt;  +------------------------------+ 0x00200000        |
-                    |       Empty Memory (*)       |                   |
-   0 ------------&gt;  +------------------------------+                 --+
-
-Note: The kernel ensures that &quot;Invalid Memory&quot; is *never* mapped.
-    &quot;Empty Memory&quot; is normally unmapped, but user programs may map pages
-    there if desired.  JOS user programs map pages temporarily at UTEMP.
-</code></pre><h3 id="permissions-and-fault-isolation">权限和故障隔离（Permissions and Fault Isolation）</h3>
+<p><img src="/img/2021/10/memory-manage.png" alt="虚拟内存映射"></p>
+<h3 id="permissions-and-fault-isolation">权限和故障隔离（Permissions and Fault Isolation）</h3>
 <p>由于内核和用户内存都存在于每个环境的地址空间中，因此我们必须在 x86 页表（page table）中使用权限位（permission bits），以限制用户代码仅能访问地址空间中的用户部分。否则，用户代码中的错误可能会覆盖内核数据，导致系统崩溃等问题；用户代码还可能窃取其他环境的私有数据。注意：可写权限位 <code>PTE_W</code> 同时影响用户代码和内核代码。</p>
 <p>内核可以读写 <code>ULIM</code> 符号之上的任何内存，用户环境则没有权限访问。<code>[UTOP，ULIM]</code> 地址范围，内核和用户环境具有相同的权限：他们可以读取但是不能写入该地址范围。<strong>此地址范围用于以只读方式向用户环境公开某些内核数据结构</strong>。最后，<code>UTOP</code> 下面的地址空间供用户环境使用；用户环境将设置访问此内存的权限。</p>
 <h3 id="initializing-the-kernel-address-space">初始化内核地址空间（Initializing the Kernel Address Space）</h3>
