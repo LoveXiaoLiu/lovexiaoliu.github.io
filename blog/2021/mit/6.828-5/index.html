@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>【MIT 6.828】5. 用户环境 - Gra55&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+<meta name="generator" content="Hugo 0.60.0" /><meta property="og:site_name" content="Gra55&#39;s Blog">
+  <meta property="og:title" content="【MIT 6.828】5. 用户环境">
+  <meta property="og:description" content="本节详细学习 6.828 lab 3，操作系统的用户环境">
+  <meta property="description" content="本节详细学习 6.828 lab 3，操作系统的用户环境">
+  <meta property="og:url" content="/blog/2021/mit/6.828-5/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="/img/main/mamba.png">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+        <script src="https://kit.fontawesome.com/be54eb011a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><link rel="stylesheet" href="/css/main.min.db5f7c24b564197df6497d519025664c4ebe7e6cb278e17de62b2edae43af3b4.css" integrity="sha256-2198JLVkGX32SX1RkCVmTE6&#43;fmyyeOF95isu2uQ687Q="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='fa fa-heartbeat'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='fa fa-coffee'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/awesome/" class="nav link"><i class='fab fa-angellist'></i> Awesome</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-folder-open'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='fas fa-paper-plane'></i> Contact</a>
+        
+      
+      
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+  
+</menu>
+
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="/img/main/mamba.png" class="circle" width="100" alt="Mamba spirit" /></a>
+  <header>
+    <h1>Gra55</h1>
+  </header>
+  <main>
+    <p>愿背井离乡、追寻梦想的你归来仍是少年 <i class='fab fa-angellist'></i></p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article>
+    <div class="post">
+      <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2021/mit/6.828-5/">【MIT 6.828】5. 用户环境</a></h2>
+    
+    
+      <p>本节详细学习 6.828 lab 3，操作系统的用户环境</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2021-10-31 00:00:00 &#43;0000 UTC">October 31, 2021</time>
+    <p>gra55</p>
+    <p>3-Minute Read</p>
+  </div>
+</header>
+
+      <div id="socnet-share">
+        
+
+
+
+
+
+      </div>
+      <div class="content">
+        
+        <blockquote>
+<p>lab 3 实验地址：<a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">https://pdos.csail.mit.edu/6.828/2018/labs/lab3/</a></a></p>
+</blockquote>
+<h2 id="0x00-">0x00 课程介绍</h2>
+<p>在本实验中将会实现，运行一个受保护的用户模式（user-mode）环境（例如：“进程”等）所需的基本内核功能。我们需要增强 JOS 内核，设计一个数据结构来跟踪用户环境（user environment），创建单用户环境（single user environment），加载一个程序镜像（program image）并运行它。另外 JOS 内核还需要处理用户环境（user environment）发出的任何系统调用（system calls）和造成的任何其他异常（exceptions）。</p>
+<blockquote>
+<p>注意：本实验中，术语“环境（environment）”和“进程（process）”的可以互换的，都是一个抽象概念：指允许你运行一个程序。</p>
+<p>引入术语“环境（environment）”而不使用传统术语“进程（process）”，是为了强调 JOS 环境和 UNIX 进程提供不同的接口，并且不提供相同的语义。</p>
+</blockquote>
+<p>使用命令 <code>git checkout -b lab3 origin/lab3</code> 切换到 lab3 的最新代码分支，lab3 增加了很多新的源文件，如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> inc/ env.h         用户模式环境的公共定义
+      trap.h        trap 处理的公共定义
+      syscall.h     从用户环境到内核的系统调用的公共定义
+      lib.h         用户模式支持库的公共定义
+kern/ env.h         用户模式环境的内核私有定义
+      env.c         实现用户模式环境的内核代码
+      trap.h        内核私有 trap 处理定义
+      trap.c        trap 处理代码
+      trapentry.S   汇编语言 trap 处理程序入口点
+      syscall.h     系统调用处理的内核私有定义
+      syscall.c     系统调用实现代码
+ lib/ Makefrag      Makefile 片段来构建用户模式库，obj/lib/libjos.a
+      entry.S       用户环境的汇编语言入口点
+      libmain.c     从 entry.S 调用的用户模式库设置代码
+      syscall.c     用户模式 系统调用的存根<span style="color:#f92672">(</span>stub<span style="color:#f92672">)</span>函数
+      console.c     用户模式 putchar 和 getchar 的实现，提供控制台 I/O
+      exit.c        用户模式 退出的实现
+      panic.c       用户模式 panic 的实现
+user/ *             用于检查内核 lab3 代码的各种测试程序 
+</code></pre></div><h2 id="0x01-part-a">0x01 Part A：用户环境和异常处理</h2>
+<p>lab3 中新增的文件 <code>inc/env.h</code> 包含了 JOS 中用户环境（user environment）需要使用到的基础定义（definition）。内核使用 <code>Env</code> 数据结构跟踪每一个用户环境（user environment）。本实验中，你只需要创建一个环境，但是需要设计 JOS 内核支持多环境（multiple environments）。lab4 会利用这个特性，来学习多环境交互。</p>
+<p>环境池 ID <code>envid_t</code> 由下图三部分组成，环境索引 <code>ENVX(eid)</code> 等于 <code>envs[]</code> 数组中的环境索引。 Uniqueifier 区分在不同时间创建但共享相同环境索引的环境。所有真实环境都大于 0（因此符号位为零）。<code>envid_ts</code> 小于 0 表示错误。 <code>envid_t == 0</code> 是特殊的，代表当前环境。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    +1+---------------21-----------------+--------10--------+
+    |0|          Uniqueifier             |   Environment    |
+    | |                                  |      Index       |
+    +------------------------------------+------------------+
+                                          <span style="color:#ae81ff">\-</span>-- ENVX<span style="color:#f92672">(</span>eid<span style="color:#f92672">)</span> --/
+</code></pre></div><p>内核维护了三个关于用户环境（user environment）的全局变量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Env</span> <span style="color:#f92672">*</span>envs <span style="color:#f92672">=</span> NULL;    <span style="color:#75715e">// 维护所有的环境
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Env</span> <span style="color:#f92672">*</span>curenv <span style="color:#f92672">=</span> NULL;    <span style="color:#75715e">// 当前环境
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Env</span> <span style="color:#f92672">*</span>env_free_list;    <span style="color:#75715e">// 空闲环境列表
+</span></code></pre></div><p>一旦 JOS 启动并运行，<code>envs</code> 指针将指向一个 Env 结构体的数组（该数组维护系统中所有的环境）。在我们的设计中，JOS 内核最多支持 NENV（<code>#define NENV 1024</code>）个同时活动的环境（active environments），通常情况下，运行环境（running environments）会少的多。<code>envs</code> 数组将包含 Env 结构体的实例，该实例是 NENV（<code>#define NENV 1024</code>）中的某一个可能的环境。</p>
+<p>JOS 内核在变量 <code>env_free_list</code> 中保存所有不活跃（inactive）的 Env 结构体。这种设计使分配（allocation）和取消分配（deallocation）环境变的更简单，因为只需要从变量 <code>env_free_list</code>  中插入或者删除即可。</p>
+<p>JOS 内核使用 <code>curenv</code> 变量来跟踪当前执行的环境。在系统启动期间，在运行第一个环境之前，<code>curenv</code> 被设置为 NULL。</p>
+<h3 id="heading">环境状态</h3>
+<p><code>inc/env.h</code> 中定义了 Env 结构体，如下所示（后续 lab 中会增加更多的字段）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Env</span> {
+  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Trapframe</span> env_tf       <span style="color:#75715e">// 保存的寄存器
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Env</span> <span style="color:#f92672">*</span>env_link;         <span style="color:#75715e">// 下一个空闲的 Env
+</span><span style="color:#75715e"></span>  envid_t env_id;               <span style="color:#75715e">// 唯一的环境标识符
+</span><span style="color:#75715e"></span>  envid_t env_parent_id;        <span style="color:#75715e">// 该 env 的父级 env 的 env_id
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">EnvType</span> env_type;        <span style="color:#75715e">// 特殊的系统环境
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> env_status;          <span style="color:#75715e">// 环境的状态
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">uint32_t</span> env_runs;            <span style="color:#75715e">// 环境运行的次数
+</span><span style="color:#75715e"></span>
+  <span style="color:#75715e">// Address space
+</span><span style="color:#75715e"></span>  pde_t <span style="color:#f92672">*</span>env_pgdir;             <span style="color:#75715e">// 页目录（page dir）的内核虚拟地址
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>env_tf</p>
+<ul>
+<li>Trapframe 结构体定义在 <code>inc/trap.h</code> 中，在当前环境未运行时（例如：当内核或其他环境运行时），维护着当前环境已保存的寄存器的值。内核在从用户模式切换到内核模式时会保存这些信息，以便以后可以在停止的位置恢复环境。</li>
+</ul>
+<p>env_link</p>
+<ul>
+<li>指向 <code>env_free_list</code> 中的下一个空闲 Env。<code>env_free_list</code> 指向列表中的第一个可用空闲环境（free environment）。</li>
+</ul>
+<p>env_id</p>
+<ul>
+<li>该值唯一标识一个环境（envs 数组中使用该值作为唯一标识）。当一个环境终止后，内核将重新分配一个 Env 结构体指向不同的环境，新环境会生成一个新的 env_id，与旧环境的 env_id 保证不相同，即使新环境复用了 envs 数组中的某一项元素（数组中每个元素都是一个插槽（slot））。</li>
+</ul>
+<p>env_parent_id</p>
+<ul>
+<li>内核在此保存了创建当前环境的环境的 env_id。通过这种方式，环境可以形成一个 “family tree”，这有助于做一些安全决策，比如：限制哪些环境可以对谁做什么操作等。</li>
+</ul>
+<p>env_type</p>
+<ul>
+<li>这用于区分特殊环境。对于大多数环境，它将是 ENV_TYPE_USER（ENV_TYPE_USER = 0）。我们将在以后的实验室中为特殊的系统服务环境介绍更多类型。</li>
+</ul>
+<p>env_status</p>
+<ul>
+<li>env_status 变量，包含以下值：
+<ul>
+<li>ENV_FREE：表示当前环境为非活跃（inactive）状态，因此该环境会在 env_free_list 中。</li>
+<li>ENV_RUNNABLE：表示该环境正在等待处理器运行。</li>
+<li>ENV_RUNNING：表示当前环境正在运行。</li>
+<li>ENV_NOT_RUNNABLE：表示该环境处于活跃状态（active），但它当前尚未准备好运行：例如，因为它正在等待来自另一个环境的进程间通信（IPC）。</li>
+<li>ENV_DYING：表示该环境是一个僵尸（zombie）环境。僵尸（zombie）环境将在下次捕获到内核时被释放。</li>
+</ul>
+</li>
+</ul>
+<p>env_pgdir</p>
+<ul>
+<li>此变量保存此环境的页面目录（page directory）的内核虚拟地址。</li>
+</ul>
+<p>与 Unix 进程一样，JOS 环境将“线程”（thread）和“地址空间”（address space）的概念结合了起来。线程（thread）主要由保存的寄存器（env_tf 字段）定义，地址空间（address space）由 env_pgdir 指向的页面目录（page directory）和页表（page table）定义。要运行环境，内核必须使用保存的寄存器和适当的地址空间去设置（set up）CPU。</p>
+<p>JOS 内核的 Env 结构体类似于 xv6 中的 proc 结构体。这两种结构体都将环境（或叫做 xv6 中的进程）的用户模式（user-mode）寄存器状态保存在 Trapframe 结构体中。在 JOS 中，各个环境不像 xv6 中的进程那样有自己的内核堆栈。JOS 内核中一次只能有一个活动的 JOS 环境，因此 JOS 只需要一个内核堆栈。</p>
+<h3 id="envs">分配环境数组（envs）</h3>
+<p>在 lab2 中，使用 <code>mem_init()</code> 为 <code>pages[]</code> 数组分配了内存，内核使用该表跟踪哪些页面是空闲的，哪些页面不是空闲的。现在需要进一步修改 <code>mem_init()</code>，以分配一个 Env 结构体数组，称为 envs。</p>
+<h3 id="heading1">创建和运行环境</h3>
+<p>现在，需要在 <code>kern/env.c</code> 中编写运行用户环境所需的代码。因为我们还没有文件系统，所以我们会设置内核加载一个静态二进制镜像（static binary image，该二进制镜像会嵌入到内核本身）。JOS 将该二进制文件作为 ELF 可执行镜像嵌入内核中。</p>
+<p>lab3 的 GNUmakefile 会在 <code>obj/user/</code> 目录下生成一些二进制镜像。如果看过 <code>kern/Makefrag</code> 文件，会注意到一些神奇的东西，它们将这些二进制文件直接“链接”（link）到内核可执行文件中，就像它们是 <code>.o</code> 文件一样。链接器命令行上的 <code>-b binary</code> 选项将使这些文件作为“原始”（raw）未解释的二进制文件（uninterpreted binary files）链接，而不是作为编译器生成的常规 <code>.o</code> 文件链接（<strong>其实，对链接器而言，这些文件根本不必是 ELF images，它们可以是任何东西，例如文本文件或图片</strong>）。如果在构建内核后查看 <code>obj/kern/kernel.sym</code> 文件，可以看到链接器“神奇地”生成了许多具有模糊名称的有趣变量，例如：<code>_binary_obj_user_hello_start</code>、<code>_binary_obj_user_hello_end</code>、<code>_binary_obj_user_hello_size</code>。链接器通过修改二进制文件的文件名来生成这些变量名，这些变量为常规内核代码提供了一种<em><strong>引用嵌入式二进制文件</strong></em>的方法。</p>
+<p>在 <code>kern/init.c</code> 的 <code>i386_init()</code> 函数中，将看到在环境中运行这些二进制镜像的代码。但是，设置用户环境的主要功能还没有完成，需要我们去补充。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// 在 env.c 文件中，完成以下函数功能：
+</span><span style="color:#75715e"></span>env_init()  <span style="color:#75715e">// 初始化 envs 数组中的所有 Env 结构体，并将它们添加到 env_free_list 中。调用 env_init_percpu 函数，该函数使用 privilege level 0（内核）和 privilege level 3（用户）的单独段（separate segments）来配置分段硬件（segmentation hardware）。
+</span><span style="color:#75715e"></span>env_setup_vm()  <span style="color:#75715e">// 为新环境分配页目录（page directory），并初始化新环境地址空间的内核部分。
+</span><span style="color:#75715e"></span>region_alloc()  <span style="color:#75715e">// 为环境分配和映射物理内存。
+</span><span style="color:#75715e"></span>load_icode()  <span style="color:#75715e">// 解析一个 ELF 二进制镜像，就像引导加载程序（ boot loader）已经做的那样，并将其内容加载到新环境的用户地址空间中。
+</span><span style="color:#75715e"></span>env_create()  <span style="color:#75715e">// 使用 env_alloc 分配环境，并调用 load_icode 将 ELF 二进制文件加载到环境中。
+</span><span style="color:#75715e"></span>env_run()  <span style="color:#75715e">// 在用户模式下，启动一个给定的环境。
+</span></code></pre></div><p>下面是调用用户代码之前的代码调用顺序图，学习下每一步完成了什么动作：</p>
+<ol>
+<li>start (kern/entry.S)</li>
+<li>i386_init (kern/init.c)
+<ol>
+<li>cons_init</li>
+<li>mem_init</li>
+<li>env_init</li>
+<li>trap_init (still incomplete at this point)</li>
+<li>env_create</li>
+<li>env_run
+<ol>
+<li>env_pop_tf</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="heading2">处理中断和异常</h3>
+<p>系统调用 <code>int $0x30</code> 指令是一条死胡同，<strong>一旦处理器进入用户模式，就无法返回</strong>。我们现在需要实现基本的异常（basic exception）和系统调用处理（system call handling），这样内核就有可能从用户模式代码（user-mode code）中恢复对处理器的控制。我们需要彻底熟悉 x86 中断和异常机制。</p>
+<blockquote>
+<p>在本实验室中，我们通常遵循英特尔的中断、异常等术语。然而，诸如异常、陷阱、中断、故障和中止等术语在整个体系结构或操作系统中没有标准意义，并且在使用时通常不考虑它们在特定体系结构（如 x86）上的细微差别。当您在本实验室之外看到这些术语时，其含义可能略有不同。</p>
+</blockquote>
+<p><a href="https://pdos.csail.mit.edu/6.828/2018/readings/i386/c09.htm"><strong>学习 Chapter 9, Exceptions and Interrupts 部分：</strong></a></p>
+<ul>
+<li>中断（interrupts）和异常（exceptions）是一种特殊的控制转移（control transfer），它们的工作方式有点像未编程的调用（unprogrammed <a href="https://pdos.csail.mit.edu/6.828/2018/readings/i386/CALL.htm">CALL</a>s）</li>
+<li>它们改变正常的程序流以处理外部事件、或报告错误、或异常情况</li>
+<li>中断（interrupts）和异常（exceptions）之间的区别在于，中断用于处理<code>处理器</code>外部的异步事件，而异常用于处理<code>处理器</code>在执行指令过程中检测到的条件（conditions）</li>
+<li>有两个外部中断源和两个异常源：
+<ul>
+<li>中断
+<ul>
+<li>可屏蔽中断（Maskable interrupts），通过 INTR 引脚（pin）发出信号；</li>
+<li>不可屏蔽中断（Nonmaskable interrupts），通过 NMI（Non-Maskable Interrupt，不可屏蔽中断）引脚发出信号；</li>
+</ul>
+</li>
+<li>异常
+<ul>
+<li>处理器检测（Processor detected），这些进一步分类为断层 faults、traps 和 aborts；</li>
+<li>软件触发（Programmed），INTO、INT 3、INT n 和 BOUND 中的指令可以触发异常。这些指令通常被称为“软件中断”（software interrupts），但处理器将其作为异常处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading3">受保护的控制传输</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading4">异常和中断的类型</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading5">例子说明</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading6">嵌套异常和中断</h3>
+<p>// TODO: 待补充</p>
+<h3 id="-idtinterrupt-descriptor-table">设置 IDT（interrupt descriptor table）</h3>
+<p>// TODO: 待补充</p>
+<h2 id="0x02-part-b">0x02 Part B：页错误、断点异常、系统调用</h2>
+<h3 id="heading7">处理页错误</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading8">断点异常</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading9">系统调用</h3>
+<p>用户进程通过调用“系统调用”（system calls）请求内核为它们做一些事情。当用户进程调用“系统调用”（system calls）时，处理器进入内核模式（kernel mode），处理器和内核协作保存用户进程的状态，内核执行适当的代码以执行系统调用，然后恢复用户进程。用户进程<strong>如何引起内核注意以及它如何指定要执行的调用</strong>的确切细节因系统而异。</p>
+<p>在 JOS 内核中，我们将使用 <code>int</code> 指令，这会导致处理器中断（processor interrupt）。特别地是，我们将使用 <code>int $0x30</code> 作为系统调用中断（system call interrupt），可以使用定义好的常量 <code>T_SYSCALL</code>（48=0x30）。所以必须设置中断描述符（interrupt descriptor），以允许用户进程触发该中断。请注意，中断 <code>0x30</code> 不能由硬件生成，因此，允许用户代码生成它不会引起歧义。</p>
+<p>应用程序通过寄存器来传递系统调用编号（system call number）和系统调用参数（system call arguments）。这样，内核就不需要在用户环境的堆栈或指令流中四处搜索。系统调用编号（system call number）会在 <code>%eax</code> 寄存器中，参数（最多五个）将分别位于 <code>%edx</code>、<code>%ecx</code>、<code>%ebx</code>、<code>%edi</code> 和 <code>%esi</code> 寄存器中。内核将返回值传回 <code>%eax</code> 寄存器中。调用“系统调用”（system calls）的汇编代码已经在 <code>lib/syscall.c</code> 中的 <code>syscall()</code> 中编写完成。有兴趣可以看看。</p>
+<h3 id="heading10">启动用户模式</h3>
+<p>// TODO: 待补充</p>
+<h3 id="heading11">页面错误和内存保护</h3>
+<p>// TODO: 待补充</p>
+<h2 id="0xff-">0xff 参考</h2>
+<p><a href="/blog/2021/mit/6.828-0">MIT 6.828 参考资料</a></p>
+
+      </div>
+      <footer>
+        <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%9f%ba%e7%a1%80/">计算机基础</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/mit/">MIT</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/2021/">2021</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/6.828/">6.828</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+      </footer>
+    </div>
+    
+      
+
+    
+  </article>
+  <div class="pagination">
+    
+    
+      <a href="/blog/2021/mit/6.828-4/" class="button right"><span>【MIT 6.828】4. 内存管理</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-5/">【MIT 6.828】5. 用户环境</a></h2>
+          <time class="published" datetime="2021-10-31 00:00:00 &#43;0000 UTC">October 31, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-4/">【MIT 6.828】4. 内存管理</a></h2>
+          <time class="published" datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/computer-basics/computer-terms/">计算机术语【持续更新】</a></h2>
+          <time class="published" datetime="2021-10-24 00:00:00 &#43;0000 UTC">October 24, 2021</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/algorithm/">algorithm<span class="count">10</span></a>
+          
+          <li>
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础<span class="count">9</span></a>
+          
+          <li>
+              <a href="/categories/%E6%9E%B6%E6%9E%84/">架构<span class="count">8</span></a>
+          
+          <li>
+              <a href="/categories/python/">python<span class="count">7</span></a>
+          
+          <li>
+              <a href="/categories/go/">go<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/blog/">blog<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/web/">web<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>Ordinary but not mediocre, fighting <i class='fab fa-angellist'></i></p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2021 Gra55&#39;s Blog
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/python.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/sql.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/shell.min.js"></script>
+    <script>hljs.highlightAll();</script><script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
+    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.e63fe476a466e8f6d101ddb4dd3f27ec124c3bece64f2f5e317a05eb20e7048d.js" integrity="sha256-5j/kdqRm6PbRAd203T8n7BJMO&#43;zmTy9eMXoF6yDnBI0="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

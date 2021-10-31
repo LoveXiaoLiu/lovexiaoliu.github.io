@@ -6,18 +6,23 @@
     <description>Recent content in MIT on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/mit/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>【MIT 6.828】0. 参考资料</title>
-      <link>/blog/2021/mit/6.828-0/</link>
-      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      <title>【MIT 6.828】5. 用户环境</title>
+      <link>/blog/2021/mit/6.828-5/</link>
+      <pubDate>Sun, 31 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2021/mit/6.828-0/</guid>
-      <description>非官方  MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列 [MIT] 6.828 操作系统工程导读  官方  《PC 汇编语言》 PDF 版本 《6.828: PC hardware and x86》PPT 课件 xv6 操作系统介绍  </description>
+      <guid>/blog/2021/mit/6.828-5/</guid>
+      <description>lab 3 实验地址：https://pdos.csail.mit.edu/6.828/2018/labs/lab3/
+ 0x00 课程介绍 在本实验中将会实现，运行一个受保护的用户模式（user-mode）环境（例如：“进程”等）所需的基本内核功能。我们需要增强 JOS 内核，设计一个数据结构来跟踪用户环境（user environment），创建单用户环境（single user environment），加载一个程序镜像（program image）并运行它。另外 JOS 内核还需要处理用户环境（user environment）发出的任何系统调用（system calls）和造成的任何其他异常（exceptions）。
+ 注意：本实验中，术语“环境（environment）”和“进程（process）”的可以互换的，都是一个抽象概念：指允许你运行一个程序。
+引入术语“环境（environment）”而不使用传统术语“进程（process）”，是为了强调 JOS 环境和 UNIX 进程提供不同的接口，并且不提供相同的语义。
+ 使用命令 git checkout -b lab3 origin/lab3 切换到 lab3 的最新代码分支，lab3 增加了很多新的源文件，如下所示：
+inc/ env.h 用户模式环境的公共定义 trap.h trap 处理的公共定义 syscall.h 从用户环境到内核的系统调用的公共定义 lib.h 用户模式支持库的公共定义 kern/ env.h 用户模式环境的内核私有定义 env.c 实现用户模式环境的内核代码 trap.h 内核私有 trap 处理定义 trap.c trap 处理代码 trapentry.S 汇编语言 trap 处理程序入口点 syscall.h 系统调用处理的内核私有定义 syscall.c 系统调用实现代码 lib/ Makefrag Makefile 片段来构建用户模式库，obj/lib/libjos.a entry.</description>
     </item>
     
     <item>
@@ -39,11 +44,12 @@ lab2 新增了如下文件：
       <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>/blog/2021/mit/6.828-3/</guid>
-      <description>0x00 非官方解读 6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章操作系统基础知识概览
+      <description>lab 1 实验地址：https://pdos.csail.mit.edu/6.828/2018/labs/lab1/
+ 0x00 非官方解读 6.828 实验使用的是 386 CPU，但是 386 CPU 一上电以后，处于 16 位的实模式，与 8086 CPU 很相似，不清楚 8086 的可以学习文章操作系统基础知识概览
 CPU 一上电，CS=0xF000、IP=0xFFF0，地址为 0xFFFF0，这个地址刚好在 BIOS ROM 中，所以先执行 BIOS 中的代码。
 BIOS 执行流程：
  上电自检（Power On Self Test） 加载磁盘的第一个可引导扇区，一个扇区大小为 512 字节，如何判断该扇区时可引导的？判断最后两个字节为 0xAA55 则表示该扇区可引导 BIOS 会把该扇区加载到段地址为 0x0000，偏移地址为 0x7c00 内存处 然后使用跳转指令跳到 CS=0x0000、IP=0x7c00 处开始执行 至此，BIOS 完成了自己的使命，把执行流交给了 0x7c00 处的代码，所以我们需要做的就是在磁盘的第一个扇区存放我们的代码。  0x01 官方解读（Lab 1: Booting a PC）  实验分为三部分：
- Part 1：主要是熟悉 x86 汇编语言、QEMU x86 仿真器和 PC 的开机引导过程 Part 2：主要是学习 6.828 内核的 boot 引导过程，代码的 boot 目录下 Part 3：主要学习 6.</description>
+ Part 1：主要是熟悉 x86 汇编语言、QEMU x86 仿真器和 PC 的开机引导过程 Part 2：主要是学习 6.</description>
     </item>
     
     <item>
@@ -72,6 +78,15 @@ tar xjf gmp-5.0.2.tar.bz2;cd gmp-5.0.2;./configure --prefix=/usr/local;make;make
       <description>0x00 简述 6.828 主要讲操作系统基本原理，包括虚拟内存、内核、用户模式等。
 课程组成形式，如下所示：
 ├── 讲座 │ ├── 讲解 xv6 操作系统 │ └── 讲解操作系统新兴的概念，这部分会学习很多研究论文 ├── 实验 │ ├── Lab 1：Booting │ ├── Lab 2：Memory management │ ├── Lab 3：User environments │ ├── Lab 4：Preemptive multitasking │ ├── Lab 5：File system, spawn, and shell │ └── Lab 6：Network driver └── 文档读物 0x01 术语  xv6：xv6 是一个类 Unix 的教学使用的操作系统，MIT 基于 Sixth Edition Unix (aka V6) 版本的重新实现，也是基于 x86 的，但是比 x86 更贴近于教学学习。 JOS：JOS 比 xv6 更早期一些，只支持单核，比 xv6 更适合学生来学习，6.</description>
+    </item>
+    
+    <item>
+      <title>【MIT 6.828】0. 参考资料</title>
+      <link>/blog/2021/mit/6.828-0/</link>
+      <pubDate>Tue, 19 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/mit/6.828-0/</guid>
+      <description>非官方  MIT 6.828-神级OS课程-要是早遇到，我还会是这种 five 系列 [MIT] 6.828 操作系统工程导读  官方  《PC 汇编语言》 PDF 版本 《6.828: PC hardware and x86》PPT 课件 xv6 操作系统介绍  </description>
     </item>
     
   </channel>

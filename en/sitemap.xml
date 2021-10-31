@@ -4,22 +4,22 @@
   
   <url>
     <loc>/tags/2021/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/6.828/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -49,12 +49,12 @@
   
   <url>
     <loc>/tags/mit/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -68,17 +68,17 @@
   </url>
   
   <url>
-    <loc>/blog/2021/mit/6.828-0/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/blog/2021/mit/6.828-4/</loc>
-    <lastmod>2021-10-27T00:00:00+00:00</lastmod>
+    <loc>/blog/2021/mit/6.828-5/</loc>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2021-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2021/mit/6.828-4/</loc>
     <lastmod>2021-10-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -110,6 +110,11 @@
   <url>
     <loc>/blog/2021/mit/6.828-1/</loc>
     <lastmod>2021-10-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2021/mit/6.828-0/</loc>
+    <lastmod>2021-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
