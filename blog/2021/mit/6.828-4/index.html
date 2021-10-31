@@ -231,9 +231,13 @@ check_page_free_list<span style="color:#f92672">(</span><span style="color:#f926
     <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">PageInfo</span> <span style="color:#f92672">*</span>pp_link;  <span style="color:#75715e">// 空闲列表中的下一个 page
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint16_t</span> pp_ref;           <span style="color:#75715e">// 记录指向该页的指针数量（引用计数）
 </span><span style="color:#75715e"></span>};
-</code></pre></div><p>每个 PageInfo 结构体存储着一个物理页的元数据。但是他不是物理页本身，但是物理页和 PageInfo 结构体有一对一的关系，可以使用 <code>kern/pmap.h</code> 中的 <code>page2pa()</code> 函数将结构体 PageInfo 映射到对应的物理地址上。</p>
+</code></pre></div><p>每个 <strong>PageInfo 结构体存储着一个物理页的元数据。但是他不是物理页本身</strong>，但是物理页和 PageInfo 结构体有一对一的关系，可以使用 <code>kern/pmap.h</code> 中的 <code>page2pa()</code> 函数将结构体 PageInfo 映射到对应的物理地址上。</p>
 <p>Page Directory 和 Page Table 其实就是一个列表，列表中每一项存储着具体的地址信息，目前这种方式相当于二级页表查找。线性地址（32-bit）分为三部分：页目录（10-bit）+ 页表（10-bit）+ 偏移（12-bit）。页目录可以存放 1024（2^10）个页表，每个页表可以存放 1024（2^10）个内存页，每个物理内存页是 4096 字节（4K），所以，整个线性地址可以表示 4G（4K * 1024 * 1024）的内存。如下图所示：</p>
 <p><img src="/img/2021/10/address-map.png" alt="内存映射"></p>
+<blockquote>
+<p>物理内存的管理总结起来其实就是一句话：</p>
+<p>物理内存也是使用页（page）来管理，页（page）是由内核的物理内存分配器（physical memory allocator）来划分的，内核中的 PageInfo 结构体和物理页面一一对应。</p>
+</blockquote>
 <h2 id="0x02-part-2-virtual-memory">0x02 Part 2: Virtual Memory</h2>
 <p>x86 保护模式（protected-mode）下的内存管理架构：段转换（segment translation）和页面转换（page translation）。</p>
 <h3 id="heading">虚拟地址、线性地址和物理地址</h3>
