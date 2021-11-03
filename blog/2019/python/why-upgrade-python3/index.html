@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>抛弃 Python2，从此使用 Python3 - Gra55&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+<meta name="generator" content="Hugo 0.60.0" /><meta property="og:site_name" content="Gra55&#39;s Blog">
+  <meta property="og:title" content="抛弃 Python2，从此使用 Python3">
+  <meta property="og:description" content="Python3 ">
+  <meta property="description" content="Python3 ">
+  <meta property="og:url" content="/blog/2019/python/why-upgrade-python3/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="/img/2019/12/kobe_first_champ.jpg">
+      <meta property="og:image:alt" content="Jerry Buss is interviewed after his team won the 1999-2000 NBA Finals">
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+        <script src="https://kit.fontawesome.com/be54eb011a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><link rel="stylesheet" href="/css/main.min.db5f7c24b564197df6497d519025664c4ebe7e6cb278e17de62b2edae43af3b4.css" integrity="sha256-2198JLVkGX32SX1RkCVmTE6&#43;fmyyeOF95isu2uQ687Q="><link rel="stylesheet" href="/css/add-on.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8966627721202055"
+  crossorigin="anonymous"></script>
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='fa fa-coffee'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/awesome/" class="nav link"><i class='fab fa-angellist'></i> Awesome</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-folder-open'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='fa fa-heartbeat'></i> About</a>
+        
+      
+      
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="/img/main/mamba.png" class="circle" width="100" alt="Mamba spirit" /></a>
+  <header>
+    <h1>Gra55</h1>
+  </header>
+  <main>
+    <p>愿背井离乡、追寻梦想的你归来仍是少年 <i class='fab fa-angellist'></i></p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article>
+    <div class="post">
+      <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2019/python/why-upgrade-python3/">抛弃 Python2，从此使用 Python3</a></h2>
+    
+    
+      <p>Python3 </p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2019-12-11 00:00:00 &#43;0000 UTC">December 11, 2019</time>
+    <p>gra55</p>
+    <p>2-Minute Read</p>
+  </div>
+</header>
+
+      <div id="socnet-share">
+        
+
+
+
+
+
+      </div>
+      <div class="content">
+        <a href="/blog/2019/python/why-upgrade-python3/" class="image" style="--bg-image: url('/img/2019/12/kobe_first_champ.jpg');">
+    <img class="stretchH" src="/img/2019/12/kobe_first_champ.jpg" alt="Jerry Buss is interviewed after his team won the 1999-2000 NBA Finals">
+  </a>
+        <blockquote>
+<p>为什么要使用 Python3？我 2 用的好好的。（py 版本演进过程；2018 年开发者问卷调查；）</p>
+<p>Python 2 3 的特性对比</p>
+<p>到底写 2 还是写 3，还是两个都写。（如果是自己的项目，只写 py3，如果是提供的第三方库，需要写 3 代码来兼容 2。为什么不是写 2 的代码兼容 3 呢？2 孔的插座好比 Python2，3 孔的好比 Python3，本来是 2 孔的充电器插 2 孔的电源，3 孔的插 3 孔的。现在假如 2 孔的插座快淘汰了，你是愿意给 3 孔的充电器安装一个 2 孔的转接头，让他可以用使用 2 孔的插座呢，还是另外一种做法）</p>
+<p>如何逐步迁移到 Python 3（不迁移的话，你永远在使用 py2，因为你迈不出第一步）（需要注意很多老库不支持 py3）</p>
+<p>迁移工具有哪些</p>
+<p>如何部署 Python 2 和 Python3 的环境，并且还有虚拟环境</p>
+</blockquote>
+<h1 id="0x00--python3">0x00 为什么要升级到 Python3</h1>
+<p>Python2</p>
+<ul>
+<li>Python2 算是一种比较古老的语言</li>
+<li>2010 年 7 月，发布 2.7.0 版本的时候，就宣布了以后不会再发布 Python 2.x 大版本。参考 <a href="https://www.python.org/dev/peps/pep-0404/">PEP 404</a></li>
+<li>2020 年 1月 1 日以后，Python 官方不再支持 Python2。最初是打算 2014 年停止支持，发现大多数人还是没有迁移到 Python3，所以推迟到 2020 年。参考 <a href="https://www.python.org/dev/peps/pep-0373/">PEP 373</a></li>
+</ul>
+<p>Python3</p>
+<ul>
+<li>Python3 是一种比较现代化的语言</li>
+<li>第一个版本 3.0.0，发布于 2008 年 12 月</li>
+<li>初期的 3.x 版本不稳定，直到 3.3 版本（2012 年 9 月发布）以后</li>
+</ul>
+<p>Python2 语言在最初设计的时候，就存在很多问题（Unicode、print &amp; exec 都是语句、整数使用了地板除、rang等），在后来版本迭代的时候发现向后兼容的成本大于新写一门语言，所以就果断放弃了 Python2。</p>
+<p>为什么要推迟停止支持 Python2 的时间？我个人觉得是 Python3 早期没有太多的库来支持，如果我的项目想迁移到 Python3，但是我依赖的库只支持 Python2，那我肯定是放弃升级 Python3 的。</p>
+<p>But now，时代不一样了，95% 的常用库都已经支持 Python3 了，所以，你还在等什么呢？</p>
+<p>另外，根据 <a href="https://www.jetbrains.com/research/python-developers-survey-2017/">2017</a> 和 <a href="https://www.jetbrains.com/research/python-developers-survey-2018/">2018</a> 年的 Python 开发者调查报告显示，2018 年使用 Python3 的人数高达 84%，2019 年的报告还没出来，占比肯定 会更高。</p>
+<h1 id="0x01-">0x01 主要差异对比</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Python2</th>
+<th>Python3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>print</td>
+<td>print 是语句</td>
+<td>函数</td>
+</tr>
+<tr>
+<td>整数除法</td>
+<td>地板除</td>
+<td>返回浮点型</td>
+</tr>
+<tr>
+<td>input</td>
+<td>转换成输入的类型</td>
+<td>传入的值总是文本类型（类似 Python2 中的 raw_input）</td>
+</tr>
+<tr>
+<td>Round</td>
+<td>返回浮点型数字</td>
+<td>返回指定的精度</td>
+</tr>
+<tr>
+<td>变量泄漏</td>
+<td>存在变量泄漏</td>
+<td>不存在</td>
+</tr>
+<tr>
+<td>range</td>
+<td>直接返回列表</td>
+<td>返回生成器（类似 Python2 中的 xrange）</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>as 关键字可有可无</td>
+<td>as 关键字必须存在</td>
+</tr>
+<tr>
+<td>生成器的 .next 方法</td>
+<td>可以使用</td>
+<td>不能使用</td>
+</tr>
+<tr>
+<td>ASCII &amp; Unicode &amp; Byte</td>
+<td>有 ASCII string 和 Unicode 类型，无 Byte 类型</td>
+<td>有 Unicode 和 Byte 类型</td>
+</tr>
+</tbody>
+</table>
+<p>不再返回 list：</p>
+<ul>
+<li>zip()</li>
+<li>map()</li>
+<li>filter()</li>
+<li>dictionary’s .keys() method</li>
+<li>dictionary’s .values() method</li>
+<li>dictionary’s .items() method</li>
+</ul>
+<h1 id="0x02--python2--3-">0x02 如何写兼容 Python2 &amp; 3 的代码</h1>
+<blockquote>
+<p>首先需要明确一个问题：写 Python2 代码来兼容 Python3，还是写 Python3 代码来兼容 Python2？</p>
+<ul>
+<li>
+<p>历史经验来看，最佳实践是写<strong>Python3 代码来兼容 Python2</strong></p>
+</li>
+<li>
+<p>打一个不太恰当的比方：2 孔的插座好比 Python2 解释器，3 孔的好比 Python3 解释器，本来是 2 孔的充电器（Python2 代码）插 2 孔插座（Python2 解释器），3 孔（Python3 代码）的插 3 孔插座（Python3 解释器）。现在假如 2 孔的插座（Python2 解释器）快被淘汰了，你是愿意给 3 孔的充电器（Python3 代码）安装一个 2 孔的转接头（six library），让他可以同时使用 2 孔（Python2 解释器）和 3 孔插座（Python3 代码）呢？还是给 2 孔充电器（Python2 代码）安装一个 3 孔的转接头（six library）？</p>
+</li>
+<li>
+<p>当然是给 3 孔的充电器（Python3 代码）安装 2 孔的转接头（six library）。因为 2 孔的插座（Python2 解释器）被淘汰以后，我们完全可以不使用转接头了。否则必须一直依赖转接头（six library）。</p>
+</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/PythonCharmers/python-future">python-future</a> 库是用来弥补 Python2 和 Python3 兼容性的库，也就是一个转接头。</p>
+<p><a href="https://github.com/benjaminp/six">six</a> 也是一个解决 Python2 和 Python3 兼容性的库</p>
+<p>Python 内置 __future__</p>
+<p>这三者的区别：</p>
+<ul>
+<li>__future__ Python 内置的兼容模块，提供基础的兼容特性（print 函数、Unicode 等）</li>
+</ul>
+<h1 id="0x03-">0x03 升级工具</h1>
+<h1 id="0x04--python-2--3-">0x04 安装 Python 2 &amp; 3 的环境</h1>
+<hr>
+<p>参考：</p>
+<p>📌 <a href="https://www.fullstackpython.com/python-2-or-3.html">Python 2 or 3?</a></p>
+<p>📌 <a href="https://wiki.python.org/moin/Python2orPython3?action=recall&amp;rev=96">Should I use Python 2 or Python 3 for my development activity?</a></p>
+<p>📌 <a href="https://www.python.org/dev/peps/pep-0373/">PEP 373 &ndash; Python 2.7 Release Schedule</a></p>
+<p>📌 <a href="http://python-notes.curiousefficiency.org/en/latest/python3/questions_and_answers.html#why-was-python-3-made-incompatible-with-python-2">Why was Python 3 made incompatible with Python 2?</a></p>
+<p>📌 <a href="http://python-future.org/compatible_idioms.html">Cheat Sheet: Writing Python 2-3 compatible code</a></p>
+<p>📌 <a href="https://www.guru99.com/python-2-vs-python-3.html">Python 2 vs Python 3: Key Differences</a></p>
+<p>📌 <a href="https://www.geeksforgeeks.org/python2-vs-python3-syntax-and-performance-comparison/">Python2 vs Python3 | Syntax and performance Comparison</a></p>
+<p>📌 <a href="https://pybit.es/python-porting.html">Best Practices for Compatible Python 2 and 3 Code</a></p>
+<p>📌 <a href="http://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html">The key differences between Python 2.7.x and Python 3.x with examples</a></p>
+<p>📌 <a href="https://stackoverflow.com/questions/42110826/writing-cross-compatible-python-2-3-difference-between-future-six-and-fut">Writing cross-compatible Python 2/3: Difference between __future__, six, and future.utils?</a></p>
+
+      </div>
+      <footer>
+        <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/python/">Python</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/python/">python</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/2019/">2019</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+      </footer>
+    </div>
+    
+      
+
+    
+  </article>
+  <div class="pagination">
+    
+      <a href="/blog/2019/python/python-standard-library-queue/" class="button left"><span>Python 标准库：Queue</span></a>
+    
+    
+      <a href="/blog/2019/go/go-compare-python/" class="button right"><span>Python 与 Golang 语法特性对比</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-5/">【MIT 6.828】5. 用户环境</a></h2>
+          <time class="published" datetime="2021-10-31 00:00:00 &#43;0000 UTC">October 31, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-4/">【MIT 6.828】4. 内存管理</a></h2>
+          <time class="published" datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/computer-basics/computer-terms/">计算机术语【持续更新】</a></h2>
+          <time class="published" datetime="2021-10-24 00:00:00 &#43;0000 UTC">October 24, 2021</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/algorithm/">algorithm<span class="count">10</span></a>
+          
+          <li>
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础<span class="count">9</span></a>
+          
+          <li>
+              <a href="/categories/%E6%9E%B6%E6%9E%84/">架构<span class="count">8</span></a>
+          
+          <li>
+              <a href="/categories/python/">python<span class="count">7</span></a>
+          
+          <li>
+              <a href="/categories/go/">go<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/blog/">blog<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/web/">web<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>Ordinary but not mediocre, fighting <i class='fab fa-angellist'></i></p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2021 Gra55&#39;s Blog
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/python.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/sql.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/shell.min.js"></script>
+    <script>hljs.highlightAll();</script><script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
+    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.e63fe476a466e8f6d101ddb4dd3f27ec124c3bece64f2f5e317a05eb20e7048d.js" integrity="sha256-5j/kdqRm6PbRAd203T8n7BJMO&#43;zmTy9eMXoF6yDnBI0="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

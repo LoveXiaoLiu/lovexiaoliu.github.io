@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>回溯法 on Gra55&#39;s Blog</title>
+    <link>/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</link>
+    <description>Recent content in 回溯法 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>基础算法：回溯法</title>
+      <link>/blog/2020/algorithm/back-tracking/</link>
+      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/algorithm/back-tracking/</guid>
+      <description>0x00 算法概述 回溯算法其实是一种枚举算法（穷举法），是一种暴力解法，时间复杂度比较高。
+回溯法通过深度优先遍历的方法来尝试所有可能的解，当发现某一个分支无法满足求解条件，立马退回一步重新选择（回溯），尝试其他路径。如果只求一个解时，搜索到可用解后就停止搜索；如果求问题的所有解，就必须遍历所有解空间。
+0x01 解题步骤  针对所给问题，确定解空间：需要确定问题的解空间是否存在一个（最优）解 确定搜索规则 以深度优先策略开始搜索解空间，搜索过程中通过剪枝函数避免无效搜索  什么是剪枝函数？
+ 剪枝函数是对无效解的过滤策略（明知道这条路径走下去不会得到解或最优解，所以就提前回溯，提高效率） 可行性剪枝：提前判断当前路径无法求出解，就可以提前回溯 最优化剪枝：声明一个变量存储当前最优解，如果可以提前判断当前路径无法满足最优解的条件，就提前回溯 剪枝函数特别难找，好的剪枝函数可以极大的降低算法的时间复杂度 回溯通常是通过反转动态规划的步骤来实现的  0x02 实现方式  非递归 递归   参考：
+📌 五大常用算法之四：回溯法
+📌 “通用解题法”之回溯中的“剪枝”</description>
+    </item>
+    
+  </channel>
+</rss>

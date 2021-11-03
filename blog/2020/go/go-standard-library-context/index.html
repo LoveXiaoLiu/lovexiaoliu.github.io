@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Golang 标准库：context - Gra55&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+<meta name="generator" content="Hugo 0.60.0" /><meta property="og:site_name" content="Gra55&#39;s Blog">
+  <meta property="og:title" content="Golang 标准库：context">
+  <meta property="og:description" content="context 包定义了 Context 类型，可以用来跨进程传输信息、帮助 API 传输数据，并且可以携带 deadlines 或者 cancellation 信号">
+  <meta property="description" content="context 包定义了 Context 类型，可以用来跨进程传输信息、帮助 API 传输数据，并且可以携带 deadlines 或者 cancellation 信号">
+  <meta property="og:url" content="/blog/2020/go/go-standard-library-context/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="/img/2020/11/kobe-04-as-gty.jpg">
+      <meta property="og:image:alt" content="Fog may have disoriented pilot in helicopter crash that killed Kobe Bryant, 8 others: NTSB">
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+        <script src="https://kit.fontawesome.com/be54eb011a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><link rel="stylesheet" href="/css/main.min.db5f7c24b564197df6497d519025664c4ebe7e6cb278e17de62b2edae43af3b4.css" integrity="sha256-2198JLVkGX32SX1RkCVmTE6&#43;fmyyeOF95isu2uQ687Q="><link rel="stylesheet" href="/css/add-on.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8966627721202055"
+  crossorigin="anonymous"></script>
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='fa fa-coffee'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/awesome/" class="nav link"><i class='fab fa-angellist'></i> Awesome</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-folder-open'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='fa fa-heartbeat'></i> About</a>
+        
+      
+      
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="/img/main/mamba.png" class="circle" width="100" alt="Mamba spirit" /></a>
+  <header>
+    <h1>Gra55</h1>
+  </header>
+  <main>
+    <p>愿背井离乡、追寻梦想的你归来仍是少年 <i class='fab fa-angellist'></i></p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article>
+    <div class="post">
+      <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2020/go/go-standard-library-context/">Golang 标准库：context</a></h2>
+    
+    
+      <p>context 包定义了 Context 类型，可以用来跨进程传输信息、帮助 API 传输数据，并且可以携带 deadlines 或者 cancellation 信号</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2020-11-27 00:00:00 &#43;0000 UTC">November 27, 2020</time>
+    <p>gra55</p>
+    <p>3-Minute Read</p>
+  </div>
+</header>
+
+      <div id="socnet-share">
+        
+
+
+
+
+
+      </div>
+      <div class="content">
+        <a href="/blog/2020/go/go-standard-library-context/" class="image" style="--bg-image: url('/img/2020/11/kobe-04-as-gty.jpg');">
+    <img class="stretchH" src="/img/2020/11/kobe-04-as-gty.jpg" alt="Fog may have disoriented pilot in helicopter crash that killed Kobe Bryant, 8 others: NTSB">
+  </a>
+        <h2 id="0x00-">0x00 简介</h2>
+<p>Context 是以链式的方式来保存数据：context A 派生出了 context B，context B 派生出了 context C &hellip;&hellip;</p>
+<p>当一个 context 被 canceled，所有从它派生的 context 都会被取消：B 被取消，C 同样也会被废弃</p>
+<p>调用 <code>WithCancel</code>、<code>WithDeadline</code>、<code>WithTimeout</code> 这三个函数，入参是 <code>parent context</code>，出参是包含了 <code>parent context</code> 的 <code>child context</code> 和 CancelFunc函数。</p>
+<ul>
+<li>调用 CancelFunc 函数会废弃 <code>child context</code>，并且会废弃 <code>child context</code> 的 context，同样会切断与 <code>parent context</code> 的关联，也会暂停所有相关的定时器。</li>
+<li>如果没有调用 CancelFunc 函数，只能等到 <code>parent context</code> 被废弃或者定时器被触发。</li>
+<li>go 的 vet 工具会检查所有的 context 链中 CancelFuncs 函数是否被调用。</li>
+</ul>
+<h2 id="0x01-">0x01 最佳实践</h2>
+<ul>
+<li>不要将 context 对象保存在结构体类型中。我们应该显式的传递 context 给需要的函数，而且 context 必须是第一个参数，通常命名为 ctx</li>
+<li>不要传递一个 nil 的 context，即使你不需要他。此时可以使用 context.TODO 代替</li>
+<li>context 的 value 只建议保存进程和 APIs 的请求数据，不建议用来传递函数的可选参数</li>
+<li>context 是协程安全的，多个 goroutine 可以操作相同的 context</li>
+</ul>
+<h2 id="0x02-">0x02 常用函数</h2>
+<h3 id="withcancel">WithCancel</h3>
+<blockquote>
+<p>func WithCancel(parent Context) (ctx Context, cancel CancelFunc)</p>
+</blockquote>
+<p>WithCancel 返回一个 parent context 的副本 child context，child context 同时携带了一个 Done channel，当返回的 CancelFunc 函数被调用时 context's Done channel 就会被关闭，此外如果 parent context's Done channel 被关闭，child context's Done channel 同样也会被关闭。</p>
+<p>cancel context 意味着程序会释放掉与该 context 相关的所有资源，所以建议在操作完成后立即 cancel context</p>
+<p>如下示例，使用 canceled context 可以防止 goroutine 泄漏，gen 函数得到 ctx.Done() 的信号以后会结束该函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// gen generates integers in a separate goroutine and
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// sends them to the returned channel.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// The callers of gen need to cancel the context once
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// they are done consuming generated integers not to leak
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// the internal goroutine started by gen.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">gen</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
+		<span style="color:#a6e22e">dst</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+		<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>
+		<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+			<span style="color:#66d9ef">for</span> {
+				<span style="color:#66d9ef">select</span> {
+				<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>():
+					<span style="color:#66d9ef">return</span> <span style="color:#75715e">// returning not to leak the goroutine
+</span><span style="color:#75715e"></span>				<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">dst</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">n</span>:
+					<span style="color:#a6e22e">n</span><span style="color:#f92672">++</span>
+				}
+			}
+		}()
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dst</span>
+	}
+
+	<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithCancel</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>())
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>() <span style="color:#75715e">// cancel when we are finished consuming integers
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">gen</span>(<span style="color:#a6e22e">ctx</span>) {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> {
+			<span style="color:#66d9ef">break</span>
+		}
+	}
+}
+</code></pre></div><h3 id="withdeadline">WithDeadline</h3>
+<blockquote>
+<p>func WithDeadline(parent Context, d time.Time) (Context, CancelFunc)</p>
+</blockquote>
+<p>WithDeadline 同样返回一个 child context，不过限制了 child context 的截止时间不超过 d，如果 parent context 的时间早于 child，那么截止时间统一等于较早时间。当截止时间到达或者 CancelFunc 函数被调用又或者 parent context's Done channel 被关闭，都会导致 child context's Done channel 被关闭。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+)
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">shortDuration</span> = <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">shortDuration</span>)
+	<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithDeadline</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#a6e22e">d</span>)
+
+	<span style="color:#75715e">// Even though ctx will be expired, it is good practice to call its
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// cancellation function in any case. Failure to do so may keep the
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// context and its parent alive longer than necessary.
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+
+	<span style="color:#66d9ef">select</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">After</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>):
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;overslept&#34;</span>)
+	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>():
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Err</span>())
+	}
+
+}
+</code></pre></div><h3 id="withtimeout">WithTimeout</h3>
+<blockquote>
+<p>func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)</p>
+</blockquote>
+<p>相当于是 WithDeadline(parent, time.Now().Add(timeout))</p>
+<h3 id="cancelfunc">CancelFunc</h3>
+<blockquote>
+<p>type CancelFunc func()</p>
+</blockquote>
+<p>CancelFunc 作用是取消一项任务，不需要等待这个任务执行完成。CancelFunc 可能被多个 goroutine 同时调用，第一次调用以后，后边的调用没有任何效果。</p>
+<h3 id="context-">Context 接口</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Context</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Deadline</span>() (<span style="color:#a6e22e">deadline</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>, <span style="color:#a6e22e">ok</span> <span style="color:#66d9ef">bool</span>)    <span style="color:#75715e">// 返回截止时间
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Done</span>() <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">struct</span>{}    <span style="color:#75715e">// 返回一个被关闭的 channel，如果 context 永远不会被 canceled，则返回 nil。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Err</span>() <span style="color:#66d9ef">error</span>    <span style="color:#75715e">// 如果 Done 没有被关闭，返回 nil
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Value</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">interface</span>{}    <span style="color:#75715e">// 返回对应 key 的 val
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="background-">Background 方法</h3>
+<blockquote>
+<p>func Background() Context</p>
+</blockquote>
+<p>Background 方法返回一个非 nil 的空 Context 对象。这个 Context 永远不会被 canceled，而且没有 deadline。</p>
+<p>这个一般用在主函数、初始化函数等场景，作为最顶层 Context 存在。</p>
+<h3 id="todo-">TODO 方法</h3>
+<blockquote>
+<p>func TODO() Context</p>
+</blockquote>
+<p>TODO 也返回一个非 nil 的空 Context 对象。使用场景：当前不清楚使用哪个 Context、当前 Context 参数不可用，以后再扩展。</p>
+<h3 id="withvalue-">WithValue 方法</h3>
+<blockquote>
+<p>func WithValue(parent Context, key, val interface{}) Context</p>
+</blockquote>
+<p>WithValue 返回一个 parent context 的副本，这个副本包含了 key-val 键值对。key 必须是可比较的，为了避免冲突并且不应该是 string 或者其他内置类型，WithValue 的使用者建议自定义一种类型作为 key 来使用， 不能是 interface 类型，必须是 struct 类型。Alternatively, exported context key variables&rsquo; static type should be a pointer or interface.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">favContextKey</span> <span style="color:#66d9ef">string</span>
+
+	<span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">k</span> <span style="color:#a6e22e">favContextKey</span>) {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Value</span>(<span style="color:#a6e22e">k</span>); <span style="color:#a6e22e">v</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;found value:&#34;</span>, <span style="color:#a6e22e">v</span>)
+			<span style="color:#66d9ef">return</span>
+		}
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;key not found:&#34;</span>, <span style="color:#a6e22e">k</span>)
+	}
+
+	<span style="color:#a6e22e">k</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">favContextKey</span>(<span style="color:#e6db74">&#34;language&#34;</span>)
+	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#a6e22e">k</span>, <span style="color:#e6db74">&#34;Go&#34;</span>)
+
+	<span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">k</span>)
+	<span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">favContextKey</span>(<span style="color:#e6db74">&#34;color&#34;</span>))
+
+}
+</code></pre></div><hr>
+<p>参考：</p>
+<p>📌 <a href="https://golang.org/pkg/context/">context 官方文档</a></p>
+
+      </div>
+      <footer>
+        <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/go/">Go</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/go/">go</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/2020/">2020</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+      </footer>
+    </div>
+    
+      
+
+    
+  </article>
+  <div class="pagination">
+    
+      <a href="/blog/2021/computer-basics/os-basic/" class="button left"><span>操作系统基础知识概览</span></a>
+    
+    
+      <a href="/blog/2020/architecture/decorator-pattern/" class="button right"><span>设计模式 # 结构型 # 装饰器模式</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-5/">【MIT 6.828】5. 用户环境</a></h2>
+          <time class="published" datetime="2021-10-31 00:00:00 &#43;0000 UTC">October 31, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/mit/6.828-4/">【MIT 6.828】4. 内存管理</a></h2>
+          <time class="published" datetime="2021-10-27 00:00:00 &#43;0000 UTC">October 27, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2021/computer-basics/computer-terms/">计算机术语【持续更新】</a></h2>
+          <time class="published" datetime="2021-10-24 00:00:00 &#43;0000 UTC">October 24, 2021</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/algorithm/">algorithm<span class="count">10</span></a>
+          
+          <li>
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础<span class="count">9</span></a>
+          
+          <li>
+              <a href="/categories/%E6%9E%B6%E6%9E%84/">架构<span class="count">8</span></a>
+          
+          <li>
+              <a href="/categories/python/">python<span class="count">7</span></a>
+          
+          <li>
+              <a href="/categories/go/">go<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/blog/">blog<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/web/">web<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>Ordinary but not mediocre, fighting <i class='fab fa-angellist'></i></p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="weixin://contacts/profile/0x00" target="_blank" rel="noopener" title="WeChat" class="fab fa-weixin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:shuai.grass@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2021 Gra55&#39;s Blog
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/python.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/sql.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/shell.min.js"></script>
+    <script>hljs.highlightAll();</script><script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
+    <script src="//unpkg.com/lunr/lunr.js"></script><script src="/js/bundlecdn.min.e63fe476a466e8f6d101ddb4dd3f27ec124c3bece64f2f5e317a05eb20e7048d.js" integrity="sha256-5j/kdqRm6PbRAd203T8n7BJMO&#43;zmTy9eMXoF6yDnBI0="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

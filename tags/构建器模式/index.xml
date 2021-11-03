@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>构建器模式 on Gra55&#39;s Blog</title>
+    <link>/tags/%E6%9E%84%E5%BB%BA%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 构建器模式 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%9E%84%E5%BB%BA%E5%99%A8%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>设计模式 # 创建型 # 构建器模式</title>
+      <link>/blog/2020/architecture/builder-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/builder-pattern/</guid>
+      <description>0x00 模式概述 构建器模式用来创建复杂的对象，该复杂对象由多个步骤构建而来。
+为了分离这种复杂性，新增一个对象 Builder 来一步一步创建最终的对象，这种创建实例的方式真的是非常优雅，后续如果进行需求变更，需要修改的内容就很少。
+0x01 场景 创建一个复杂的对象时，基础的对象不会变化，但是其组合会经常变化，此时使用构建器模式就非常有用。
+0x02 解决方案 // 复杂对象 class Burger { protected $size; protected $pepperoni = false; protected $lettuce = false; protected $tomato = false; public function __construct(BurgerBuilder $builder) { $this-&amp;gt;size = $builder-&amp;gt;size; $this-&amp;gt;pepperoni = $builder-&amp;gt;pepperoni; $this-&amp;gt;lettuce = $builder-&amp;gt;lettuce; $this-&amp;gt;tomato = $builder-&amp;gt;tomato; } } // 构造器类 class BurgerBuilder { public $size; public $pepperoni = false; public $lettuce = false; public $tomato = false; public function __construct(int $size) { $this-&amp;gt;size = $size; } public function addPepperoni() { $this-&amp;gt;pepperoni = true; return $this; } public function addLettuce() { $this-&amp;gt;lettuce = true; return $this; } public function addTomato() { $this-&amp;gt;tomato = true; return $this; } public function build(): Burger { return new Burger($this); } } // client $burger = (new BurgerBuilder(14)) -&amp;gt;addLettuce() -&amp;gt;addTomato() -&amp;gt;build(); 0x03 总结 这个模式很简单，简单理解就是适用于复杂对象的构造函数会经常变更的场景。</description>
+    </item>
+    
+  </channel>
+</rss>

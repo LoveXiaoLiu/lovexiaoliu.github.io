@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>创建型设计模式 on Gra55&#39;s Blog</title>
+    <link>/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 创建型设计模式 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E5%88%9B%E5%BB%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>设计模式 # 创建型 # 单例模式</title>
+      <link>/blog/2020/architecture/singleton-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/singleton-pattern/</guid>
+      <description>0x00 模式概述 单例模式是最简单的设计模式之一，属于创建型，提供了一种创建全局唯一对象的方法。
+0x01 场景 在业务代码中，如果需要全局唯一的对象，可以使用单例模式来创建对象。
+0x02 解决方案 单例模式根据对象实例化的时机，划分为懒汉式和饿汉式，顾名思义：
+ 饿汉式：在类初始化的时候，就提前实例化一个对象，等到使用的时候直接返回 懒汉式：在第一次准备实例化对象的时候才真正创建一个对象，再此之后的实例化都是直接返回第一次创建的对象  饿汉式的优势是因为它是线程安全的，因为对象在使用之前已经创建了。而懒汉式就存在多线程并发情况下会创建出多个实例对象的问题，所以就需要加锁，加锁会影响性能。
+0x03 总结 一般情况下使用饿汉式就可以了，除非明确要求延迟初始化（lazy initialization）。
+ 参考：
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 原型模式</title>
+      <link>/blog/2020/architecture/prototype-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/prototype-pattern/</guid>
+      <description>0x00 模式概述 原型模式用于创建重复的对象，该重复对象的创建成本比较高，所以原型模式通过 clone 现有对象来完成。
+0x01 场景 适用于创建实例成本比较高的场景，eg：创建对象时需要先连接数据库，这个成本就很高，原型模式很适合。
+0x02 解决方案 // 克隆羊多利 class Sheep { protected $name; protected $category; public function __construct(string $name, string $category = &amp;#39;Mountain Sheep&amp;#39;) { $this-&amp;gt;name = $name; $this-&amp;gt;category = $category; } public function setName(string $name) { $this-&amp;gt;name = $name; } public function getName() { return $this-&amp;gt;name; } public function setCategory(string $category) { $this-&amp;gt;category = $category; } public function getCategory() { return $this-&amp;gt;category; } } // client $original = new Sheep(&amp;#39;Jolly&amp;#39;); echo $original-&amp;gt;getName(); // Jolly echo $original-&amp;gt;getCategory(); // Mountain Sheep // Clone and modify what is required $cloned = clone $original; $cloned-&amp;gt;setName(&amp;#39;Dolly&amp;#39;); echo $cloned-&amp;gt;getName(); // Dolly echo $cloned-&amp;gt;getCategory(); // Mountain sheep 0x03 总结 这个模式很简单，当创建的成本比较高时，就可以考虑使用 clone 的方式（原型模式）。</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 构建器模式</title>
+      <link>/blog/2020/architecture/builder-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/builder-pattern/</guid>
+      <description>0x00 模式概述 构建器模式用来创建复杂的对象，该复杂对象由多个步骤构建而来。
+为了分离这种复杂性，新增一个对象 Builder 来一步一步创建最终的对象，这种创建实例的方式真的是非常优雅，后续如果进行需求变更，需要修改的内容就很少。
+0x01 场景 创建一个复杂的对象时，基础的对象不会变化，但是其组合会经常变化，此时使用构建器模式就非常有用。
+0x02 解决方案 // 复杂对象 class Burger { protected $size; protected $pepperoni = false; protected $lettuce = false; protected $tomato = false; public function __construct(BurgerBuilder $builder) { $this-&amp;gt;size = $builder-&amp;gt;size; $this-&amp;gt;pepperoni = $builder-&amp;gt;pepperoni; $this-&amp;gt;lettuce = $builder-&amp;gt;lettuce; $this-&amp;gt;tomato = $builder-&amp;gt;tomato; } } // 构造器类 class BurgerBuilder { public $size; public $pepperoni = false; public $lettuce = false; public $tomato = false; public function __construct(int $size) { $this-&amp;gt;size = $size; } public function addPepperoni() { $this-&amp;gt;pepperoni = true; return $this; } public function addLettuce() { $this-&amp;gt;lettuce = true; return $this; } public function addTomato() { $this-&amp;gt;tomato = true; return $this; } public function build(): Burger { return new Burger($this); } } // client $burger = (new BurgerBuilder(14)) -&amp;gt;addLettuce() -&amp;gt;addTomato() -&amp;gt;build(); 0x03 总结 这个模式很简单，简单理解就是适用于复杂对象的构造函数会经常变更的场景。</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 简单工厂、工厂方法、抽象工厂</title>
+      <link>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</guid>
+      <description>0x00 模式概述 这种三种设计模式都是属于创建型，都是为了将类的创建和使用隔离。GoF 23 种设计模式不包含简单工厂模式，因为简单工厂在扩展的时候需要修改源码，违反了开闭原则
+工厂方法模式是简单工厂的升级版，解决了扩展需要修改源码的问题，满足了开闭原则。
+抽象工厂模式是工厂方法的升级版，解决了工厂方法只能生产一类产品的问题，但是抽象工厂在增加新类型产品的时候会违反开闭原则，这里需要特别注意。
+0x01 场景 简单工厂  只有一个工厂生产产品，后期也不会扩展  工厂方法  多个工厂生产同一类产品，后期会扩展更多的工厂  抽象工厂  多个工厂生产多种类型的产品  0x02 解决方案 简单工厂 简单工厂的类图（不是标准的类图，只是凸显一下依赖关系）如下所示，client 需要使用产品类 A 时不直接实例化产品类 A，而是通过 SimpleFactory 工厂类的 createProd() 方法来创建产品类 A 实例。
+如果现在需要新增产品类 B，则需要修改 createProd() 方法的源码，这明显违反了开闭原则。
++--------------------+ +---------------------------+ | | | SimpleFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd(prodType) | +--------------------+ +---------------------------+ 工厂方法 所以出现了工厂方法，工厂方法其实是依赖倒置原则（面向接口编程，不要面向实现编程）的体现，client 不依赖具体的 SimpleFactory，而是依赖一个抽象的工厂 AbstractFactory，具体的工厂继承自 AbstractFactory，实现 createProd() 方法即可。
+增加新产品 C 时，只需要新增加 ConcreteFactoryC 类即可，满足开闭原则。
++--------------------+ +---------------------------+ | | | AbstractFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd() | +--------------------+ +----+----------------+-----+ ^ ^ | | | | +--------------+-----+ +----+---------------+ | ConcreteFactoryA | | ConcreteFactoryB | +--------------------+ +--------------------+ | +createProd() | | +createProd() | +--------------------+ +--------------------+ 抽象工厂 抽象工厂在工厂方法的基础上增加了新的产品类型（2 号产品），其他没有太大的区别。但是在扩展新产品类型（3号产品）的时候需要修改已有的代码（AbstractFactory、ConcreteFactoryA、ConcreteFactoryB 都需要增加 createProd3() 方法），破坏了开闭原则。</description>
+    </item>
+    
+  </channel>
+</rss>

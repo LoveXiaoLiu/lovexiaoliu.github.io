@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>埃拉托斯特尼筛法 on Gra55&#39;s Blog</title>
+    <link>/tags/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95/</link>
+    <description>Recent content in 埃拉托斯特尼筛法 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Leetcode：#204 计数质数</title>
+      <link>/blog/2019/algorithm/leetcode-204-count-primes/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/algorithm/leetcode-204-count-primes/</guid>
+      <description>0x00 题目描述 #204
+统计所有小于非负整数 n 的质数的数量。
+0x01 约束   n 为非负整数
+  0 和 1 不是质数
+  n 溢出的情况
+  0x02 题解 什么是质数？ 质数就是只能被 1 和 自己整除的数字，也叫素数。
+算法 1：暴力破解法 暴力破解法是最简单也是最容易想到的算法
+ 遍历 n 个数字，判断每个数字是不是质数，判断是不是质数的方法是遍历小于它的每个数字，看能不能被整除。  这个算法太愚蠢了，时间复杂度也很大 O(n²)。
+算法 2：埃拉托斯特尼筛法 我最初卡在如何判断一个数字是不是质数的问题上。其实判断一个数是不是质数，不需要判断比他小的每一个数字可不可以被整除，只需要判断到 [1-sqrt(n)]。
+比如说 12 = 2 x 6，12 = 3 x 4，12 = sqrt(12) x sqrt(12)，12 = 4 x 3，12 = 6 x 2。从 sqrt(12) 分割，前半部分和后半部分是对称的，所以只需要判断 [1-sqrt(n)] 区间内的数字可不可以被整除就 ok 了。</description>
+    </item>
+    
+  </channel>
+</rss>

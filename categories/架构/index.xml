@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>架构 on Gra55&#39;s Blog</title>
+    <link>/categories/%E6%9E%B6%E6%9E%84/</link>
+    <description>Recent content in 架构 on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>设计模式 # 结构型 # 装饰器模式</title>
+      <link>/blog/2020/architecture/decorator-pattern/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/decorator-pattern/</guid>
+      <description>结构型设计模式主要用于描述对象之间的组合，通过对象间的组合来完成特定功能。
+ 0x00 模式概述 装饰器模式会动态的给一个对象添加新功能，就增加功能来说，装饰器模式比子类化更灵活（合成复用原则）。
+0x01 场景 当需要给一个对象增加新功能时，又不想使用继承，可以考虑使用装饰器模式实现。
+0x02 解决方案 装饰器模式通过将对象包装在装饰器类内部来动态更改对象的行为。
+0x03 总结 装饰器模式很简单，大多数脚本语言已经在语言层面实现了该模式。
+ 参考：
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 单例模式</title>
+      <link>/blog/2020/architecture/singleton-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/singleton-pattern/</guid>
+      <description>0x00 模式概述 单例模式是最简单的设计模式之一，属于创建型，提供了一种创建全局唯一对象的方法。
+0x01 场景 在业务代码中，如果需要全局唯一的对象，可以使用单例模式来创建对象。
+0x02 解决方案 单例模式根据对象实例化的时机，划分为懒汉式和饿汉式，顾名思义：
+ 饿汉式：在类初始化的时候，就提前实例化一个对象，等到使用的时候直接返回 懒汉式：在第一次准备实例化对象的时候才真正创建一个对象，再此之后的实例化都是直接返回第一次创建的对象  饿汉式的优势是因为它是线程安全的，因为对象在使用之前已经创建了。而懒汉式就存在多线程并发情况下会创建出多个实例对象的问题，所以就需要加锁，加锁会影响性能。
+0x03 总结 一般情况下使用饿汉式就可以了，除非明确要求延迟初始化（lazy initialization）。
+ 参考：
+📌 设计模式（45种）
+📌 Design patterns for humans 中文版</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 原型模式</title>
+      <link>/blog/2020/architecture/prototype-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/prototype-pattern/</guid>
+      <description>0x00 模式概述 原型模式用于创建重复的对象，该重复对象的创建成本比较高，所以原型模式通过 clone 现有对象来完成。
+0x01 场景 适用于创建实例成本比较高的场景，eg：创建对象时需要先连接数据库，这个成本就很高，原型模式很适合。
+0x02 解决方案 // 克隆羊多利 class Sheep { protected $name; protected $category; public function __construct(string $name, string $category = &amp;#39;Mountain Sheep&amp;#39;) { $this-&amp;gt;name = $name; $this-&amp;gt;category = $category; } public function setName(string $name) { $this-&amp;gt;name = $name; } public function getName() { return $this-&amp;gt;name; } public function setCategory(string $category) { $this-&amp;gt;category = $category; } public function getCategory() { return $this-&amp;gt;category; } } // client $original = new Sheep(&amp;#39;Jolly&amp;#39;); echo $original-&amp;gt;getName(); // Jolly echo $original-&amp;gt;getCategory(); // Mountain Sheep // Clone and modify what is required $cloned = clone $original; $cloned-&amp;gt;setName(&amp;#39;Dolly&amp;#39;); echo $cloned-&amp;gt;getName(); // Dolly echo $cloned-&amp;gt;getCategory(); // Mountain sheep 0x03 总结 这个模式很简单，当创建的成本比较高时，就可以考虑使用 clone 的方式（原型模式）。</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 构建器模式</title>
+      <link>/blog/2020/architecture/builder-pattern/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020/architecture/builder-pattern/</guid>
+      <description>0x00 模式概述 构建器模式用来创建复杂的对象，该复杂对象由多个步骤构建而来。
+为了分离这种复杂性，新增一个对象 Builder 来一步一步创建最终的对象，这种创建实例的方式真的是非常优雅，后续如果进行需求变更，需要修改的内容就很少。
+0x01 场景 创建一个复杂的对象时，基础的对象不会变化，但是其组合会经常变化，此时使用构建器模式就非常有用。
+0x02 解决方案 // 复杂对象 class Burger { protected $size; protected $pepperoni = false; protected $lettuce = false; protected $tomato = false; public function __construct(BurgerBuilder $builder) { $this-&amp;gt;size = $builder-&amp;gt;size; $this-&amp;gt;pepperoni = $builder-&amp;gt;pepperoni; $this-&amp;gt;lettuce = $builder-&amp;gt;lettuce; $this-&amp;gt;tomato = $builder-&amp;gt;tomato; } } // 构造器类 class BurgerBuilder { public $size; public $pepperoni = false; public $lettuce = false; public $tomato = false; public function __construct(int $size) { $this-&amp;gt;size = $size; } public function addPepperoni() { $this-&amp;gt;pepperoni = true; return $this; } public function addLettuce() { $this-&amp;gt;lettuce = true; return $this; } public function addTomato() { $this-&amp;gt;tomato = true; return $this; } public function build(): Burger { return new Burger($this); } } // client $burger = (new BurgerBuilder(14)) -&amp;gt;addLettuce() -&amp;gt;addTomato() -&amp;gt;build(); 0x03 总结 这个模式很简单，简单理解就是适用于复杂对象的构造函数会经常变更的场景。</description>
+    </item>
+    
+    <item>
+      <title>设计模式 # 创建型 # 简单工厂、工厂方法、抽象工厂</title>
+      <link>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/design-patterns-simple-factory-and-factory-method-and-abstract-factory/</guid>
+      <description>0x00 模式概述 这种三种设计模式都是属于创建型，都是为了将类的创建和使用隔离。GoF 23 种设计模式不包含简单工厂模式，因为简单工厂在扩展的时候需要修改源码，违反了开闭原则
+工厂方法模式是简单工厂的升级版，解决了扩展需要修改源码的问题，满足了开闭原则。
+抽象工厂模式是工厂方法的升级版，解决了工厂方法只能生产一类产品的问题，但是抽象工厂在增加新类型产品的时候会违反开闭原则，这里需要特别注意。
+0x01 场景 简单工厂  只有一个工厂生产产品，后期也不会扩展  工厂方法  多个工厂生产同一类产品，后期会扩展更多的工厂  抽象工厂  多个工厂生产多种类型的产品  0x02 解决方案 简单工厂 简单工厂的类图（不是标准的类图，只是凸显一下依赖关系）如下所示，client 需要使用产品类 A 时不直接实例化产品类 A，而是通过 SimpleFactory 工厂类的 createProd() 方法来创建产品类 A 实例。
+如果现在需要新增产品类 B，则需要修改 createProd() 方法的源码，这明显违反了开闭原则。
++--------------------+ +---------------------------+ | | | SimpleFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd(prodType) | +--------------------+ +---------------------------+ 工厂方法 所以出现了工厂方法，工厂方法其实是依赖倒置原则（面向接口编程，不要面向实现编程）的体现，client 不依赖具体的 SimpleFactory，而是依赖一个抽象的工厂 AbstractFactory，具体的工厂继承自 AbstractFactory，实现 createProd() 方法即可。
+增加新产品 C 时，只需要新增加 ConcreteFactoryC 类即可，满足开闭原则。
++--------------------+ +---------------------------+ | | | AbstractFactory | | client +-------------&amp;gt;|---------------------------+ | | | +createProd() | +--------------------+ +----+----------------+-----+ ^ ^ | | | | +--------------+-----+ +----+---------------+ | ConcreteFactoryA | | ConcreteFactoryB | +--------------------+ +--------------------+ | +createProd() | | +createProd() | +--------------------+ +--------------------+ 抽象工厂 抽象工厂在工厂方法的基础上增加了新的产品类型（2 号产品），其他没有太大的区别。但是在扩展新产品类型（3号产品）的时候需要修改已有的代码（AbstractFactory、ConcreteFactoryA、ConcreteFactoryB 都需要增加 createProd3() 方法），破坏了开闭原则。</description>
+    </item>
+    
+    <item>
+      <title>设计模式概述</title>
+      <link>/blog/2019/architecture/design-patterns-overview/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/design-patterns-overview/</guid>
+      <description>为什么需要设计模式？
+套用树人哥的一句话：其实世上本没有设计模式，走的人多了就有了设计模式。
+本来大家都是按照自己的方式写代码，然后根据不同需求，写出各种可扩展的、可维护的代码。然后，1995 年，GoF 四个人就将这些经验性代码总结出来，汇总成 23 种编程范式。
+其实就是编程的最佳实践，针对这种问题你就得这么干，因为根据历史经验来看，这么干是最优的。
+设计模式的本质是面向对象设计原则的实际应用。
+ 0x00 设计模式分类 按目的来分  创建型：用于描述如何创建对象，将对象的创建与使用分离开 结构型：用于描述如何将类或对象按照某种布局组成更大的结构（类似于聚合） 行为型：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务（类似于组合）  按作用范围来分  类模式：用于描述类与子类的关系，是静态的，在编译时就能确定下来（通过继承实现） 对象模式：用于描述对象之间的关系，在运行时刻是变化的（通过聚合/组合实现）     范围\目的 创建型 结构型 行为型     类模式 工厂方法 适配器（类） 模板方法、解释器   对象模式 单例、原型、抽象工厂、建造者 代理、适配器（对象）、桥接、装饰、外观、享元、组合 策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录    0x01 Prin 1：开闭原则 Software entities should be open for extension, but closed for modification.
+ 需求变更的时候，尽量通过扩展来实现需求，而不是通过修改源码来实现。 开闭原则是面向对象程序设计的终极目标 实现方法：通过抽象约束、封装变化来实现开闭原则，即通过接口或者抽象类为软件实体定义一个相对稳定的抽象层，而将相同的可变因素封装在具体实现类中。  0x02 Prin 2：里氏替换原则 Inheritance should ensure that any property proved about supertype objects also holds for subtype objects.</description>
+    </item>
+    
+    <item>
+      <title>分布式事务：TCC</title>
+      <link>/blog/2019/architecture/distributed-transaction-tcc/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/distributed-transaction-tcc/</guid>
+      <description>什么是分布式？
+ 与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。  分布式事务常见解决方案:
+ 2PC两段提交协议 3PC三段提交协议(弥补两端提交协议缺点) TCC或者GTS(阿里) 消息中间件最终一致性 使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。   0x00 TCC TCC 是 Try、Confire、Cancel 的缩写。
+又称补偿机制，核心思想是：针对每个操作（Try）都要注册一个与其对应的确认（Confirm）和补偿（Cancel）操作。
+0x01 5 个步骤 ①、向协调者发起开启事务请求
+②、Try 阶段：Try 阶段负责把所有服务的业务资源预留和锁住。类似于 MySQL DML 操作，会加行锁
+③、Confirm or Cancel 阶段：如果 Try 阶段涉及的所有服务都确认执行成功，则向协调者发送 Confirm（commit），否则发送 Cancel（rollback）
+④、协调者根据业务发送的 Confirm or Cancel，向所有服务发送相应的 Confirm or Cancel 请求
+⑤、各服务提交本地事务
++----------------------+ 1 +------------------------+ | +---------------&amp;gt;+ | | APP | | Coordination service | | +---------------&amp;gt;+ | +-+--+--+------+--+--+-+ 3 +------------------------+ | | | | | | 2 | | | | | | 2 +------------------------+ | | | | +--------------------------+ | 4 | | | | 4 | | +------------------------+ | | +--------------------------+ | | | 4&amp;#39;| | 4&amp;#39; | | | | +----------------------+ +-------------------------+ | | | | | | | | v v v v v v +-+--+----+-------------------------+ +---------------------+---+--+-+ | service A | | service B | +----------------------+------------+ +-------+----------------------+ | | 5 | | 5 v v +-----+-------+ +---+---------+ | DB 1 | | DB 2 | +-------------+ +-------------+ 与 2PC 比较： 2PC 是资源层面的分布式事务，强一致，整个操作中资源一直被加锁，不需要开发者参与。</description>
+    </item>
+    
+    <item>
+      <title>分布式事务：2PC &amp; 3PC</title>
+      <link>/blog/2019/architecture/distributed-transaction-2pc-3pc/</link>
+      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/architecture/distributed-transaction-2pc-3pc/</guid>
+      <description>什么是分布式？
+ 与分布式对立的概念是单体系统，分布式系统是将不同的功能模块拆分成不同的服务，微服务就是一个典型的分布式系统。  分布式事务常见解决方案:
+ 2PC两段提交协议 3PC三段提交协议(弥补两端提交协议缺点) TCC或者GTS(阿里) 消息中间件最终一致性 使用LCN解决分布式事物，理念“LCN并不生产事务,LCN只是本地事务的搬运工”。   0x00 CAP 定理 所谓定理就是别人发现的规律，并且已经证实该规律是正确的（就像勾股定理，它永远是正确的，你直接用它的结论就行，你也可以自己证实其正确性）。
+CAP 定理定义：在异步网络中（不可靠的网络），不可能同时实现并发读/写状态下的 availability、consistency。即 Consistency、Availability 和 Partition Tolerance 不能同时满足。
+这里证明了 CAP 是成立的
+0x01 2PC Two-Phase Commit Protocol（两阶段提交协议），注意 ，2PC 是一个协议。
+2PC 是一个强一致、中心化的原子提交协议。这里面包含一个中心化的协调者节点（coordinator）。
+Example：订单服务 A，需要调用支付服务 B 去支付，支付成功则处理购物订单为待发货状态，否则就需要将购物订单处理为失败状态。
+两个阶段： Prepare 阶段
+①、事务询问：Coordinator 收到请求以后，向所有参与者发送事务预处理请求，即 Prepare。开始等待参与者响应
+②、执行本地事务：各参与者执行本地事务，但是不会真正提交，而是先向 Coordinator 报告自己的情况
+③、返回事务询问响应：参与者根据本地事务的情况返回 Yes or No
+Commit 阶段
+④、Coordinator 统计参与者的返回值，返送 commit（参与者全回复 Yes） 或者 rollback（有参与者回复 No）
+⑤、执行本地 commit 或者 rollbak
+| | request v +-----------------+-----------------+ | Coordinator | +-+------+----+-------+---+------+--+ | ^ | | ^ | | | | | | | 4 | 3 | | 1 1 | | 3 | 4 | | | | | | v | v v | v +-----+------+----+-+ ++---+------+-------+ | Server A | | Server B | +------+-----+------+ +---+-----+---------+ | | | | 5 | | 2 2 | | 5 | | | | v v v v +--+-----+---+ +-+-----+----+ | DB 1 | | DB 2 | +------------+ +------------+ 优缺点： 优点</description>
+    </item>
+    
+  </channel>
+</rss>

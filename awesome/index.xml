@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Awesome on Gra55&#39;s Blog</title>
+    <link>/awesome/</link>
+    <description>Recent content in Awesome on Gra55&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/awesome/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MIT：6.828-操作系统引擎</title>
+      <link>/awesome/mit-6.828/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/mit-6.828/</guid>
+      <description>0x00 原版视频  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  0x01 UP 主实操视频【推荐】  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  0xff 题外话 MIT 6.828 是由 PDOS 发布的操作系统相关的公开课程。
+PDOS 是什么呢？PDOS 全称是 MIT Parallel &amp;amp; Distributed Operating Systems Group，即麻省理工学院平行与分布式操作系统研究组，这个小组致力于研究操作系统相关的内容。PDOS 隶属于 MIT CSAIL。
+MIT CSAIL 又是什么呢？CSAIL 全称是 MIT Computer Science &amp;amp; Artificial Intelligence Lab，即麻省理工学院计算机科学与人工智能实验室，是计算机领域的先驱，创造了很多有价值的东西。下设很多小组，分别研究不同的方向。</description>
+    </item>
+    
+    <item>
+      <title>MIT：6.824-分布式系统</title>
+      <link>/awesome/mit-6.824/</link>
+      <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/mit-6.824/</guid>
+      <description>0x00 《Distributed Systems》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
+    
+    <item>
+      <title>视频：奥斯卡最佳动画短片 - Alike</title>
+      <link>/awesome/academy-award-for-best-animated-short-alike/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/academy-award-for-best-animated-short-alike/</guid>
+      <description>0x00 《Alike》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
+    
+    <item>
+      <title>音乐：Photograph</title>
+      <link>/awesome/ed-sheeran-photograph-mv/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/ed-sheeran-photograph-mv/</guid>
+      <description>0x00 Photograph - Ed Sheeran  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
+    
+    <item>
+      <title>TED演讲：什么是区块链？</title>
+      <link>/awesome/what-is-block-chain/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/what-is-block-chain/</guid>
+      <description>0x00 《什么是区块链？》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
+    
+    <item>
+      <title>视频：林轩田机器学习基石</title>
+      <link>/awesome/machine-learning-foundation/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/awesome/machine-learning-foundation/</guid>
+      <description>0x00 《机器学习基石》  document.getElementById(&#34;video-bilibili&#34;).style.height=document.getElementById(&#34;video-bilibili&#34;).scrollWidth*0.5+&#34;px&#34;;  </description>
+    </item>
+    
+  </channel>
+</rss>
