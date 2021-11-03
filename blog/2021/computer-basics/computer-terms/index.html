@@ -88,10 +88,6 @@
     
       
     
-      
-        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
-      
-    
   
 </menu>
 
@@ -230,7 +226,7 @@
 </tr>
 <tr>
 <td>GNU</td>
-<td></td>
+<td>GNU's not unix</td>
 <td>GNU 是追求开源一项运动。Unix 系统被发明以后，大家用的很爽，但是后来闭源开始收费了。一个叫 RMS 的大叔觉得很不爽，于是发起 GNU 计划，模仿 Unix 的界面和使用方式，从头做一个开源的版本。然后他自己做了编辑器 Emacs 和编译器 GCC。做了很多可以运行在 Unix 上的开源软件，但是一直没做出操作系统，于是一个叫 Linus 的博士，写出来 Linux 操作系统，完美符合 GNU 的目的，所以最后 Linux 也纳入了 GNU 中。</td>
 </tr>
 <tr>
@@ -252,6 +248,11 @@
 <td>IA-32</td>
 <td>Intel Architecture, 32-bit 的缩写</td>
 <td>有时候也叫做 i386</td>
+</tr>
+<tr>
+<td>CGI</td>
+<td><a href="https://en.wikipedia.org/wiki/Common_Gateway_Interface">Common Gateway Interface</a></td>
+<td>通用网关接口。早期的 web 服务，后端会绑定一个目录（<code>/usr/local/apache/htdocs/</code>），浏览器请求时，会直接返回目录下 index.html 文件，这就是静态请求，无法满足后来动态请求的发展趋势，所以当浏览器请求 web 服务的特定 URL 时，不直接返回 index.html，而是执行一个脚本，这个脚本的输出会作为 http response 返回给浏览器端，这个脚本就叫做 CGI 脚本。CGI 脚本在执行的时候，还会通过环境变量等形式获取到 http request 带过来的附加信息。慢慢的，CGI 泛指后端服务。</td>
 </tr>
 </tbody>
 </table>

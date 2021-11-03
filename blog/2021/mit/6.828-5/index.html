@@ -88,10 +88,6 @@
     
       
     
-      
-        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
-      
-    
   
 </menu>
 
@@ -175,7 +171,7 @@
   <div class="meta">
     <time datetime="2021-10-31 00:00:00 &#43;0000 UTC">October 31, 2021</time>
     <p>gra55</p>
-    <p>3-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -328,7 +324,7 @@ user/ *             用于检查内核 lab3 代码的各种测试程序
 <li>中断（interrupts）和异常（exceptions）之间的区别在于，中断用于处理<code>处理器</code>外部的异步事件，而异常用于处理<code>处理器</code>在执行指令过程中检测到的条件（conditions）</li>
 <li>有两个外部中断源和两个异常源：
 <ul>
-<li>中断
+<li>中断（这里的硬件中断是通过 CPU 物理层连接两个引脚实现的）
 <ul>
 <li>可屏蔽中断（Maskable interrupts），通过 INTR 引脚（pin）发出信号；</li>
 <li>不可屏蔽中断（Nonmaskable interrupts），通过 NMI（Non-Maskable Interrupt，不可屏蔽中断）引脚发出信号；</li>
@@ -343,28 +339,53 @@ user/ *             用于检查内核 lab3 代码的各种测试程序
 </ul>
 </li>
 </ul>
-<h3 id="heading3">受保护的控制传输</h3>
+<h4 id="heading3">个人理解</h4>
+<p><strong>中断：</strong></p>
+<p>中断（interrupts）是 CPU 和操作系统的最基本特性之一，是支撑多用户、多进程的基础。如果没有中断（interrupts），CPU 会一直工作直到完成你交给它的工作，那么我们就无法同时做多项任务。但是有了中断（interrupts），操作系统就会触发中断（interrupts）来打断 CPU，让 CPU 听下手头的这个事情，去干其他事情，它的切换速度很快，在我们看来就是多项工作在并发来进行。</p>
+<p><strong>异常：</strong></p>
+<p>异常（exceptions）和中断（interrupts）其实是一个道理，都是用来打破 CPU 正常的工作，异常（exceptions）是 CPU 内部触发的，比如说除数为 0 时，CPU 会引发异常（exceptions），然后会转而执行处理异常（exceptions）的指令中去。另外软件也能通过指令来触发“软件中断”（software interrupts），在 CPU 看来就是程序发生了异常（exceptions）。<strong>总之：异常（exceptions）和中断（interrupts）的目的都是为了让 CPU 停下来去干其他事情</strong></p>
+<p><strong>信号：</strong></p>
+<p>CPU 可以中断（interrupts），那么进程可以中断（interrupts）吗？比如说进程是个死循环，我想停止进程；或者说进程要接收异步 IO 的消息怎么办？进程也是可以被中断（interrupts），这里使用的是信号，进程会接收操作系统发送出来的信号，通过信号来执行特定的操作。比如说我想停止某个进程，如果是前台进程，我们通过执行 <code>ctrl-c</code> 来终止进程（<code>ctrl-c</code> 其实是一个硬件中断，操作系统收到以后会给进程发送 SIGINT 信号，SIGINT 是让进程终止的信号）；如果是后台进程，一般通过 <code>kill -9 pid</code> 来杀死进程（<code>kill -9 pid</code> 原理也是操作系统会发送一个 SIGKILL 信号给进程）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 操作系统定义的所有信号</span>
+<span style="color:#f92672">[</span>root@centos ~<span style="color:#f92672">]</span><span style="color:#75715e"># kill -l</span>
+ 1<span style="color:#f92672">)</span> SIGHUP       2<span style="color:#f92672">)</span> SIGINT       3<span style="color:#f92672">)</span> SIGQUIT      4<span style="color:#f92672">)</span> SIGILL       5<span style="color:#f92672">)</span> SIGTRAP
+ 6<span style="color:#f92672">)</span> SIGABRT      7<span style="color:#f92672">)</span> SIGBUS       8<span style="color:#f92672">)</span> SIGFPE       9<span style="color:#f92672">)</span> SIGKILL     10<span style="color:#f92672">)</span> SIGUSR1
+11<span style="color:#f92672">)</span> SIGSEGV     12<span style="color:#f92672">)</span> SIGUSR2     13<span style="color:#f92672">)</span> SIGPIPE     14<span style="color:#f92672">)</span> SIGALRM     15<span style="color:#f92672">)</span> SIGTERM
+16<span style="color:#f92672">)</span> SIGSTKFLT   17<span style="color:#f92672">)</span> SIGCHLD     18<span style="color:#f92672">)</span> SIGCONT     19<span style="color:#f92672">)</span> SIGSTOP     20<span style="color:#f92672">)</span> SIGTSTP
+21<span style="color:#f92672">)</span> SIGTTIN     22<span style="color:#f92672">)</span> SIGTTOU     23<span style="color:#f92672">)</span> SIGURG      24<span style="color:#f92672">)</span> SIGXCPU     25<span style="color:#f92672">)</span> SIGXFSZ
+26<span style="color:#f92672">)</span> SIGVTALRM   27<span style="color:#f92672">)</span> SIGPROF     28<span style="color:#f92672">)</span> SIGWINCH    29<span style="color:#f92672">)</span> SIGIO       30<span style="color:#f92672">)</span> SIGPWR
+31<span style="color:#f92672">)</span> SIGSYS      34<span style="color:#f92672">)</span> SIGRTMIN    35<span style="color:#f92672">)</span> SIGRTMIN+1  36<span style="color:#f92672">)</span> SIGRTMIN+2  37<span style="color:#f92672">)</span> SIGRTMIN+3
+38<span style="color:#f92672">)</span> SIGRTMIN+4  39<span style="color:#f92672">)</span> SIGRTMIN+5  40<span style="color:#f92672">)</span> SIGRTMIN+6  41<span style="color:#f92672">)</span> SIGRTMIN+7  42<span style="color:#f92672">)</span> SIGRTMIN+8
+43<span style="color:#f92672">)</span> SIGRTMIN+9  44<span style="color:#f92672">)</span> SIGRTMIN+10 45<span style="color:#f92672">)</span> SIGRTMIN+11 46<span style="color:#f92672">)</span> SIGRTMIN+12 47<span style="color:#f92672">)</span> SIGRTMIN+13
+48<span style="color:#f92672">)</span> SIGRTMIN+14 49<span style="color:#f92672">)</span> SIGRTMIN+15 50<span style="color:#f92672">)</span> SIGRTMAX-14 51<span style="color:#f92672">)</span> SIGRTMAX-13 52<span style="color:#f92672">)</span> SIGRTMAX-12
+53<span style="color:#f92672">)</span> SIGRTMAX-11 54<span style="color:#f92672">)</span> SIGRTMAX-10 55<span style="color:#f92672">)</span> SIGRTMAX-9  56<span style="color:#f92672">)</span> SIGRTMAX-8  57<span style="color:#f92672">)</span> SIGRTMAX-7
+58<span style="color:#f92672">)</span> SIGRTMAX-6  59<span style="color:#f92672">)</span> SIGRTMAX-5  60<span style="color:#f92672">)</span> SIGRTMAX-4  61<span style="color:#f92672">)</span> SIGRTMAX-3  62<span style="color:#f92672">)</span> SIGRTMAX-2
+63<span style="color:#f92672">)</span> SIGRTMAX-1  64<span style="color:#f92672">)</span> SIGRTMAX
+</code></pre></div><blockquote>
+<p>进程为什么会处理信号，简单理解是因为进程的结构体中有一个 sigbitmap 字段用来保存信号，会处理发出来的信号。可以参考：<a href="https://blog.csdn.net/qq_47406941/article/details/115607430">Linux-进程信号</a></p>
+</blockquote>
+<h3 id="heading4">受保护的控制传输</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading4">异常和中断的类型</h3>
+<h3 id="heading5">异常和中断的类型</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading5">例子说明</h3>
+<h3 id="heading6">例子说明</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading6">嵌套异常和中断</h3>
+<h3 id="heading7">嵌套异常和中断</h3>
 <p>// TODO: 待补充</p>
 <h3 id="-idtinterrupt-descriptor-table">设置 IDT（interrupt descriptor table）</h3>
 <p>// TODO: 待补充</p>
 <h2 id="0x02-part-b">0x02 Part B：页错误、断点异常、系统调用</h2>
-<h3 id="heading7">处理页错误</h3>
+<h3 id="heading8">处理页错误</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading8">断点异常</h3>
+<h3 id="heading9">断点异常</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading9">系统调用</h3>
+<h3 id="heading10">系统调用</h3>
 <p>用户进程通过调用“系统调用”（system calls）请求内核为它们做一些事情。当用户进程调用“系统调用”（system calls）时，处理器进入内核模式（kernel mode），处理器和内核协作保存用户进程的状态，内核执行适当的代码以执行系统调用，然后恢复用户进程。用户进程<strong>如何引起内核注意以及它如何指定要执行的调用</strong>的确切细节因系统而异。</p>
 <p>在 JOS 内核中，我们将使用 <code>int</code> 指令，这会导致处理器中断（processor interrupt）。特别地是，我们将使用 <code>int $0x30</code> 作为系统调用中断（system call interrupt），可以使用定义好的常量 <code>T_SYSCALL</code>（48=0x30）。所以必须设置中断描述符（interrupt descriptor），以允许用户进程触发该中断。请注意，中断 <code>0x30</code> 不能由硬件生成，因此，允许用户代码生成它不会引起歧义。</p>
 <p>应用程序通过寄存器来传递系统调用编号（system call number）和系统调用参数（system call arguments）。这样，内核就不需要在用户环境的堆栈或指令流中四处搜索。系统调用编号（system call number）会在 <code>%eax</code> 寄存器中，参数（最多五个）将分别位于 <code>%edx</code>、<code>%ecx</code>、<code>%ebx</code>、<code>%edi</code> 和 <code>%esi</code> 寄存器中。内核将返回值传回 <code>%eax</code> 寄存器中。调用“系统调用”（system calls）的汇编代码已经在 <code>lib/syscall.c</code> 中的 <code>syscall()</code> 中编写完成。有兴趣可以看看。</p>
-<h3 id="heading10">启动用户模式</h3>
+<h3 id="heading11">启动用户模式</h3>
 <p>// TODO: 待补充</p>
-<h3 id="heading11">页面错误和内存保护</h3>
+<h3 id="heading12">页面错误和内存保护</h3>
 <p>// TODO: 待补充</p>
 <h2 id="0xff-">0xff 参考</h2>
 <p><a href="/blog/2021/mit/6.828-0">MIT 6.828 参考资料</a></p>
