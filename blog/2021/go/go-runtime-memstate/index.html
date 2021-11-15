@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>3PC - Gra55&#39;s Blog</title>
+<title>GO Runtime 内存状态 - Gra55&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -19,10 +19,10 @@
   <meta name="theme-color" content="#ffffff">
 
 <meta name="generator" content="Hugo 0.60.0" /><meta property="og:site_name" content="Gra55&#39;s Blog">
-  <meta property="og:title" content="3PC">
-  <meta property="og:description" content="A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo.">
-  <meta property="description" content="A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo.">
-  <meta property="og:url" content="/tags/3pc/">
+  <meta property="og:title" content="GO Runtime 内存状态">
+  <meta property="og:description" content="Runtime 中的内存状态字段解析，pprof 中也会输出相关的内存字段供排查问题">
+  <meta property="description" content="Runtime 中的内存状态字段解析，pprof 中也会输出相关的内存字段供排查问题">
+  <meta property="og:url" content="/blog/2021/go/go-runtime-memstate/">
   <meta property="og:type" content="article">
   
     <meta property="og:image" content="/img/main/mamba.png">
@@ -44,7 +44,7 @@
     <h1 class="nav-title">
       <a href="/" class="nav">
         
-          tags
+          Blog
         
       </a>
     </h1>
@@ -109,8 +109,6 @@
     <footer>
       <ul class="socnet-icons">
         
-    <li><a href="/tags/3pc/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
@@ -161,40 +159,139 @@
 
       <main id="site-main">
         
-  
-  
-    <article class="post">
-  <header>
+  <article>
+    <div class="post">
+      <header>
   <div class="title">
     
-      <h2><a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/">分布式事务：2PC &amp; 3PC</a></h2>
+      <h2><a href="/blog/2021/go/go-runtime-memstate/">GO Runtime 内存状态</a></h2>
     
     
-      <p>单体架构演化到微服务架构，分布式事务是必须要解决的问题</p>
+      <p>Runtime 中的内存状态字段解析，pprof 中也会输出相关的内存字段供排查问题</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-12-27 00:00:00 &#43;0000 UTC">December 27, 2019</time>
+    <time datetime="2021-11-15 00:00:00 &#43;0000 UTC">November 15, 2021</time>
     <p>gra55</p>
-    <p>2-Minute Read</p>
+    <p>1-Minute Read</p>
   </div>
 </header>
 
-  <div class="content">
-    <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="image" style="--bg-image: url('/img/2019/12/great-wall-station-antarctica.jpg');">
-    <img class="stretchH" src="/img/2019/12/great-wall-station-antarctica.jpg" alt="1984年12月27日，我国首支极地探险队在南极半岛附近的乔治王岛登陆，开始建设长城站">
-  </a>
-    
-    <p>什么是分布式？</p>
-  </div>
-  <footer>
-    <a href="/blog/2019/architecture/distributed-transaction-2pc-3pc/" class="button big">Read More</a>
-    <div class="stats">
+      <div id="socnet-share">
+        
+
+
+
+
+
+      </div>
+      <div class="content">
+        
+        <blockquote>
+<p>官方文档：<a href="https://pkg.go.dev/runtime#MemStats"><a href="https://pkg.go.dev/runtime#MemStats">https://pkg.go.dev/runtime#MemStats</a></a></p>
+</blockquote>
+<h2 id="0x00-">0x00 概述</h2>
+<p>Alloc uint64</p>
+<ul>
+<li>堆中分配的对象所占用的字节数，与 HeapAlloc 是一样的</li>
+</ul>
+<p>TotalAlloc uint64</p>
+<ul>
+<li>堆中分配的对象所占用的字节数的累积值（释放内存这个数值不会减小）</li>
+</ul>
+<p>Sys uint64</p>
+<ul>
+<li>从操作系统获得的内存总字节数，包含 go 运行时的堆、栈和其他数据结构，通常情况下这个值会保持不变</li>
+</ul>
+<p>Lookups uint64</p>
+<ul>
+<li>runtime 执行的指针查找次数</li>
+</ul>
+<p>Mallocs uint64</p>
+<ul>
+<li>堆中分配的对象累积的数量，活跃对象计算公式：Mallocs - Frees</li>
+</ul>
+<p>Frees uint64</p>
+<ul>
+<li>释放的堆对象的累积计数，活跃对象计算公式：Mallocs - Frees</li>
+</ul>
+<p>HeapAlloc uint64</p>
+<ul>
+<li>堆中分配的对象所占用的字节数，与 Alloc 是一样的。（这里包含所有可达的对象和 GC 尚未释放的不可达对象）</li>
+</ul>
+<p>HeapSys uint64</p>
+<ul>
+<li>从操作系统获得的堆内存字节数（包含预留的未使用的虚拟地址空间）</li>
+</ul>
+<p>HeapIdle uint64</p>
+<ul>
+<li>堆中未使用的字节数（这些内存字节可以返回给 OS，也可以被堆或栈重复使用。HeapIdle-HeapReleased是可以返回给 OS 的内存，但是现在由 runtime 保留，这样就可以不从 OS 申请内存而来增加堆的大小。如果这个值很大，大于堆大小，则表明活跃的堆大小最近出现过瞬时峰值）</li>
+</ul>
+<p>HeapInuse uint64</p>
+<ul>
+<li>在使用的堆内存（HeapInuse - HeapAlloc 专用于特定大小的类的内存，但是现在还没有使用。这是碎片的上限值，通常可以有效重用此内存）</li>
+</ul>
+<p>HeapReleased uint64</p>
+<ul>
+<li>返回给操作系统的物理内存字节，尚未被堆重新获取的内存字节</li>
+</ul>
+<p>HeapObjects uint64</p>
+<ul>
+<li>在堆中创建的对象数量（随对象的创建和释放而增减）</li>
+</ul>
+<p>StackInuse uint64</p>
+<ul>
+<li>栈使用的字节数（没有StackIdle是因为，未使用的栈返回到堆中，因此计入 HeapIdle）</li>
+</ul>
+<p>StackSys uint64</p>
+<ul>
+<li>从 OS 获取的栈内存字节数（StackSys = StackInuse + 任何为 OS 线程栈从 OS 申请的内存）</li>
+</ul>
+<p>GCSys uint64</p>
+<ul>
+<li>GC 元数据使用的字节数</li>
+</ul>
+<p>NextGC uint64</p>
+<ul>
+<li>下一个 GC 周期的目标堆的大小（GC 的目标是保持HeapAlloc ≤ NextGC）</li>
+</ul>
+<p>LastGC uint64</p>
+<ul>
+<li>最后一次垃圾收集完成的时间，纳秒的 Unix 时间戳</li>
+</ul>
+<p>PauseTotalNs uint64</p>
+<ul>
+<li>自程序启动以来，GC stop-the-world 的累积纳秒数（在 stop-the-world 暂停期间，所有 goroutine 都会暂停，只有垃圾收集器可以运行。）</li>
+</ul>
+<p>PauseNs [256]uint64</p>
+<ul>
+<li>最近的GC stop-the-world 持续的时间，纳秒为单位</li>
+</ul>
+<p>PauseEnd [256]uint64</p>
+<ul>
+<li>最近 GC 暂停结束的纳秒时间戳</li>
+</ul>
+<p>NumGC uint32</p>
+<ul>
+<li>GC 循环的次数</li>
+</ul>
+<p>NumForcedGC uint32</p>
+<ul>
+<li>由应用调用 GC 函数所执行的 GC 的次数</li>
+</ul>
+<p>GCCPUFraction float64</p>
+<ul>
+<li>GCs 使用的 CPU 的比例</li>
+</ul>
+
+      </div>
+      <footer>
+        <div class="stats">
   
     <ul class="categories">
       
         
-          <li><a class="article-terms-link" href="/categories/%e6%9e%b6%e6%9e%84/">架构</a></li>
+          <li><a class="article-terms-link" href="/categories/go/">Go</a></li>
         
       
     </ul>
@@ -203,25 +300,26 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1/">分布式事务</a></li>
+          <li><a class="article-terms-link" href="/tags/go/">go</a></li>
         
-          <li><a class="article-terms-link" href="/tags/2pc/">2PC</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/3pc/">3PC</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/2019/">2019</a></li>
+          <li><a class="article-terms-link" href="/tags/2021/">2021</a></li>
         
       
     </ul>
   
 </div>
 
-  </footer>
-</article>
+      </footer>
+    </div>
+    
+      
 
-  
+    
+  </article>
   <div class="pagination">
     
+    
+      <a href="/blog/2021/mit/6.828-5/" class="button right"><span>【MIT 6.828】5. 用户环境</span></a>
     
   </div>
 
@@ -322,8 +420,6 @@
   
       <ul class="socnet-icons">
         
-    <li><a href="/tags/3pc/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/LoveXiaoLiu" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 

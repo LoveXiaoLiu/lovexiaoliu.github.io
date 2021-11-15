@@ -6,10 +6,29 @@
     <description>Recent content on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 31 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Nov 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GO Runtime 内存状态</title>
+      <link>/blog/2021/go/go-runtime-memstate/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2021/go/go-runtime-memstate/</guid>
+      <description>官方文档：https://pkg.go.dev/runtime#MemStats
+ 0x00 概述 Alloc uint64
+ 堆中分配的对象所占用的字节数，与 HeapAlloc 是一样的  TotalAlloc uint64
+ 堆中分配的对象所占用的字节数的累积值（释放内存这个数值不会减小）  Sys uint64
+ 从操作系统获得的内存总字节数，包含 go 运行时的堆、栈和其他数据结构，通常情况下这个值会保持不变  Lookups uint64
+ runtime 执行的指针查找次数  Mallocs uint64
+ 堆中分配的对象累积的数量，活跃对象计算公式：Mallocs - Frees  Frees uint64
+ 释放的堆对象的累积计数，活跃对象计算公式：Mallocs - Frees  HeapAlloc uint64
+ 堆中分配的对象所占用的字节数，与 Alloc 是一样的。（这里包含所有可达的对象和 GC 尚未释放的不可达对象）  HeapSys uint64
+ 从操作系统获得的堆内存字节数（包含预留的未使用的虚拟地址空间）  HeapIdle uint64
+ 堆中未使用的字节数（这些内存字节可以返回给 OS，也可以被堆或栈重复使用。HeapIdle-HeapReleased是可以返回给 OS 的内存，但是现在由 runtime 保留，这样就可以不从 OS 申请内存而来增加堆的大小。如果这个值很大，大于堆大小，则表明活跃的堆大小最近出现过瞬时峰值）  HeapInuse uint64</description>
+    </item>
     
     <item>
       <title>【MIT 6.828】5. 用户环境</title>
