@@ -6,10 +6,33 @@
     <description>Recent content in Blog on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GDB 调试 Python</title>
+      <link>/blog/2022/python/gdb-debugging-python/</link>
+      <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2022/python/gdb-debugging-python/</guid>
+      <description>1. 背景 很多问题在 Python 中很难调试，比如说：
+ 段错误（segfaults），这种错误不是未捕获的 Python 异常，而是程序真正发生的段错误 进程 hung 住（hung processes），这种情况下无法获取堆栈信息，也无法通过 pdb 进行调试 守护进程失控（out of control daemon processes）  出现以上 3 种情况，可以使用 gdb 进行调试。
+2. 依赖 使用 gdb 调试 Python 时，需要具体以下条件：
+ 安装好 gdb 安装调试 Python 的扩展包，扩展包包含了：  debugging symbols Python 特定的 gdb 命令    各个系统安装 gdb 和 python-debuginfo 的方式：
+ Fedora  sudo yum install gdb python-debuginfo   Ubuntu  sudo apt-get install gdb python2.</description>
+    </item>
+    
+    <item>
+      <title>标题</title>
+      <link>/blog/_template/</link>
+      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/_template/</guid>
+      <description> 引用：
+ 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考     </description>
+    </item>
     
     <item>
       <title>GO Runtime 内存状态</title>
