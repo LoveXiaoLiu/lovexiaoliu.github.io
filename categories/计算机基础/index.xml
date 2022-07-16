@@ -6,20 +6,10 @@
     <description>Recent content in 计算机基础 on Gra55&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>标题</title>
-      <link>/blog/_template/</link>
-      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/_template/</guid>
-      <description> 引用：
- 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考     </description>
-    </item>
     
     <item>
       <title>【MIT 6.828】5. 用户环境</title>

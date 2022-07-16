@@ -5,12 +5,6 @@
     "body": "1. 背景 很多问题在 Python 中很难调试，比如说：\n 段错误（segfaults），这种错误不是未捕获的 Python 异常，而是程序真正发生的段错误 进程 hung 住（hung processes），这种情况下无法获取堆栈信息，也无法通过 pdb 进行调试 守护进程失控（out of control daemon processes）  出现以上 3 种情况，可以使用 gdb 进行调试。\n2. 依赖 使用 gdb 调试 Python 时，需要具体以下条件：\n 安装好 gdb 安装调试 Python 的扩展包，扩展包包含了：  debugging symbols Python 特定的 gdb 命令    各个系统安装 gdb 和 python-debuginfo 的方式：\n Fedora  sudo yum install gdb python-debuginfo   Ubuntu  sudo apt-get install gdb python2.7-dbg   Centos*  sudo yum install yum-utils sudo debuginfo-install glibc sudo yum install gdb python-debuginfo    3. 开始调试 3.1 调试已有进程 命令：gdb python $pid。\n这种情况，会使运行中的进程停止，使用 c 命令可以使其继续运行\n3.2 gdb 启动 Python 进程 命令：\n gdb -ex r \u0026ndash;args python \u0026lt;programname\u0026gt;.py \u0026lt;arguments\u0026gt; gdb python; run \u0026lt;programname\u0026gt;.py \u0026lt;arguments\u0026gt;  这种情况下，程序会一直运行，直到退出、segfaults 或者 Ctrl+C\n3.3 调试-段错误 如果被调试的程序有段错误（segfaulted），gdb 会自动暂停程序，此刻，就可以使用 Python 的 gdb 命令来查看相关信息。\n可以执行如下命令：\n bt：获取 C 的堆栈。如果这里查不到可用信息，继续往下执行； py-bt：获取 Python 堆栈。  3.4 调试-进程 Hung 如果一个进程出现挂起，它要么在等待某个东西（锁、IO等），要么在某个繁忙的循环中。这两种情况下，我们可以使用 gdb attach 到进程，查看堆栈信息。\n如果进程处于繁忙循环中，我们可以继续往下执行代码（使用 cont 命令），然后再次中断（Ctrl+C），然后就可以查看堆栈信息了。\n如果 hung 发生在某个线程，可以执行如下操作：\n 使用 info threads 命令查看所有线程，带星号的线程为当前正在执行的线程 py-list 查看当前线程执行到的代码位置 thread apply all py-list（简写：t a a py-list）查看所有线程的代码位置 frame X 可以用来切换栈帧  参考： 📌 https://wiki.python.org/moin/DebuggingWithGdb\n📌 https://fedoraproject.org/wiki/Features/EasierPythonDebugging\n📌 https://github.com/spyder-ide/spyder/wiki/How-to-debug-Spyder-deadlock-freeze-hang\n📌 gdb 支持的 Python 命令\n",
     "ref": "/blog/2022/python/gdb-debugging-python/"
   },{
-    "title": "标题",
-    "date": "",
-    "description": "文章简述",
-    "body": " 引用：\n 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考     ",
-    "ref": "/blog/_template/"
-  },{
     "title": "GO Runtime 内存状态",
     "date": "",
     "description": "Runtime 中的内存状态字段解析，pprof 中也会输出相关的内存字段供排查问题",
@@ -286,6 +280,12 @@
     "description": "如何开源一个 Python 第三方包",
     "body": "0x00 初始化 skeleton 开源一个 Python 第三方包，需要配置很多额外的东西（pip 需要的 setup.cfg，CI/CD 需要的 .travis.yml 等），这些东西完全没必要自己来逐一创建。\n所以我们需要一个脚手架来快速创建项目的 skeleton。这里我推荐使用 cookiecutter-X 系列工具。\n我这里开发 pypi 包，使用 cookiecutter-pypackage 模板。\ncookiecutter https://github.com/audreyr/cookiecutter-pypackage.git 0x01 生态配置 创建完项目 skeleton 以后，需要关联 Travis 账号、ReadTheDocs 账号等。步骤如下：\n 将 repo 添加到 GitHub 中 将该 repo 添加到 Travis CI 中（需要注册 Travis 账号） 安装 dev requirement.txt 到虚拟开发环境中：pip install -r requirements_dev.txt 注册项目到 PyPI 中（需要注册 PyPI 账号）  生成 tar\u0026amp;wheel 包：python setup.py sdist bdist_wheel 上传包到 PyPI 中：python -m twine upload dist/*   将该 repo 添加到 ReadTheDocs 中  0x02 迭代开发  更新项目代码，开发新 features 使用 bumpversion 升级版本：bumpversion --current-version 0.1.0 minor setup.py 上传包到 PyPI 中  ",
     "ref": "/blog/2019/python/python-package-pypi/"
+  },{
+    "title": "",
+    "date": "",
+    "description": "",
+    "body": "template: 使用模板时，删除这句话。+++ title = \u0026ldquo;标题\u0026rdquo; description = \u0026ldquo;文章简述\u0026rdquo; author = \u0026ldquo;gra55\u0026rdquo; date = \u0026ldquo;2021-12-20\u0026rdquo; categories = [\u0026ldquo;计算机基础\u0026rdquo;] tags = [\u0026ldquo;基础\u0026rdquo;, \u0026ldquo;2021\u0026rdquo;] [[images]] src = \u0026ldquo;img/2019/12/macau_back_china.jpg\u0026rdquo; alt = \u0026ldquo;1999年12月20日葡萄牙结束统治澳门，中国政府恢复对澳门行使主权，中华人民共和国澳门特别行政区成立\u0026rdquo; stretch = \u0026ldquo;horizontal\u0026rdquo; +++\n 引用：\n 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考 ",
+    "ref": "/blog/_template/"
   },{
     "title": "About Gra55",
     "date": "",

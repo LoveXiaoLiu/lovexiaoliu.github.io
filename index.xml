@@ -25,16 +25,6 @@
     </item>
     
     <item>
-      <title>标题</title>
-      <link>/blog/_template/</link>
-      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/_template/</guid>
-      <description> 引用：
- 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考     </description>
-    </item>
-    
-    <item>
       <title>GO Runtime 内存状态</title>
       <link>/blog/2021/go/go-runtime-memstate/</link>
       <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
@@ -692,6 +682,17 @@ Key point：
 我这里开发 pypi 包，使用 cookiecutter-pypackage 模板。
 cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git 0x01 生态配置 创建完项目 skeleton 以后，需要关联 Travis 账号、ReadTheDocs 账号等。步骤如下：
  将 repo 添加到 GitHub 中 将该 repo 添加到 Travis CI 中（需要注册 Travis 账号） 安装 dev requirement.txt 到虚拟开发环境中：pip install -r requirements_dev.txt 注册项目到 PyPI 中（需要注册 PyPI 账号）  生成 tar&amp;amp;wheel 包：python setup.py sdist bdist_wheel 上传包到 PyPI 中：python -m twine upload dist/*   将该 repo 添加到 ReadTheDocs 中  0x02 迭代开发  更新项目代码，开发新 features 使用 bumpversion 升级版本：bumpversion --current-version 0.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/blog/_template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/_template/</guid>
+      <description>template: 使用模板时，删除这句话。+++ title = &amp;ldquo;标题&amp;rdquo; description = &amp;ldquo;文章简述&amp;rdquo; author = &amp;ldquo;gra55&amp;rdquo; date = &amp;ldquo;2021-12-20&amp;rdquo; categories = [&amp;ldquo;计算机基础&amp;rdquo;] tags = [&amp;ldquo;基础&amp;rdquo;, &amp;ldquo;2021&amp;rdquo;] [[images]] src = &amp;ldquo;img/2019/12/macau_back_china.jpg&amp;rdquo; alt = &amp;ldquo;1999年12月20日葡萄牙结束统治澳门，中国政府恢复对澳门行使主权，中华人民共和国澳门特别行政区成立&amp;rdquo; stretch = &amp;ldquo;horizontal&amp;rdquo; +++
+ 引用：
+ 0x00 简述 0x01 章节一 0x02 章节二 0x03 章节三 0xff 参考 </description>
     </item>
     
     <item>
